@@ -39,6 +39,7 @@ export function VenueList() {
             </datalist>
 
             <Row gutter={[16, 16]}>
+                {/* eslint-disable-next-line array-callback-return */}
                 {venues?.filter((venue: { name: string }) => {
                     if (searchInput === "") {
                         return venue

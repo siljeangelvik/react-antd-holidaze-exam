@@ -1,8 +1,4 @@
 import {Button, Input, Typography} from 'antd';
-import FormItemInput from 'antd/es/form/FormItemInput';
-import FormItemLabel from 'antd/es/form/FormItemLabel';
-import {Content} from 'antd/es/layout/layout';
-import Title from 'antd/es/typography/Title';
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
