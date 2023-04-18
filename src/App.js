@@ -14,13 +14,14 @@ const App: React.FC = () => (
         theme={{
             token: {
                 colorPrimary: '#00b96b',
+                colorFillSecondary: '#0000ff',
             },
         }}
     >
         <Routes>
             <Route path="/" element={<Layout/>}>
                 <Route index element={<Home/>}/>
-                <Route path="/:id" element={<Details />}/>
+                <Route path="/details/:id" element={<Details />}/>
                 <Route path="/bookings" element={<Bookings />}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/profile" element={<Profile/>}/>

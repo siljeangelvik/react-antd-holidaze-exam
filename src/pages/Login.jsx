@@ -1,17 +1,19 @@
-import {Content} from 'antd/es/layout/layout';
-import Title from 'antd/es/typography/Title';
-import React from 'react';
+import { Button } from 'antd';
+import { useState } from 'react';
+import RegisterForm from '../components/forms/register/RegisterForm';
+import LoginForm from '../components/forms/login/LoginForm';
 
-export function Login () {
+export function Login() {
+    const [toggle, setToggle] = useState(false);
+
     return (
         <div>
 
-            <Content style={{paddingBottom:"40px"}}>
-                <Title level={1}>Login</Title>
-                <Title level={4}>Welcome to the login page. Please enter your credentials to continue.</Title>
-            </Content>
+            {toggle ? <RegisterForm /> : <LoginForm />}
 
-            {/* Login Form Component Here */}
+            <Button onClick={() => setToggle(!toggle)}>
+                {toggle ? 'Go to Login Form' : 'Go to Register Form'}
+            </Button>
         </div>
     );
 }

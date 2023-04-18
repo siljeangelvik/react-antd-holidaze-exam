@@ -17,42 +17,38 @@ const items: MenuProps['items'] = [
         label: (<Link to={"/"}/>),
         key: 'logo',
         icon: <HeatMapOutlined/>,
+        disabled: true,
     },
     {
         label: (<Link to={"/"}>Explore</Link>),
         key: 'home',
         icon: <SearchOutlined/>,
+        disabled: false,
     },
     {
         label: (<Link to={"/bookings"}>Your Bookings</Link>),
         key: 'bookings',
         icon: <BookOutlined/>,
-        disabled: false,
     },
     {
         label: (<Link to={"/profile"}>Your Profile</Link>),
         key: 'profile',
         icon: <UserOutlined/>,
-        disabled: false,
     },
     {
         label: (<Link to={"/login"}>Login</Link>),
         key: 'login',
-        icon: <LoginOutlined />,
-        disabled: false,
+        icon: <LoginOutlined/>,
     },
     {
-        label: 'Logout',
+        label: (<Link to={"/"}>Logout</Link>),
         key: 'logout',
-        icon: <LogoutOutlined />,
-        disabled: false,
+        icon: <LogoutOutlined/>,
     },
-
-
 ];
 
 const App: React.FC = () => {
-    const [current, setCurrent] = useState('mail');
+    const [current, setCurrent] = useState('home');
 
     const onClick: MenuProps['onClick'] = (e) => {
         console.log('click ', e);

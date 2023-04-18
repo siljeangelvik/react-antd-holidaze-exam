@@ -1,17 +1,21 @@
 import {Card, Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
-import Title from 'antd/es/skeleton/Title';
+import Title from 'antd/es/typography/Title';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {useMediaHandler} from '../hooks/useMediaHandler';
 import {formatCurrency} from '../utilities/formatCurrency';
 
-export function VenueItem({venue}) {
+const VenueItem = ({venue}) => {
 
-    const id = venue?.id;
+    const {id, name, description, price, maxGuests} = venue;
+    console.log(id);
+
+    const media = useMediaHandler(venue);
 
     return (
         <>
-            <Link to={`/${id}`}>
+            <Link to={`/details/${id}`}>
                 <Card
                     style={{
                         maxWidth: '320px',
@@ -21,17 +25,13 @@ export function VenueItem({venue}) {
                     }}
                     cover={
                         <Image
-                            src={
-                                venue?.media && venue?.media[0]
-                                    ? venue?.media[0]
-                                    : 'https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg'
-                            }
-                            alt={venue?.name}
+                            src={media}
+                            alt={name}
                             height={"213px"}
                         />
                     }
                 >
-                    <Title>{venue?.name}</Title>
+                    <Title level={4}>{name}</Title>
 
                     <Content>
                         <Typography.Paragraph
@@ -42,15 +42,17 @@ export function VenueItem({venue}) {
                                 maxWidth: '85ch',
                             }}
                         >
-                            {venue?.description}
+                            {description}
                         </Typography.Paragraph>
-                        <Typography>4 Jun - 2 Jul</Typography>
+                        <Typography><strong>Max Guests:</strong> {maxGuests}</Typography>
                         <Typography>
-                            <strong>{formatCurrency(venue?.price)}</strong> night
+                            <strong>{formatCurrency(price)}</strong> /night
                         </Typography>
                     </Content>
                 </Card>
             </Link>
         </>
     );
-}
+};
+
+export default VenueItem;
