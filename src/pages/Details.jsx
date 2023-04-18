@@ -1,8 +1,9 @@
-import {Image, Typography} from 'antd';
+import {Button, Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useParams} from 'react-router-dom';
+import Calendar from '../components/Calendar';
 import {useMediaHandler} from '../hooks/useMediaHandler';
 import {formatCurrency} from '../utilities/formatCurrency';
 import {VenuesContext} from '../context/VenuesContext';
@@ -18,6 +19,12 @@ function Details({venue}) {
 
     console.log(chosenVenue?.meta || "No meta found", "chosenVenue.meta");
     console.log(chosenVenue?.owner?.name || "No owner found", "chosenVenue.owner");
+
+    let [openCalendar, setOpenCalendar] = useState(false);
+
+    const handleCalendar = () => {
+        setOpenCalendar(<Calendar venue={chosenVenue} />);
+    }
 
 
     return (
@@ -41,6 +48,25 @@ function Details({venue}) {
                 <Typography.Paragraph>{chosenVenue?.maxGuests}</Typography.Paragraph>
             </Content>
 
+
+            {!openCalendar &&
+                <Content style={{display:"flex", flexDirection:"column", gap:"20px"}}>
+                    <Button type="primary" onClick={() => setOpenCalendar(true)} style={{width:"300px"}}>Reserve</Button>
+                </Content>
+            }
+
+
+            {openCalendar &&
+                <Content style={{display:"flex", flexDirection:"column", gap:"20px"}}>
+                    <Calendar venue={chosenVenue} />
+                    <Button type="primary" onClick={() => handleCalendar()} style={{width:"300px"}}>Book Now</Button>
+                    <Button type="primary" onClick={() => setOpenCalendar(false)} style={{width:"300px"}}>Close Calendar</Button>
+                </Content>
+            }
+
+
+
+
             <Content>
                 {chosenVenue?.meta && (
                     <>
@@ -60,6 +86,7 @@ function Details({venue}) {
                     </>
                 )}
             </Content>
+
 
 
             <Content style={{display: "flex", flexWrap: "wrap", maxWidth: "100%", gap: "20px", alignItems: "center"}}>

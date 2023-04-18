@@ -1,27 +1,25 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import {useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
 import LoginForm from "../login/LoginForm";
-import { API_REGISTER_URL } from '../../../utilities/constants';
-import { schema } from './schema';
-import React, { useState } from 'react';
-import { Layout, Typography } from 'antd';
+import {API_REGISTER_URL} from '../../../utilities/constants';
+import {schema} from './schema';
+import React, {useState} from 'react';
+import {Button, Checkbox, Input, Typography} from 'antd';
 import useApiPost from '../../../hooks/useApiPost';
-const { Content } = Layout;
-const { Title } = Typography;
 
 function Register() {
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
     } = useForm({
         resolver: yupResolver(schema),
     });
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const { postData, isLoading, isError } = useApiPost(API_REGISTER_URL);
+    const {postData, isLoading, isError} = useApiPost(API_REGISTER_URL);
 
 
     async function onSubmit(data) {
@@ -50,38 +48,28 @@ function Register() {
     return (
         <>
             <div>
-                <Content style={{ paddingBottom: '40px' }}>
-                    <Title level={1}>Register</Title>
-                    <Title level={4}>
-                        Please fill out the form below to register your account.
-                    </Title>
-                </Content>
+                <form onSubmit={handleSubmit(onSubmit)} style={{maxWidth:"320px", display:"flex", flexDirection:"column"}}>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <p>
-                        <label htmlFor="name">Name: </label>
-                    </p>
-                    <input {...register('name')} />
-                    <p className={'error'}>{errors.name?.message}</p>
+                    <Typography.Title level={5}>Name: </Typography.Title>
+                    <Input {...register("name")} errors={errors.name} warnings={errors.name}/>
+                    <Typography.Text type="danger">{errors.name?.message}</Typography.Text>
 
-                    <p>
-                        <label htmlFor="email">Email: </label>
-                    </p>
-                    <input {...register('email')} />
-                    <p className={'error'}>{errors.email?.message}</p>
+                    <Typography.Title level={5}>Email: </Typography.Title>
+                    <Input {...register("email")} errors={errors.email?.message} warnings={errors.email?.message}/>
+                    <Typography.Text type="danger">{errors.email?.message}</Typography.Text>
 
-                    <p>
-                        <input type="checkbox" {...register('manager')} />
-                        <label htmlFor="manager">Register as a Venue Manager</label>
-                    </p>
+                    <Typography.Title level={5}>Password: </Typography.Title>
+                    <Input {...register("password")} errors={errors.password?.message} warnings={errors.password?.message}/>
+                    <Typography.Text type="danger">{errors.password?.message}</Typography.Text>
 
-                    <p>
-                        <label htmlFor="password">Password: </label>
-                    </p>
-                    <input {...register('password')} />
-                    <p className={'error'}>{errors.password?.message}</p>
+                    <Typography.Title level={5}>Confirm Password: </Typography.Title>
+                    <Input {...register("confirmPassword")} errors={errors.confirmPassword?.message} warnings={errors.confirmPassword?.message}/>
+                    <Typography.Text type="danger">{errors.confirmPassword?.message}</Typography.Text>
 
-                    <p className={'error'}>{errors.message?.message}</p>
+                    <Typography.Title level={5}>Manager: </Typography.Title>
+                    <Typography>
+                        <Checkbox {...register("manager")} errors={errors.manager?.message} warnings={errors.manager?.message}/> Register as a Venue Manager?</Typography>
+                    <Typography.Text type="danger">{errors.manager?.message}</Typography.Text>
 
                     {isLoading && <p>Loading...</p>} {/* display loading message */}
                     {isError && (
@@ -90,7 +78,8 @@ function Register() {
                     {errorMessage && (
                         <p className={'error'}>{errorMessage}</p>
                     )} {/* display error message */}
-                    <button type="submit">Register</button>
+
+                    <Button type="primary" htmlType="submit" style={{marginTop:"20px"}}>Register</Button>
                 </form>
             </div>
         </>

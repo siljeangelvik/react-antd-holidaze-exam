@@ -1,4 +1,6 @@
-import {Button} from 'antd';
+import {Button, Input, Typography} from 'antd';
+import FormItemInput from 'antd/es/form/FormItemInput';
+import FormItemLabel from 'antd/es/form/FormItemLabel';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useState} from 'react';
@@ -77,21 +79,17 @@ function LoginForm() {
                 <Register setShowRegister={setShowRegister}/>
             ) : (
                 <div>
-                    <Content style={{paddingBottom: "40px"}}>
-                        <Title level={1}>Login</Title>
-                        <Title level={4}>Welcome to the login page. Please enter your credentials to continue.</Title>
-                    </Content>
+                    <form onSubmit={handleSubmit(onSubmit)} style={{maxWidth:"320px", display:"flex", flexDirection:"column"}}>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <p><label htmlFor="name">Name: </label></p>
-                        <input {...register('name')} />
-                        <p className={'error'}>{errors.name?.message}</p>
+                        <Typography.Title level={5}>Name: </Typography.Title>
+                        <Input {...register("name")} errors={errors.name?.message} warnings={errors.name?.message}/>
+                        <Typography.Text type="danger">{errors.name?.message}</Typography.Text>
 
-                        <p><label htmlFor="password">Password: </label></p>
-                        <input {...register('password')} />
-                        <p className={'error'}>{errors.password?.message}</p>
+                        <Typography.Title level={5}>Password: </Typography.Title>
+                        <Input {...register("password")} errors={errors.password?.message} warnings={errors.password?.message}/>
+                        <Typography.Text type="danger">{errors.password?.message}</Typography.Text>
 
-                        <Button type="submit">Login</Button>
+                        <Button type="primary" htmlType="submit" style={{marginTop:"20px"}}>Login</Button>
                     </form>
                 </div>
             )}

@@ -22,6 +22,7 @@ const VenueItem = ({venue}) => {
                         boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
                         transition: '0.3s',
                         borderRadius: '5px',
+                        height: '435px',
                     }}
                     cover={
                         <Image
