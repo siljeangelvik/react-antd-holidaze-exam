@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {SearchOutlined} from '@ant-design/icons';
 import {Input, Space} from 'antd';
 
-
 interface VenueItem {
     name: string;
     // add any other properties here
@@ -25,7 +24,7 @@ const venues: VenueItem[] = [
     {name: 'The Old Vic'},
     {name: 'The Old Vic'},
     {name: 'The Old Vic'},
-    ];
+];
 
 const Searchbar: React.FC = () => {
     const [searchInput, setSearchInput] = useState('');
@@ -57,7 +56,7 @@ const Searchbar: React.FC = () => {
 
             <datalist id="dataList">
                 {onSearch(searchInput).map((venue, index: Key) => (
-                    <option key={index} value={venue.name} />
+                    <option key={index} value={venue.name}/>
                 ))}
             </datalist>
 
