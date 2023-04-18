@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {ConfigProvider} from 'antd';
+import React from 'react';
+import {Route, Routes} from 'react-router-dom';
+import {Bookings} from './pages/Bookings';
+import {Profile} from './pages/Profile';
+import {NotFound} from './pages/NotFound';
+import {Login} from './pages/Login';
+import Details from './pages/Details';
+import Home from './pages/Home';
+import Layout from "./components/layout/Layout";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => (
+    <ConfigProvider
+        theme={{
+            token: {
+                colorPrimary: '#00b96b',
+            },
+        }}
+    >
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<Home/>}/>
+                <Route path="/:id" element={<Details />}/>
+                <Route path="/bookings" element={<Bookings />}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/profile" element={<Profile/>}/>
+                <Route path="*" element={<NotFound/>}/>
+            </Route>
+        </Routes>
+    </ConfigProvider>
+);
 
 export default App;
