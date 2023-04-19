@@ -29,6 +29,7 @@ const VenueItem = ({venue}) => {
                             src={media}
                             alt={name}
                             height={"213px"}
+                            width={"320px"}
                         />
                     }
                 >
