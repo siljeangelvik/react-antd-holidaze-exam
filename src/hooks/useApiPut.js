@@ -1,16 +1,16 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-function useApiPost(url) {
+function useApiPut(url) {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
-    async function postData(payload) {
+    async function putData(payload) {
         setIsLoading(true);
         setIsError(false);
         try {
             const response = await fetch(url, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ function useApiPost(url) {
         }
     }
 
-    return {data, isLoading, isError, postData};
+    return { data, isLoading, isError, putData };
 }
 
-export default useApiPost;
+export default useApiPut;

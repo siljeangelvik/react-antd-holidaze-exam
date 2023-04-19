@@ -1,9 +1,10 @@
-import {Button, Image, Typography} from 'antd';
+
+import {Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {useParams} from 'react-router-dom';
-import Calendar from '../components/Calendar';
+import BookingCalendar from '../components/BookingCalendar';
 import {useMediaHandler} from '../hooks/useMediaHandler';
 import {formatCurrency} from '../utilities/formatCurrency';
 import {VenuesContext} from '../context/VenuesContext';
@@ -13,22 +14,31 @@ function Details({venue}) {
     console.log(venue, "venueTestId From VenuesContext");
 
     const {id} = useParams();
-    const {venues} = useContext(VenuesContext);
+    const {data: venues} = useContext(VenuesContext);
     const chosenVenue = venues.find(venue => venue.id === id);
     const media = useMediaHandler(chosenVenue);
 
     console.log(chosenVenue?.meta || "No meta found", "chosenVenue.meta");
     console.log(chosenVenue?.owner?.name || "No owner found", "chosenVenue.owner");
+    console.log(chosenVenue?.bookings || "No bookings found", "chosenVenue.bookings");
 
-    let [openCalendar, setOpenCalendar] = useState(false);
 
-    const handleCalendar = () => {
-        setOpenCalendar(<Calendar venue={chosenVenue} />);
-    }
+    const getBookings = () => {
+        if (chosenVenue?.bookings) {
+            return chosenVenue.bookings.map(booking => {
+                return (
+                    <Typography.Paragraph>
+                        {booking.start} - {booking.end}
+                    </Typography.Paragraph>
+                );
+            });
+        } else {
+            return <Typography.Paragraph>No bookings found</Typography.Paragraph>;
+        }
+    };
 
     return (
         <>
-
             <Content style={{paddingBottom: "40px"}}>
                 <Title level={1}>{chosenVenue?.name}</Title>
                 <Title level={4}>{formatCurrency(chosenVenue?.price)} / night</Title>
@@ -47,21 +57,11 @@ function Details({venue}) {
                 <Typography.Paragraph>{chosenVenue?.maxGuests}</Typography.Paragraph>
             </Content>
 
+            <Content>
+                <Title level={2}>Availability</Title>
+                <BookingCalendar bookings={chosenVenue?.bookings} />
+            </Content>
 
-            {!openCalendar &&
-                <Content style={{display:"flex", flexDirection:"column", gap:"20px"}}>
-                    <Button type="primary" onClick={() => setOpenCalendar(true)} style={{width:"300px"}}>Reserve</Button>
-                </Content>
-            }
-
-
-            {openCalendar &&
-                <Content style={{display:"flex", flexDirection:"column", gap:"20px"}}>
-                    <Calendar venue={chosenVenue} />
-                    <Button type="primary" onClick={() => handleCalendar()} style={{width:"300px"}}>Book Now</Button>
-                    <Button type="primary" onClick={() => setOpenCalendar(false)} style={{width:"300px"}}>Close Calendar</Button>
-                </Content>
-            }
 
             <Content>
                 {chosenVenue?.meta && (
@@ -83,8 +83,6 @@ function Details({venue}) {
                 )}
             </Content>
 
-
-
             <Content style={{display: "flex", flexWrap: "wrap", maxWidth: "100%", gap: "20px", alignItems: "center"}}>
                 {chosenVenue?.owner && (
                     <>
@@ -103,6 +101,11 @@ function Details({venue}) {
                         </div>
                     </>
                 )}
+            </Content>
+
+            <Content>
+                <Title level={2}>Availability</Title>
+                <Typography.Paragraph>{getBookings()}</Typography.Paragraph>
             </Content>
 
         </>

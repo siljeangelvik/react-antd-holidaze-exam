@@ -10,6 +10,7 @@ import {
 import type {MenuProps} from 'antd';
 import {Menu} from 'antd';
 import {Link} from 'react-router-dom';
+import {profileName} from '../../utilities/constants';
 
 
 const items: MenuProps['items'] = [
@@ -31,7 +32,7 @@ const items: MenuProps['items'] = [
         icon: <BookOutlined/>,
     },
     {
-        label: (<Link to={"/profile"}>Your Profile</Link>),
+        label: (<Link to={`/profile/` + profileName}>Your Profile</Link>),
         key: 'profile',
         icon: <UserOutlined/>,
     },

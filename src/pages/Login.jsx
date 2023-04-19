@@ -31,7 +31,7 @@ function Login() {
             localStorage.setItem("manager", json.manager);
             localStorage.setItem("avatar", json.avatar);
 
-            alert("You are now logged in!")
+            alert("You are now logged in!");
 
             setTimeout(() => {
                 return (
