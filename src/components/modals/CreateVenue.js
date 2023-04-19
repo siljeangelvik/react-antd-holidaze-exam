@@ -17,13 +17,11 @@
 
  */
 
-
 import {Button, Form, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
 
-import { Checkbox } from 'antd';
-
+import {Checkbox} from 'antd';
 
 export const CreateVenue = (venueData) => {
     let [value, setValue] = useState(venueData);
@@ -40,8 +38,6 @@ export const CreateVenue = (venueData) => {
             value = false;
         }
     };
-
-
 
     console.log(venueData);
 
