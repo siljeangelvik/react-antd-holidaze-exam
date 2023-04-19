@@ -38,7 +38,7 @@ export function VenueList() {
                 })}
             </datalist>
 
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 16]} style={{display:"flex", flexWrap:"wrap", rowGap:"50px"}}>
                 {/* eslint-disable-next-line array-callback-return */}
                 {venues?.filter((venue: { name: string }) => {
                     if (searchInput === "") {
@@ -47,7 +47,7 @@ export function VenueList() {
                         return venue
                     }
                 }).map((venue: { id: Key }) => (
-                    <Col xs={24} sm={12} md={10} lg={8}>
+                    <Col xs={24} sm={12} md={10} lg={8} style={{display:"flex", justifyContent:"center"}}>
                         <VenueItem key={venue?.id} venue={venue}/>
                     </Col>
                 ))}

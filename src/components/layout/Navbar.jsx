@@ -46,7 +46,6 @@ const items: MenuProps['items'] = [
         key: 'logout',
         icon: <LogoutOutlined/>,
         disabled: true,
-        disabledReason: 'You are not logged in',
     },
 ];
 
@@ -57,7 +56,6 @@ const App: React.FC = () => {
         console.log('click ', e);
         setCurrent(e.key);
     };
-
 
     return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items}/>;
 };

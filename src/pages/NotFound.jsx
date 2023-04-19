@@ -2,7 +2,7 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 
-export function NotFound() {
+function NotFound() {
   return (
     <div>
         <Content style={{paddingBottom:"40px"}}>
@@ -12,3 +12,5 @@ export function NotFound() {
     </div>
   );
 }
+
+export default NotFound;

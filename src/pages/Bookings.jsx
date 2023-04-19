@@ -4,7 +4,7 @@ import Title from 'antd/es/typography/Title';
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export function Bookings() {
+function Bookings() {
     return (
         <>
            <div>
@@ -30,3 +30,5 @@ export function Bookings() {
         </>
     );
 }
+
+export default Bookings;

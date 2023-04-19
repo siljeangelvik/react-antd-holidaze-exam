@@ -1,10 +1,16 @@
-import {LogoutOutlined} from '@ant-design/icons';
-import {Button, Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import {Logout} from '../components/buttons/Logout';
+import {useParams} from 'react-router-dom';
+import useApiGet from '../hooks/useApiGet';
+import {API_PROFILE_URL} from '../utilities/constants';
 
-export function Profile() {
+function Profile() {
+
+    const {id} = useParams();
+
+    const {profile} = useApiGet(API_PROFILE_URL + id)
+
+    console.log(profile.name , "USER from profile");
 
     return (
         <>
@@ -12,6 +18,18 @@ export function Profile() {
             <div>
                 <Content style={{paddingBottom: "40px"}}>
                     <Title level={1}>Your Profile</Title>
+                </Content>
+
+
+            </div>
+
+        </>
+    );
+}
+
+export default Profile;
+
+/*
 
 
                     {localStorage.getItem("token") === null &&
@@ -67,7 +85,4 @@ export function Profile() {
                 </>
             }
 
-
-        </>
-    );
-}
+ */

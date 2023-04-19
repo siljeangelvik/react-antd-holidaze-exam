@@ -5,8 +5,8 @@ import Navbar from './Navbar';
 const Layout = ({children}) => {
     return (
         <>
-         <Navbar />
-         <Outlet context={children} />
+            <Navbar/>
+            <Outlet context={children}/>
         </>
     );
 };

@@ -26,7 +26,6 @@ function Details({venue}) {
         setOpenCalendar(<Calendar venue={chosenVenue} />);
     }
 
-
     return (
         <>
 
@@ -63,9 +62,6 @@ function Details({venue}) {
                     <Button type="primary" onClick={() => setOpenCalendar(false)} style={{width:"300px"}}>Close Calendar</Button>
                 </Content>
             }
-
-
-
 
             <Content>
                 {chosenVenue?.meta && (
