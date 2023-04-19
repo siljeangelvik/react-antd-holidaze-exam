@@ -20,19 +20,18 @@
 import {Button, Form, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
-
 import {Checkbox} from 'antd';
 
 export const CreateVenue = (venueData) => {
     let [value, setValue] = useState(venueData);
     const {name, description, media, price, maxGuests} = venueData;
 
-
     const onChange = (e) => { // this is the function that will be called when the checkbox is clicked
         console.log(`checked = ${e.target.checked}`);
         if (e.target.checked) {
             console.log("checked");
             setValue(e.target.value = true);
+            setValue(value);
         } else {
             console.log("unchecked");
             value = false;
@@ -42,7 +41,6 @@ export const CreateVenue = (venueData) => {
     console.log(venueData);
 
     return (
-
         <>
             <Form layout="vertical" style={{minWidth: "320px", maxWidth: "600px", margin: "0 auto"}}>
 
@@ -136,7 +134,6 @@ export const CreateVenue = (venueData) => {
                         type="primary" htmlType="submit" style={{width: "100%"}}>
                     Create Venue
                 </Button>
-
             </Form>
         </>
     )

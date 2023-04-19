@@ -73,4 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Resources
 
+Host: [Netlify](https://exam-holidaze.netlify.app/)  
+
+
 [Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  

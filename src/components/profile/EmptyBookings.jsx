@@ -8,7 +8,7 @@ const EmptyBookings = () => (
         }}
         description={
             <span>
-        Customize <a href="#">Description</a>
+        Customize <a href="https://github.com">Description</a>
       </span>
         }
     >
