@@ -12,30 +12,29 @@ import {
 
 export default function Profile() {
 
-      console.log(profileName);
-      document.title = profileName;
-
-
+    console.log(profileName);
+    document.title = profileName;
 
     return (
         <>
             <Content style={{paddingBottom: "40px"}}>
-                <Title level={1}>Your Profile</Title>
+                <Title level={1}>{profileName}</Title>
                 <Title level={4}>Here you can view your profile information and upload a profile picture.</Title>
             </Content>
 
             <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                 <UpdateAvatar/>
-                <Content style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "100%",
-                    gap: "20px",
-                }}>
-                    <Typography><strong>Name:</strong> {profileName}</Typography>
-                    <Typography><strong>Email:</strong> {profileEmail}</Typography>
-                    <Typography><strong>Manager:</strong> {profileManager}</Typography>
-                </Content>
+            </Content>
+
+            <Content style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                gap: "20px",
+            }}>
+                <Typography><strong>Name:</strong> {profileName}</Typography>
+                <Typography><strong>Email:</strong> {profileEmail}</Typography>
+                <Typography><strong>Manager:</strong> {profileManager}</Typography>
             </Content>
 
             <Content style={{
@@ -48,9 +47,6 @@ export default function Profile() {
                 <ProfileMenu/>
 
             </Content>
-
-
-
 
         </>
     );
