@@ -1,5 +1,7 @@
-export const handleLogout = ({userLogout}) => {
-    if (localStorage.getItem('accessToken')) {
+import {profileToken} from './constants';
+
+export const handleLogout = () => {
+    if (profileToken) {
         console.log("You're logged in");
         localStorage.removeItem('accessToken');
         localStorage.removeItem('id');
@@ -7,8 +9,5 @@ export const handleLogout = ({userLogout}) => {
         localStorage.removeItem('email');
         localStorage.removeItem('avatar');
         localStorage.removeItem('manager');
-    } else {
-        console.log("You're not logged in");
     }
-    userLogout();
 };

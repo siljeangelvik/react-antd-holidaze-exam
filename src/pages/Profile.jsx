@@ -1,27 +1,21 @@
 import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import EmptyBookings from '../components/profile/EmptyBookings';
-import {CreateVenue} from '../components/modals/CreateVenue';
+import ProfileMenu from '../components/profile/ProfileMenu';
 import UpdateAvatar from '../components/profile/UpdateAvatar';
-
 
 import {
     profileEmail,
     profileManager,
     profileName,
-    profileToken
 } from '../utilities/constants';
 
-function Profile() {
+export default function Profile() {
 
-    if (profileToken === null) {
-        console.log("No token found, redirecting to login page.");
-        window.location.href = "/login";
-    }
+      console.log(profileName);
+      document.title = profileName;
 
-    console.log(profileName);
-    document.title = profileName;
+
 
     return (
         <>
@@ -30,7 +24,7 @@ function Profile() {
                 <Title level={4}>Here you can view your profile information and upload a profile picture.</Title>
             </Content>
 
-            <Content style={{minHeight: "250px", width:"320px", margin:"0 auto"}}>
+            <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                 <UpdateAvatar/>
                 <Content style={{
                     display: "flex",
@@ -40,7 +34,7 @@ function Profile() {
                 }}>
                     <Typography><strong>Name:</strong> {profileName}</Typography>
                     <Typography><strong>Email:</strong> {profileEmail}</Typography>
-                    <Typography><strong>Manager:</strong> {profileManager ? "No" : "Yes"}</Typography>
+                    <Typography><strong>Manager:</strong> {profileManager}</Typography>
                 </Content>
             </Content>
 
@@ -51,19 +45,17 @@ function Profile() {
                 gap: "20px",
             }}>
 
-
-                <CreateVenue/>
-
-
-                <EmptyBookings/>
-
+                <ProfileMenu/>
 
             </Content>
+
+
+
+
         </>
     );
 }
 
-export default Profile;
 
 /*
 

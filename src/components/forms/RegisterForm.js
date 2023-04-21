@@ -20,7 +20,7 @@ export function RegisterForm({onSubmit}) {
 
     return (
         <form onSubmit={handleSubmit}
-              style={{maxWidth: "320px", display: "flex", flexDirection: "column", gap: "20px"}}>
+              style={{maxWidth: "320px", display: "flex", flexDirection: "column", gap: "20px", marginTop:"40px"}}>
 
             <label htmlFor="name">Name:</label>
             <input ref={nameRef} type="text" id="name" placeholder="Please enter your name"
@@ -41,12 +41,16 @@ export function RegisterForm({onSubmit}) {
                 <Typography.Text>Register as a Venue Manager?</Typography.Text>
             </div>
 
-            <button type="submit" style={{
-                padding: "9px",
-                background: "transparent",
-                border: "2px solid lightgreen",
-                borderRadius: "7px"
-            }}>Register Account
+            <button type="submit"
+                    style={{
+                        padding: "9px",
+                        background: "transparent",
+                        border: "2px solid transparent",
+                        borderRadius: "7px",
+                        backgroundColor: "#3dbd7d",
+                        color: "white",
+                        fontWeight: "bold",
+                    }}>Login
             </button>
         </form>
     );

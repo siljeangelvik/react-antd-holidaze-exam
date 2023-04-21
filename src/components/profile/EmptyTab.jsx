@@ -1,6 +1,6 @@
 import { Button, Empty } from 'antd';
 
-const EmptyBookings = () => (
+const EmptyTab = () => (
     <Empty
         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
         imageStyle={{
@@ -16,4 +16,4 @@ const EmptyBookings = () => (
     </Empty>
 );
 
-export default EmptyBookings;
+export default EmptyTab;

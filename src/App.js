@@ -37,6 +37,7 @@ const App: React.FC = () => (
                            </VenuesProvider>
                        }
                 />
+                {}
                 <Route path={`/profile/` + profileName} element={<Profile/>} />
                 <Route path="/bookings" element={<Bookings/>}/>
                 <Route path="/login" element={<Form/>}/>

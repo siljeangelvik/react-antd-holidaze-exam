@@ -1,17 +1,37 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {VenuesContext} from '../context/VenuesContext';
+import {useParams} from 'react-router-dom';
+import useApiGet from '../hooks/useApiGet';
+import {API_VENUES_URL} from '../utilities/constants';
 
 const BookingCalendar = () => {
 
-    const {data: bookings} = useContext(VenuesContext);
-    console.log(bookings?.id, "bookings from calendar");
+    const {id} = useParams();
+    // https://nf-api.onrender.com/api/v1/holidaze/venues/73a67858-9f1b-4f46-a0a9-6827655bafc3?_owner=true&_bookings=true
+    const {data: bookings} = useApiGet(`${API_VENUES_URL}/${id}?_owner=true&_bookings=true`);
 
+    console.log(bookings, "bookings from calendar");
+
+    const availableForBooking = [];
+
+    bookings?.bookings?.map(booking => {
+        const dateFrom = new Date(booking.dateFrom);
+        const dateTo = new Date(booking.dateTo);
+        const diffTime = Math.abs(dateTo - dateFrom);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        console.log(diffDays, "diffDays");
+        for (let i = 0; i < diffDays; i++) {
+            availableForBooking.push(new Date(dateFrom.getFullYear(), dateFrom.getMonth(), dateFrom.getDate() + i));
+        }
+    });
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const handleDateClick = (date) => {
+        {availableForBooking
+                ? console.log("available") && setSelectedDate(availableForBooking)
+                : console.log("not available")}
         setSelectedDate(date);
     };
 
@@ -22,14 +42,10 @@ const BookingCalendar = () => {
             <Calendar
                 value={selectedDate}
                 onClickDay={handleDateClick}
-                tileDisabled={({activeStartDate, date, view}) =>
-                    view === 'month' &&
-                    disabledDates.some((disabledDate) =>
-                        date.getFullYear() === disabledDate.getFullYear() &&
-                        date.getMonth() === disabledDate.getMonth() &&
-                        date.getDate() === disabledDate.getDate()
-                    )
-                }
+                activeStartDate={new Date()}
+                goToRangeStartOnSelect={true}
+                disabledDates={disabledDates}
+                tileDisabled={({date}) => availableForBooking.includes(date)}
             />
         </div>
     );

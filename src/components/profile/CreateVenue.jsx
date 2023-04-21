@@ -1,32 +1,10 @@
-/*
-{
-  "name": "string",
-  "description": "string",
-  "media": [
-    "string"
-  ],
-  "price": 0,
-  "maxGuests": 0,
-  "meta": {
-    "wifi": true,
-    "parking": true,
-    "breakfast": true,
-    "pets": true
-  }
-}
-
- */
-
-/*
-
-import {Button, Form, Typography} from 'antd';
+import {Button, Checkbox, Form, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
-import {Checkbox} from 'antd';
 
-export const CreateVenue = (venueData) => {
-    let [value, setValue] = useState(venueData);
-    const {name, description, media, price, maxGuests} = venueData;
+
+export default function CreateVenue() {
+    let [value, setValue] = useState();
 
     const onChange = (e) => { // this is the function that will be called when the checkbox is clicked
         console.log(`checked = ${e.target.checked}`);
@@ -40,17 +18,15 @@ export const CreateVenue = (venueData) => {
         }
     };
 
-    console.log(venueData);
+    console.log("Create Venue");
 
     return (
         <>
+            <Typography.Title level={2}>Create Venue</Typography.Title>
+
             <Form layout="vertical" style={{minWidth: "320px", maxWidth: "600px", margin: "0 auto"}}>
-
-                <Typography.Title level={2}>Create Venue</Typography.Title>
-
                 <Form.Item label="Name of Venue">
                     <input
-                        value={name}
                         type="string"
                         name="name"
                         placeholder="Name of Venue"
@@ -66,7 +42,6 @@ export const CreateVenue = (venueData) => {
 
                 <Form.Item label="Description of Venue">
                     <TextArea
-                        value={description}
                         type="string"
                         name="description"
                         placeholder="Write a description of the venue"
@@ -79,7 +54,6 @@ export const CreateVenue = (venueData) => {
 
                 <Form.Item label="Images of Venue">
                     <input
-                        value={media}
                         type="[string]"
                         name="media"
                         placeholder="Add images of the venue"
@@ -95,7 +69,6 @@ export const CreateVenue = (venueData) => {
 
                 <Form.Item label="Price of Venue /night">
                     <input
-                        value={price}
                         type="number"
                         name="price"
                         placeholder="Set the price of the venue"
@@ -111,7 +84,6 @@ export const CreateVenue = (venueData) => {
 
                 <Form.Item label="Max Guests">
                     <input
-                        value={maxGuests}
                         type="number"
                         name="maxGuests"
                         placeholder="Set a limit for how many guests can stay at the venue"
@@ -138,7 +110,5 @@ export const CreateVenue = (venueData) => {
                 </Button>
             </Form>
         </>
-    )
+    );
 }
-
- */

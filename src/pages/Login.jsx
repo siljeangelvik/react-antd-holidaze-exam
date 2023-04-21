@@ -1,8 +1,11 @@
-import LoginSuccess from '../components/alerts/LoginSuccess';
-import {API_LOGIN_URL} from '../utilities/constants';
+import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {API_LOGIN_URL, profileToken} from '../utilities/constants';
 import {LoginForm} from '../components/forms/LoginForm';
 
 function Login() {
+
+    const navigate = useNavigate();
 
     async function onSubmit(formData) {
         console.log(formData);
@@ -11,8 +14,8 @@ function Login() {
             const options = {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    "content-Type": "application/json",
+                    Authorization: `Bearer ${profileToken}`,
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
             };
@@ -25,28 +28,28 @@ function Login() {
                 throw new Error();
             }
             console.log(response.status);
+
+            alert("You are now logged in!");
+
+
+
             localStorage.setItem("accessToken", json.accessToken);
             localStorage.setItem("name", json.name);
             localStorage.setItem("email", json.email);
             localStorage.setItem("manager", json.manager);
             localStorage.setItem("avatar", json.avatar);
 
-            alert("You are now logged in!");
 
-            setTimeout(() => {
-                return (
-                    <LoginSuccess />
-                );
-            }, 1000)
 
         } catch (error) {
             console.log(error);
         }
     }
 
+
     return (
         <div>
-            <LoginForm onSubmit={onSubmit}/>
+            <LoginForm onSubmit={onSubmit} />
         </div>
     );
 }
@@ -65,7 +68,6 @@ avatar: null, venueManager: false,
 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc5LCJuYW1lIjoiU2lBdkFuZyIsImVtYWlsIjoic2lsamVhdmVuYWFuZ2VsdmlrQG5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwidmVudWVNYW5hZ2VyIjpmYWxzZSwiaWF0IjoxNjgxODc3MTQzfQ.hlATxgtLFcQLxMrD-TiOyQPptqrg6PkHV8_IQMpEhHs" }
 
  */
-
 
 
 /*

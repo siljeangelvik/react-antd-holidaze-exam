@@ -10,23 +10,24 @@ const Form = () => {
 
     return (
         <div>
-            <Content style={{marginBottom: "40px"}}>
+            <Content style={{display: "flex", flexDirection: "column", marginBottom: "40px"}}>
                 {toggle
-                    ? <Title level={1}>Login</Title>
-                    : <Title level={1}>Register</Title>}
+                    ? <><Title level={1}>Login</Title>
+                        <Title level={4}>Please enter your credentials to login.</Title></>
+                    : <><Title level={1}>Register</Title>
+                        <Title level={4}>Please fill out the form below to register your account.</Title></>
+                }
+
                 {toggle
-                    ? <Title level={4}>Please enter your credentials to login.</Title>
-                    : <Title level={4}>Please fill out the form below to register your account.</Title>}
-                <Button type="link" onClick={() => setToggle(!toggle)}>
-                    {toggle
-                        ? 'Don\'t have an account? Register here.'
-                        : 'Already have an account? Login here.'}
-                </Button>
+                    ? <Login/>
+                    : <Register/>}
             </Content>
 
-            {toggle
-                ? <Login/>
-                : <Register/>}
+            <Button type="link" onClick={() => setToggle(!toggle)}>
+                {toggle
+                    ? 'Don\'t have an account? Register here.'
+                    : 'Already have an account? Login here.'}
+            </Button>
         </div>
     );
 };

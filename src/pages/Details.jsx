@@ -59,7 +59,7 @@ function Details({venue}) {
 
             <Content>
                 <Title level={2}>Availability</Title>
-                <BookingCalendar bookings={chosenVenue?.bookings} />
+                <BookingCalendar />
             </Content>
 
 
@@ -87,17 +87,17 @@ function Details({venue}) {
                 {chosenVenue?.owner && (
                     <>
                         <Image
-                            src={chosenVenue.owner.avatar}
-                            alt={chosenVenue.owner.name}
+                            src={chosenVenue?.owner.avatar}
+                            alt={chosenVenue?.owner.name}
                             style={{width: "40px", height: "40px", borderRadius: "50%"}}
                         />
 
                         <div>
                             <Title level={5}>Host:</Title>
-                            <Typography.Paragraph>{chosenVenue.owner.name}</Typography.Paragraph>
+                            <Typography.Paragraph>{chosenVenue?.owner.name}</Typography.Paragraph>
 
                             <Title level={5}>Contact:</Title>
-                            <Typography.Paragraph>{chosenVenue.owner.email}</Typography.Paragraph>
+                            <Typography.Paragraph>{chosenVenue?.owner.email}</Typography.Paragraph>
                         </div>
                     </>
                 )}

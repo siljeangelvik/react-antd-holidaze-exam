@@ -8,8 +8,7 @@ export const API_VENUES_URL = `${API_BASE_URL}/venues`;
 export const profileToken = localStorage.getItem("accessToken");
 export const profileName = localStorage.getItem("name");
 export const profileEmail = localStorage.getItem("email");
-export const profileAvatar = localStorage.getItem("avatar");
-export const profileManager = localStorage.getItem("manager") ? "No" : "Yes" // if manager is true, then no, else yes
+export const profileManager = localStorage.getItem("manager") // if manager is true, then no, else yes
 
 
 export const UPDATE_PROFILE_AVATAR = `${API_PROFILE_URL}/${profileName}/media`;
