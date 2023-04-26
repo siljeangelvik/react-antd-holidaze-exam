@@ -13,7 +13,6 @@ import Home from './pages/Home';
 import {VenuesProvider} from './context/VenuesContext';
 import "./main.css";
 
-
 function App() {
 
     return (
@@ -57,7 +56,6 @@ function App() {
             </ConfigProvider>
         </>
     );
-
 }
 
 export default App;
