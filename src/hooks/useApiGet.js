@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
-/**
- * Our API hook
- */
 function useApiGet(url) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +10,11 @@ function useApiGet(url) {
             try {
                 setIsLoading(true);
                 setIsError(false);
-                const fetchedData = await fetch(url);
+                const fetchedData = await fetch(url, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                });
                 const json = await fetchedData.json();
                 setData(json);
             } catch (error) {
@@ -26,7 +27,7 @@ function useApiGet(url) {
 
         getData();
     }, [url]);
-    return { data, isLoading, isError };
+    return {data, isLoading, isError};
 }
 
 export default useApiGet;

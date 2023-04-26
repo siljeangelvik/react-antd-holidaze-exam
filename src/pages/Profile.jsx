@@ -1,24 +1,60 @@
+import {Button} from '@mui/material';
 import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
+import React, {useState} from 'react';
+import {Navigate} from 'react-router-dom';
+import {profileAccessToken, profileEmail, profileManager, profileName} from '../utilities/constants';
+import useApiGet from '../hooks/useApiGet';
 import ProfileMenu from '../components/profile/ProfileMenu';
 import UpdateAvatar from '../components/profile/UpdateAvatar';
 
-import {
-    profileEmail,
-    profileManager,
-    profileName,
-} from '../utilities/constants';
-
 export default function Profile() {
 
-    console.log(profileName);
-    document.title = profileName;
+    console.log(`https://nf-api.onrender.com/api/v1/holidaze/profiles/${profileName}`);
+    const {data} = useApiGet(`https://nf-api.onrender.com/api/v1/holidaze/profiles/${profileName}`);
+
+    const isLoggedIn = profileAccessToken;
+
+    const initialManagerRole = data.venueManager;
+    const [toggleManager, setToggleManager] = useState(true);
+    console.log(initialManagerRole);
+
+
+    if (isLoggedIn) {
+        console.log(data);
+    }
+    if (!isLoggedIn) {
+        return <Navigate replace to="/login"/>;
+    }
+
+
+    function updateManager() {
+        setToggleManager(false);
+        localStorage.removeItem("manager")
+        localStorage.setItem("manager", !initialManagerRole);
+        /*
+        if (initialManagerRole === false) {
+            localStorage.setItem("manager", true);
+            setToggleManager(false);
+            console.log("You are able to create, update and delete venues")
+        }
+
+        if (initialManagerRole === true) {
+            localStorage.setItem("manager", false);
+            setToggleManager(true);
+            console.log("You are NOT a venue manager");
+        }
+    */
+    }
+
+    console.log(initialManagerRole, "initialManagerRole");
+    console.log(toggleManager, "toggleManager");
 
     return (
         <>
             <Content style={{paddingBottom: "40px"}}>
-                <Title level={1}>{profileName}</Title>
+                <Title level={1}>{data.name}</Title>
                 <Title level={4}>Here you can view your profile information and upload a profile picture.</Title>
             </Content>
 
@@ -32,9 +68,11 @@ export default function Profile() {
                 width: "100%",
                 gap: "20px",
             }}>
+                <Typography><strong>User ID:</strong> {data.id}</Typography>
                 <Typography><strong>Name:</strong> {profileName}</Typography>
                 <Typography><strong>Email:</strong> {profileEmail}</Typography>
-                <Typography><strong>Manager:</strong> {profileManager}</Typography>
+                <Typography><strong>Manager:</strong> {profileManager} || {profileManager ? "Yes" : "No"}</Typography>
+                <Typography><strong>Manager:</strong> {initialManagerRole ? "Yes" : "No"}</Typography>
             </Content>
 
             <Content style={{
@@ -47,7 +85,6 @@ export default function Profile() {
                 <ProfileMenu/>
 
             </Content>
-
         </>
     );
 }

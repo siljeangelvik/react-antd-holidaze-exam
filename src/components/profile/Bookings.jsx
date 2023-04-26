@@ -1,10 +1,10 @@
-import {Typography} from 'antd';
+import {Typography} from '@mui/material';
 
 export default function Bookings() {
 
     return (
         <>
-            <Typography.Title level={2}>Your Bookings</Typography.Title>
+            <Typography variant={"h2"}>Your Bookings</Typography>
 
         </>
     );

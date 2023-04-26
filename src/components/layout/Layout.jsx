@@ -1,15 +1,19 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbar from './navbar/Navbar';
+import Footer from './footer/Footer';
 
-const Layout = ({children}) => {
+export default function Layout({children}) {
 
     return (
         <>
+
             <Navbar/>
+
             <Outlet context={children}/>
+
+            <Footer/>
         </>
     );
 };
 
-export default Layout;
