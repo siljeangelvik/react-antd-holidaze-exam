@@ -14,18 +14,17 @@ function Details({venue}) {
     const {id} = useParams();
     const {data: venues} = useContext(VenuesContext);
     const chosenVenue = venues.find(venue => venue.id === id);
-    const media = chosenVenue?.media?.length ? chosenVenue.media[0].url : "https://via.placeholder.com/150";
+    const media = chosenVenue?.media?.length ? chosenVenue?.media : "https://via.placeholder.com/150";
     console.log(chosenVenue?.meta || "No meta found", "chosenVenue.meta");
     console.log(chosenVenue?.owner?.name || "No owner found", "chosenVenue.owner");
     console.log(chosenVenue?.bookings || "No bookings found", "chosenVenue.bookings");
 
-
     const getBookings = () => {
-        if (chosenVenue?.bookings) {
-            return chosenVenue.bookings.map(booking => {
+        if (chosenVenue?.bookings?.id === id) {
+            return chosenVenue?.bookings?.map(booking => {
                 return (
                     <Typography.Paragraph>
-                        {booking.start} - {booking.end}
+                        {booking.dateFrom} - {booking.dateTo}
                     </Typography.Paragraph>
                 );
             });

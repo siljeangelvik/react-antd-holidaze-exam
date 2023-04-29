@@ -58,7 +58,7 @@ function AllVenues() {
     const venueInfo = {
         id: data.id,
         name: data.name,
-        media: useMediaHandler(data.media),
+        media: data.media,
         description: data.description,
         price: formatCurrency(data.price),
         maxGuests: data.maxGuests,

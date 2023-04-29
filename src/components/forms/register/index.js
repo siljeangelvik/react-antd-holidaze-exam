@@ -1,9 +1,10 @@
 import {Button, Input} from '@mui/material';
 import {Form} from 'antd';
+import {useContext} from 'react';
+import {AuthContext} from '../../../context/AuthContext';
 
 function Register() {
-    const { userData, handleRegister } = useLoginRegisterData();
-
+    const { handleRegister } = useContext(AuthContext);
     const handleRegisterFormSubmit = (event) => {
         event.preventDefault();
         const userData = { username: event.target.username.value, password: event.target.password.value };

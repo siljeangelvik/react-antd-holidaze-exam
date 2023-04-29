@@ -1,11 +1,9 @@
 import {useNavigate} from 'react-router-dom';
 import SuccessLogin from '../components/alerts/SuccessLogin';
-import useAuthentication from '../hooks/useAuthentication';
 import {API_LOGIN} from '../utilities/constants';
 import {LoginForm} from '../components/forms/LoginForm';
 
 function Login() {
-    const isLoggedIn = useAuthentication();
     const navigate = useNavigate();
 
     async function onSubmit(formData) {
@@ -36,7 +34,7 @@ function Login() {
             localStorage.setItem("avatar", json.avatar);
 
 
-            SuccessLogin(isLoggedIn);
+           alert(<SuccessLogin/>);
 
 
             setTimeout(() => {

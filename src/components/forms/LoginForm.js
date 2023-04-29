@@ -1,10 +1,10 @@
 import {useState} from 'react';
-import {API_LOGIN_URL} from '../../utilities/constants';
+import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
 export function LoginForm() {
     // Call the useApiPost hook with the desired URL
-    const {postData, isLoading, isError, data} = useApiPost(API_LOGIN_URL);
+    const {postData, isLoading, isError, data} = useApiPost(API_LOGIN);
 
     // Define state variables for the login form inputs
     const [email, setEmail] = useState('');

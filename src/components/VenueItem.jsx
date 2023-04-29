@@ -6,16 +6,12 @@ import {Link} from 'react-router-dom';
 import {formatCurrency} from '../utilities/formatCurrency';
 
 const VenueItem = ({venue}) => {
-
     const {id, name, media, description, price, maxGuests} = venue;
-    console.log(id);
-
 
     return (
         <>
             <Link to={`/details/${id}`}>
-                <Card
-                    style={{
+                <Card style={{
                         maxWidth: '320px',
                         boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
                         transition: '0.3s',
@@ -32,7 +28,6 @@ const VenueItem = ({venue}) => {
                     }
                 >
                     <Title level={4}>{name}</Title>
-
                     <Content>
                         <Typography.Paragraph
                             style={{

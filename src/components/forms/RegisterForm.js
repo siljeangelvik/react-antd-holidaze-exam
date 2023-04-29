@@ -1,11 +1,11 @@
 import {Typography} from 'antd';
 import {useState} from 'react';
 import useApiPost from '../../hooks/useApiPost';
-import {API_REGISTER_URL} from '../../utilities/constants';
+import {API_REGISTER} from '../../utilities/constants';
 
 export function RegisterForm() {
     // Call the useApiPost hook with the desired URL
-    const {postData, isLoading, isError, data} = useApiPost(API_REGISTER_URL);
+    const {postData, isLoading, isError, data} = useApiPost(API_REGISTER);
 
     // Define state variables for the login form inputs
     const [name, setName] = useState('');
@@ -40,7 +40,7 @@ export function RegisterForm() {
                 <input value={email}
                        onChange={(e) => setEmail(e.target.value)}
                        type="text" id="email" placeholder="Example@mail.com"
-                       pattern={"/^[a-z0-9_æøå]{4,25}@(stud.)?noroff\.no$/i"}
+                       pattern={"/^[a-z0-9_æøå]{4,25}@(stud.)?noroff.no$/i"}
                        style={{padding: "9px", borderRadius: "7px", border: "2px solid lightgray"}}/>
 
 

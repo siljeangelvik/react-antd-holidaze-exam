@@ -1,14 +1,22 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {VenuesContext} from '../context/VenuesContext';
+import {useParams} from 'react-router-dom';
+import useApiGet from '../hooks/useApiGet';
+import {API_VENUES} from '../utilities/constants';
 
 const BookingCalendar = () => {
 
-    const {data: bookings} = useContext(VenuesContext);
-    console.log(bookings?.id, "bookings from calendar");
+    const {id} = useParams();
+    const response = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
+    console.log(response, "bookingsData from calendar");
+    const {data} = response;
+    console.log(data, "data from calendar");
 
-const [selectedDates, setSelectedDates] = useState([new Date(2022, 3, 25), new Date(2022, 3, 27)]);
+    const dateFromObj = data[0]?.bookings[0]?.dateFrom;
+    console.log(dateFromObj, "dateFromObj from calendar");
+
+
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const handleDateClick = (date) => {
@@ -19,6 +27,7 @@ const [selectedDates, setSelectedDates] = useState([new Date(2022, 3, 25), new D
 
     return (
         <div>
+            {dateFromObj}
             <Calendar
                 value={selectedDate}
                 onClickDay={handleDateClick}

@@ -1,20 +1,32 @@
+import {Button} from '@mui/material';
 import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import EmptyBookings from '../components/profile/EmptyBookings';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import HandleLogout from '../utilities/HandleLogout';
 import {CreateVenue} from '../components/modals/CreateVenue';
 import UpdateAvatar from '../components/profile/UpdateAvatar';
-import {profileEmail, profileManager, profileName, profileAccessToken} from '../utilities/constants';
+import {profileEmail, profileManager, profileName, profileAccessToken, profileAvatar} from '../utilities/constants';
 
 function Profile() {
 
+    const navigate = useNavigate();
+
     if (profileAccessToken === null) {
         console.log("No token found, redirecting to login page.");
-        window.location.href = "/login";
+        navigate("/login");
     }
 
     console.log(profileName);
     document.title = profileName;
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleOpen = () => {
+        setIsOpen(!isOpen);
+    };
+
 
     return (
         <>
@@ -24,7 +36,8 @@ function Profile() {
             </Content>
 
             <Content style={{minHeight: "250px", width:"320px", margin:"0 auto"}}>
-                <UpdateAvatar/>
+                <HandleLogout/>
+                <UpdateAvatar putAvatar={profileAvatar}/>
                 <Content style={{
                     display: "flex",
                     flexDirection: "column",
@@ -44,10 +57,19 @@ function Profile() {
                 gap: "20px",
             }}>
 
-                <CreateVenue/>
+                {profileManager &&
+                    <>
+                        <Title level={3}>Your Venues to Manage</Title>
+                        <Title level={5}>You are currently managing <em>0</em> venues.</Title>
 
-                <EmptyBookings/>
+                        <div style={{display:"flex", flexWrap:"nowrap"}}>
+                            <Title level={3}>Create a Venue</Title>
+                            <Button onClick={toggleOpen} variant="text" size="small">{isOpen ? 'Close' : 'Open'}</Button>
+                        </div>
+                        {isOpen ? <CreateVenue/> : null}
 
+                    </>
+                }
             </Content>
         </>
     );

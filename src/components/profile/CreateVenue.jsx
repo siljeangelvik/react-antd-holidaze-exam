@@ -1,7 +1,6 @@
-import {Button, Checkbox, Form, Typography} from 'antd';
+import {Button, Checkbox, Form} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
-
 
 export default function CreateVenue() {
     let [value, setValue] = useState();
@@ -22,8 +21,6 @@ export default function CreateVenue() {
 
     return (
         <>
-            <Typography.Title level={2}>Create Venue</Typography.Title>
-
             <Form layout="vertical" style={{minWidth: "320px", maxWidth: "600px", margin: "0 auto"}}>
                 <Form.Item label="Name of Venue">
                     <input
