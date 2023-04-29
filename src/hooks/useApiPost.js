@@ -9,16 +9,23 @@ function useApiPost(url) {
         setIsLoading(true);
         setIsError(false);
         try {
-            const response = await fetch(url, {
+            const options = {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload),
-            });
+                body: JSON.stringify(payload)
+            }
+            const response = await fetch(url, options);
             const json = await response.json();
             setData(json);
+            localStorage.setItem("accessToken", json.accessToken);
+            localStorage.setItem("id", json.id);
+            localStorage.setItem("name", json.name);
+            localStorage.setItem("email", json.email);
+            localStorage.setItem("avatar", json.avatar);
+            localStorage.setItem("manager", json.manager);
         } catch (error) {
             console.log(error);
             setIsError(true);

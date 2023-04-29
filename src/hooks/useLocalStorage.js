@@ -1,27 +1,32 @@
 import { useState } from 'react';
 
-function useLocalStorage(key, initialValue) {
-    const [storedValue, setStoredValue] = useState(() => {
-        try {
-            const item = window.localStorage.getItem(key);
-            return item ? JSON.parse(item) : initialValue;
-        } catch (error) {
-            console.log(error);
-            return initialValue;
-        }
-    });
-
-    const setValue = (value) => {
-        try {
-            const valueToStore = value instanceof Function ? value(storedValue) : value;
-            setStoredValue(valueToStore);
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        } catch (error) {
-            console.log(error);
-        }
+function useLocalStorage(key) {
+    const getLocalStorage = () => {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : null;
     };
 
-    return [storedValue, setValue];
+    const setLocalStorage = (data) => {
+        localStorage.setItem(key, JSON.stringify(data));
+    };
+
+    return { getLocalStorage, setLocalStorage };
 }
 
-export default useLocalStorage;
+export function useLoginRegisterData() {
+    const { getLocalStorage, setLocalStorage } = useLocalStorage('accessToken');
+
+    const [userData, setUserData] = useState(getLocalStorage() || {});
+
+    const handleLogin = (userData) => {
+        setUserData(userData);
+        setLocalStorage(userData);
+    };
+
+    const handleRegister = (userData) => {
+        setUserData(userData);
+        setLocalStorage(userData);
+    };
+
+    return { userData, handleLogin, handleRegister };
+}

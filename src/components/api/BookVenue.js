@@ -23,7 +23,7 @@ function BookVenue() {
 
     return (
         <div>
-            <LoginForm onSubmit={onSubmit}/>
+
         </div>
     );
 }

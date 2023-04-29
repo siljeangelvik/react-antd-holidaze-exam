@@ -2,7 +2,7 @@ import { Button, Empty } from 'antd';
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const EmptyBookings = () => (
+const EmptyTab = () => (
     <Empty
         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
         imageStyle={{
@@ -18,4 +18,4 @@ const EmptyBookings = () => (
     </Empty>
 );
 
-export default EmptyBookings;
+export default EmptyTab;

@@ -1,3 +1,15 @@
+import {Typography} from '@mui/material';
+
+export default function Bookings() {
+
+    return (
+        <>
+            <Typography variant={"h2"}>Your Bookings</Typography>
+
+        </>
+    );
+}
+
 /*
 
 
