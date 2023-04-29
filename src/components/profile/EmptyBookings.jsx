@@ -1,4 +1,6 @@
 import { Button, Empty } from 'antd';
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const EmptyBookings = () => (
     <Empty
@@ -8,11 +10,11 @@ const EmptyBookings = () => (
         }}
         description={
             <span>
-        Customize <a href="https://github.com">Description</a>
+        Book your next <Link to="/">adventure</Link> now!
       </span>
         }
     >
-        <Button type="primary">Create Now</Button>
+        <Button type="primary">Venues</Button>
     </Empty>
 );
 

@@ -1,27 +1,24 @@
 import {Button} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import React, {useState} from 'react';
-import CalendarFC from './CalendarFC';
+import MyCalendar from './Calendar';
 
 const CalendarComponent = () => {
 
-/*  const {id, dateFrom, dateTo, guests, created, updated} = booking
-    console.log(booking);
-    console.log(id, dateFrom, dateTo, guests, created, updated);
-    const dateFormat = formatDate()
-    console.log(dateFormat(dateFrom));  */
+    /*  const {id, dateFrom, dateTo, guests, created, updated} = booking
+        console.log(booking);
+        console.log(id, dateFrom, dateTo, guests, created, updated);
+        const dateFormat = formatDate()
+        console.log(dateFormat(dateFrom));  */
 
-    const [toggle, setToggle] = useState(false);
-
+    const [selectedDates, setSelectedDates] = useState([]);
 
     return (
         <div>
-            <Content style={{display:"flex", flexDirection:"column", gap:"20px"}}>
-                {toggle &&
-                    <>
-                        <CalendarFC  />
-                    </>}
-                <Button onClick={() => setToggle(!toggle)} style={{maxWidth:"300px"}} type="primary">{toggle ?  "Cancel" : "Reserve"}</Button>
+            <Content style={{display: "flex", flexDirection: "column", gap: "20px"}}>
+               <MyCalendar />
+                <Button onClick={() => setSelectedDates(selectedDates)} style={{maxWidth: "300px"}}
+                        type="primary">Book dates now</Button>
             </Content>
         </div>
     );
@@ -29,9 +26,7 @@ const CalendarComponent = () => {
 
 export default CalendarComponent;
 
-
 /*
-
   "bookings": [
     {
       "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -42,6 +37,4 @@ export default CalendarComponent;
       "updated": "2023-04-19T01:36:11.758Z"
     }
   ]
-
-
  */

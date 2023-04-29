@@ -3,15 +3,13 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useMediaHandler} from '../hooks/useMediaHandler';
 import {formatCurrency} from '../utilities/formatCurrency';
 
 const VenueItem = ({venue}) => {
 
-    const {id, name, description, price, maxGuests} = venue;
+    const {id, name, media, description, price, maxGuests} = venue;
     console.log(id);
 
-    const media = useMediaHandler(venue);
 
     return (
         <>

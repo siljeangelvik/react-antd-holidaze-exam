@@ -1,22 +1,3 @@
-/*
-{
-  "name": "string",
-  "description": "string",
-  "media": [
-    "string"
-  ],
-  "price": 0,
-  "maxGuests": 0,
-  "meta": {
-    "wifi": true,
-    "parking": true,
-    "breakfast": true,
-    "pets": true
-  }
-}
-
- */
-
 import {Button, Form, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
@@ -24,6 +5,7 @@ import {Checkbox} from 'antd';
 
 export const CreateVenue = (venueData) => {
     let [value, setValue] = useState(venueData);
+
     const {name, description, media, price, maxGuests} = venueData;
 
     const onChange = (e) => { // this is the function that will be called when the checkbox is clicked
@@ -42,8 +24,7 @@ export const CreateVenue = (venueData) => {
 
     return (
         <>
-            <Form layout="vertical" style={{minWidth: "320px", maxWidth: "600px", margin: "0 auto"}}>
-
+            <Form layout="vertical" style={{minWidth: "340px", maxWidth: "340px", margin: "0 auto"}}>
                 <Typography.Title level={2}>Create Venue</Typography.Title>
 
                 <Form.Item label="Name of Venue">
@@ -52,6 +33,8 @@ export const CreateVenue = (venueData) => {
                         type="string"
                         name="name"
                         placeholder="Name of Venue"
+                        required={true}
+                        pattern={"[A-Za-z]+"}
                         style={{
                             padding: "9px",
                             borderRadius: "7px",
@@ -68,7 +51,9 @@ export const CreateVenue = (venueData) => {
                         type="string"
                         name="description"
                         placeholder="Write a description of the venue"
+                        required={true}
                         autoSize={{
+                            width: "100%",
                             minRows: 3,
                             maxRows: 5,
                         }}
@@ -94,9 +79,12 @@ export const CreateVenue = (venueData) => {
                 <Form.Item label="Price of Venue /night">
                     <input
                         value={price}
+                        min={0}
                         type="number"
                         name="price"
-                        placeholder="Set the price of the venue"
+                        placeholder="$1,000"
+                        pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                        required={true}
                         style={{
                             padding: "9px",
                             borderRadius: "7px",
@@ -110,9 +98,11 @@ export const CreateVenue = (venueData) => {
                 <Form.Item label="Max Guests">
                     <input
                         value={maxGuests}
+                        min={0}
                         type="number"
                         name="maxGuests"
-                        placeholder="Set a limit for how many guests can stay at the venue"
+                        placeholder="500"
+                        required={true}
                         style={{
                             padding: "9px",
                             borderRadius: "7px",
@@ -124,10 +114,12 @@ export const CreateVenue = (venueData) => {
                 </Form.Item>
 
                 <Form.Item label="Amenities">
-                    <Checkbox onChange={onChange}>WiFi Included</Checkbox>
-                    <Checkbox onChange={onChange}>Parking Included</Checkbox>
-                    <Checkbox onChange={onChange}>Breakfast Included</Checkbox>
-                    <Checkbox onChange={onChange}>Pets Allowed</Checkbox>
+                    <div style={{display: "flex", flexDirection: "column"}}>
+                        <Checkbox onChange={onChange} name="wifi">WiFi Included</Checkbox>
+                        <Checkbox onChange={onChange} name="parking">Parking Included</Checkbox>
+                        <Checkbox onChange={onChange} name="breakfast">Breakfast Included</Checkbox>
+                        <Checkbox onChange={onChange} name="pets">Pets Allowed</Checkbox>
+                    </div>
                 </Form.Item>
 
                 <Button onChange={(e) => setValue(e.target.value)}
@@ -138,3 +130,21 @@ export const CreateVenue = (venueData) => {
         </>
     )
 }
+
+/*
+{
+  "name": "string",
+  "description": "string",
+  "media": [
+    "string"
+  ],
+  "price": 0,
+  "maxGuests": 0,
+  "meta": {
+    "wifi": true,
+    "parking": true,
+    "breakfast": true,
+    "pets": true
+  }
+}
+ */

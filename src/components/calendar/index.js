@@ -1,9 +1,9 @@
 import {useRef, useState} from 'react';
 import {Button, DatePicker, Radio, Space} from 'antd';
-const { RangePicker } = DatePicker;
 
+const {RangePicker} = DatePicker;
 
-function Calendar ({onBookNow}) {
+function Calendar({onBookNow}) {
 
     const dateFromRef = useRef();
     const dateToRef = useRef();
@@ -12,14 +12,13 @@ function Calendar ({onBookNow}) {
         e.preventDefault();
         const [dateFrom, dateTo] = dateFromRef.current.state.value;
         console.log(dateFrom, dateTo);
-        onBookNow({ dateFrom, dateTo });
+        onBookNow({dateFrom, dateTo});
     }
 
     const [size, setSize] = useState('middle');
     const handleSizeChange = (e) => {
         setSize(e.target.value);
     };
-
 
     return (
         <>
@@ -43,7 +42,6 @@ function Calendar ({onBookNow}) {
 }
 
 export default Calendar;
-
 
 /*
   <Content style={{display: "flex", flexDirection: "column", gap: "20px"}}>

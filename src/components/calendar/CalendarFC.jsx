@@ -3,7 +3,6 @@ import {useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import useApiGet from '../../hooks/useApiGet';
 
-
 const {RangePicker} = DatePicker;
 
 const CalendarFC = ({onBooking}) => {
@@ -11,26 +10,18 @@ const CalendarFC = ({onBooking}) => {
     const dateFromRef = useRef();
     const dateToRef = useRef();
 
-
     const {id} = useParams();
     const bookings = useApiGet(`/venues/${id}/bookings/${id}`);
     console.log(bookings, "Bookings from CalendarFC");
 
-
     const booking = bookings?.filter(booking => booking.id === id);
     console.log(booking, "Booking from CalendarFC");
-
-
-
-
-
 
     console.log(booking);
 
     if (bookings?.id === id) {
         console.log(bookings && bookings.id === id);
     }
-
 
     bookings.forEach(booking => {
         const availableDates = bookings
@@ -51,12 +42,10 @@ const CalendarFC = ({onBooking}) => {
         console.log(availableDates);
     });
 
-
     function handleBooking() {
         const [dateFrom, dateTo] = dateFromRef.current.state.value;
         onBooking({dateFrom, dateTo});
     }
-
 
     const [size, setSize] = useState('middle');
     const handleSizeChange = (e) => {

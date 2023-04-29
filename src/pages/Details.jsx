@@ -1,11 +1,9 @@
-
 import {Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import BookingCalendar from '../components/BookingCalendar';
-import {useMediaHandler} from '../hooks/useMediaHandler';
 import {formatCurrency} from '../utilities/formatCurrency';
 import {VenuesContext} from '../context/VenuesContext';
 
@@ -16,8 +14,7 @@ function Details({venue}) {
     const {id} = useParams();
     const {data: venues} = useContext(VenuesContext);
     const chosenVenue = venues.find(venue => venue.id === id);
-    const media = useMediaHandler(chosenVenue);
-
+    const media = chosenVenue?.media?.length ? chosenVenue.media[0].url : "https://via.placeholder.com/150";
     console.log(chosenVenue?.meta || "No meta found", "chosenVenue.meta");
     console.log(chosenVenue?.owner?.name || "No owner found", "chosenVenue.owner");
     console.log(chosenVenue?.bookings || "No bookings found", "chosenVenue.bookings");
@@ -61,7 +58,6 @@ function Details({venue}) {
                 <Title level={2}>Availability</Title>
                 <BookingCalendar bookings={chosenVenue?.bookings} />
             </Content>
-
 
             <Content>
                 {chosenVenue?.meta && (

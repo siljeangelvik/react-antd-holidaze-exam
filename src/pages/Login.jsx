@@ -1,8 +1,12 @@
-import LoginSuccess from '../components/alerts/LoginSuccess';
-import {API_LOGIN_URL} from '../utilities/constants';
+import {useNavigate} from 'react-router-dom';
+import SuccessLogin from '../components/alerts/SuccessLogin';
+import useAuthentication from '../hooks/useAuthentication';
+import {API_LOGIN} from '../utilities/constants';
 import {LoginForm} from '../components/forms/LoginForm';
 
 function Login() {
+    const isLoggedIn = useAuthentication();
+    const navigate = useNavigate();
 
     async function onSubmit(formData) {
         console.log(formData);
@@ -16,7 +20,7 @@ function Login() {
                 },
                 body: JSON.stringify(formData),
             };
-            const response = await fetch(API_LOGIN_URL, options);
+            const response = await fetch(API_LOGIN, options);
             console.log(`response = ${response}`);
             const json = await response.json();
             console.log(json);
@@ -31,13 +35,13 @@ function Login() {
             localStorage.setItem("manager", json.manager);
             localStorage.setItem("avatar", json.avatar);
 
-            alert("You are now logged in!");
+
+            SuccessLogin(isLoggedIn);
+
 
             setTimeout(() => {
-                return (
-                    <LoginSuccess />
-                );
-            }, 1000)
+                navigate("/profile");
+            }, 1500);
 
         } catch (error) {
             console.log(error);
@@ -53,27 +57,11 @@ function Login() {
 
 export default Login;
 
-
 // RESPONSE:
-
 /*
-
 Object {
 name: "SiAvAng",
 email: "siljeavenaangelvik@noroff.no",
 avatar: null, venueManager: false,
 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc5LCJuYW1lIjoiU2lBdkFuZyIsImVtYWlsIjoic2lsamVhdmVuYWFuZ2VsdmlrQG5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwidmVudWVNYW5hZ2VyIjpmYWxzZSwiaWF0IjoxNjgxODc3MTQzfQ.hlATxgtLFcQLxMrD-TiOyQPptqrg6PkHV8_IQMpEhHs" }
-
- */
-
-
-
-/*
-
-        localStorage.setItem("accessToken", json.accessToken);
-            localStorage.setItem("name", json.name);
-            localStorage.setItem("email", json.email);
-            localStorage.setItem("manager", json.manager);
-            localStorage.setItem("avatar", json.avatar);
-
- */
+*/

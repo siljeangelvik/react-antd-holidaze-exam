@@ -1,7 +1,7 @@
 import Login from '../pages/Login';
 import {RegisterSuccess} from '../components/alerts/RegisterSuccess';
 import {RegisterForm} from '../components/forms/RegisterForm';
-import {API_REGISTER_URL} from '../utilities/constants';
+import {API_REGISTER} from '../utilities/constants';
 
 function Register() {
 
@@ -17,7 +17,7 @@ function Register() {
                 },
                 body: JSON.stringify(formData),
             };
-            const response = await fetch(API_REGISTER_URL, postData);
+            const response = await fetch(API_REGISTER, postData);
             console.log(response);
             const json = await response.json();
             console.log(json);
@@ -28,7 +28,7 @@ function Register() {
             return (
                 <>
                     <RegisterSuccess/>
-                    { setTimeout(() => {
+                    {setTimeout(() => {
                         return (
                             <Login/>
                         );
@@ -49,15 +49,11 @@ function Register() {
 
 export default Register;
 
-
 // RESPONSE
-
 /*
-
 { id: 179,
   name: "SiAvAng",
   email: "siljeavenaangelvik@noroff.no",
   avatar: null,
   venueManager: false }
-
  */

@@ -1,17 +1,17 @@
 import React, {createContext} from 'react';
 import {useParams} from 'react-router-dom';
 import useApiGet from '../hooks/useApiGet';
-import {API_VENUES_URL} from '../utilities/constants';
+import {API_VENUES} from '../utilities/constants';
 
 const VenuesContext = createContext();
 
 export const VenuesProvider = ({children}) => {
 
-    const {data, isLoading, isError} = useApiGet(API_VENUES_URL);
+    const {data, isLoading, isError} = useApiGet(API_VENUES);
     console.log(data, "venues From VenuesContext");
 
     const {id} = useParams();
-    const {venues: bookings, owner} = useApiGet(API_VENUES_URL + "/" + id)
+    const {venues: bookings, owner} = useApiGet(API_VENUES + "/" + id)
     console.log(bookings, "bookings From VenuesContext");
     console.log(owner, "owner From VenuesContext");
 

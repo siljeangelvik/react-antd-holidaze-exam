@@ -4,18 +4,11 @@ import Title from 'antd/es/typography/Title';
 import EmptyBookings from '../components/profile/EmptyBookings';
 import {CreateVenue} from '../components/modals/CreateVenue';
 import UpdateAvatar from '../components/profile/UpdateAvatar';
-
-
-import {
-    profileEmail,
-    profileManager,
-    profileName,
-    profileToken
-} from '../utilities/constants';
+import {profileEmail, profileManager, profileName, profileAccessToken} from '../utilities/constants';
 
 function Profile() {
 
-    if (profileToken === null) {
+    if (profileAccessToken === null) {
         console.log("No token found, redirecting to login page.");
         window.location.href = "/login";
     }
@@ -51,12 +44,9 @@ function Profile() {
                 gap: "20px",
             }}>
 
-
                 <CreateVenue/>
 
-
                 <EmptyBookings/>
-
 
             </Content>
         </>
@@ -66,15 +56,12 @@ function Profile() {
 export default Profile;
 
 /*
-
-
-                    {localStorage.getItem("token") === null &&
+        {localStorage.getItem("token") === null &&
                         <>
                             <Title level={4}>You need to be logged in to view you profile.</Title>
                             <Button type="primary" href="/login">Go to login page</Button>
                         </>
                     }
-
 
                     {localStorage.getItem("token") !== null &&
                         <>
@@ -120,5 +107,4 @@ export default Profile;
                     </Content>
                 </>
             }
-
  */

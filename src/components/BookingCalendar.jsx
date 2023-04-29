@@ -8,7 +8,7 @@ const BookingCalendar = () => {
     const {data: bookings} = useContext(VenuesContext);
     console.log(bookings?.id, "bookings from calendar");
 
-
+const [selectedDates, setSelectedDates] = useState([new Date(2022, 3, 25), new Date(2022, 3, 27)]);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const handleDateClick = (date) => {
@@ -22,6 +22,7 @@ const BookingCalendar = () => {
             <Calendar
                 value={selectedDate}
                 onClickDay={handleDateClick}
+                minDate={new Date()}
                 tileDisabled={({activeStartDate, date, view}) =>
                     view === 'month' &&
                     disabledDates.some((disabledDate) =>
