@@ -21,11 +21,10 @@ function useApiPost(url) {
             const json = await response.json();
             setData(json);
             localStorage.setItem("accessToken", json.accessToken);
-            localStorage.setItem("id", json.id);
-            localStorage.setItem("name", json.name);
-            localStorage.setItem("email", json.email);
-            localStorage.setItem("avatar", json.avatar);
-            localStorage.setItem("manager", json.manager);
+            localStorage.getItem("email", json.email);
+            localStorage.getItem("name", json.name);
+            //localStorage.getItem("avatar", json.avatar);
+            localStorage.getItem("manager", json.manager);
         } catch (error) {
             console.log(error);
             setIsError(true);
