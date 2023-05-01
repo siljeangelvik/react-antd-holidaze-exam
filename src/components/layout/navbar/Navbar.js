@@ -79,6 +79,19 @@ export default function Navbar() {
                                     </MenuItem>
                                 }
 
+                                {!isLoggedIn &&
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Link to={"/register"} className={"site-login"} style={{
+                                            listStyleType: "none",
+                                            textDecoration: "none",
+                                            fontWeight: "bold",
+                                            color: "black"
+                                        }}>
+                                            Register
+                                        </Link>
+                                    </MenuItem>
+                                }
+
                                 {isLoggedIn &&
                                     <MenuItem onClick={handleCloseNavMenu}>
                                         <Link to={"/profile"} className={"site-profile"} style={{
@@ -141,6 +154,19 @@ export default function Navbar() {
                                         color: "white"
                                     }}>
                                         Login
+                                    </Link>
+                                </MenuItem>
+                            }
+
+                            {!isLoggedIn &&
+                                <MenuItem onClick={handleCloseNavMenu}>
+                                    <Link to={"/register"} className={"site-login"} style={{
+                                        listStyleType: "none",
+                                        textDecoration: "none",
+                                        fontWeight: "bold",
+                                        color: "white"
+                                    }}>
+                                        Register
                                     </Link>
                                 </MenuItem>
                             }

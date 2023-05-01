@@ -1,5 +1,4 @@
-import Login from '../pages/Login';
-import {RegisterSuccess} from '../components/alerts/RegisterSuccess';
+import SuccessRegistered from '../components/alerts/SuccessRegistered';
 import {RegisterForm} from '../components/forms/RegisterForm';
 import {API_REGISTER} from '../utilities/constants';
 
@@ -25,16 +24,8 @@ function Register() {
                 throw new Error();
             }
 
-            return (
-                <>
-                    <RegisterSuccess/>
-                    {setTimeout(() => {
-                        return (
-                            <Login/>
-                        );
-                    }, 2000)}
-                </>
-            );
+            return (<SuccessRegistered/>);
+
         } catch (error) {
             console.log(error);
         }

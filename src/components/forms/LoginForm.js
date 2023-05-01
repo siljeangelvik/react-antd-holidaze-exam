@@ -2,6 +2,7 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import SuccessLogin from '../../components/alerts/SuccessLogin';
 import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
@@ -19,11 +20,14 @@ export function LoginForm() {
         event.preventDefault();
         // Call the postData function with the form data
         await postData({email, password});
-        alert("You successfully logged in");
-
-        setTimeout(() => {
-            navigate(`/profile`)
-        }, 1500)
+        return (
+            <>
+                <SuccessLogin />
+                {setTimeout(() => {
+                    navigate(`/profile`)
+                }, 3000)}
+            </>
+        );
     };
 
     return (
