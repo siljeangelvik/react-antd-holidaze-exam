@@ -2,7 +2,7 @@ import {BookOutlined, HeatMapOutlined, LoginOutlined, LogoutOutlined, SearchOutl
 import { Menu } from 'antd';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
-import {handleLogout} from '../../utilities/handleLogout';
+import HandleLogout from '../../utilities/HandleLogout';
 import useAuthentication from '../../hooks/useAuthentication';
 import {profileName} from '../../utilities/constants';
 
@@ -51,7 +51,7 @@ const loggedInItems = [
         icon: <UserOutlined/>,
     },
     {
-        label: (<Link to={`/`} onClick={handleLogout}>Logout</Link>),
+        label: (<Link to={`/`}><HandleLogout/></Link>),
         key: 'logout',
         icon: <LogoutOutlined/>,
     },

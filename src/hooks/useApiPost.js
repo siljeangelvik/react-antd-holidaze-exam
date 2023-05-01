@@ -20,11 +20,13 @@ function useApiPost(url) {
             const response = await fetch(url, options);
             const json = await response.json();
             setData(json);
+
             localStorage.setItem("accessToken", json.accessToken);
-            localStorage.getItem("email", json.email);
             localStorage.getItem("name", json.name);
-            //localStorage.getItem("avatar", json.avatar);
+            localStorage.getItem("email", json.email);
             localStorage.getItem("manager", json.manager);
+            localStorage.getItem("avatar", json.avatar);
+
         } catch (error) {
             console.log(error);
             setIsError(true);

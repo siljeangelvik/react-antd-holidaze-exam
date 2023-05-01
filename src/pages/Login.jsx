@@ -1,52 +1,22 @@
-import {useNavigate} from 'react-router-dom';
-import SuccessLogin from '../components/alerts/SuccessLogin';
-import {API_LOGIN} from '../utilities/constants';
+import {Button} from '@mui/material';
+import React, {useState} from 'react';
+import {RegisterForm} from '../components/forms/RegisterForm';
 import {LoginForm} from '../components/forms/LoginForm';
 
 function Login() {
-    const navigate = useNavigate();
 
-    async function onSubmit(formData) {
-        console.log(formData);
-
-        try {
-            const options = {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    "content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            };
-            const response = await fetch(API_LOGIN, options);
-            console.log(`response = ${response}`);
-            const json = await response.json();
-            console.log(json);
-            if (!response.ok) {
-                console.log(json.errors[0].message);
-                throw new Error();
-            }
-            console.log(response.status);
-            localStorage.setItem("accessToken", json.accessToken);
-            localStorage.setItem("name", json.name);
-            localStorage.setItem("email", json.email);
-            localStorage.setItem("manager", json.manager);
-            localStorage.setItem("avatar", json.avatar);
-
-           alert(<SuccessLogin/>);
-
-            setTimeout(() => {
-                navigate("/profile");
-            }, 1500);
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const [toggle, setToggle] = useState(false);
 
     return (
         <div>
-            <LoginForm onSubmit={onSubmit}/>
+            {toggle
+                ? <LoginForm/>
+                : <RegisterForm/>
+            }
+
+            <Button onClick={() => setToggle(!toggle)}>
+                {toggle ? "Dont have an account? Sign up here" : "Already have an account? Log in here"}
+            </Button>
         </div>
     );
 }

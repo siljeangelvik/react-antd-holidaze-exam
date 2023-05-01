@@ -9,6 +9,7 @@ function useAuthentication() {
         function checkLoginStatus() {
             if (profileAccessToken) {
                 return setIsLoggedIn(true);
+
             }
             return setIsLoggedIn(false);
         }

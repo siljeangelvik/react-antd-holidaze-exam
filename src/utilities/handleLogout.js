@@ -11,7 +11,6 @@ const HandleLogout = () => {
             localStorage.removeItem('email');
             localStorage.removeItem('avatar');
             localStorage.removeItem('manager');
-            window.location.replace("/login");
         }
         console.log("You logged out.")
     }
