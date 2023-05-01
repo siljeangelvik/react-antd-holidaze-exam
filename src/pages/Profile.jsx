@@ -4,10 +4,11 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import Avatar from '../components/profile/Avatar';
 import HandleLogout from '../utilities/HandleLogout';
 import {CreateVenue} from '../components/modals/CreateVenue';
-import UpdateAvatar from '../components/profile/UpdateAvatar';
-import {profileEmail, profileManager, profileName, profileAccessToken, profileAvatar} from '../utilities/constants';
+// import UpdateAvatar from '../components/profile/UpdateAvatar';
+import {profileEmail, profileManager, profileName, profileAccessToken} from '../utilities/constants';
 
 function Profile() {
 
@@ -18,15 +19,11 @@ function Profile() {
         navigate("/login");
     }
 
-    console.log(profileName);
-    document.title = profileName;
-
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
-
 
     return (
         <>
@@ -37,7 +34,11 @@ function Profile() {
 
             <Content style={{minHeight: "250px", width:"320px", margin:"0 auto"}}>
                 <HandleLogout/>
-                <UpdateAvatar putAvatar={profileAvatar}/>
+
+                <Avatar />
+
+                {/* <UpdateAvatar putAvatar={profileAvatar}/> */}
+
                 <Content style={{
                     display: "flex",
                     flexDirection: "column",

@@ -33,9 +33,7 @@ function Login() {
             localStorage.setItem("manager", json.manager);
             localStorage.setItem("avatar", json.avatar);
 
-
            alert(<SuccessLogin/>);
-
 
             setTimeout(() => {
                 navigate("/profile");

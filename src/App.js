@@ -2,6 +2,8 @@ import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
+import useAuthentication from './hooks/useAuthentication';
+import {profileName} from './utilities/constants';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Layout from './components/layout/Layout';
@@ -14,6 +16,13 @@ import {VenuesProvider} from './context/VenuesContext';
 import "./main.css";
 
 function App() {
+
+    const isLoggedIn = useAuthentication();
+
+    if (isLoggedIn) {
+        console.log(profileName);
+        document.title = profileName;
+    }
 
     return (
         <>
