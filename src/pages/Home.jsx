@@ -1,11 +1,12 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import {profileAccessToken, profileName} from '../utilities/constants';
+import useAuthentication from '../hooks/useAuthentication';
+import {profileName} from '../utilities/constants';
 import {VenueList} from '../components/VenuesList';
 
 export default function Home() {
 
-    const isLoggedIn = profileAccessToken;
+    const isLoggedIn = useAuthentication();
 
     return (
         <Content style={{padding: "40px"}}>

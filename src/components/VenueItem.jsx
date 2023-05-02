@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import {formatCurrency} from '../utilities/formatCurrency';
 
 const VenueItem = ({venue}) => {
-    const {id, name, media, description, price, maxGuests} = venue;
+    const {id, name, media, description, price, maxGuests, number} = venue;
 
     /* if (!mediaEndsWith(media, '.jpg') && !mediaEndsWith(media, '.png')) {
         return 'https://cdn.pixabay.com/photo/2016/10/22/18/52/beach-1761410_1280.jpg';
@@ -42,6 +42,7 @@ const VenueItem = ({venue}) => {
                 >
                     <Title level={4}>{name}</Title>
                     <Content>
+                        <Typography>{number}</Typography>
                         <Typography.Paragraph
                             style={{
                                 overflow: 'hidden',

@@ -24,7 +24,6 @@ function useApiPost(url) {
             localStorage.setItem("id", json.id);
             localStorage.setItem("name", json.name);
             localStorage.setItem("email", json.email);
-            localStorage.setItem("avatar", json.avatar);
             localStorage.setItem("manager", json.manager);
 
         } catch (error) {
