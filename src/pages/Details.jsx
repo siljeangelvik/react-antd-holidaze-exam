@@ -21,8 +21,8 @@ function Details({venue}) {
 
 
     return (
-        <>
-            <Content style={{paddingBottom: "40px"}}>
+        <Content style={{padding: "40px"}}>
+            <Content style={{paddingBottom: "20px"}}>
                 <Title level={1}>{chosenVenue?.name}</Title>
                 <Title level={4}>{formatCurrency(chosenVenue?.price)} / night</Title>
             </Content>
@@ -42,7 +42,7 @@ function Details({venue}) {
 
             <Content>
                 <Title level={2}>Availability</Title>
-                <BookingCalendar bookings={chosenVenue?.bookings} />
+                <BookingCalendar bookings={chosenVenue?.bookings}/>
             </Content>
 
             <Content>
@@ -89,8 +89,7 @@ function Details({venue}) {
                 <Title level={2}>Title Something</Title>
                 <Typography.Paragraph>Something...</Typography.Paragraph>
             </Content>
-
-        </>
+        </Content>
     );
 }
 

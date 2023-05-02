@@ -20,19 +20,16 @@ export function LoginForm() {
         event.preventDefault();
         // Call the postData function with the form data
         await postData({email, password});
-        return (
-            <>
-                <SuccessLogin />
-                {setTimeout(() => {
-                    navigate(`/profile`)
-                }, 3000)}
-            </>
-        );
+        // If the login was successful, redirect to the home page
+        if (data) {
+            SuccessLogin();
+            navigate('/profile');
+        }
     };
 
     return (
         <>
-            <Content style={{paddingBottom: "40px"}}>
+            <Content style={{paddingBottom: "20px"}}>
                 <Title level={1}>Login</Title>
                 <Title level={4}>Log in to you account</Title>
             </Content>

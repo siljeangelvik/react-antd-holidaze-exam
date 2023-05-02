@@ -1,11 +1,17 @@
+import {Button} from '@mui/material';
+import {Typography} from 'antd';
+import {Content} from 'antd/lib/layout/layout';
 import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {useParams} from 'react-router-dom';
+import useAuthentication from '../hooks/useAuthentication';
+import useBooking from '../hooks/useBooking';
 import useApiGet from '../hooks/useApiGet';
 import {API_VENUES} from '../utilities/constants';
 
 const BookingCalendar = () => {
+    const isLoggedIn = useAuthentication();
     const {id} = useParams();
     const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
     // console.log(data, "data from calendar");
@@ -20,15 +26,6 @@ const BookingCalendar = () => {
     });
 
     console.log(newBookingsList, "newBookingsList from calendar");
-
-    /*
-        for (let i = 0; i < bookingsList.length; i++) {
-            bookingsList[i].dateFrom = new Date(bookingsList[i].dateFrom);
-            bookingsList[i].dateTo = new Date(bookingsList[i].dateTo);
-            console.log(bookingsList[i].dateFrom, "bookingsList[i].dateFrom from calendar");
-            console.log(bookingsList[i].dateTo, "bookingsList[i].dateTo from calendar");
-        }
-    */
 
     const [selectedDates, setSelectedDates] = useState([]);
 
@@ -60,29 +57,66 @@ const BookingCalendar = () => {
         return dates;
     });
 
-    console.log(disabledDates, "disabledDates from calendar");
+    // console.log(disabledDates, "disabledDates from calendar");
+
+    const { loading, error, success, createBooking } = useBooking(
+        id,
+        selectedDates
+    );
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (!isLoggedIn) {
+            alert("Please log in to book a venue.");
+            return;
+        }
+       return createBooking();
+    };
 
     return (
         <div>
-            <Calendar
-                value={selectedDates}
-                onChange={setSelectedDates}
-                onClickDay={handleDateClick}
-                minDate={new Date()}
-                tileDisabled={({date, view}) =>
-                    view === 'month' &&
-                    disabledDates?.some((disabledDate) =>
-                        date.getFullYear() === disabledDate.getFullYear() &&
-                        date.getMonth() === disabledDate.getMonth() &&
-                        date.getDate() === disabledDate.getDate())}
-                selectRange={true}
-                tileClassName={({date}) =>
-                    selectedDates.length === 2 &&
-                    date >= selectedDates[0] &&
-                    date <= selectedDates[1] &&
-                    'selected-range'
-                }
-            />
+            <form onSubmit={handleSubmit}>
+                <Calendar
+                    value={selectedDates}
+                    onChange={setSelectedDates}
+                    onClickDay={handleDateClick}
+                    minDate={new Date()}
+                    tileDisabled={({ date, view }) =>
+                        view === "month" &&
+                        disabledDates?.some(
+                            (disabledDate) =>
+                                date.getFullYear() === disabledDate.getFullYear() &&
+                                date.getMonth() === disabledDate.getMonth() &&
+                                date.getDate() === disabledDate.getDate()
+                        )
+                    }
+                    selectRange={true}
+                    tileClassName={({ date }) =>
+                        selectedDates.length === 2 &&
+                        date >= selectedDates[0] &&
+                        date <= selectedDates[1] &&
+                        "selected-range"
+                    }
+                />
+
+                <Content style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+                        <Button variant="contained" color="primary" type="submit">
+                            {loading ? "Loading..." : "Book Now"}
+                        </Button>
+
+                    {error && (
+                        <Typography.Text type="danger">
+                            {error?.message}
+                        </Typography.Text>
+                    )}
+                    {success && (
+                        <Typography.Text type="success">
+                            Booking successful!
+                        </Typography.Text>
+                    )}
+
+                </Content>
+            </form>
         </div>
     );
 };
@@ -101,3 +135,13 @@ export default BookingCalendar;
     }
   ]
  */
+
+
+/*
+      for (let i = 0; i < bookingsList.length; i++) {
+          bookingsList[i].dateFrom = new Date(bookingsList[i].dateFrom);
+          bookingsList[i].dateTo = new Date(bookingsList[i].dateTo);
+          console.log(bookingsList[i].dateFrom, "bookingsList[i].dateFrom from calendar");
+          console.log(bookingsList[i].dateTo, "bookingsList[i].dateTo from calendar");
+      }
+  */

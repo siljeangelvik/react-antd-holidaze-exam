@@ -10,7 +10,7 @@ const Footer = () => {
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <Typography.Text>
+                        <Typography.Text style={{color:"white"}}>
                             copyright - @2023 Holidaze
                         </Typography.Text>
                     </Toolbar>

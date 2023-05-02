@@ -1,3 +1,4 @@
+import {Content} from 'antd/es/layout/layout';
 import {useNavigate} from 'react-router-dom';
 import {API_LOGIN} from '../utilities/constants';
 import {LoginForm} from '../components/forms/LoginForm';
@@ -24,11 +25,6 @@ function Login() {
             console.log(json);
 
             localStorage.setItem("accessToken", json.accessToken);
-            localStorage.setItem("id", json.id);
-            localStorage.setItem("name", json.name);
-            localStorage.setItem("email", json.email);
-            localStorage.setItem("avatar", json.avatar);
-            localStorage.setItem("manager", json.manager);
 
             if (!response.ok) {
                 throw new Error();
@@ -40,9 +36,9 @@ function Login() {
     }
 
     return (
-        <div>
+        <Content style={{padding: "40px"}}>
             <LoginForm onSubmit={onSubmit}/>
-        </div>
+        </Content>
     );
 }
 

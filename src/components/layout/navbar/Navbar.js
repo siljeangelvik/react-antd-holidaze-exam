@@ -10,12 +10,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import useAuthentication from '../../../hooks/useAuthentication';
 import HandleLogout from '../../../utilities/HandleLogout';
-import useAuth from '../../../hooks/useAuth';
 
 export default function Navbar() {
 
-    const isLoggedIn = useAuth(true);
+    const isLoggedIn = useAuthentication();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 

@@ -4,17 +4,27 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {BookingsList} from '../components/BookingsList';
+import RegisterAsManager from '../components/RegisterAsManager';
+import useApiGet from '../hooks/useApiGet';
+import useAuthentication from '../hooks/useAuthentication';
+import useManagerStatus from '../hooks/useManagerStatus';
 import Avatar from '../components/profile/Avatar';
 import HandleLogout from '../utilities/HandleLogout';
 import {CreateVenue} from '../components/modals/CreateVenue';
 // import UpdateAvatar from '../components/profile/UpdateAvatar';
-import {profileEmail, profileManager, profileName, profileAccessToken} from '../utilities/constants';
+import {profileEmail, profileName, API_PROFILES} from '../utilities/constants';
 
 function Profile() {
 
     const navigate = useNavigate();
+    const isLoggedIn = useAuthentication();
+    const isManager = useManagerStatus();
 
-    if (profileAccessToken === null) {
+    const {profile} = useApiGet(`${API_PROFILES}/${profileName}?_count`);
+    console.log(profile);
+
+    if (!isLoggedIn) {
         console.log("No token found, redirecting to login page.");
         navigate("/login");
     }
@@ -25,8 +35,9 @@ function Profile() {
         setIsOpen(!isOpen);
     };
 
+
     return (
-        <>
+        <Content style={{padding: "40px"}}>
             <Content style={{paddingBottom: "40px"}}>
                 <Title level={1}>Your Profile</Title>
                 <Title level={4}>Here you can view your profile information and upload a profile picture.</Title>
@@ -47,7 +58,7 @@ function Profile() {
                 }}>
                     <Typography><strong>Name:</strong> {profileName}</Typography>
                     <Typography><strong>Email:</strong> {profileEmail}</Typography>
-                    <Typography><strong>Manager:</strong> {profileManager ? "No" : "Yes"}</Typography>
+                    <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
                 </Content>
             </Content>
 
@@ -57,22 +68,43 @@ function Profile() {
                 width: "100%",
                 gap: "20px",
             }}>
-                {profileManager &&
+                {isManager ? (
                     <>
                         <Title level={3}>Your Venues to Manage</Title>
                         <Title level={5}>You are currently managing <em>0</em> venues.</Title>
 
                         <div style={{display: "flex", flexWrap: "nowrap"}}>
                             <Title level={3}>Create a Venue</Title>
-                            <Button onClick={toggleOpen} variant="text"
-                                    size="small">{isOpen ? 'Close' : 'Open'}</Button>
+                            <Button onClick={toggleOpen} variant="text" size="small">
+                                {isOpen ? 'Close' : 'Open'}
+                            </Button>
                         </div>
                         {isOpen ? <CreateVenue/> : null}
-
                     </>
-                }
+                ) : (
+                    <>
+                        <Button onClick={toggleOpen} variant="text" size="small">
+                            {isOpen ? 'Hide' : 'Register as Manager'}
+                        </Button>
+                        {isOpen ? <RegisterAsManager/> : null}
+                    </>
+                )}
+
+                {isLoggedIn
+                ? (
+                    <>
+                    <BookingsList/>
+                    </>
+                    ) : (
+                    <>
+                    <Title level={4}>You need to be logged in to view your bookings.</Title>
+                    <Button type="primary" href="/login">Go to login page</Button>
+                    </>
+                    )}
             </Content>
-        </>
+
+
+        </Content>
     );
 }
 
