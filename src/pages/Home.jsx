@@ -3,7 +3,6 @@ import Title from 'antd/es/typography/Title';
 import {profileAccessToken, profileName} from '../utilities/constants';
 import {VenueList} from '../components/VenuesList';
 
-
 export default function Home() {
 
     const isLoggedIn = profileAccessToken;
@@ -22,4 +21,3 @@ export default function Home() {
         </>
     );
 }
-
