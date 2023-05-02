@@ -12,7 +12,7 @@ import useAuthentication from '../hooks/useAuthentication';
 import useManagerStatus from '../hooks/useManagerStatus';
 import HandleLogout from '../utilities/HandleLogout';
 import {CreateVenue} from '../components/modals/CreateVenue';
-import {profileEmail, profileName, API_PROFILES} from '../utilities/constants';
+import {profileName, API_PROFILES} from '../utilities/constants';
 
 function Profile() {
     const navigate = useNavigate();
@@ -52,8 +52,8 @@ function Profile() {
                     width: "100%",
                     gap: "20px",
                 }}>
-                    <Typography><strong>Name:</strong> {profileName}</Typography>
-                    <Typography><strong>Email:</strong> {profileEmail}</Typography>
+                    <Typography><strong>Name:</strong> {data?.name}</Typography>
+                    <Typography><strong>Email:</strong> {data?.email}</Typography>
                     <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
                 </Content>
             </Content>
