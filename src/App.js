@@ -1,3 +1,4 @@
+import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import React from 'react';
@@ -34,6 +35,7 @@ function App() {
                     },
                 }}
             >
+                <CssBaseline/>
                 <Content className={"container"}>
 
                     <Routes>

@@ -10,7 +10,7 @@ export default function Home() {
 
     return (
         <>
-            <Content style={{paddingBottom:"40px"}}>
+            <Content style={{padding:"20px"}}>
                 <Title level={1}>Holidaze</Title>
 
                 {!isLoggedIn && <Title level={4}>Find your perfect holiday destination.</Title>}

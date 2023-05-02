@@ -19,19 +19,6 @@ function Details({venue}) {
     console.log(chosenVenue?.owner?.name || "No owner found", "chosenVenue.owner");
     console.log(chosenVenue?.bookings || "No bookings found", "chosenVenue.bookings");
 
-    const getBookings = () => {
-        if (chosenVenue?.bookings?.id === id) {
-            return chosenVenue?.bookings?.map(booking => {
-                return (
-                    <Typography.Paragraph>
-                        {booking.dateFrom} - {booking.dateTo}
-                    </Typography.Paragraph>
-                );
-            });
-        } else {
-            return <Typography.Paragraph>No bookings found</Typography.Paragraph>;
-        }
-    };
 
     return (
         <>
@@ -99,8 +86,8 @@ function Details({venue}) {
             </Content>
 
             <Content>
-                <Title level={2}>Availability</Title>
-                <Typography.Paragraph>{getBookings()}</Typography.Paragraph>
+                <Title level={2}>Title Something</Title>
+                <Typography.Paragraph>Something...</Typography.Paragraph>
             </Content>
 
         </>

@@ -29,7 +29,7 @@ export default function Navbar() {
 
     return (
         <nav className={"nav"}>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Link to={"/"} style={{color:"white", marginRight:"15px"}}>

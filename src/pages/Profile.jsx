@@ -32,10 +32,10 @@ function Profile() {
                 <Title level={4}>Here you can view your profile information and upload a profile picture.</Title>
             </Content>
 
-            <Content style={{minHeight: "250px", width:"320px", margin:"0 auto"}}>
+            <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                 <HandleLogout/>
 
-                <Avatar />
+                <Avatar/>
 
                 {/* <UpdateAvatar putAvatar={profileAvatar}/> */}
 
@@ -57,15 +57,15 @@ function Profile() {
                 width: "100%",
                 gap: "20px",
             }}>
-
                 {profileManager &&
                     <>
                         <Title level={3}>Your Venues to Manage</Title>
                         <Title level={5}>You are currently managing <em>0</em> venues.</Title>
 
-                        <div style={{display:"flex", flexWrap:"nowrap"}}>
+                        <div style={{display: "flex", flexWrap: "nowrap"}}>
                             <Title level={3}>Create a Venue</Title>
-                            <Button onClick={toggleOpen} variant="text" size="small">{isOpen ? 'Close' : 'Open'}</Button>
+                            <Button onClick={toggleOpen} variant="text"
+                                    size="small">{isOpen ? 'Close' : 'Open'}</Button>
                         </div>
                         {isOpen ? <CreateVenue/> : null}
 

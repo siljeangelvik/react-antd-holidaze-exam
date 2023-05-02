@@ -17,6 +17,7 @@ export const getDatesBetween = (startDate, endDate) => {
             currentDate.getDate() + 1, // Will increase month if over range
         );
     }
+    console.log(dates);
 
     return dates;
 };
