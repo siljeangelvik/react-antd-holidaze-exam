@@ -17,7 +17,7 @@ export function VenueList() {
 
     return (
         <Content style={{paddingBottom: "40px"}}>
-            <Title level={5}>Search to find a venue</Title>
+            <Title level={5}>Search your way to you next adventure.</Title>
             <Input.Search
                 placeholder="What are you looking for?"
                 value={searchInput}
@@ -29,7 +29,6 @@ export function VenueList() {
                 }}
                 onChange={e => setSearchInput(e.target.value)}
             />
-
 
             <datalist id="dataList">
                 {dataList?.map((item: string, index: Key) => {

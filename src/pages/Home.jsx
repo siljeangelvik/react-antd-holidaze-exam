@@ -8,16 +8,15 @@ export default function Home() {
     const isLoggedIn = profileAccessToken;
 
     return (
-        <>
-            <Content style={{padding:"20px"}}>
+        <Content style={{padding: "40px"}}>
+
                 <Title level={1}>Holidaze</Title>
 
                 {!isLoggedIn && <Title level={4}>Find your perfect holiday destination.</Title>}
                 {isLoggedIn && <Title level={4}>Your perfect holiday destination awaits, {profileName}!</Title>}
-            </Content>
 
             <VenueList />
 
-        </>
+        </Content>
     );
 }
