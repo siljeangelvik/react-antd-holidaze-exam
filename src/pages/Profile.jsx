@@ -10,7 +10,7 @@ import RegisterAsManager from '../components/RegisterAsManager';
 import useApiGet from '../hooks/useApiGet';
 import useAuthentication from '../hooks/useAuthentication';
 import useManagerStatus from '../hooks/useManagerStatus';
-import HandleLogout from 'src/utilities/HandleLogout';
+import HandleLogout from '../utilities/HandleLogout';
 import {CreateVenue} from '../components/modals/CreateVenue';
 import {profileName, API_PROFILES} from '../utilities/constants';
 
