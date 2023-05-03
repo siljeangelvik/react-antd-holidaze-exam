@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react';
-import {profileAccessToken} from '../utilities/constants';
 
 function useAuthentication() {
 
@@ -7,7 +6,7 @@ function useAuthentication() {
 
     useEffect(() => {
         function checkLoginStatus() {
-            if (profileAccessToken) {
+            if (localStorage.getItem("accessToken")) {
                 return setIsLoggedIn(true);
 
             }

@@ -3,6 +3,7 @@ import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
 import useAuthentication from './hooks/useAuthentication';
 import {profileName} from './utilities/constants';
 import Login from './pages/Login';
@@ -30,14 +31,15 @@ function App() {
             <ConfigProvider
                 theme={{
                     token: {
-                        colorPrimary: '#00b96b',
+                        colorPrimary: '#ff9900',
                         colorFillSecondary: '#00bbf9',
                     },
                 }}
             >
                 <CssBaseline/>
-                <Content className={"container"}>
 
+                <Content className={"container"}>
+                    <Navbar/>
                     <Routes>
                         <Route path="/" element={<Layout/>}>
                             <Route index path="/" element={

@@ -7,6 +7,6 @@ max-width: 320px;
 }
 
 body, html {
-    min-height: 100vh;
+    height: 100vh;
 }
 

@@ -1,22 +1,17 @@
-import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import {Typography} from 'antd';
 import React from 'react';
+import "../styles.css";
 
 const Footer = () => {
     return (
-        <nav className={"nav"}>
-            <AppBar position="static">
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                        <Typography.Text style={{color:"white"}}>
-                            copyright - @2023 Holidaze
-                        </Typography.Text>
-                    </Toolbar>
-                </Container>
-            </AppBar>
-        </nav>
+        <div className="navbar-container">
+            <Container maxWidth="xl">
+                <Typography.Text style={{color: "white", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    Copyright © 2023 &nbsp; <span className="logo">S.Angelvik</span>. All Rights Reserved.
+                </Typography.Text>
+            </Container>
+        </div>
     );
 };
 
