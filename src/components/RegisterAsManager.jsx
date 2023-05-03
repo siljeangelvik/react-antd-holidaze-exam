@@ -1,10 +1,9 @@
 import {Button, Input} from '@mui/material';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
-import {profileEmail} from '../utilities/constants';
 
 const RegisterAsManager = () => {
-    const canRegisterAsManager = profileEmail && profileEmail.endsWith('@stud.noroff.no') || profileEmail && profileEmail.endsWith('@noroff.no');
+    const canRegisterAsManager = localStorage.getItem("email").endsWith('@stud.noroff.no') || localStorage.getItem("email").endsWith('@noroff.no');
     console.log(canRegisterAsManager);
 
     const handleRegisterAsManager = () => {

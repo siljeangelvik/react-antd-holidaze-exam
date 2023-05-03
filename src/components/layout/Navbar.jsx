@@ -26,7 +26,7 @@ const Navbar = () => {
         }
         handleResize(); // Call on initial mount
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [ toggleValue, value]);
 
     const handleToggle = () => {
         const navbar = document.querySelector(".navbar-list-mobile");

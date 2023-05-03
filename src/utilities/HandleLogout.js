@@ -1,19 +1,21 @@
 import {Button} from 'antd';
+import {useNavigate} from 'react-router-dom';
 
-const HandleLogout = () => {
+function HandleLogout () {
+    const navigate = useNavigate();
 
     const logout = () => {
-        if (localStorage.getItem("accessToken")) {
-            console.log("You're logged in");
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('id');
-            localStorage.removeItem('name');
-            localStorage.removeItem('email');
-            localStorage.removeItem('avatar');
-            localStorage.removeItem('manager');
-            window.location.replace("/login");
-        }
-        console.log("You logged out.")
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('id');
+        localStorage.removeItem('name');
+        localStorage.removeItem('email');
+        localStorage.removeItem('avatar');
+        localStorage.removeItem('manager');
+        console.log("You logged out.");
+
+        setTimeout(() => {
+            navigate('/login');
+        }, 1000);
     }
 
     return (

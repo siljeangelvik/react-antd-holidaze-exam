@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import useAuthentication from '../../../hooks/useAuthentication';
-import HandleLogout from '../../../utilities/HandleLogout';
+import HandleLogout from 'src/utilities/HandleLogout';
 
 export default function Navbar() {
 
