@@ -30,6 +30,26 @@ function App() {
         <>
             <ConfigProvider
                 theme={{
+                    palette: {
+                        primary: {
+                            main: '#4caf50',
+                        },
+                        secondary: {
+                            main: '#ff99ff',
+                        },
+                        background: {
+                            default: '#ffff99',
+                        },
+                    },
+                    typography: {
+                        fontFamily: 'Roboto, sans-serif',
+                        fontSize: 16,
+                        fontWeightLight: 300,
+                        fontWeightRegular: 400,
+                        fontWeightMedium: 500,
+                        fontWeightBold: 700,
+                    },
+
                     token: {
                         colorPrimary: '#ff9900',
                         colorFillSecondary: '#00bbf9',
@@ -62,10 +82,7 @@ function App() {
                             <Route path="*" element={<NotFound/>}/>
                         </Route>
                     </Routes>
-
                 </Content>
-
-
             </ConfigProvider>
         </>
     );

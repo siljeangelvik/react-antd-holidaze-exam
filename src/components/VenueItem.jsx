@@ -8,10 +8,6 @@ import {formatCurrency} from '../utilities/formatCurrency';
 const VenueItem = ({venue}) => {
     const {id, name, media, description, price, maxGuests, number} = venue;
 
-    /* if (!mediaEndsWith(media, '.jpg') && !mediaEndsWith(media, '.png')) {
-        return 'https://cdn.pixabay.com/photo/2016/10/22/18/52/beach-1761410_1280.jpg';
-    } */
-
     function checkMediaProperty() {
         const placeholderUrl = 'https://cdn.pixabay.com/photo/2016/10/22/18/52/beach-1761410_1280.jpg';
         if (media.length > 0) {

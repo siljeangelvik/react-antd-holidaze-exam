@@ -7,8 +7,7 @@ const VenuesContext = createContext();
 export const VenuesProvider = ({children}) => {
 
     const {data, isLoading, isError} = useApiGet(API_VENUES);
-    console.log(data, "venues From VenuesContext");
-
+    // console.log(data, "venues From VenuesContext");
 
     // 73a67858-9f1b-4f46-a0a9-6827655bafc3
 

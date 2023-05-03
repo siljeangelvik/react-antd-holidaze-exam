@@ -9,16 +9,11 @@ import {VenuesContext} from '../context/VenuesContext';
 
 function Details({venue}) {
 
-    console.log(venue, "venueTestId From VenuesContext");
-
     const {id} = useParams();
     const {data: venues} = useContext(VenuesContext);
     const chosenVenue = venues.find(venue => venue.id === id);
     const media = chosenVenue?.media?.length ? chosenVenue?.media : "https://via.placeholder.com/150";
     console.log(chosenVenue?.meta || "No meta found", "chosenVenue.meta");
-    console.log(chosenVenue?.owner?.name || "No owner found", "chosenVenue.owner");
-    console.log(chosenVenue?.bookings || "No bookings found", "chosenVenue.bookings");
-
 
     return (
         <Content style={{padding: "40px"}}>
