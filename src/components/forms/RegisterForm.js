@@ -43,7 +43,7 @@ export function RegisterForm() {
 
     return (
         <>
-            <Content style={{paddingBottom: "40px"}}>
+            <Content style={{paddingBottom: "20px"}}>
                 <Title level={1}>Register</Title>
                 <Title level={4}>Sign up for a new account!</Title>
             </Content>

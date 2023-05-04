@@ -1,3 +1,4 @@
+import {Content} from 'antd/es/layout/layout';
 import {RegisterForm} from '../components/forms/RegisterForm';
 
 function Register(onSubmit) {
