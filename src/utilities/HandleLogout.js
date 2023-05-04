@@ -21,8 +21,16 @@ function HandleLogout () {
     return (
         <Button
             onClick={logout}
-            color={"danger"}
-            type="primary"
+           style={{
+               background: "#fff",
+               color:"#ff4d4f",
+               boxShadow: 'none',
+
+               border: 'none',
+               cursor: 'pointer',
+               fontWeight: 'bold',
+               outline: 'none',
+           }}
         >
             Log out
         </Button>
