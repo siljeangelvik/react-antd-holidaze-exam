@@ -1,18 +1,14 @@
 import {Typography} from '@mui/material';
 
 export default function Bookings() {
-
     return (
         <>
             <Typography variant={"h2"}>Your Bookings</Typography>
-
         </>
     );
 }
 
 /*
-
-
   {
     "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "dateFrom": "2023-04-19T22:25:07.406Z",
@@ -48,5 +44,4 @@ export default function Bookings() {
     }
   }
 ]
-
  */

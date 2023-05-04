@@ -1,10 +1,12 @@
 import {Avatar} from '@mui/material';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {AuthenticationContext} from '../../context/AuthenticationContext';
 import useApiPut from '../../hooks/useApiPut';
-import {API_PROFILES, profileName} from '../../utilities/constants';
+import {API_PROFILES} from '../../utilities/constants';
 
 export function UpdateAvatar() {
-    const {putData, isLoading, isError, data} = useApiPut(`${API_PROFILES}/${profileName}/media`);
+    const {userProfileData} = useContext(AuthenticationContext);
+    const {putData, isLoading, isError, data} = useApiPut(`${API_PROFILES}/${localStorage.getItem("name")}/media`);
     const [avatar, setAvatar] = useState('');
 
     const isValidAvatarUrl = (url) => {
@@ -25,7 +27,7 @@ export function UpdateAvatar() {
 
     return (
         <>
-            <Avatar src={localStorage.getItem("avatar")} style={{width: "100px", height: "100px", margin: "auto"}}/>
+            <Avatar src={userProfileData?.avatar} style={{width: "100px", height: "100px", margin: "auto"}}/>
             <form onSubmit={handleSubmit} style={{
                 maxWidth: "320px",
                 display: "flex",

@@ -5,6 +5,13 @@ import {AuthenticationProvider} from './context/AuthenticationContext';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Register the service worker.
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+    });
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>

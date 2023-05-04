@@ -3,7 +3,6 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import SuccessRegistered from '../../components/alerts/SuccessRegistered';
 import useApiPost from '../../hooks/useApiPost';
 import {API_REGISTER} from '../../utilities/constants';
 
@@ -38,15 +37,8 @@ export function RegisterForm() {
         event.preventDefault();
         // Call the postData function with the form data
         await postData({email, password, manager});
-
-        return (
-            <>
-                <SuccessRegistered />
-                {setTimeout(() => {
-                    navigate(`/login`)
-                }, 3000)}
-            </>
-        );
+        // Navigate to the login page
+        navigate('/login');
     };
 
     return (
@@ -74,7 +66,6 @@ export function RegisterForm() {
                        required={true}
                        pattern={emailPattern}
                        style={{padding: "9px", borderRadius: "7px", border: "2px solid lightgray"}}/>
-
 
                 <label htmlFor="password">Password:</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)}

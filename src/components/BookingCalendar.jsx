@@ -28,7 +28,6 @@ const BookingCalendar = () => {
     console.log(newBookingsList, "newBookingsList from calendar");
 
     const [selectedDates, setSelectedDates] = useState([]);
-
     const handleDateClick = (date) => {
         if (selectedDates.length === 0) {
             // if no dates are selected yet, set the start date of the range
@@ -58,8 +57,7 @@ const BookingCalendar = () => {
     });
 
     // console.log(disabledDates, "disabledDates from calendar");
-
-    const { loading, error, success, createBooking } = useBooking(
+    const {loading, error, success, createBooking} = useBooking(
         id,
         selectedDates
     );
@@ -70,7 +68,7 @@ const BookingCalendar = () => {
             alert("Please log in to book a venue.");
             return;
         }
-       return createBooking();
+        return createBooking();
     };
 
     return (
@@ -81,7 +79,7 @@ const BookingCalendar = () => {
                     onChange={setSelectedDates}
                     onClickDay={handleDateClick}
                     minDate={new Date()}
-                    tileDisabled={({ date, view }) =>
+                    tileDisabled={({date, view}) =>
                         view === "month" &&
                         disabledDates?.some(
                             (disabledDate) =>
@@ -91,18 +89,17 @@ const BookingCalendar = () => {
                         )
                     }
                     selectRange={true}
-                    tileClassName={({ date }) =>
+                    tileClassName={({date}) =>
                         selectedDates.length === 2 &&
                         date >= selectedDates[0] &&
                         date <= selectedDates[1] &&
                         "selected-range"
                     }
                 />
-
-                <Content style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-                        <Button variant="contained" color="primary" type="submit">
-                            {loading ? "Loading..." : "Book Now"}
-                        </Button>
+                <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
+                    <Button variant="contained" color="primary" type="submit">
+                        {loading ? "Loading..." : "Book Now"}
+                    </Button>
 
                     {error && (
                         <Typography.Text type="danger">
@@ -135,7 +132,6 @@ export default BookingCalendar;
     }
   ]
  */
-
 
 /*
       for (let i = 0; i < bookingsList.length; i++) {

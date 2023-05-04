@@ -1,20 +1,15 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
-import {AuthenticationContext} from '../../context/AuthenticationContext';
-import useToggle from "../../hooks/useToggle";
+import {AuthenticationContext} from '../../../context/AuthenticationContext';
+import useToggle from "../../../hooks/useToggle";
 import "./styles.css";
 
 const Navbar = () => {
     const [value, toggleValue] = useToggle(false);
-    const {isLoggedIn, handleUserLogout} = useContext(AuthenticationContext);
-
-    const navbar = document.querySelector('.navbar-list-mobile');
-    // const button = document.querySelector('.navbar-button, .navbar-button-emoji')
-    // button.addEventListener('click', _ => (button) = navbar.classList.toggle('is-active'))
+    const {isAuthenticated, handleUserLogout} = useContext(AuthenticationContext);
 
     const handleNavbar = () => {
         toggleValue(!value);
-        navbar.classList.toggle('is-active');
     };
 
     return (
@@ -32,15 +27,14 @@ const Navbar = () => {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    {isLoggedIn && (
+                    {isAuthenticated ? (
                         <>
                             <li><Link to="/profile">Profile</Link></li>
                             <li><Link to="/bookings">Bookings</Link></li>
                             <li><Link to="/venues">Venues</Link></li>
                             <li><Link to="/login" onClick={handleUserLogout}>Logout</Link></li>
                         </>
-                    )}
-                    {!isLoggedIn && (
+                    ) : (
                         <>
                             <li><Link to="/login">Login</Link></li>
                             <li><Link to="/register">Register</Link></li>

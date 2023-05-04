@@ -1,6 +1,4 @@
 function BookVenue() {
-
-
     /*
 
     {
@@ -18,8 +16,7 @@ function BookVenue() {
     "pets": true
   }
 }
-
-   */
+ */
 
     return (
         <div>
@@ -29,7 +26,6 @@ function BookVenue() {
 }
 
 export default BookVenue;
-
 
 // RESPONSE:
 
@@ -42,8 +38,6 @@ avatar: null, venueManager: false,
 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc5LCJuYW1lIjoiU2lBdkFuZyIsImVtYWlsIjoic2lsamVhdmVuYWFuZ2VsdmlrQG5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwidmVudWVNYW5hZ2VyIjpmYWxzZSwiaWF0IjoxNjgxODc3MTQzfQ.hlATxgtLFcQLxMrD-TiOyQPptqrg6PkHV8_IQMpEhHs" }
 
  */
-
-
 
 /*
 

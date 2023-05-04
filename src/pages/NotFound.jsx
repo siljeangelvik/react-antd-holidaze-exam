@@ -7,7 +7,7 @@ function NotFound() {
     <div>
         <Content style={{paddingBottom:"40px"}}>
             <Title level={1}>404</Title>
-            <Title level={4}>Page not found</Title>
+            <Title level={4}>Oooops, sorry...Page not found!</Title>
         </Content>
     </div>
   );

@@ -3,6 +3,7 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import {Key} from 'react';
 import React, {useContext, useState} from 'react';
+import {useParams} from 'react-router-dom';
 import {API_VENUES} from '../utilities/constants';
 import useApiGet from '../hooks/useApiGet';
 import VenueItem from '../components/VenueItem';
@@ -10,8 +11,9 @@ import {VenuesContext} from '../context/VenuesContext';
 
 export function VenueList() {
 
+    const {id} = useParams();
     const {data: venues} = useContext(VenuesContext);
-    const {venue} = useApiGet(API_VENUES);
+    const {venue} = useApiGet(`${API_VENUES}/${id}`);
     const [searchInput, setSearchInput] = useState('');
     const dataList = venue?.map((item: { title: string }) => item.title);
 

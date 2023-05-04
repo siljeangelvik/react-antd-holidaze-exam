@@ -3,7 +3,7 @@ import { Button, Image, Upload } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import React, { useRef } from 'react';
 import useApiPut from '../../hooks/useApiPut';
-import { profileName, UPDATE_PROFILE_AVATAR } from '../../utilities/constants';
+import {UPDATE_AVATAR} from '../../utilities/constants';
 
 const defaultAvatar = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
@@ -11,15 +11,16 @@ const UpdateAvatar = ({ putAvatar }) => {
     const avatarRef = useRef(null);
     const profileAvatar = localStorage.getItem('avatar');
 
-    const { isLoading, putData } = useApiPut(UPDATE_PROFILE_AVATAR, putAvatar);
+    const { isLoading, putData } = useApiPut(UPDATE_AVATAR, putAvatar);
 
     const handlePutAvatar = (e) => {
         e.preventDefault();
-        putData({
+       putData({
             avatar: avatarRef.current.value,
+        }).then(() => {
+            localStorage.setItem('avatar', avatarRef.current.value);
         });
-        localStorage.setItem('avatar', avatarRef.current.value);
-    }
+    };
 
     const uploadButton = (
         <div>
@@ -47,7 +48,7 @@ const UpdateAvatar = ({ putAvatar }) => {
                         height={100}
                         width={100}
                         src={localStorage.getItem("avatar") === null ? defaultAvatar : localStorage.getItem("avatar")}
-                        alt={profileName}
+                        alt={localStorage.getItem("name")}
                         style={{ borderRadius: "50%" }}
                     />
                 ) : (

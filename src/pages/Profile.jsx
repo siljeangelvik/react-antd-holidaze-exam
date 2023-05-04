@@ -2,33 +2,18 @@ import {Button} from '@mui/material';
 import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useContext, useState} from 'react';
+import {AuthenticationContext} from '../context/AuthenticationContext';
 import {UpdateAvatar} from '../components/forms/UpdateAvatar';
-import {BookingsList} from '../components/BookingsList';
 import RegisterAsManager from '../components/RegisterAsManager';
-import useApiGet from '../hooks/useApiGet';
-import useAuthentication from '../hooks/useAuthentication';
 import useManagerStatus from '../hooks/useManagerStatus';
-import HandleLogout from '../utilities/HandleLogout';
-import {CreateVenue} from '../components/modals/CreateVenue';
-import {profileName, API_PROFILES, profileAccessToken} from '../utilities/constants';
+import CreateVenue from '../components/modals/CreateVenue';
 
 function Profile() {
-    const navigate = useNavigate();
-    const isLoggedIn = useAuthentication();
-    const isManager = useManagerStatus();
-
-    const {data} = useApiGet(`${API_PROFILES}/${profileName}?_bookings=true&_venues=true`);
-    console.log(data);
-
-
-    if (!profileAccessToken) {
-        console.log("No token found, redirecting to login page.");
-        navigate("/login");
-    }
-
     const [isOpen, setIsOpen] = useState(false);
+
+    const {userProfileData} = useContext(AuthenticationContext);
+    const isManager = useManagerStatus();
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -39,7 +24,6 @@ function Profile() {
             <Content style={{paddingBottom: "40px"}}>
                 <Title level={1}>Your Profile</Title>
                 <Title level={4}>Here you can view and edit your profile information.</Title>
-                <HandleLogout/>
             </Content>
 
             <Content style={{paddingBottom: "40px", minHeight: "250px", width: "320px", margin: "0 auto"}}>
@@ -53,8 +37,8 @@ function Profile() {
                     width: "100%",
                     gap: "20px",
                 }}>
-                    <Typography><strong>Name:</strong> {data?.name}</Typography>
-                    <Typography><strong>Email:</strong> {data?.email}</Typography>
+                    <Typography><strong>Name:</strong> {userProfileData?.name}</Typography>
+                    <Typography><strong>Email:</strong> {userProfileData?.email}</Typography>
                     <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
                 </Content>
             </Content>
@@ -86,12 +70,6 @@ function Profile() {
                         {isOpen ? <RegisterAsManager/> : null}
                     </>
                 )}
-
-                {isLoggedIn
-                    ? (<><BookingsList/></>)
-                    : (<><Title level={4}>You need to be logged in to view your bookings.</Title>
-                            <Button type="primary" href="/login">Go to login page</Button></>
-                    )}
             </Content>
         </Content>
     );

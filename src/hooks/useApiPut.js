@@ -9,16 +9,27 @@ function useApiPut(url) {
         setIsLoading(true);
         setIsError(false);
         try {
-            const response = await fetch(url, {
+            const options = {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
-            });
+            }
+            const response = await fetch(url, options);
             const json = await response.json();
             setData(json);
+            localStorage.setItem('avatar', json.avatar);
+
+            /*const response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });*/
         } catch (error) {
             console.log(error);
             setIsError(true);

@@ -8,32 +8,21 @@ import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
 export function LoginForm() {
-
-    const {setIsAuthenticated, handleUserLogin} = useContext(AuthenticationContext);
-
     const navigate = useNavigate();
 
-    // Call the useApiPost hook with the desired URL
+    const {handleUserLogin} = useContext(AuthenticationContext);
+
     const {postData, isLoading, isError, data} = useApiPost(API_LOGIN);
 
-    // Define state variables for the login form inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // Define an event handler for the form submit event
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // Call the postData function with the form data
         await postData({email, password});
-        // If the login was successful, redirect to the home page
         if (data && data.success) {
-            setIsAuthenticated(true); //  set the authentication state to true
-            handleUserLogin(data); // set the user data in the context
-
-            // Show the success login alert
+            handleUserLogin(data);
             SuccessLogin();
-
-            // Redirect to the profile page
             navigate('/profile');
         }
     };
@@ -69,7 +58,7 @@ export function LoginForm() {
                        required={true}
                        style={{padding: "9px", borderRadius: "7px", border: "2px solid lightgray"}}/>
 
-                <button type="submit" disabled={isLoading}
+                <button type="submit" disabled={isLoading} onClick={handleUserLogin}
                         style={{
                             padding: "9px",
                             background: "transparent",
