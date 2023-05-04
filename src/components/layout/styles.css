@@ -40,7 +40,7 @@ span.navbar-button-emoji {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    border: transparent;
+    border: 2px solid transparent;
     border-radius: 50%;
     box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
     rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
@@ -48,27 +48,51 @@ span.navbar-button-emoji {
     font-size: 16px;
     color: #000;
     cursor: pointer;
+
+    transition: 0.4s ease-out;
 }
 
-nav.navbar-mobile {
-    display: none;
-    flex-direction: column;
-    padding: 20px;
+.navbar-button-emoji:hover {
+    #background-color: #ff9944;
+    background-color: lightsalmon;
+    border: 2px solid #fff;
+    box-shadow: rgba(255, 250, 255, 0.7) 0 1px 2px 0,
+    rgba(255, 250, 255, 0.85) 0 1px 3px 1px;
+    transition-duration: 2s;
 }
 
-ul.navbar-list-mobile {
+/* Container Wrapper */
+nav.navbar-container-mobile {
     display: none;
-    flex-direction: column;
-    gap: 20px;
-    box-shadow: none;
-    position: relative;
-    right: 0;
-    background-color: #fff;
-    top: 53px;
-    width: 100%;
-    border: 1px solid transparent;
-    height: min-content;
     z-index: 100;
+}
+
+/* Container */
+ul.navbar-list-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 53px;
+    right: 0;
+
+    gap: 30px;
+    height: min-content;
+    width: 35%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
+    rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+    padding: 30px 0 30px 30px;
+    background-color: #fff;
+
+    border: 1px solid #fff;
+    border-radius: 0 0 0 20px;
+    z-index: 101;
+}
+
+li,
+li > * {
+    color: #000;
 }
 
 li,
@@ -84,34 +108,58 @@ li > * {
 li {
     /*border: 1px solid #000; /**/
     display: block;
-    width:100%;
+    width: 100%;
 }
 
 li:hover, li > *:hover {
     color: #ff9900;
 }
 
+/* Define styles for small displays */
+@media screen and (max-width: 480px) {
+    li,
+    li > * {
+        color: #000;
+    }
+}
 
-@media only screen and (min-width: 500px) {
+/* Define styles for large displays */
+@media screen and (min-width: 481px) {
     button.navbar-button-emoji,
     span.navbar-button-emoji {
         display: none;
     }
 
+    nav.navbar-container-mobile {
+        display: flex;
 
+    }
+
+    nav.navbar-container-mobile,
     ul.navbar-list-mobile {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         align-items: center;
-        gap: 20px;
-        background-color: transparent;
-        position: relative;
-        right: 0;
+
+        position: absolute;
         top: 0;
-        width: 100%;
+        right: 0;
+
+        height: 100%;
+        width: min-content;
+
+
+        box-shadow: none;
+
+
+        background-color: transparent;
         border: 1px solid transparent;
-        height: min-content;
-        z-index: 100;
+    }
+
+    ul.navbar-list-mobile {
+        gap: 30px;
+        position: relative;
     }
 
     li,

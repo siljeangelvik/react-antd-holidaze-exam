@@ -7,8 +7,8 @@ const Footer = () => {
     return (
         <div className="navbar-container">
             <Container maxWidth="xl">
-                <Typography.Text style={{color: "white", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    Copyright © 2023 &nbsp; <span className="logo">S.Angelvik</span>. All Rights Reserved.
+                <Typography.Text style={{color: "white", display: "flex", justifyContent: "center", alignItems: "baseline"}}>
+                    Copyright © 2023 &nbsp; <span className="logo" style={{fontSize:"0.8rem", letterSpacing:"0.1rem"}}>S.Angelvik</span>. All Rights Reserved.
                 </Typography.Text>
             </Container>
         </div>
