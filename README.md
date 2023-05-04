@@ -44,6 +44,30 @@ Prototype
 `npm install @mui/material @emotion/react @emotion/styled --legacy-peer-deps`  
 `npm install @mui/icons-material--legacy-peer-deps`  
 
+
+---
+
+### Dependencies Issues
+
+List all dependencies and their sub-dependencies in the project:  
+_(remember to open package.json in terminal)_
+`npm ls`  
+
+To check which dependencies depend on a specific package:  
+`npm ls <package-name>`  
+
+Shows all the direct dependencies of a specific package and their versions:  
+`npm view <package-name> dependencies`  
+
+To check which version of `<package-name>` is being used:  
+`npm ls <package-name> --depth=0`  
+
+
+Returns a list of packages that depend on `<package-name>` dependency:    
+`npm ls --reverse <package-name>`    
+
+
+
 ---
 
 # Getting Started with Create React App
