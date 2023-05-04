@@ -16,7 +16,7 @@ function Bookings() {
     return (
         <>
             <div style={{padding: "80px 40px", height:"'100vh"}}>
-                <Content style={{paddingBottom: "40px"}}>
+                <Content style={{paddingBottom: "20px"}}>
                     <Title level={1}>Your Bookings</Title>
                     <>
                         <Title level={4}>Hi {localStorage.getItem("name")}, You have {bookings.length} bookings.</Title>

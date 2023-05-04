@@ -2,9 +2,13 @@ import {RegisterForm} from '../components/forms/RegisterForm';
 
 function Register(onSubmit) {
     return (
-        <div>
-            <RegisterForm onSubmit={onSubmit}/>
-        </div>
+        <>
+            <div style={{padding: "80px 40px", height: "'100vh"}}>
+                <Content style={{paddingBottom: "20px"}}>
+                    <RegisterForm onSubmit={onSubmit}/>
+                </Content>
+            </div>
+        </>
     );
 }
 

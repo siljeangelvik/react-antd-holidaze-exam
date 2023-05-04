@@ -20,58 +20,62 @@ function Profile() {
     };
 
     return (
-        <Content style={{padding: "40px"}}>
-            <Content style={{paddingBottom: "40px"}}>
-                <Title level={1}>Your Profile</Title>
-                <Title level={4}>Here you can view and edit your profile information.</Title>
-            </Content>
+        <>
+            <div style={{padding: "80px 40px", height: "'100vh"}}>
+                <Content>
+                    <Content style={{paddingBottom: "40px"}}>
+                        <Title level={1}>Your Profile</Title>
+                        <Title level={4}>Here you can view and edit your profile information.</Title>
+                    </Content>
 
-            <Content style={{paddingBottom: "40px", minHeight: "250px", width: "320px", margin: "0 auto"}}>
-                <UpdateAvatar/>
-            </Content>
+                    <Content style={{paddingBottom: "40px", minHeight: "250px", width: "320px", margin: "0 auto"}}>
+                        <UpdateAvatar/>
+                    </Content>
 
-            <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
-                <Content style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "100%",
-                    gap: "20px",
-                }}>
-                    <Typography><strong>Name:</strong> {userProfileData?.name}</Typography>
-                    <Typography><strong>Email:</strong> {userProfileData?.email}</Typography>
-                    <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
+                    <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
+                        <Content style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                            gap: "20px",
+                        }}>
+                            <Typography><strong>Name:</strong> {userProfileData?.name}</Typography>
+                            <Typography><strong>Email:</strong> {userProfileData?.email}</Typography>
+                            <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
+                        </Content>
+                    </Content>
+
+                    <Content style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "100%",
+                        gap: "20px",
+                    }}>
+                        {isManager ? (
+                            <>
+                                <Title level={3}>Your Venues to Manage</Title>
+                                <Title level={5}>You are currently managing <em>0</em> venues.</Title>
+
+                                <div style={{display: "flex", flexWrap: "nowrap"}}>
+                                    <Title level={3}>Create a Venue</Title>
+                                    <Button onClick={toggleOpen} variant="text" size="small">
+                                        {isOpen ? 'Close' : 'Open'}
+                                    </Button>
+                                </div>
+                                {isOpen ? <CreateVenue/> : null}
+                            </>
+                        ) : (
+                            <>
+                                <Button onClick={toggleOpen} variant="text" size="small">
+                                    {isOpen ? 'Hide' : 'Register as Manager'}
+                                </Button>
+                                {isOpen ? <RegisterAsManager/> : null}
+                            </>
+                        )}
+                    </Content>
                 </Content>
-            </Content>
-
-            <Content style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "100%",
-                gap: "20px",
-            }}>
-                {isManager ? (
-                    <>
-                        <Title level={3}>Your Venues to Manage</Title>
-                        <Title level={5}>You are currently managing <em>0</em> venues.</Title>
-
-                        <div style={{display: "flex", flexWrap: "nowrap"}}>
-                            <Title level={3}>Create a Venue</Title>
-                            <Button onClick={toggleOpen} variant="text" size="small">
-                                {isOpen ? 'Close' : 'Open'}
-                            </Button>
-                        </div>
-                        {isOpen ? <CreateVenue/> : null}
-                    </>
-                ) : (
-                    <>
-                        <Button onClick={toggleOpen} variant="text" size="small">
-                            {isOpen ? 'Hide' : 'Register as Manager'}
-                        </Button>
-                        {isOpen ? <RegisterAsManager/> : null}
-                    </>
-                )}
-            </Content>
-        </Content>
+            </div>
+        </>
     );
 }
 

@@ -3,14 +3,16 @@ import Title from 'antd/es/typography/Title';
 import React from 'react';
 
 function NotFound() {
-  return (
-    <div>
-        <Content style={{paddingBottom:"40px"}}>
-            <Title level={1}>404</Title>
-            <Title level={4}>Oooops, sorry...Page not found!</Title>
-        </Content>
-    </div>
-  );
+    return (
+        <>
+            <div style={{padding: "80px 40px", height: "'100vh"}}>
+                <Content style={{paddingBottom: "40px"}}>
+                    <Title level={1}>404</Title>
+                    <Title level={4}>Oooops, sorry...Page not found!</Title>
+                </Content>
+            </div>
+        </>
+    );
 }
 
 export default NotFound;
