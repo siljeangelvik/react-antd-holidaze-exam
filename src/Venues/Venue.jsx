@@ -1,4 +1,4 @@
-import {Card, Image, Typography} from 'antd';
+/*import {Card, Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
@@ -75,3 +75,5 @@ function AllVenues() {
 }
 
 export default AllVenues;
+
+ */

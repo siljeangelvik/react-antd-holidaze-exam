@@ -1,16 +1,19 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import useAuthentication from '../hooks/useAuthentication';
+import {useContext} from 'react';
+import {AuthenticationContext} from '../context/AuthenticationContext';
 import {VenueList} from '../components/VenuesList';
 
 export default function Home() {
-    const isLoggedIn = useAuthentication();
+    const isAuthenticated = useContext(AuthenticationContext);
+
+
 
     return (
         <Content style={{padding: "40px"}}>
                 <Title level={1}>Holidaze</Title>
-                {!isLoggedIn && <Title level={4}>Find your perfect holiday destination.</Title>}
-                {isLoggedIn && <Title level={4}>Your perfect holiday destination awaits, {localStorage.getItem("name")}!</Title>}
+                {!isAuthenticated && <Title level={4}>Find your perfect holiday destination.</Title>}
+                {isAuthenticated && <Title level={4}>Your perfect holiday destination awaits, {localStorage.getItem("name")}!</Title>}
             <VenueList />
         </Content>
     );
