@@ -66,8 +66,6 @@ To check which version of `<package-name>` is being used:
 Returns a list of packages that depend on `<package-name>` dependency:    
 `npm ls --reverse <package-name>`    
 
-
-
 ---
 
 # Getting Started with Create React App
