@@ -1,13 +1,18 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {AuthenticationContext} from '../../context/AuthenticationContext';
 import SuccessLogin from '../../components/alerts/SuccessLogin';
 import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
 export function LoginForm() {
+
+    const {setIsAuthenticated, handleUserLogin} = useContext(AuthenticationContext);
+
     const navigate = useNavigate();
+
     // Call the useApiPost hook with the desired URL
     const {postData, isLoading, isError, data} = useApiPost(API_LOGIN);
 
@@ -21,8 +26,14 @@ export function LoginForm() {
         // Call the postData function with the form data
         await postData({email, password});
         // If the login was successful, redirect to the home page
-        if (data) {
+        if (data && data.success) {
+            setIsAuthenticated(true); //  set the authentication state to true
+            handleUserLogin(data); // set the user data in the context
+
+            // Show the success login alert
             SuccessLogin();
+
+            // Redirect to the profile page
             navigate('/profile');
         }
     };

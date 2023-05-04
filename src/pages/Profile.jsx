@@ -12,17 +12,18 @@ import useAuthentication from '../hooks/useAuthentication';
 import useManagerStatus from '../hooks/useManagerStatus';
 import HandleLogout from '../utilities/HandleLogout';
 import {CreateVenue} from '../components/modals/CreateVenue';
-import {profileName, API_PROFILES} from '../utilities/constants';
+import {profileName, API_PROFILES, profileAccessToken} from '../utilities/constants';
 
 function Profile() {
     const navigate = useNavigate();
     const isLoggedIn = useAuthentication();
     const isManager = useManagerStatus();
 
-    const {data} = useApiGet(`${API_PROFILES}/${profileName}?_count`);
+    const {data} = useApiGet(`${API_PROFILES}/${profileName}?_bookings=true&_venues=true`);
     console.log(data);
 
-    if (!isLoggedIn) {
+
+    if (!profileAccessToken) {
         console.log("No token found, redirecting to login page.");
         navigate("/login");
     }

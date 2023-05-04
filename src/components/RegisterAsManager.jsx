@@ -3,6 +3,7 @@ import Title from 'antd/es/typography/Title';
 import React from 'react';
 
 const RegisterAsManager = () => {
+    // eslint-disable-next-line no-restricted-globals
     const canRegisterAsManager = localStorage.getItem("email").endsWith('@stud.noroff.no') || localStorage.getItem("email").endsWith('@noroff.no');
     console.log(canRegisterAsManager);
 

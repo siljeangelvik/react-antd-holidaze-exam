@@ -58,7 +58,7 @@ function App() {
             >
                 <CssBaseline/>
 
-                <Content className={"container"}>
+                <Content className={"App"}>
                     <Navbar/>
                     <Routes>
                         <Route path="/" element={<Layout/>}>

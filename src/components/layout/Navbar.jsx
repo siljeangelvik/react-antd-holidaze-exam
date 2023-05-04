@@ -1,23 +1,21 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Link} from "react-router-dom";
-import useAuthentication from '../../hooks/useAuthentication';
+import {AuthenticationContext} from '../../context/AuthenticationContext';
 import useToggle from "../../hooks/useToggle";
 import "./styles.css";
 
 const Navbar = () => {
     const [value, toggleValue] = useToggle(false);
-    const isLoggedIn = useAuthentication();
+    const {isLoggedIn, handleUserLogout} = useContext(AuthenticationContext);
 
     const navbar = document.querySelector('.navbar-list-mobile');
-   // const button = document.querySelector('.navbar-button, .navbar-button-emoji')
+    // const button = document.querySelector('.navbar-button, .navbar-button-emoji')
+    // button.addEventListener('click', _ => (button) = navbar.classList.toggle('is-active'))
 
     const handleNavbar = () => {
         toggleValue(!value);
         navbar.classList.toggle('is-active');
     };
-
-//    button.addEventListener('click', _ => (button) = navbar.classList.toggle('is-active'))
-
 
     return (
         <div className="navbar-container">
@@ -30,19 +28,16 @@ const Navbar = () => {
             </button>
 
             <nav className="navbar-container-mobile" style={{display: value && "flex"}}>
-                <ul className="navbar-list-mobile"  id="slide">
+                <ul className="navbar-list-mobile" id="slide">
                     <li>
                         <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/details">Details</Link>
                     </li>
                     {isLoggedIn && (
                         <>
                             <li><Link to="/profile">Profile</Link></li>
                             <li><Link to="/bookings">Bookings</Link></li>
                             <li><Link to="/venues">Venues</Link></li>
-                            <li><Link to="/logout">Logout</Link></li>
+                            <li><Link to="/login" onClick={handleUserLogout}>Logout</Link></li>
                         </>
                     )}
                     {!isLoggedIn && (

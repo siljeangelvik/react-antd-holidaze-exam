@@ -13,7 +13,11 @@ function useApiGet(url) {
                 setIsLoading(true);
                 setIsError(false);
                 const fetchedData = await fetch(memoizedUrl, {
-
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                        'Content-Type': 'application/json',
+                    },
                 });
                 const json = await fetchedData.json();
                 setData(json);
@@ -24,8 +28,7 @@ function useApiGet(url) {
                 setIsLoading(false);
             }
         }
-
-        getData().then(r => console.log(r));
+        getData();
     }, [memoizedUrl]);
 
     return {data, isLoading, isError};

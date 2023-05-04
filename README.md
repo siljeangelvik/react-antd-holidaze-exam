@@ -1,3 +1,51 @@
+# React AntDesign "Holidaze" Exam
+
+## Table of Contents
+
+Contents | Links | Status | Description | Setup | Resources
+
+**Host:** [Netlify](https://exam-holidaze.netlify.app/)
+**Repository:** [GitHub](https://github.com/siljeangelvik/react-antd-holidaze-exam)  
+**Project Board:** [GitHub]()
+**Style Tile:** [Figma]()  
+**Wireframe:** [Figma]()  
+**Prototype:** [Figma]()
+
+**Exam:** [Brief](https://content.noroff.dev/project-exam-2/brief.html)  
+**API:** [Holidaze Venues Endpoint](https://nf-api.onrender.com/api/v1/holidaze/venues)  
+**Docs:** [Noroff API Swagger](https://nf-api.onrender.com/docs/static/index.html#/holidaze-venues/get_api_v1_holidaze_venues__id_)  
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)  
+[![Netlify Status Main Branch](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploy=status?branch=main)  
+
+
+
+## Description
+
+This is a React exam project for the course "Frontend Development 2" at Noroff.   
+The project is a website for a fictional venue booking application called "Holidaze".   
+The website is built with React, AntDesign, Sanity.io and Netlify.   
+This project contains a single page application with a home(list of venues) page,   
+a profile page and a detail page for each venue.
+
+---
+
+## Resources
+
+[Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  
+[React Router v6](https://www.youtube.com/watch?v=Ul3y1LXxzdU)
+
+#### TODO
+Style Tile  
+Wireframe  
+Prototype
+
+#### Had some issues with the dependencies
+`npm install @mui/material @emotion/react @emotion/styled --legacy-peer-deps`  
+`npm install @mui/icons-material--legacy-peer-deps`  
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,20 +116,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
----
-
-## Resources
-
-Host: [Netlify](https://exam-holidaze.netlify.app/)  
-
-
-[Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  
-[React Router v6](https://www.youtube.com/watch?v=Ul3y1LXxzdU)  
-
-
-#### TODO
-Style Tile  
-Wireframe  
-Prototype  
-
