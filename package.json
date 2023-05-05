@@ -1,7 +1,7 @@
 {
   "name": "react-antd-holidaze-exam",
   "version": "0.1.0",
-  "homepage": "/",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@emotion/styled": "11.10.8",

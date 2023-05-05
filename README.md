@@ -7,8 +7,8 @@ Contents | Links | Status | Description | Setup | Resources
 **Host:** [Netlify](https://exam-holidaze.netlify.app/)
 **Repository:** [GitHub](https://github.com/siljeangelvik/react-antd-holidaze-exam)  
 **Project Board:** [GitHub]()
-**Style Tile:** [Figma]()  
-**Wireframe:** [Figma]()  
+**Style Tile:** [Figma](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=xkqBhFw0ewmxhreV-0)    
+**Wireframe:** [Figma](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0)    
 **Prototype:** [Figma]()
 
 **Exam:** [Brief](https://content.noroff.dev/project-exam-2/brief.html)  
@@ -40,11 +40,6 @@ Style Tile
 Wireframe  
 Prototype
 
-#### Had some issues with the dependencies
-`npm install @mui/material @emotion/react @emotion/styled --legacy-peer-deps`  
-`npm install @mui/icons-material--legacy-peer-deps`  
-
-
 ---
 
 ### Dependencies Issues
@@ -65,6 +60,13 @@ To check which version of `<package-name>` is being used:
 
 Returns a list of packages that depend on `<package-name>` dependency:    
 `npm ls --reverse <package-name>`    
+
+
+### Had some issues with netlify
+
+#### 1. Redirects not working
+`"build": "react-scripts build && echo '/* /index.html  200' | cat >build/_redirects ",`
+
 
 ---
 
