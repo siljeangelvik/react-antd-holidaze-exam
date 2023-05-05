@@ -48,7 +48,7 @@ span.navbar-button-emoji {
     color: #000;
     cursor: pointer;
 
-    transition: 0.4s ease-out;
+    transition: 0.3s ease-out;
 }
 
 .navbar-button-emoji:hover {
@@ -165,6 +165,10 @@ li:hover, li > *:hover {
     li,
     li > * {
         color: #fff;
+    }
+
+    li:hover, li > *:hover {
+        color: #000;
     }
 }
 
