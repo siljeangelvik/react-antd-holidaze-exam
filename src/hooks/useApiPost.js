@@ -23,8 +23,6 @@ function useApiPost(url) {
             localStorage.setItem("accessToken", json.accessToken);
             localStorage.setItem("name", json.name);
             localStorage.setItem("email", json.email);
-            localStorage.setItem("venueManager", json.manager);
-
         } catch (error) {
             console.log(error);
             setIsError(true);

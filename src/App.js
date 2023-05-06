@@ -2,6 +2,7 @@ import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import {Route, Routes} from 'react-router-dom';
+import Venues from './pages/Venues';
 import Navbar from './components/layout/navbar/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,7 +17,6 @@ import "./main.css";
 
 function App() {
 
-  //  const {userProfileData} = useContext(AuthenticationContext);
     return (
         <>
             <ConfigProvider
@@ -66,8 +66,18 @@ function App() {
                                        </VenuesProvider>
                                    }
                             />
+
+                            <Route path="/profile">
+                                <Route path=":name" element={<Profile/>}>
+                                    <Route path=":bookings" element={<Bookings/>}/>
+                                    <Route path=":venues" element={<Venues/>}/>
+                                </Route>
+                            </Route>
+
+
                             <Route path="/profile" element={<Profile/>}/>
                             <Route path="/bookings" element={<Bookings/>}/>
+                            <Route path="/venues" element={<Venues/>}/>
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="*" element={<NotFound/>}/>

@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import SuccessLogin from '../components/alerts/SuccessLogin';
+import useManagerStatus from '../hooks/useManagerStatus';
 import SuccessRegistered from '../components/alerts/SuccessRegistered';
 import useAuthentication from '../hooks/useAuthentication';
 import {API_PROFILES} from '../utilities/constants';
@@ -13,13 +13,13 @@ const AuthenticationProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
+    const {isManager} = useManagerStatus;
+
     useEffect(() => {
         if (!isLoggedIn) {
-            document.title = 'Holidaze';
             setIsAuthenticated(false);
             return;
         }
-        document.title = localStorage.getItem('name');
         setIsAuthenticated(true);
     }, [isLoggedIn, userProfileData]);
 
@@ -37,18 +37,10 @@ const AuthenticationProvider = ({children}) => {
     };
 
     const handleUserLogin = () => {
-        setIsAuthenticated(true);
-        console.log('You successfully logged into your account!\n' + userProfileData.name);
-        document.title = userProfileData.name;
-        return (
-            <>
-                <SuccessLogin/>
-                {setTimeout(() => {
-                    window.location.replace(`/profile`);
-                    // <Profile />
-                }, 1000)}
-            </>
-        );
+        console.log('You successfully logged into your account!\n' + userProfileData?.name);
+        document.title = userProfileData?.name;
+
+        setIsAuthenticated((prevState) => !prevState);
     };
 
     const handleUserLogout = () => {
@@ -67,7 +59,7 @@ const AuthenticationProvider = ({children}) => {
             try {
                 setIsLoading(true);
                 setIsError(false);
-                const response = await fetch(`${API_PROFILES}/${localStorage.getItem('name')}?_bookings=true&_venues=true`, {
+                const response = await fetch(`${API_PROFILES}/${localStorage.getItem('name')}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -75,8 +67,8 @@ const AuthenticationProvider = ({children}) => {
                     },
                 });
                 const json = await response.json();
-                setUserProfileData(json);
                 console.log(JSON.stringify(json, null, 2));
+                setUserProfileData(json);
             } catch (error) {
                 console.error(error);
                 setIsError(true);
@@ -84,12 +76,15 @@ const AuthenticationProvider = ({children}) => {
                 setIsLoading(false);
             }
         }
-        getUserProfile().then(r => console.log(r));
+
+        getUserProfile();
     }, [isLoggedIn]);
+
 
     return (
         <AuthenticationContext.Provider
             value={{
+                isManager,
                 isLoggedIn,
                 isAuthenticated,
                 userProfileData,

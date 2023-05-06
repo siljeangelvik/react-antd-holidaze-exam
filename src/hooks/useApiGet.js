@@ -29,7 +29,8 @@ function useApiGet(url) {
                 setIsLoading(false);
             }
         }
-         getData().then(r => console.log(r));
+
+        getData().then(r => console.log(JSON.stringify(r, null, 2)));
     }, [memoizedUrl]);
 
     return {data, isLoading, isError};

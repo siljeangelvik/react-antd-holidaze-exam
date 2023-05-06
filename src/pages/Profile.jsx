@@ -3,30 +3,36 @@ import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
+import RegisterVenueManager from '../components/manager/register/RegisterVenueManager';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 import {UpdateAvatar} from '../components/forms/UpdateAvatar';
 import RegisterAsManager from '../components/RegisterAsManager';
-import useManagerStatus from '../hooks/useManagerStatus';
 import CreateVenue from '../components/modals/CreateVenue';
 
 function Profile() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [toggle, setToggle] = useState(false);
+    const {isManager, userProfileData} = useContext(AuthenticationContext);
 
-    const {userProfileData} = useContext(AuthenticationContext);
-    const isManager = useManagerStatus();
+    if (isManager) {
+        console.log("isManager\nNeed to show venues to manage");
+    } else {
+        console.log(!!isManager);
+        console.log("If user is not a venueManager and has a invalid email:\nDisplay nothing\n\nIf user is not a venueManager and has a valid email:\nDisplay option to register as a venueManager\n\nIf user is already a venueManager:\nDisplay a list of venues to manage");
+    }
 
-    const toggleOpen = () => {
-        setIsOpen(!isOpen);
+    const handleToggle = () => {
+        setToggle(!toggle);
     };
 
     return (
         <>
-            <div style={{padding: "80px 40px", height: "'100vh"}}>
+            <div style={{padding: "80px 40px", height: "95vh"}}>
                 <Content>
                     <Content style={{paddingBottom: "40px"}}>
                         <Title level={1}>Your Profile</Title>
                         <Title level={4}>Here you can view and edit your profile information.</Title>
                     </Content>
+
 
                     <Content style={{paddingBottom: "40px", minHeight: "250px", width: "320px", margin: "0 auto"}}>
                         <UpdateAvatar/>
@@ -51,6 +57,15 @@ function Profile() {
                         width: "100%",
                         gap: "20px",
                     }}>
+
+
+                        {isManager && (
+                            <RegisterVenueManager/>
+                        )}
+
+
+
+
                         {isManager ? (
                             <>
                                 <Title level={3}>Your Venues to Manage</Title>
@@ -58,18 +73,18 @@ function Profile() {
 
                                 <div style={{display: "flex", flexWrap: "nowrap"}}>
                                     <Title level={3}>Create a Venue</Title>
-                                    <Button onClick={toggleOpen} variant="text" size="small">
-                                        {isOpen ? 'Close' : 'Open'}
+                                    <Button onClick={handleToggle} variant="text" size="small">
+                                        {toggle ? 'Close' : 'Open'}
                                     </Button>
                                 </div>
-                                {isOpen ? <CreateVenue/> : null}
+                                {toggle ? <CreateVenue/> : null}
                             </>
                         ) : (
                             <>
-                                <Button onClick={toggleOpen} variant="text" size="small">
-                                    {isOpen ? 'Hide' : 'Register as Manager'}
+                                <Button onClick={handleToggle} variant="text" size="small">
+                                    {toggle ? 'Hide' : 'Register as Manager'}
                                 </Button>
-                                {isOpen ? <RegisterAsManager/> : null}
+                                {toggle ? <RegisterAsManager/> : null}
                             </>
                         )}
                     </Content>

@@ -5,7 +5,7 @@ import React from 'react';
 function NotFound() {
     return (
         <>
-            <div style={{padding: "80px 40px", height: "'100vh"}}>
+            <div style={{padding: "80px 40px", height: "95vh"}}>
                 <Content style={{paddingBottom: "40px"}}>
                     <Title level={1}>404</Title>
                     <Title level={4}>Oooops, sorry...Page not found!</Title>

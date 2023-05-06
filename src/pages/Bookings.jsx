@@ -1,3 +1,4 @@
+import {Button} from '@mui/material';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
@@ -11,11 +12,17 @@ function Bookings() {
     const userProfileBookings = userProfileData?.bookings?.length > 0 ? userProfileData?.bookings : [];
     const [bookings, setBookings] = useState(userProfileBookings);
 
+
     const userHasBookings = userProfileBookings?.length > 0;
+
+    const handleDeleteBooking = (bookingId) => {
+        const newBookings = bookings.filter(booking => booking.id !== bookingId);
+        setBookings(newBookings);
+    }
 
     return (
         <>
-            <div style={{padding: "80px 40px", height:"'100vh"}}>
+            <div style={{minHeight:"95vh", padding: "80px 40px",}}>
                 <Content style={{paddingBottom: "20px"}}>
                     <Title level={1}>Your Bookings</Title>
                     <>
@@ -32,6 +39,8 @@ function Bookings() {
 
                     </>
 
+
+                    <Button variant={"contained"} color={"error"}>Delete booking</Button>
 
                 </Content>
             </div>

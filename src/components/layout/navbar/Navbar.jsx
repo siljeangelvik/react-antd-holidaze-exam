@@ -5,11 +5,16 @@ import useToggle from "../../../hooks/useToggle";
 import "./styles.css";
 
 const Navbar = () => {
+
     const [value, toggleValue] = useToggle(false);
-    const {isAuthenticated, handleUserLogout} = useContext(AuthenticationContext);
+    const {isAuthenticated, isManager, handleUserLogout} = useContext(AuthenticationContext);
 
     const handleNavbar = () => {
         toggleValue(!value);
+    };
+
+    const handleNavbarClose = () => {
+        toggleValue(false);
     };
 
     return (
@@ -22,16 +27,20 @@ const Navbar = () => {
         </span>
             </button>
 
-            <nav className="navbar-container-mobile" style={{display: value && "flex"}}>
+            <nav className="navbar-container-mobile" style={{display: value && "flex"}} onClick={handleNavbarClose}>
                 <ul className="navbar-list-mobile" id="slide">
                     <li>
                         <Link to="/">Home</Link>
                     </li>
                     {isAuthenticated ? (
                         <>
-                            <li><Link to="/profile">Profile</Link></li>
-                            <li><Link to="/bookings">Bookings</Link></li>
-                            <li><Link to="/venues">Venues</Link></li>
+                            <li><Link to={`/profile/${localStorage.getItem("name")}`}>Profile</Link></li>
+                            <li><Link to={`/bookings`}>Bookings</Link></li>
+                            {isManager && (
+                                <>
+                                    <li><Link to="/venues">Venues</Link></li>
+                                </>
+                            )}
                             <li><Link to="/login" onClick={handleUserLogout}>Logout</Link></li>
                         </>
                     ) : (

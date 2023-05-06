@@ -24,6 +24,7 @@ export default function CreateVenue(venueData) {
     return (
         <>
             <Form layout="vertical" style={{minWidth: "340px", maxWidth: "340px", margin: "0 auto"}}>
+
                 <Typography.Title level={2}>Create Venue</Typography.Title>
 
                 <Form.Item label="Name of Venue">
@@ -122,7 +123,7 @@ export default function CreateVenue(venueData) {
                 </Form.Item>
 
                 <Button onChange={(e) => setValue(e.target.value)}
-                        type="primary" htmlType="submit" style={{width: "100%"}}>
+                        type="primary" htmlType="submit" style={{width: "100%", marginBottom:"40px"}}>
                     Create Venue
                 </Button>
             </Form>

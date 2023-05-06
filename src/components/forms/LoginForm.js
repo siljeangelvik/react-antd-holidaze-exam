@@ -1,16 +1,14 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {redirect} from 'react-router-dom';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
-import SuccessLogin from '../../components/alerts/SuccessLogin';
 import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
 export function LoginForm() {
-    const navigate = useNavigate();
 
-    const {handleUserLogin} = useContext(AuthenticationContext);
+    const {handleUserLogin, getUserProfile} = useContext(AuthenticationContext);
 
     const {postData, isLoading, isError, data} = useApiPost(API_LOGIN);
 
@@ -20,10 +18,10 @@ export function LoginForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         await postData({email, password});
-        if (data && data.success) {
-            handleUserLogin(data);
-            SuccessLogin();
-            navigate('/profile');
+        if (data) {
+            handleUserLogin(data.token);
+            getUserProfile();
+            redirect('/');
         }
     };
 
@@ -58,7 +56,7 @@ export function LoginForm() {
                        required={true}
                        style={{padding: "9px", borderRadius: "7px", border: "2px solid lightgray"}}/>
 
-                <button type="submit" disabled={isLoading} onClick={handleUserLogin}
+                <button type="submit" disabled={isLoading}
                         style={{
                             padding: "9px",
                             background: "transparent",

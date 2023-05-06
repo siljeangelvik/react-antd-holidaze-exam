@@ -4,7 +4,7 @@ import {LoginForm} from '../components/forms/LoginForm';
 function Login(onSubmit) {
     return (
         <>
-            <div style={{padding: "80px 40px", height: "'100vh"}}>
+            <div style={{padding: "80px 40px", height: "95vh"}}>
                 <Content style={{paddingBottom:"20px"}}>
                     <LoginForm onSubmit={onSubmit}/>
                 </Content>

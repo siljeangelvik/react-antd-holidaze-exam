@@ -2,25 +2,19 @@ import {Button, Input} from '@mui/material';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
-import CreateVenue from '../components/modals/CreateVenue';
-import {AuthenticationContext} from '../context/AuthenticationContext';
-import useToggle from '../hooks/useToggle';
+import {AuthenticationContext} from '../../../context/AuthenticationContext';
+import '../styles.css';
 
-const RegisterAsManager = () => {
+const RegisterVenueManager = () => {
 
-    const [toggle, setToggle] = useToggle(false);
     const {isManager} = useContext(AuthenticationContext);
-
-    const handleToggle = () => {
-        setToggle(!toggle);
-    };
 
     const canRegisterAsManager = (() => {
         const email = localStorage.getItem('email');
         const noroffDomain = email.slice(email.indexOf('@') + 1);
-        return noroffDomain === 'stud.noroff.no' || noroffDomain === 'noroff.no';
+        const eligibleForRegistry = noroffDomain === 'stud.noroff.no' || noroffDomain === 'noroff.no';
+        return eligibleForRegistry;
     })();
-
 
     return (
         <div>
@@ -44,28 +38,9 @@ const RegisterAsManager = () => {
                         </Button>
                     </>
                 )}
-
-                {/* If user is already a manager */}
-                {!isManager && (
-                    <>
-                        <Title level={3}>Your Venues to Manage</Title>
-                        <Title level={5}>You are currently managing <em>0</em> venues.</Title>
-                        <div style={{display: "flex", flexWrap: "nowrap"}}>
-                            <Title level={3}>Create a Venue</Title>
-                            <Button onClick={handleToggle} variant="text" size="small">
-                                {toggle ? 'Close' : 'Open'}
-                            </Button>
-                        </div>
-                        {toggle ?
-                            <div className={"create-venue-modal"}>
-                                <CreateVenue/>
-                            </div>
-                            : null}
-                    </>
-                )}
             </Content>
         </div>
     );
 };
 
-export default RegisterAsManager;
+export default RegisterVenueManager;

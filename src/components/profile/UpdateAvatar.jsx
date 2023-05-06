@@ -1,17 +1,21 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Image, Upload } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-import React, { useRef } from 'react';
+import React, {useContext, useRef} from 'react';
+import useManagerStatus from '../../hooks/useManagerStatus';
+import {AuthenticationContext} from '../../context/AuthenticationContext';
 import useApiPut from '../../hooks/useApiPut';
-import {UPDATE_AVATAR} from '../../utilities/constants';
+import {API_PROFILES_AVATAR} from '../../utilities/constants';
 
 const defaultAvatar = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
 const UpdateAvatar = ({ putAvatar }) => {
     const avatarRef = useRef(null);
-    const profileAvatar = localStorage.getItem('avatar');
+    const avatar = localStorage.getItem("avatar");
+    const {userProfileData} = useContext(AuthenticationContext);
 
-    const { isLoading, putData } = useApiPut(UPDATE_AVATAR, putAvatar);
+
+    const { isLoading, putData } = useApiPut(API_PROFILES_AVATAR, putAvatar);
 
     const handlePutAvatar = (e) => {
         e.preventDefault();
@@ -42,13 +46,13 @@ const UpdateAvatar = ({ putAvatar }) => {
                     localStorage.getItem("avatar")
                 }}
             >
-                {profileAvatar ? (
+                {avatar ? (
                     <Image
                         itemType={"avatar"}
                         height={100}
                         width={100}
-                        src={localStorage.getItem("avatar") === null ? defaultAvatar : localStorage.getItem("avatar")}
-                        alt={localStorage.getItem("name")}
+                        src={userProfileData?.avatar === null ? defaultAvatar : userProfileData?.avatar}
+                        alt={userProfileData?.name}
                         style={{ borderRadius: "50%" }}
                     />
                 ) : (

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": ".",
   "private": true,
+  "license": "UNLICENSED",
   "dependencies": {
     "@emotion/styled": "11.10.8",
     "axios": "1.3.5",

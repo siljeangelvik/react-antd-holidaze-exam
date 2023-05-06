@@ -7,7 +7,7 @@ import BookingCalendar from '../components/BookingCalendar';
 import {formatCurrency} from '../utilities/formatCurrency';
 import {VenuesContext} from '../context/VenuesContext';
 
-function Details({venue}) {
+function Details() {
     const {id} = useParams();
     const {data: venues} = useContext(VenuesContext);
     const chosenVenue = venues.find(venue => venue.id === id);
@@ -16,7 +16,7 @@ function Details({venue}) {
 
     return (
         <>
-            <div style={{padding: "80px 40px", height: "'100vh"}}>
+            <div style={{padding: "80px 40px", height: "95vh"}}>
                 <Content style={{paddingBottom: "20px"}}>
                     <Title level={1}>{chosenVenue?.name}</Title>
                     <Title level={4}>{formatCurrency(chosenVenue?.price)} / night</Title>
