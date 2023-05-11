@@ -1,4 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
+// import useLocalStorage from '../hooks/useLocalStorage';
 import useManagerStatus from '../hooks/useManagerStatus';
 import SuccessRegistered from '../components/alerts/SuccessRegistered';
 import useAuthentication from '../hooks/useAuthentication';
@@ -7,14 +8,16 @@ import {API_PROFILES} from '../utilities/constants';
 const AuthenticationContext = createContext();
 
 const AuthenticationProvider = ({children}) => {
-    const isLoggedIn = useAuthentication();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
-    const {isManager} = useManagerStatus;
+    const isLoggedIn = useAuthentication();
 
+    //  const {userData, setLocalStorage, getLocalStorage} = useLocalStorage();
+
+    const {isManager} = useManagerStatus;
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -31,23 +34,19 @@ const AuthenticationProvider = ({children}) => {
 
     const handleUserLogin = () => {
 
-        if (localStorage.getItem('name')) {
-            setIsAuthenticated(true);
-            console.log('You successfully logged into your account!\n' + data?.name);
+        console.log(`You successfully logged into your account,\n localStorage: ${localStorage.getItem("name")}!\n data: ${data?.name}`);
+        document.title = localStorage.getItem("name");
 
-            alert(`Welcome back ${localStorage.getItem('name')}!`);
-            document.title = localStorage.getItem('name');
 
-            // window.location.replace(`/profile/${localStorage.getItem('name')}`);
-        }
+        setIsAuthenticated(true);
     };
 
     const handleUserLogout = () => {
         console.log('Sad to see you logout, see you soon!\n' + localStorage.getItem('name'));
         document.title = 'Holidaze';
 
-        ['accessToken', 'name', 'email', 'avatar', 'venueManager'].forEach((key) =>
-            localStorage.removeItem(key)
+        ['accessToken', 'name', 'email', 'avatar', 'manager'].forEach((key) =>
+            localStorage.removeItem(key, data[key])
         );
 
         setIsAuthenticated((prevState) => !prevState);

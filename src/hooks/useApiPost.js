@@ -21,11 +21,6 @@ function useApiPost(url) {
             const json = await response.json();
             setData(json);
             console.log(json, "useApiPost json");
-            localStorage.setItem('accessToken', json.accessToken);
-            localStorage.setItem('name', json.name);
-            localStorage.setItem('email', json.email);
-            localStorage.setItem('avatar', json.avatar);
-            localStorage.setItem('manager', json.manager);
         } catch (error) {
             console.log(error);
             setIsError(true);
@@ -38,3 +33,11 @@ function useApiPost(url) {
 }
 
 export default useApiPost;
+
+/*
+           localStorage.setItem('accessToken', json.accessToken);
+           localStorage.setItem('name', json.name);
+           localStorage.setItem('email', json.email);
+           localStorage.setItem('avatar', json.avatar);
+           localStorage.setItem('manager', json.manager);
+           */

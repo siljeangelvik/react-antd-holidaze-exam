@@ -33,6 +33,7 @@ const VenueItem = ({venue}) => {
                               alt={name}
                               height={"213px"}
                               width={"320px"}
+                              loading={"lazy"}
                           />
                       }
                 >

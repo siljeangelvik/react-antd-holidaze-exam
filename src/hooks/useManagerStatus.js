@@ -22,7 +22,7 @@ function useManagerStatus() {
         }
 
         checkManagerStatus();
-    }, [data]);
+    }, [data, manager]);
 
     return isManager;
 }

@@ -1,4 +1,4 @@
-import {Button} from 'antd';
+/* import {Button} from 'antd';
 import {useNavigate} from 'react-router-dom';
 
 const HandleLogout = () => {
@@ -26,4 +26,4 @@ const HandleLogout = () => {
     );
 }
 
-export default HandleLogout;
+export default HandleLogout; */

@@ -2,6 +2,7 @@ import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
+import Logout from '../components/notifications/Logout';
 import {UpdateAvatar} from '../components/profile/avatar/UpdateAvatar';
 import {CreateVenue} from '../components/forms/venue/CreateVenue';
 import {Venues} from '../components/profile/Venues';
@@ -17,13 +18,9 @@ function Profile() {
 
     if (isManager) {
         console.log("isManager\nNeed to show venues to manage");
-        return (
-            <>
-                <CreateVenue/>
-            </>
-        );
+        return (<CreateVenue/>);
     } else {
-        console.log(!!isManager, "isManager value");
+        console.log(!isManager, "isManager value");
         console.log("If user is not a venueManager and has a invalid email:\nDisplay nothing\n\nIf user is not a venueManager and has a valid email:\nDisplay option to register as a venueManager\n\nIf user is already a venueManager:\nDisplay a list of venues to manage");
     }
 
@@ -35,12 +32,14 @@ function Profile() {
         <>
             <div style={{padding: "80px 40px", height: "95vh"}}>
                 <Content>
+                    <Logout/>
+
                     <Content style={{paddingBottom: "40px"}}>
                         <Title level={1}>Your Profile</Title>
                         <Title level={4}>Here you can view and edit your profile information.</Title>
                     </Content>
 
-                    <Content style={{ minHeight: "250px", width: "320px", margin: "0 auto"}}>
+                    <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                         <UpdateAvatar/>
                     </Content>
 
@@ -75,15 +74,21 @@ function Profile() {
                             </>
                         )}
 
-                        <ul style={{display:"flex", justifyContent:"space-between"}}>
-                            <li>{!isManager && <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>}</li>
-                            <li>{!isManager && <button className={"secondary-button"} onClick={setEditVenues}>Edit a Venue</button>}</li>
-                            <li>{!isManager && <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}</li>
+                        <ul style={{display: "flex", justifyContent: "space-between"}}>
+                            <li>{!isManager &&
+                                <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>}</li>
+                            <li>{!isManager && <button className={"secondary-button"} onClick={setEditVenues}>Edit a
+                                Venue</button>}</li>
+                            <li>{!isManager &&
+                                <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}</li>
                         </ul>
 
-                        {editVenues && (<Venues/>)} {/*<EditVenues/>*/}
+                        {/*  {editVenues && (<Venues/>)} {<EditVenues/>} */}
 
+
+                        {/* set to:  isManager  */}
                         {!isManager && (<Venues/>)}
+
 
                         {/** IF USER IS NOT A MANAGER:
                          SHOW BUTTON TO REGISTER AS MANAGER

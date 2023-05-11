@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
+import Logout from '../../../components/notifications/Logout';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import useToggle from "../../../hooks/useToggle";
 import "./styles.css";
@@ -41,7 +42,7 @@ const Navbar = () => {
                                     <li><Link to={`/profile/${localStorage.getItem("name")}/venues`}>Venues</Link></li>
                                 </>
                             )}
-                            <li><Link to="/login" onClick={handleUserLogout}>Logout</Link></li>
+                            <li><Logout/></li>
                         </>
                     ) : (
                         <>

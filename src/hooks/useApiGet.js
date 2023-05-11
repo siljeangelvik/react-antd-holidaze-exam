@@ -31,7 +31,7 @@ function useApiGet(url) {
             }
         }
 
-        getData().then(r => console.log(JSON.stringify(r, null, 2)));
+        getData(data).then(r => console.log(JSON.stringify(r, null, 2)));
     }, [memoizedUrl]);
 
     return {data, isLoading, isError};

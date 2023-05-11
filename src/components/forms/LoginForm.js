@@ -2,29 +2,48 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useLoginRegisterData} from '../../hooks/useLoginRegisterData';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
 export const LoginForm = () => {
-
-    const {handleUserLogin} = useContext(AuthenticationContext);
-
-    const {postData, isLoading, isError, data} = useApiPost(API_LOGIN);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+
+    const {handleUserLogin} = useContext(AuthenticationContext);
+    const {isLoading, isError, data} = useApiPost(API_LOGIN);
+    const {handleLogin} = useLoginRegisterData();
 
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await postData({email, password});
-        if (postData || data) {
-            handleUserLogin(data);
+
+        const formData = new FormData(event.target);
+
+        handleLogin(Object.fromEntries(formData));
+        // const response = await postData({email, password});
+
+        setTimeout(() => {
+                const user = JSON.parse(localStorage.getItem('user'));
+                navigate(`/profile/${user?.name}`);
+            }, 2000);
+
+
+            // handleUserLogin(data);
+            /*
             setTimeout(() => {
                 navigate(`/profile/${localStorage.getItem('name')}`);
-            }, 1000);
+            }, 2000);
+            */
+
+        if (isLoading) {
+            console.log("Loading...");
+        }
+        if (isError) {
+            console.log("Error...");
         }
     };
 
@@ -67,8 +86,6 @@ export const LoginForm = () => {
                 {isError && <div>Error submitting form</div>}
                 {data && <div>{data.message}</div>}
             </form>
-
         </>
-
     );
 }
