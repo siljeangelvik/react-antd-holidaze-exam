@@ -33,9 +33,12 @@ const AuthenticationProvider = ({children}) => {
     };
 
     const handleUserLogin = () => {
-        setIsAuthenticated(true);
 
-        document.title = localStorage.getItem("name");
+        if (localStorage.getItem("name")) {
+            document.title = localStorage.getItem("name");
+            console.log('Welcome back, ' + localStorage.getItem('name'));
+        }
+        setIsAuthenticated(true);
     };
 
     const handleUserLogout = () => {

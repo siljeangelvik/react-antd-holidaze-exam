@@ -2,7 +2,6 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useLoginRegisterData} from '../../hooks/useLoginRegisterData';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
@@ -16,19 +15,13 @@ export const LoginForm = () => {
 
     const {handleUserLogin} = useContext(AuthenticationContext);
     const {isLoading, isError, data, postData} = useApiPost(API_LOGIN);
-    const {handleLogin} = useLoginRegisterData();
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const formData = new FormData(event.target);
         const response = await postData({email, password});
-        const user = await response?.data?.json();
-
-        if (user === 200) {
-            handleLogin(Object.fromEntries(formData));
-            handleUserLogin(user);
+        if (response === 200) {
+            handleUserLogin(data);
             setTimeout(() => {
                 navigate(`/profile/${localStorage.getItem('name')}`);
             }, 1000);
