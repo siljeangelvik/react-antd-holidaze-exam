@@ -1,27 +1,30 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
-import {redirect} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import {API_LOGIN} from '../../utilities/constants';
 import useApiPost from '../../hooks/useApiPost';
 
-export function LoginForm() {
+export const LoginForm = () => {
 
-    const {handleUserLogin, getUserProfile} = useContext(AuthenticationContext);
+    const {handleUserLogin} = useContext(AuthenticationContext);
 
     const {postData, isLoading, isError, data} = useApiPost(API_LOGIN);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         await postData({email, password});
-        if (data) {
-            handleUserLogin(data.token);
-            getUserProfile();
-            redirect('/');
+        if (postData || data) {
+            handleUserLogin(data);
+            setTimeout(() => {
+                navigate(`/profile/${localStorage.getItem('name')}`);
+            }, 1000);
         }
     };
 
@@ -56,16 +59,10 @@ export function LoginForm() {
                        required={true}
                        style={{padding: "9px", borderRadius: "7px", border: "2px solid lightgray"}}/>
 
-                <button type="submit" disabled={isLoading}
-                        style={{
-                            padding: "9px",
-                            background: "transparent",
-                            border: "2px solid transparent",
-                            borderRadius: "7px",
-                            backgroundColor: "#3dbd7d",
-                            color: "white",
-                            fontWeight: "bold",
-                        }}>Login
+                <button type="submit" disabled={isLoading} onClick={handleUserLogin}
+                        className={"primary-button"}
+                >
+                    Login
                 </button>
                 {isError && <div>Error submitting form</div>}
                 {data && <div>{data.message}</div>}

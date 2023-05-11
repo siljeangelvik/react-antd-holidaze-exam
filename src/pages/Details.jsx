@@ -66,11 +66,9 @@ function Details() {
                                 alt={chosenVenue.owner.name}
                                 style={{width: "40px", height: "40px", borderRadius: "50%"}}
                             />
-
                             <div>
                                 <Title level={5}>Host:</Title>
                                 <Typography.Paragraph>{chosenVenue.owner.name}</Typography.Paragraph>
-
                                 <Title level={5}>Contact:</Title>
                                 <Typography.Paragraph>{chosenVenue.owner.email}</Typography.Paragraph>
                             </div>

@@ -11,23 +11,22 @@ function Bookings() {
     const {userProfileData} = useContext(AuthenticationContext);
     const userProfileBookings = userProfileData?.bookings?.length > 0 ? userProfileData?.bookings : [];
     const [bookings, setBookings] = useState(userProfileBookings);
-
+    console.log("bookings", setBookings(userProfileBookings));
 
     const userHasBookings = userProfileBookings?.length > 0;
 
-    const handleDeleteBooking = (bookingId) => {
+    /* const handleDeleteBooking = (bookingId) => {
         const newBookings = bookings.filter(booking => booking.id !== bookingId);
         setBookings(newBookings);
-    }
+    } */
 
     return (
         <>
-            <div style={{minHeight:"95vh", padding: "80px 40px",}}>
+            <div style={{minHeight: "95vh", padding: "80px 40px",}}>
                 <Content style={{paddingBottom: "20px"}}>
                     <Title level={1}>Your Bookings</Title>
                     <>
                         <Title level={4}>Hi {localStorage.getItem("name")}, You have {bookings.length} bookings.</Title>
-
                         {userHasBookings ? (
                             <BookingsList bookings={bookings}/>
                         ) : (
@@ -35,13 +34,8 @@ function Bookings() {
                                 <EmptyTab/>
                             </>
                         )}
-
-
                     </>
-
-
                     <Button variant={"contained"} color={"error"}>Delete booking</Button>
-
                 </Content>
             </div>
         </>

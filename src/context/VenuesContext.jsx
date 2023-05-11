@@ -22,7 +22,6 @@ export const VenuesProvider = ({children}) => {
         });
     };
 
-
     return (
         <VenuesContext.Provider value={{data, isLoading, isError, sortDataByRecent, sortDataByPopular}}>
             {children}

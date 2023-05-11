@@ -9,11 +9,12 @@ const AuthenticationContext = createContext();
 const AuthenticationProvider = ({children}) => {
     const isLoggedIn = useAuthentication();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [userProfileData, setUserProfileData] = useState(null);
+    const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
     const {isManager} = useManagerStatus;
+
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -21,26 +22,24 @@ const AuthenticationProvider = ({children}) => {
             return;
         }
         setIsAuthenticated(true);
-    }, [isLoggedIn, userProfileData]);
+    }, [isLoggedIn, data]);
 
     const handleUserRegister = () => {
         console.log('You successfully registered a new account!');
-        return (
-            <>
-                <SuccessRegistered/>
-                {setTimeout(() => {
-                    // <Login/>
-                    window.location.replace(`/login`);
-                }, 1000)}
-            </>
-        );
+        return (<SuccessRegistered/>);
     };
 
     const handleUserLogin = () => {
-        console.log('You successfully logged into your account!\n' + userProfileData?.name);
-        document.title = userProfileData?.name;
 
-        setIsAuthenticated((prevState) => !prevState);
+        if (localStorage.getItem('name')) {
+            setIsAuthenticated(true);
+            console.log('You successfully logged into your account!\n' + data?.name);
+
+            alert(`Welcome back ${localStorage.getItem('name')}!`);
+            document.title = localStorage.getItem('name');
+
+            // window.location.replace(`/profile/${localStorage.getItem('name')}`);
+        }
     };
 
     const handleUserLogout = () => {
@@ -67,8 +66,8 @@ const AuthenticationProvider = ({children}) => {
                     },
                 });
                 const json = await response.json();
+                setData(json);
                 console.log(JSON.stringify(json, null, 2));
-                setUserProfileData(json);
             } catch (error) {
                 console.error(error);
                 setIsError(true);
@@ -87,7 +86,7 @@ const AuthenticationProvider = ({children}) => {
                 isManager,
                 isLoggedIn,
                 isAuthenticated,
-                userProfileData,
+                data,
                 isLoading,
                 isError,
                 handleUserRegister,

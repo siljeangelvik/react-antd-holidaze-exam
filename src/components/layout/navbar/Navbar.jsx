@@ -35,10 +35,10 @@ const Navbar = () => {
                     {isAuthenticated ? (
                         <>
                             <li><Link to={`/profile/${localStorage.getItem("name")}`}>Profile</Link></li>
-                            <li><Link to={`/bookings`}>Bookings</Link></li>
+                            <li><Link to={`/profile/${localStorage.getItem("name")}/bookings`}>Bookings</Link></li>
                             {isManager && (
                                 <>
-                                    <li><Link to="/venues">Venues</Link></li>
+                                    <li><Link to={`/profile/${localStorage.getItem("name")}/venues`}>Venues</Link></li>
                                 </>
                             )}
                             <li><Link to="/login" onClick={handleUserLogout}>Logout</Link></li>

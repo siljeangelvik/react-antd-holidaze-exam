@@ -5,6 +5,7 @@ function useApiGet(url) {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
+    // only recompute when url changes, not when data or isLoading changes
     const memoizedUrl = useMemo(() => url, [url]);
 
     useEffect(() => {

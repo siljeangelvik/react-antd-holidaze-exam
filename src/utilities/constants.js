@@ -1,14 +1,11 @@
 /*      API URLS    */
 export const API_BASE_URL = "https://nf-api.onrender.com/api/v1/holidaze";
 
-// api for auth (login, register)
 export const API_LOGIN = `${API_BASE_URL}/auth/login`;
 export const API_REGISTER = `${API_BASE_URL}/auth/register`;
 
-// api for getting all venues, and specific venue
 export const API_VENUES = `${API_BASE_URL}/venues`;
 
-// api for getting all profiles, and specific profile
 export const API_PROFILES = `${API_BASE_URL}/profiles`;
 export const API_PROFILES_NAME = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}`;
 export const API_PROFILES_AVATAR = `${API_PROFILES}/${localStorage.getItem("name")}/media`;
@@ -17,7 +14,7 @@ export const API_PROFILES_VENUES = `${API_BASE_URL}/profiles/${localStorage.getI
 
 // const {data: userProfileData} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}?_bookings=true&_venues=true`);
 
-
+export const API_BOOKINGS = `${API_BASE_URL}/bookings`;
 
 /*
 export const profileAccessToken = localStorage.getItem("accessToken");

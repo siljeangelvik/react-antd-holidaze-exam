@@ -1,22 +1,29 @@
-import {Button} from '@mui/material';
 import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
-import RegisterVenueManager from '../components/manager/register/RegisterVenueManager';
+import {UpdateAvatar} from '../components/profile/avatar/UpdateAvatar';
+import {CreateVenue} from '../components/forms/venue/CreateVenue';
+import {Venues} from '../components/profile/Venues';
 import {AuthenticationContext} from '../context/AuthenticationContext';
-import {UpdateAvatar} from '../components/forms/UpdateAvatar';
-import RegisterAsManager from '../components/RegisterAsManager';
-import CreateVenue from '../components/modals/CreateVenue';
 
 function Profile() {
     const [toggle, setToggle] = useState(false);
-    const {isManager, userProfileData} = useContext(AuthenticationContext);
+    const [editVenues, setEditVenues] = useState(false);
+    const {isAuthenticated, isManager, data} = useContext(AuthenticationContext);
+
+    console.log(data, "userProfileData");
+    console.log(data?.name, "userProfileData?.name");
 
     if (isManager) {
         console.log("isManager\nNeed to show venues to manage");
+        return (
+            <>
+                <CreateVenue/>
+            </>
+        );
     } else {
-        console.log(!!isManager);
+        console.log(!!isManager, "isManager value");
         console.log("If user is not a venueManager and has a invalid email:\nDisplay nothing\n\nIf user is not a venueManager and has a valid email:\nDisplay option to register as a venueManager\n\nIf user is already a venueManager:\nDisplay a list of venues to manage");
     }
 
@@ -33,8 +40,7 @@ function Profile() {
                         <Title level={4}>Here you can view and edit your profile information.</Title>
                     </Content>
 
-
-                    <Content style={{paddingBottom: "40px", minHeight: "250px", width: "320px", margin: "0 auto"}}>
+                    <Content style={{ minHeight: "250px", width: "320px", margin: "0 auto"}}>
                         <UpdateAvatar/>
                     </Content>
 
@@ -45,9 +51,13 @@ function Profile() {
                             width: "100%",
                             gap: "20px",
                         }}>
-                            <Typography><strong>Name:</strong> {userProfileData?.name}</Typography>
-                            <Typography><strong>Email:</strong> {userProfileData?.email}</Typography>
-                            <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
+                            {isAuthenticated && (
+                                <>
+                                    <Typography><strong>Name:</strong> {data?.name}</Typography>
+                                    <Typography><strong>Email:</strong> {data?.email}</Typography>
+                                    <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
+                                </>
+                            )}
                         </Content>
                     </Content>
 
@@ -58,25 +68,83 @@ function Profile() {
                         gap: "20px",
                     }}>
 
-
-                        {isManager && (
-                            <RegisterVenueManager/>
+                        {toggle && (
+                            <>
+                                <button className={"secondary-button modal-close"} onClick={handleToggle}>Close</button>
+                                <CreateVenue/>
+                            </>
                         )}
 
+                        <ul style={{display:"flex", justifyContent:"space-between"}}>
+                            <li>{!isManager && <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>}</li>
+                            <li>{!isManager && <button className={"secondary-button"} onClick={setEditVenues}>Edit a Venue</button>}</li>
+                            <li>{!isManager && <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}</li>
+                        </ul>
+
+                        {editVenues && (<Venues/>)} {/*<EditVenues/>*/}
+
+                        {!isManager && (<Venues/>)}
+
+                        {/** IF USER IS NOT A MANAGER:
+                         SHOW BUTTON TO REGISTER AS MANAGER
+                         */}
+                        {/* IF USER IS A MANAGER:
+                        SHOW LIST OF VENUES THEY MANAGE +
+                        BUTTON(TO OPEN MODAL) CREATE NEW VENUE +
+                        BUTTON(TO DELETE SELECTED VENUE)
+                        BUTTON(EDIT SELECTED VENUE)
+                        */}
+                        {/** IF USER IS // IS NOT A VENUE MANAGER:
+
+                         DONE:
+
+                         IF USER IS A VENUE MANAGER THEN::::::
+                         - SHOW LIST OF VENUES THEY MANAGE +
+                         - BUTTON (OPEN MODAL) CREATE VENUE +
+                         -
+
+                         IF USER IS NOT A VENUE MANAGER THEN::::::
+                         - BUTTON (OPEN SECTION) REGISTER AS MANAGER +
 
 
-
-                        {isManager ? (
+                         **/}
+                        {/*
+                         {!isManager ? (
                             <>
-                                <Title level={3}>Your Venues to Manage</Title>
-                                <Title level={5}>You are currently managing <em>0</em> venues.</Title>
-
-                                <div style={{display: "flex", flexWrap: "nowrap"}}>
-                                    <Title level={3}>Create a Venue</Title>
-                                    <Button onClick={handleToggle} variant="text" size="small">
-                                        {toggle ? 'Close' : 'Open'}
-                                    </Button>
+                                <div style={{display: "flex", flexDirection: "column"}}>
+                                    {toggle ?
+                                        (<button onClick={handleToggle}
+                                                 style={{
+                                                     position: "fixed",
+                                                     top: "12%",
+                                                     left: "80%",
+                                                     padding: "9px",
+                                                     backgroundColor: "#ff9900",
+                                                     border: "2px solid transparent",
+                                                     borderRadius: "7px",
+                                                     color: "#fff",
+                                                     fontWeight: "bold",
+                                                     zIndex: "110"
+                                                 }}>
+                                                Close
+                                            </button>
+                                        ) : (
+                                            <button onClick={handleToggle}
+                                                    style={{
+                                                        position: "relative",
+                                                        padding: "9px",
+                                                        backgroundColor: "transparent",
+                                                        border: "2px solid transparent",
+                                                        borderRadius: "7px",
+                                                        color: "#ff9900",
+                                                        fontWeight: "bold",
+                                                    }}>
+                                                Open
+                                            </button>
+                                        )
+                                    }
                                 </div>
+
                                 {toggle ? <CreateVenue/> : null}
                             </>
                         ) : (
@@ -86,7 +154,7 @@ function Profile() {
                                 </Button>
                                 {toggle ? <RegisterAsManager/> : null}
                             </>
-                        )}
+                        )}*/}
                     </Content>
                 </Content>
             </div>

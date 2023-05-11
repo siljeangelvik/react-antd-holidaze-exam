@@ -7,16 +7,19 @@ import useApiPost from '../../hooks/useApiPost';
 import {API_REGISTER} from '../../utilities/constants';
 
 export function RegisterForm() {
-    const navigate = useNavigate();
-
-    // Call the useApiPost hook with the desired URL
-    const {postData, isLoading, isError, data} = useApiPost(API_REGISTER);
 
     // Define state variables for the login form inputs
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState(true);
     const [manager, setManager] = useState('');
+
+
+    // Call the useApiPost hook with the desired URL
+    const {postData, isLoading, isError, data} = useApiPost(API_REGISTER);
+
+
+    const navigate = useNavigate();
 
     // Define a function to generate the email validation regex pattern based on whether the user is a venue manager or not
     const getEmailPattern = (email) => {
@@ -32,9 +35,49 @@ export function RegisterForm() {
         return emailPattern.test(email);
     };
 
+
+
+
+
     // Define an event handler for the form submit event
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (isVenueManagerEmail(email)) {
+            setManager(true);
+            console.log(manager);
+            console.log("Manager is true");
+        }
+
+        const data = await postData({name, email, password, manager});
+
+        if (data.accessToken) {
+            console.log(data);
+            console.log(data.accessToken);
+            navigate(`/login`);
+        } else {
+            alert("Invalid credentials");
+        }
+
+        /*
+        if (data.accessToken) {
+            console.log(data.accessToken);
+            handleUserRegister(data);
+        } else {
+            alert("Invalid credentials");
+        }
+        */
+
+
+        // Display an alert to the user
+        alert("You successfully registered a new account!");
+        // Call the postData function with the form data
+        console.log(test);
+        // Navigate to the login page
+        navigate('/login');
+
+        // Display an alert to the user
+        alert("You successfully registered a new account!");
         // Call the postData function with the form data
         await postData({email, password, manager});
         // Navigate to the login page
@@ -91,15 +134,9 @@ export function RegisterForm() {
                     </div>
                 )}
 
-                <button type="submit" disabled={isLoading} style={{
-                    padding: "9px",
-                    background: "transparent",
-                    border: "2px solid transparent",
-                    borderRadius: "7px",
-                    backgroundColor: "#3dbd7d",
-                    color: "white",
-                    fontWeight: "bold",
-                }}>
+                <button type="submit" disabled={isLoading} onClick={handleSubmit}
+                        className={"primary-button"}
+                >
                     Register
                 </button>
                 {isError && <div>Error submitting form</div>}

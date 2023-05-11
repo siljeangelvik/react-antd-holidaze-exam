@@ -1,7 +1,7 @@
 {
   "name": "react-antd-holidaze-exam",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "/",
   "private": true,
   "license": "UNLICENSED",
   "dependencies": {
@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "CI='' craco build",
+    "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

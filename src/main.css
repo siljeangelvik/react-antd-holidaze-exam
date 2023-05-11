@@ -3,10 +3,81 @@
 }
 
 input {
-max-width: 320px;
+    max-width: 320px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #ccc;
 }
 
 body, html, .App {
     height: 100vh;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+    outline: #ff9900 solid 1px;
+}
+
+input[type="text"]:focus {
+    box-shadow: 0 0 0 rgb(0, 0, 0);
+}
+
+input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 rgb(0, 0, 0);
+}
+
+.primary-button {
+    cursor: pointer;
+    padding: 9px;
+    font-weight: bold;
+    border-radius: 7px;
+    color: #fff;
+    border: 1px solid transparent;
+    background-color: #ff9900;
+}
+
+.primary-button:hover {
+    color: #fff
+}
+
+.secondary-button {
+    cursor: pointer;
+    padding: 9px;
+    font-weight: normal;
+    border-radius: 7px;
+    color: #ff9900;
+    border: 1px solid #ff9900;
+    background-color: transparent;
+}
+
+
+.modal-close {
+    position: absolute;
+    top: 12%;
+    left: 75%;
+    z-index: 120;
+    width: 80px;
+}
+
+.button-tertiary {
+    cursor: pointer;
+    padding: 9px;
+    font-weight: bold;
+    border-radius: 7px;
+    color: #ff9900;
+    border: 1px solid transparent;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+
+.increase-decrease-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: bold;
+}

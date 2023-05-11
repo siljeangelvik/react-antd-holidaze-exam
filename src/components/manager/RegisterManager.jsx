@@ -4,7 +4,8 @@ import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import './styles.css';
-const RegisterVenueManager = () => {
+
+const RegisterManager = () => {
 
     const {isManager} = useContext(AuthenticationContext);
 
@@ -23,8 +24,11 @@ const RegisterVenueManager = () => {
                 width: "100%",
                 gap: "20px",
             }}>
+
+
+
                 {/* If user is not a manager but can register as one */}
-                {isManager && canRegisterAsManager && (
+                {!isManager && canRegisterAsManager && (
                     <>
                         <Title level={3}>You are not registered as a Manager!</Title>
                         <Title level={5}>A Manager has the ability to create, update and delete Venues.</Title>
@@ -42,4 +46,4 @@ const RegisterVenueManager = () => {
     );
 };
 
-export default RegisterVenueManager;
+export default RegisterManager;

@@ -2,10 +2,11 @@ import {Button} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
-import CreateVenue from '../../components/modals/CreateVenue';
+import {CreateVenue} from '../../components/forms/venue/CreateVenue';
 import useToggle from '../../hooks/useToggle';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import './styles.css';
+
 const RegisterVenueManager = () => {
 
     const {isManager, userProfileData} = useContext(AuthenticationContext);
@@ -21,20 +22,21 @@ const RegisterVenueManager = () => {
                 gap: "20px",
             }}>
 
-                <div>
-                    <Button onClick={setToggle}>Create a Venue</Button>
-                </div>
-
-                {toggle && (<CreateVenue setToggle={setToggle} />)}
-
-
-                {/* If user is already a manager */}
                 {isManager && (
-                    <>
-                        <Title level={3}>Your Venues</Title>
-                        <Title level={5}>You are currently managing {userProfileData?.bookings?.length} venues.</Title>
+                    <div>
+                        <div>
+                            <Button onClick={setToggle}>Create a Venue</Button>
+                        </div>
+                        {toggle && (<CreateVenue setToggle={setToggle}/>)}
+                    </div>
+                )}
 
-                    </>
+                {!isManager && (
+                    <div>
+                        <Title level={2}>Welcome {userProfileData?.name}</Title>
+                        <Title level={4}>You are not a Venue Manager</Title>
+                        <Button onClick={setToggle}>Register as Venue Manager</Button>
+                    </div>
                 )}
             </Content>
         </div>

@@ -20,3 +20,18 @@ function useAuthentication() {
 }
 
 export default useAuthentication;
+
+// HOW TO USE
+
+/*
+function myComponent() {
+    const isLoggedIn = useAuthentication();
+
+    return (
+        <div>
+            {isLoggedIn ? <p>Welcome Back!</p> : <p>Please login</p>}
+        </div>
+    );
+
+}
+*/
