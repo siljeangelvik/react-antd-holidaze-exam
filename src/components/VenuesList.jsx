@@ -31,7 +31,7 @@ export function VenueList() {
     useEffect(() => {
         window.addEventListener('scroll', lazyLoader);
         return () => window.removeEventListener('scroll', lazyLoader);
-    }, []);
+    });
 
     return (
         <Content style={{paddingBottom: "40px"}}>

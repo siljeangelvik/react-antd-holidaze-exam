@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import useApiGet from '../hooks/useApiGet';
 import {API_VENUES} from '../utilities/constants';
