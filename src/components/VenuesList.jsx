@@ -3,35 +3,35 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import {Key, useEffect} from 'react';
 import React, {useContext, useState} from 'react';
-import {useParams} from 'react-router-dom';
-import {API_VENUES} from '../utilities/constants';
-import useApiGet from '../hooks/useApiGet';
 import VenueItem from '../components/VenueItem';
 import {VenuesContext} from '../context/VenuesContext';
 
 export function VenueList() {
 
-  /*
-    const {data, venues, getVenues, venue} = useContext(VenuesContext);
-    console.log(venue);
-
-    const dataList = venues?.map((item: { title: string }) => item.title);
-
+    // const {id} = useParams();
+    const {data, getVenues} = useContext(VenuesContext);
+    // const {venue} = useApiGet(`${API_VENUES}/${id}`);
     const [searchInput, setSearchInput] = useState('');
+    const dataList = data?.map((item: { name: string }) => item.name);
+
+    // Lazy Loading
+    const lazyLoader = () => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+
+        if (scrolledToBottom) {
+            getVenues().then(r => {
+                console.log(r, "r");
+            });
+        }
+    };
 
     useEffect(() => {
-        getVenues();
+        window.addEventListener('scroll', lazyLoader);
+        return () => window.removeEventListener('scroll', lazyLoader);
     }, []);
-
-   */
-
-    const {id} = useParams();
-    const {data} = useContext(VenuesContext);
-    const {venue} = useApiGet(`${API_VENUES}/${id}`);
-    const [searchInput, setSearchInput] = useState('');
-    const dataList = venue?.map((item: { title: string }) => item.title);
-
-
 
     return (
         <Content style={{paddingBottom: "40px"}}>
@@ -56,8 +56,7 @@ export function VenueList() {
                 })}
             </datalist>
 
-            <Row gutter={[16, 16]} style={{display:"flex", flexWrap:"wrap", rowGap:"30px"}}>
-                {/* eslint-disable-next-line array-callback-return */}
+            <Row gutter={[16, 16]} style={{display: "flex", flexWrap: "wrap", rowGap: "30px"}}>
                 {data?.filter((venue: { name: string }) => {
                     if (searchInput === "") {
                         return venue
@@ -65,7 +64,7 @@ export function VenueList() {
                         return venue
                     }
                 }).map((venue: { id: Key }) => (
-                    <Col xs={24} sm={16} md={12} lg={8} style={{display:"flex", justifyContent:"space-around"}}>
+                    <Col xs={24} sm={16} md={12} lg={8} style={{display: "flex", justifyContent: "space-around"}}>
                         <VenueItem key={venue?.id} venue={venue}/>
                     </Col>
                 ))}

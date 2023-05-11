@@ -28,33 +28,6 @@ export const VenuesProvider = ({children}) => {
         return await response.json();
     };
 
-    // Lazy Loading
-    const lazyLoader = () => {
-        const scrollHeight = document.documentElement.scrollHeight;
-        const scrollTop = document.documentElement.scrollTop;
-        const clientHeight = document.documentElement.clientHeight;
-        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
-        const scrolledToTop = Math.ceil(scrollTop + clientHeight) <= clientHeight;
-
-        if (scrolledToBottom) {
-            getVenues().then(r => {
-                console.log(r, "r");
-            });
-        }
-
-        if (scrolledToTop) {
-            getVenues().then(r => {
-                console.log(r, "r");
-            });
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', lazyLoader);
-        return () => window.removeEventListener('scroll', lazyLoader);
-    }, []);
-
-
     // Sorting
     const sortDataByRecent = (data) => {
         return data?.sort((a, b) => {
