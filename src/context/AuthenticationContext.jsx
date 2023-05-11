@@ -33,12 +33,9 @@ const AuthenticationProvider = ({children}) => {
     };
 
     const handleUserLogin = () => {
-
-        console.log(`You successfully logged into your account,\n localStorage: ${localStorage.getItem("name")}!\n data: ${data?.name}`);
-        document.title = localStorage.getItem("name");
-
-
         setIsAuthenticated(true);
+
+        document.title = localStorage.getItem("name");
     };
 
     const handleUserLogout = () => {

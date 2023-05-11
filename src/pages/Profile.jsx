@@ -11,6 +11,7 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 function Profile() {
     const [toggle, setToggle] = useState(false);
     const [editVenues, setEditVenues] = useState(false);
+    console.log(editVenues, "editVenues from Profile.js");
     const {isAuthenticated, isManager, data} = useContext(AuthenticationContext);
 
     console.log(data, "userProfileData");

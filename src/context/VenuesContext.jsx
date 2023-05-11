@@ -25,8 +25,7 @@ export const VenuesProvider = ({children}) => {
     const getVenues = async () => {
         setOffset((prevOffset) => prevOffset + limit);
         const response = await fetch(`${API_VENUES}?limit=${limit}&offset=${offset}`);
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     // Lazy Loading
