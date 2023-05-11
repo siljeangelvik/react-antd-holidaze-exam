@@ -8,7 +8,7 @@ import "./styles.css";
 const Navbar = () => {
 
     const [value, toggleValue] = useToggle(false);
-    const {isAuthenticated, isManager, handleUserLogout} = useContext(AuthenticationContext);
+    const {isAuthenticated, isManager, data} = useContext(AuthenticationContext);
 
     const handleNavbar = () => {
         toggleValue(!value);
@@ -35,8 +35,12 @@ const Navbar = () => {
                     </li>
                     {isAuthenticated ? (
                         <>
-                            <li><Link to={`/profile/${localStorage.getItem("name")}`}>Profile</Link></li>
-                            <li><Link to={`/profile/${localStorage.getItem("name")}/bookings`}>Bookings</Link></li>
+                            {/* <li><Link to={`/profile/${localStorage.getItem("name")}`}>Profile</Link></li> */}
+                            <li><Link to={`/profile/${data?.name}`}>Profile</Link></li>
+
+                            {/* <li><Link to={`/profile/${localStorage.getItem("name")}/bookings`}>Bookings</Link></li> */}
+                            <li><Link to={`/profile/${data?.name}/bookings`}>Bookings</Link></li>
+
                             {isManager && (
                                 <>
                                     <li><Link to={`/profile/${localStorage.getItem("name")}/venues`}>Venues</Link></li>

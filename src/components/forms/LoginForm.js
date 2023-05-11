@@ -10,11 +10,10 @@ export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
-
-
     const {handleUserLogin} = useContext(AuthenticationContext);
     const {isLoading, isError, data, postData} = useApiPost(API_LOGIN);
+
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (event) => {
