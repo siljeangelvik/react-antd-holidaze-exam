@@ -10,21 +10,32 @@ export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const {handleUserLogin} = useContext(AuthenticationContext);
-    const {isLoading, isError, data, postData} = useApiPost(API_LOGIN);
+    const {handleUserLogin, data} = useContext(AuthenticationContext);
+    const {isLoading, isError, postData} = useApiPost(API_LOGIN);
 
     const navigate = useNavigate();
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await postData({email, password});
-        if (response === 200) {
+       // const response = await postData({email, password});
+        await postData({email, password});
+
+        if (postData || data) {
             handleUserLogin(data);
             setTimeout(() => {
                 navigate(`/profile/${localStorage.getItem('name')}`);
             }, 1000);
         }
+
+        /*
+        if (response?.data?.status ===  200) {
+            handleUserLogin(response);
+            setTimeout(() => {
+                navigate(`/profile/${localStorage.getItem('name')}`);
+            }, 1000);
+        }
+        */
         /*
          handleUserLogin(data);
         setTimeout(() => {
