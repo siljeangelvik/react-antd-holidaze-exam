@@ -5,22 +5,22 @@ function useManagerStatus() {
     const [isManager, setIsManager] = useState(false);
     const {userProfileData} = useContext(AuthenticationContext);
 
-    const manager = localStorage.getItem('venueManager');
+    const manager = localStorage.getItem('manager');
     console.log(manager);
 
-    const checkManagerStatus = () => {
-        if (manager !== "true") {
-            localStorage.setItem('venueManager', false);
-            setIsManager(false);
-            console.log('not a manager');
-        } else {
-            localStorage.getItem('venueManager');
-            setIsManager(true);
-            console.log('is a manager');
-        }
-    }
-
     useEffect(() => {
+        function checkManagerStatus () {
+            if (manager !== "true") {
+                localStorage.setItem('manager', false);
+                setIsManager(false);
+                console.log('not a manager');
+            } else {
+                localStorage.getItem('manager');
+                setIsManager(true);
+                console.log('is a manager');
+            }
+        }
+
         checkManagerStatus();
     }, [userProfileData]);
 
