@@ -3,7 +3,7 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 
 function useManagerStatus() {
     const [isManager, setIsManager] = useState(false);
-    const {userProfileData} = useContext(AuthenticationContext);
+    const {data} = useContext(AuthenticationContext);
 
     const manager = localStorage.getItem('manager');
     console.log(manager);
@@ -22,7 +22,7 @@ function useManagerStatus() {
         }
 
         checkManagerStatus();
-    }, [userProfileData]);
+    }, [data]);
 
     return isManager;
 }
