@@ -14,6 +14,7 @@ function Details() {
     const media = chosenVenue?.media?.length ? chosenVenue?.media : "https://via.placeholder.com/150";
     console.log(chosenVenue?.meta || "No meta found", "chosenVenue.meta");
 
+
     return (
         <>
             <div style={{padding: "80px 40px", height: "95vh"}}>
@@ -24,6 +25,17 @@ function Details() {
 
                 <Content>
                     <Image src={media} alt={chosenVenue?.name}/>
+
+                    <div style={{display: "flex", gap: "40px", fontSize: "12px"}}>
+                        <div>
+                            <strong>Created:</strong>
+                            <Typography.Paragraph>{new Date(chosenVenue?.created).toDateString()}</Typography.Paragraph>
+                        </div>
+                        <div>
+                            <strong>Last Updated:</strong>
+                            <Typography.Paragraph>{new Date(chosenVenue?.updated).toDateString()}</Typography.Paragraph>
+                        </div>
+                    </div>
 
                     <Title level={5}>Description:</Title>
                     <Typography.Paragraph>{chosenVenue?.description}</Typography.Paragraph>
@@ -36,6 +48,8 @@ function Details() {
                     <Title level={2}>Availability</Title>
                     <BookingCalendar bookings={chosenVenue?.bookings}/>
                 </Content>
+                <Title level={5}>Rating:</Title>
+                <Typography.Paragraph>{chosenVenue?.rating}/6</Typography.Paragraph>
 
                 <Content>
                     {chosenVenue?.meta && (
@@ -76,9 +90,13 @@ function Details() {
                     )}
                 </Content>
 
-                <Content>
-                    <Title level={2}>Title Something</Title>
-                    <Typography.Paragraph>Something...</Typography.Paragraph>
+                <Content style={{paddingBottom:"100px"}}>
+                    <Title level={2}>Location</Title>
+                    <Typography.Paragraph><strong>Address:</strong> {chosenVenue?.location.address}</Typography.Paragraph>
+                    <Typography.Paragraph><strong>City:</strong> {chosenVenue?.location.city}</Typography.Paragraph>
+                    <Typography.Paragraph><strong>Zip:</strong> {chosenVenue?.location.zip}</Typography.Paragraph>
+                    <Typography.Paragraph><strong>Country:</strong> {chosenVenue?.location.country}</Typography.Paragraph>
+                    <Typography.Paragraph><strong>Continent:</strong> {chosenVenue?.location.contient}</Typography.Paragraph>
                 </Content>
             </div>
         </>

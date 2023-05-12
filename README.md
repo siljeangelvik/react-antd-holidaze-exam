@@ -53,7 +53,7 @@ a profile page and a detail page for each venue.
 [GitHub Profile Badges](https://home.aveek.io/GitHub-Profile-Badges/)  
 [React Hook](https://docs.noroff.dev/holidaze/venues)  
 [Current User](https://www.back4app.com/docs/react/working-with-users/get-current-user-react)  
-
+[Fastify](https://github.com/fastify/fastify-jwt)
 
 ---
 

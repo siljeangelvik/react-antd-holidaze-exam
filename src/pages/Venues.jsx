@@ -9,10 +9,12 @@ import CreateVenue from '../components/profile/CreateVenue';
 function Venues() {
     const [toggle, setToggle] = useToggle(false);
 
-    const {isManager, userProfileData} = useContext(AuthenticationContext);
+    const {isManager, userData} = useContext(AuthenticationContext);
 
-    const {data} = useContext(VenuesContext);
-    console.log(data);
+    console.log(userData);
+
+    const {venues} = useContext(VenuesContext);
+    console.log(venues);
 
     return (
         <div style={{padding:"80px 40px", minHeight:"95vh"}}>
@@ -24,24 +26,22 @@ function Venues() {
             }}>
 
                 <div>
-                    <button onClick={setToggle}
-                            className={"primary-button"}>Create a Venue</button>
+                    <button onClick={setToggle} className={"primary-button"}>Create a Venue</button>
                 </div>
 
                 {toggle && (<CreateVenue setToggle={setToggle} />)}
 
                 {/* If user is already a manager */}
                 {isManager ? (
-                    <>
+                    <div>
                         <Title level={3}>Your Venues</Title>
-                        <Title level={5}>You are currently managing {userProfileData?.venues?.length} venues.</Title>
-
-                    </>
+                        <Title level={5}>You are currently managing {venues.length} venues.</Title>
+                    </div>
                 ) : (
-                    <>
+                    <div>
                         <Title level={3}>Your Bookings</Title>
-                        <Title level={5}>There are currently {userProfileData?.bookings?.length} venues.</Title>
-                    </>
+                        <Title level={5}>There are currently {venues.length} venues.</Title>
+                    </div>
                 )}
             </Content>
         </div>

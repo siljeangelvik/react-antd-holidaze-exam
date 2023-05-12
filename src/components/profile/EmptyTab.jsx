@@ -12,12 +12,12 @@ const EmptyTab = () => (
         description={
             <span>
                 <Typography.Text>
-                    Book your <strong>first adventure</strong> by <Link to="/">exploring</Link> beautiful places worldwide!
+                    Book your <strong>first adventure</strong> by <Link to={`/`}>exploring</Link> beautiful places worldwide!
                 </Typography.Text>
             </span>
         }
     >
-        <Button style={{marginTop: "20px"}} type="primary">Venues</Button>
+        <Link to={`/`}><Button style={{marginTop: "20px"}} type="primary">Venues</Button></Link>
     </Empty>
 );
 

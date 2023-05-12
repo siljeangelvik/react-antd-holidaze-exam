@@ -10,7 +10,7 @@ export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const {handleUserLogin, data} = useContext(AuthenticationContext);
+    const {handleUserLogin, userData} = useContext(AuthenticationContext);
     const {isLoading, isError, postData} = useApiPost(API_LOGIN);
 
     const navigate = useNavigate();
@@ -21,12 +21,10 @@ export const LoginForm = () => {
        // const response = await postData({email, password});
         await postData({email, password});
 
-        if (postData || data) {
-            handleUserLogin(data);
-            setTimeout(() => {
-                navigate(`/profile/${localStorage.getItem('name')}`);
-            }, 1000);
-        }
+
+        navigate(`/profile/${localStorage.getItem("name")}`);
+        handleUserLogin(userData);
+
 
         /*
         if (response?.data?.status ===  200) {
@@ -75,13 +73,13 @@ export const LoginForm = () => {
                        required={true}
                        style={{padding: "9px", borderRadius: "7px", border: "2px solid lightgray"}}/>
 
-                <button type="submit" disabled={isLoading} onClick={handleUserLogin}
+                <button type="submit" disabled={isLoading}
                         className={"primary-button"}
                 >
                     Login
                 </button>
                 {isError && <div>Error submitting form</div>}
-                {data && <div>{data.message}</div>}
+                {isLoading && <div>{isLoading.message}</div>}
             </form>
         </>
     );

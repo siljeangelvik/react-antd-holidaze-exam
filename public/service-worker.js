@@ -1,5 +1,5 @@
 // service-worker.js
-
+/*
 const CACHE_NAME = 'my-cache';
 
 // List the files that you want to cache.
@@ -31,3 +31,4 @@ self.addEventListener('fetch', event => {
             })
     );
 });
+*/

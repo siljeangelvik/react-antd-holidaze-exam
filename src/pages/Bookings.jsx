@@ -1,41 +1,38 @@
-import {Button} from '@mui/material';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import React, {useContext, useState} from 'react';
-import EmptyTab from '../components/profile/EmptyTab';
+import React, {useContext, useEffect, useState} from 'react';
+import useApiGet from '../hooks/useApiGet';
+import {API_PROFILES} from '../utilities/constants';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 import {BookingsList} from '../components/BookingsList';
 
 function Bookings() {
+    const [bookings, setBookings] = useState([]);
 
-    const {userProfileData} = useContext(AuthenticationContext);
-    const userProfileBookings = userProfileData?.bookings?.length > 0 ? userProfileData?.bookings : [];
-    const [bookings, setBookings] = useState(userProfileBookings);
-    console.log("bookings", setBookings(userProfileBookings));
+    const {userData} = useContext(AuthenticationContext);
 
-    const userHasBookings = userProfileBookings?.length > 0;
+    const {data: userDataBookings} = useApiGet(`${API_PROFILES}/${userData?.name}/bookings`);
 
-    /* const handleDeleteBooking = (bookingId) => {
-        const newBookings = bookings.filter(booking => booking.id !== bookingId);
-        setBookings(newBookings);
-    } */
+    console.log((JSON.stringify(userData, null, 2)));
+    console.log((JSON.stringify(userDataBookings, null, 2)));
+
+    useEffect(() => {
+        // TODO: Fetch bookings from API
+        setBookings(userDataBookings);
+        console.log(bookings);
+    });
+
 
     return (
         <>
-            <div style={{minHeight: "95vh", padding: "80px 40px",}}>
-                <Content style={{paddingBottom: "20px"}}>
+            <div style={{minHeight: '95vh', padding: '80px 40px'}}>
+                <Content style={{paddingBottom: '20px'}}>
                     <Title level={1}>Your Bookings</Title>
-                    <>
-                        <Title level={4}>Hi {localStorage.getItem("name")}, You have {bookings.length} bookings.</Title>
-                        {userHasBookings ? (
-                            <BookingsList bookings={bookings}/>
-                        ) : (
-                            <>
-                                <EmptyTab/>
-                            </>
-                        )}
-                    </>
-                    <Button variant={"contained"} color={"error"}>Delete booking</Button>
+                        <Title level={4}>
+                            Hi {userData?.name}, you currently have <em>{userDataBookings?.length}</em> upcoming bookings.
+                        </Title>
+
+                    <BookingsList bookings={bookings}/>
                 </Content>
             </div>
         </>

@@ -2,8 +2,9 @@ import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import {Route, Routes} from 'react-router-dom';
-import Venues from './pages/Venues';
 import Navbar from './components/layout/navbar/Navbar';
+import {ProtectedRoute} from './utilities/ProtectedRoute';
+import Venues from './pages/Venues';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Layout from './components/layout/Layout';
@@ -67,17 +68,36 @@ function App() {
                                    }
                             />
 
-                            <Route path="/profile">
-                                <Route path=":name" element={<Profile/>}>
-                                    <Route path=":bookings" element={<Bookings/>}/>
-                                    <Route path=":venues" element={<Venues/>}/>
-                                </Route>
-                            </Route>
+                            <Route path="/profile/:name"
+                                   element={
+                                       <ProtectedRoute>
+                                           <Profile/>
+                                       </ProtectedRoute>
+                                   }
+                            />
+
+                            <Route path="/bookings"
+                                   element={
+                                       <VenuesProvider>
+                                           <ProtectedRoute>
+                                               <Bookings/>
+                                           </ProtectedRoute>
+                                       </VenuesProvider>
+                                   }
+                            />
+
+                            <Route path="/venues"
+                                   element={
+                                       <VenuesProvider>
+                                           <ProtectedRoute>
+                                               <Venues/>
+                                           </ProtectedRoute>
+                                       </VenuesProvider>
+
+                                   }
+                            />
 
 
-                            <Route path="/profile" element={<Profile/>}/>
-                            <Route path="/bookings" element={<Bookings/>}/>
-                            <Route path="/venues" element={<Venues/>}/>
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="*" element={<NotFound/>}/>

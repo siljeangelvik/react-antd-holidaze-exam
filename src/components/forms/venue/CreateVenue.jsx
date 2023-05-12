@@ -3,164 +3,230 @@ import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
 import {Checkbox} from 'antd';
 import "./styles.css";
+import useApiPost from '../../../hooks/useApiPost';
+import {API_VENUES} from '../../../utilities/constants';
 
+export const CreateVenue = ({onCreate}) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+        media: [],
+        price: 0,
+        maxGuests: 0,
+        wifi: false,
+        parking: false,
+        breakfast: false,
+        pets: false,
+    });
 
-export const CreateVenue = (createVenueData) => {
-    let [value, setValue] = useState(createVenueData);
-    const {name, description, media, price, maxGuests} = createVenueData;
+    const {postData} = useApiPost(API_VENUES);
 
-    console.log(createVenueData);
-
-    /*
-    const [venueName, setVenueName] = useState("");
-    const [venueDescription, setVenueDescription] = useState("");
-    const [venueMedia, setVenueMedia] = useState("");
-    const [venuePrice, setVenuePrice] = useState(0);
-    const [venueMaxGuests, setVenueMaxGuests] = useState(0);
-    const [wifi, setWifi] = useState(false);
-    const [parking, setParking] = useState(false);
-    const [breakfast, setBreakfast] = useState(false);
-    const [pets, setPets] = useState(false);
-
-    const {createVenueFormData} = [venueName, venueDescription, venueMedia, venuePrice, venueMaxGuests, wifi, parking, breakfast, pets];
-    */
-
-    const onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-        if (e.target.checked) {
-            console.log("checked");
-            setValue(e.target.value = true);
-            setValue(value);
-        } else {
-            console.log("unchecked");
-            value = false;
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await postData(formData);
+            onCreate(data);
+            setFormData({
+                name: '',
+                description: '',
+                media: [],
+                price: 0,
+                maxGuests: 0,
+                wifi: false,
+                parking: false,
+                breakfast: false,
+                pets: false,
+            });
+            console.log('Venue created successfully');
+        } catch (error) {
+            console.log('Venue creation failed', error);
         }
     };
 
-    console.log(createVenueData);
+    const handleInputChange = (event) => {
+        const {name, value} = event.target;
+        setFormData({...formData, [name]: value});
+    };
 
-    const onSubmit = ({createVenue}) => {
-        console.log(typeof createVenue);
-
-        createVenue({
-            variables: {
-                name: name,
-                description: description,
-                media: media,
-                price: price,
-                maxGuests: maxGuests,
-                meta: {
-                    wifi: value,
-                    parking: value,
-                    breakfast: value,
-                    pets: value
-                }
-            }
-        });
-    }
+    const handleCheckboxChange = (event) => {
+        const {name, checked} = event.target;
+        setFormData({...formData, [name]: checked});
+    };
 
     return (
-        <>
-            <div className={"create-venue-modal"}>
-                <Form form={createVenueData} onFinish={onSubmit}
-                    layout="vertical"
-                      style={{minWidth: "340px", maxWidth: "340px", margin: "0 auto", paddingTop: "40px"}}>
+        <div className={'create-venue-modal'}>
+            <form onSubmit={onSubmit}
+                  style={{minWidth: '340px', maxWidth: '340px', margin: '0 auto', paddingTop: '40px'}}>
+                <Typography.Title level={2}>Create Venue</Typography.Title>
 
-                    <Typography.Title level={2}>Create Venue</Typography.Title>
+                <Form.Item label="Name of Venue">
+                    <Input
+                        value={formData.name}
+                        type="string"
+                        name="name"
+                        id="name"
+                        placeholder="Name of Venue"
+                        aria-label="name"
+                        required
+                        pattern="[A-Za-z]+"
+                        onChange={handleInputChange}
+                        style={{
+                            padding: '9px',
+                            borderRadius: '7px',
+                            border: '1px solid lightgray',
+                            display: 'block',
+                            width: '100%',
+                        }}
+                    />
+                </Form.Item>
 
-                    <Form.Item label="Name of Venue">
-                        <Input
-                            value={name}
-                            type="string"
-                            name="name"
-                            placeholder="Name of Venue"
-                            required={true}
-                            pattern={"[A-Za-z]+"}
-                            style={{
-                                padding: "9px",
-                                borderRadius: "7px",
-                                border: "1px solid lightgray",
-                                display: "block",
-                                width: "100%"
-                            }}
-                        />
-                    </Form.Item>
+                <Form.Item label="Description of Venue">
+                    <TextArea
+                        value={formData.description}
+                        type="string"
+                        name="description"
+                        id="description"
+                        aria-label="description"
+                        placeholder="Write a description of the venue"
+                        required
+                        min={0}
+                        onChange={handleInputChange}
+                        autoSize={{
+                            width: '100%',
+                            minRows: 3,
+                            maxRows: 5,
+                        }}
+                    />
+                </Form.Item>
 
-                    <Form.Item label="Description of Venue">
-                        <TextArea
-                            value={description}
-                            type="string"
-                            name="description"
-                            placeholder="Write a description of the venue"
-                            required={true}
-                            autoSize={{
-                                width: "100%",
-                                minRows: 3,
-                                maxRows: 5,
-                            }}
-                        />
-                    </Form.Item>
+                <Form.Item label="Images of Venue">
+                    <Input
+                        value={formData.media}
+                        type="[string]"
+                        name="media"
+                        id="media"
+                        placeholder="Add images of the venue"
+                        aria-label="media"
+                        optional
+                        onChange={handleInputChange}
+                    />
+                </Form.Item>
 
-                    <Form.Item label="Images of Venue">
-                        <Input
-                            value={media}
-                            type="[string]"
-                            name="media"
-                            placeholder="Add images of the venue"
+                <Form.Item label="Price of Venue /night">
+                    <Input
+                        value={formData.price}
+                        type="number"
+                        name="price"
+                        id="price"
+                        placeholder="$1,000"
+                        aria-label="price"
+                        required
+                        min={1}
+                        pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
 
-                        />
-                    </Form.Item>
+                        onChange={handleInputChange}
+                        style={{
+                            padding: '9px',
+                            borderRadius: '7px',
+                            border: '1px solid lightgray',
+                            display: 'block',
+                            width: '100%',
+                        }}
+                    />
+                </Form.Item>
 
-                    <Form.Item label="Price of Venue /night">
-                        <Input
-                            value={price}
-                            min={0}
-                            type="number"
-                            name="price"
-                            placeholder="$1,000"
-                            pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                            required={true}
-                        />
-                    </Form.Item>
+                <Form.Item label="Max Guests">
+                    <Input
+                        value={formData.maxGuests}
+                        type="number"
+                        name="maxGuests"
+                        id="maxGuests"
+                        placeholder="100"
+                        aria-label="maxGuests"
+                        required
+                        min={1}
+                        onChange={handleInputChange}
+                        style={{
+                            padding: '9px',
+                            borderRadius: '7px',
+                            border: '1px solid lightgray',
+                            display: 'block',
+                            width: '100%',
+                        }}
+                    />
+                </Form.Item>
 
-                    <Form.Item label="Max Guests">
-                        <input
-                            value={maxGuests}
-                            min={0}
-                            type="number"
-                            name="maxGuests"
-                            placeholder="500"
-                            required={true}
-                            style={{
-                                padding: "9px",
-                                borderRadius: "7px",
-                                border: "1px solid lightgray",
-                                display: "block",
-                                width: "100%"
-                            }}
-                        />
-                    </Form.Item>
+                <Form.Item label="Wifi">
+                    <Checkbox
+                        value={formData.wifi}
+                        type="boolean"
+                        name="wifi"
+                        id="wifi"
+                        aria-label="wifi"
+                        onChange={handleCheckboxChange}
+                    />
+                </Form.Item>
 
-                    <Form.Item label="Amenities">
-                        <div style={{display: "flex", flexDirection: "column"}}>
-                            <Checkbox onChange={onChange} name="wifi">WiFi Included</Checkbox>
-                            <Checkbox onChange={onChange} name="parking">Parking Included</Checkbox>
-                            <Checkbox onChange={onChange} name="breakfast">Breakfast Included</Checkbox>
-                            <Checkbox onChange={onChange} name="pets">Pets Allowed</Checkbox>
-                        </div>
-                    </Form.Item>
+                <Form.Item label="Parking">
+                    <Checkbox
+                        value={formData.parking}
+                        type="boolean"
+                        name="parking"
+                        id="parking"
+                        aria-label="parking"
+                        onChange={handleCheckboxChange}
+                    />
+                </Form.Item>
 
-                    <Button onChange={(e) => setValue(e.target.value)}
-                            type="submit" htmlType="submit" style={{width: "100%"}} className={"primary-button"}>
+                <Form.Item label="Breakfast">
+                    <Checkbox
+                        value={formData.breakfast}
+                        type="boolean"
+                        name="breakfast"
+                        id="breakfast"
+                        aria-label="breakfast"
+                        onChange={handleCheckboxChange}
+                    />
+                </Form.Item>
+
+                <Form.Item label="Pets">
+                    <Checkbox
+                        value={formData.pets}
+                        type="boolean"
+                        name="pets"
+                        id="pets"
+                        aria-label="pets"
+                        onChange={handleCheckboxChange}
+                    />
+                </Form.Item>
+
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" style={{width: '100%'}}>
                         Create Venue
                     </Button>
-                </Form>
-            </div>
-        </>
+                </Form.Item>
+            </form>
+        </div>
+    );
+};
 
 
-    )
-}
+/*
+
+Party Venue
+
+Introducing a stunning wedding venue available for rent! This enchanting space is perfect for couples who are looking for a romantic and memorable location to tie the knot. With its elegant and sophisticated decor, the venue boasts a spacious main hall that can accommodate up to 200 guests. The hall is adorned with beautiful chandeliers, draped ceilings, and large windows that let in plenty of natural light. The venue also features a charming outdoor area with lush gardens and a serene pond, providing the perfect backdrop for unforgettable wedding photos. With an experienced team of event planners and catering staff, this wedding venue offers everything you need to make your big day a success.
+
+https://cdn.pixabay.com/photo/2017/08/08/00/17/events-2609526_1280.jpg, https://cdn.pixabay.com/photo/2016/03/27/18/53/drinks-1283608_1280.jpg, https://cdn.pixabay.com/photo/2013/09/05/10/38/catering-179046_1280.jpg
+
+500
+
+200
+
+
+
+ */
+
 
 /*
 {

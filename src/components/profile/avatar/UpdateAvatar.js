@@ -13,7 +13,7 @@ export function UpdateAvatar() {
         setToggle(!toggle);
     };
 
-    const {data: userProfileData} = useContext(AuthenticationContext);
+    const {userData} = useContext(AuthenticationContext);
     const {putData, isLoading, isError, data} = useApiPut(`${API_PROFILES}/${localStorage.getItem("name")}/media`);
 
     const isValidAvatarUrl = (url) => {
@@ -35,14 +35,14 @@ export function UpdateAvatar() {
         localStorage.setItem('avatar', avatar);
         console.log('avatar', avatar);
         console.log('You have successfully updated your avatar!');
-        userProfileData.avatar = avatar;
+        userData.avatar = avatar;
     };
 
 
     return (
         <>
             <div style={{width:"100%", display:"flex", flexDirection:"column", justifyContent:"center", gap:"10px"}}>
-                <Avatar src={userProfileData?.avatar} className={"avatar-image"}/>
+                <Avatar src={userData?.avatar} className={"avatar-image"}/>
 
                 <button className={"button-tertiary"} onClick={handleToggle}>Edit avatar</button>
 
