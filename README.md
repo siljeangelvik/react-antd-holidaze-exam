@@ -3,21 +3,29 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)
 
 **Host:** [Netlify](https://exam-holidaze.netlify.app/)  
-**Repository:** [GitHub](https://github.com/siljeangelvik/react-antd-holidaze-exam)  
-**Project Board:** _Coming soon..._   
-**Style Tile:** [Figma](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=xkqBhFw0ewmxhreV-0)    
-**Wireframe:** [Figma](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0)    
-**Prototype:** _Coming soon..._  
-**Exam:** [Brief](https://content.noroff.dev/project-exam-2/brief.html)  
-**API:** [Holidaze Venues Endpoint](https://nf-api.onrender.com/api/v1/holidaze/venues)  
-**Docs:** [Noroff API Swagger](https://nf-api.onrender.com/docs/static/index.html#/holidaze-venues/get_api_v1_holidaze_venues__id_)
+**Repository:** [GitHub](https://github.com/siljeangelvik/react-antd-holidaze-exam)
 
-## Resources
+**GitHub:**  
+Board - [KanBan](https://github.com/users/siljeangelvik/projects/1/views/2)   
+Roadmap - [Gantt Chart](https://github.com/users/siljeangelvik/projects/1/views/3)  
+Table - [Overview](https://github.com/users/siljeangelvik/projects/1/views/4)
+
+**Figma:**   
+Design - [Style Tile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=K92xt7vpIrkLTIzI-0)    
+WireFrame / Prototype - [Mobile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0)        
+WireFrame / Prototype - [Desktop](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=36-1086&t=i0IMM4amVObPEwpw-0)  
+
+**Resources:**  
+Exam - [Noroff Brief](https://content.noroff.dev/project-exam-2/brief.html)  
+API Documentation -  [Noroff Holidaze](https://docs.noroff.dev/holidaze/venues)    
+API Endpoints - [Noroff SwaggerUI](https://nf-api.onrender.com/docs/static/index.html#/)
+
+### Resources used in this project
 ![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
-![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)
+![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)  
 ![Create React App](https://img.shields.io/badge/Create%20React%20App-09D3AC.svg?style=for-the-badge&logo=Create-React-App&logoColor=white)
-![React Router](https://img.shields.io/badge/React%20Router-CA4245.svg?style=for-the-badge&logo=React-Router&logoColor=white)
+![React Router](https://img.shields.io/badge/React%20Router-CA4245.svg?style=for-the-badge&logo=React-Router&logoColor=white)  
 ![AntDesign](https://img.shields.io/badge/Ant%20Design-0170FE.svg?style=for-the-badge&logo=Ant-Design&logoColor=white)
 ![Material Design](https://img.shields.io/badge/MUI-007FFF.svg?style=for-the-badge&logo=MUI&logoColor=white)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7.svg?style=for-the-badge&logo=Netlify&logoColor=white)
@@ -43,6 +51,9 @@ a profile page and a detail page for each venue.
 [Colors Toolbox](https://uxpro.cc/toolbox/visual-design/colors/)    
 [Culrs](https://culrs.com/#/tetradic)    
 [GitHub Profile Badges](https://home.aveek.io/GitHub-Profile-Badges/)  
+[React Hook](https://docs.noroff.dev/holidaze/venues)  
+[Current User](https://www.back4app.com/docs/react/working-with-users/get-current-user-react)  
+
 
 ---
 
