@@ -1,13 +1,23 @@
-import {Typography} from '@mui/material';
+import {Content} from 'antd/es/layout/layout';
+import React, {useState} from 'react';
+import {BookingsList} from '../../components/BookingsList';
 
 export default function Bookings() {
 
+    const [bookings, setBookings] = useState([]);
+
     return (
         <>
-            <Typography variant={"h2"}>Your Bookings</Typography>
+            <div style={{minHeight: '95vh', padding: '80px 40px'}}>
+                <Content style={{paddingBottom: '20px'}}>
+
+                    <BookingsList bookings={bookings}/>
+                </Content>
+            </div>
         </>
     );
 }
+
 
 /*
   {

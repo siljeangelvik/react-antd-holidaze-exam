@@ -14,14 +14,9 @@ import {API_VENUES} from '../utilities/constants';
 const BookingCalendar = (venueId) => {
 
     const [selectedDates, setSelectedDates] = useState([]);
-    // const [getStartDate, setStartDate] = useState(venueId);
-    // const [getEndDate, setEndDate] = useState(venueId);
     const [guests, setGuests] = useState(0);
 
-
-
     const {isAuthenticated} = useContext(AuthenticationContext);
-
 
     const {id} = useParams();
     const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
@@ -33,7 +28,6 @@ const BookingCalendar = (venueId) => {
             dateTo: new Date(booking.dateTo),
         };
     });
-
 
     const handleDateClick = (date) => {
         if (selectedDates.length === 0) {
@@ -65,38 +59,32 @@ const BookingCalendar = (venueId) => {
 
     const {loading, error, success, createBooking} = useBooking(id, selectedDates[0], selectedDates[1], guests);
 
-
     const handleCheckIdMatch = () => {
         console.log(data?.id, "data?.id from calendar");
         console.log(venueId, "venueId from calendar");
         return data?.id === data?.venueId;
     }
 
-
-
-
     const {postData} = useApiPost(`${API_VENUES}/${id}/bookings`);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
         handleCheckIdMatch();
 
         if (isAuthenticated && selectedDates && setGuests(guests)) {
-            const data = postData({
+            const postDataBooking = await postData({
                 venueId: id,
                 dateFrom: selectedDates[0],
                 dateTo: selectedDates[1],
                 guests: guests,
-            });
+            })
 
-            console.log(data, "data from handleSubmit in calendar");
-        return createBooking(data);
+            console.log(postDataBooking, "data from handleSubmit in calendar");
+            return createBooking(postDataBooking);
         }
         if (!isAuthenticated) {
             alert("Please log in to book a venue.");
         }
-
         console.log(isAuthenticated, "isAuthenticated from handleSubmit in calendar")
         console.log(selectedDates, "selectedDates from handleSubmit in calendar");
         console.log(guests, "guests from handleSubmit in calendar");
@@ -152,7 +140,7 @@ const BookingCalendar = (venueId) => {
                         </Typography.Text>
                     )}
 
-                    </Content>
+                </Content>
 
 
                 <Content style={{paddingBottom: "20px"}}>
@@ -172,9 +160,12 @@ const BookingCalendar = (venueId) => {
                     </button>
                 </div>
 
-                {guests < 0 && <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
+                {guests < 0 &&
+                    <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
 
-                {guests > data?.maxGuests && <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests allowed</Typography.Text>}
+                {guests > data?.maxGuests &&
+                    <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests
+                        allowed</Typography.Text>}
 
 
                 <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
@@ -204,16 +195,3 @@ const BookingCalendar = (venueId) => {
 };
 
 export default BookingCalendar;
-
-/*
-  "bookings": [
-    {
-      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "dateFrom": "2023-04-19T01:36:11.758Z",
-      "dateTo": "2023-04-19T01:36:11.758Z",
-      "guests": 0,
-      "created": "2023-04-19T01:36:11.758Z",
-      "updated": "2023-04-19T01:36:11.758Z"
-    }
-  ]
- */

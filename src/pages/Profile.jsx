@@ -45,7 +45,7 @@ function Profile() {
                             <>
                                 <Typography><strong>Name:</strong> {userData?.name}</Typography>
                                 <Typography><strong>Email:</strong> {userData?.email}</Typography>
-                                <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
+                                <Typography><strong>Manager:</strong> {userData?.venueManager ? "Yes" : "No"}</Typography>
                             </>
                         )}
                     </Content>
@@ -65,90 +65,11 @@ function Profile() {
                         </>
                     )}
 
-                    <ul style={{display: "flex", justifyContent: "space-between"}}>
-                        <li>{!isManager &&
-                            <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>}</li>
-                        <li>{!isManager && <button className={"secondary-button"}>Edit a
-                            Venue</button>}</li>
-                        <li>{!isManager &&
-                            <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}</li>
-                    </ul>
-
-                    {/*  {editVenues && (<Venues/>)} {<EditVenues/>} */}
-
-
-                    {/* set to:  isManager  */}
-
-                    {/** IF USER IS NOT A MANAGER:
-                     SHOW BUTTON TO REGISTER AS MANAGER
-                     */}
-                    {/* IF USER IS A MANAGER:
-                        SHOW LIST OF VENUES THEY MANAGE +
-                        BUTTON(TO OPEN MODAL) CREATE NEW VENUE +
-                        BUTTON(TO DELETE SELECTED VENUE)
-                        BUTTON(EDIT SELECTED VENUE)
-                        */}
-                    {/** IF USER IS // IS NOT A VENUE MANAGER:
-
-                     DONE:
-
-                     IF USER IS A VENUE MANAGER THEN::::::
-                     - SHOW LIST OF VENUES THEY MANAGE +
-                     - BUTTON (OPEN MODAL) CREATE VENUE +
-                     -
-
-                     IF USER IS NOT A VENUE MANAGER THEN::::::
-                     - BUTTON (OPEN SECTION) REGISTER AS MANAGER +
-
-
-                     **/}
-                    {/*
-                         {!isManager ? (
-                            <>
-                                <div style={{display: "flex", flexDirection: "column"}}>
-                                    {toggle ?
-                                        (<button onClick={handleToggle}
-                                                 style={{
-                                                     position: "fixed",
-                                                     top: "12%",
-                                                     left: "80%",
-                                                     padding: "9px",
-                                                     backgroundColor: "#ff9900",
-                                                     border: "2px solid transparent",
-                                                     borderRadius: "7px",
-                                                     color: "#fff",
-                                                     fontWeight: "bold",
-                                                     zIndex: "110"
-                                                 }}>
-                                                Close
-                                            </button>
-                                        ) : (
-                                            <button onClick={handleToggle}
-                                                    style={{
-                                                        position: "relative",
-                                                        padding: "9px",
-                                                        backgroundColor: "transparent",
-                                                        border: "2px solid transparent",
-                                                        borderRadius: "7px",
-                                                        color: "#ff9900",
-                                                        fontWeight: "bold",
-                                                    }}>
-                                                Open
-                                            </button>
-                                        )
-                                    }
-                                </div>
-
-                                {toggle ? <CreateVenue/> : null}
-                            </>
-                        ) : (
-                            <>
-                                <Button onClick={handleToggle} variant="text" size="small">
-                                    {toggle ? 'Hide' : 'Register as Manager'}
-                                </Button>
-                                {toggle ? <RegisterAsManager/> : null}
-                            </>
-                        )}*/}
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>
+                        <button className={"secondary-button"}>Edit a Venue</button>
+                        <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>
+                    </div>
                 </Content>
             </div>
         </>

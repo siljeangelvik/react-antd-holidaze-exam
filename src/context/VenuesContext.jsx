@@ -1,32 +1,27 @@
-import React, {createContext, useState} from 'react';
-import {useParams} from 'react-router-dom';
+/*import React, {createContext, useState} from 'react';
 import useApiGet from '../hooks/useApiGet';
 import {API_VENUES} from '../utilities/constants';
 
 const VenuesContext = createContext();
-
+// 73a67858-9f1b-4f46-a0a9-6827655bafc3?_bookings=true
 export const VenuesProvider = ({children}) => {
     const [limit, setLimit] = useState(9);
     const [offset, setOffset] = useState(0);
 
-    const {id} = useParams();
-
-    const {data, isLoading, isError} = useApiGet(`${API_VENUES}?limit=${limit}&offset=${offset}`);
-    // console.log(data, "venues From VenuesContext");
-    // 73a67858-9f1b-4f46-a0a9-6827655bafc3
-
+    const {data, isLoading, isError} = useApiGet(`${API_VENUES}`);
     const venues = [...data];
-    console.log(venues, "venues From VenuesContext");
-
-    const venue = venues?.find((venue) => venue?.id === id);
-    console.log(venue, "venue From VenuesContext");
 
     // Get Venues
     const getVenues = async () => {
         setOffset((prevOffset) => prevOffset + limit);
-        const response = await fetch(`${API_VENUES}?limit=${limit}&offset=${offset}`);
+        const response = await fetch(`${data}?limit=${limit}&offset=${offset}`);
         return await response.json();
     };
+
+
+    // Get Venues List
+    const dataList = venues?.map((item: { name: string }) => item.name);
+
 
     // Sorting
     const sortDataByRecent = (data) => {
@@ -35,18 +30,79 @@ export const VenuesProvider = ({children}) => {
         });
     };
 
-    const sortDataByPopular = (data) => {
-        return data?.sort((a, b) => {
-            return b?.rating?.length - a?.rating?.length;
-        });
-    };
-
     return (
         <VenuesContext.Provider
-            value={{data, venues, venue, isLoading, isError, getVenues, sortDataByRecent, sortDataByPopular}}>
+            value={{data, venues, dataList, isLoading, isError, getVenues, sortDataByRecent}}>
             {children}
         </VenuesContext.Provider>
     );
 };
 
 export {VenuesContext};
+*/
+
+import React, { createContext, useState, useEffect } from 'react';
+
+export const VenuesContext = createContext();
+
+async function fetchData(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to fetch data from ${url}`);
+    }
+    const data = await response.json();
+    return data;
+}
+
+export const VenuesProvider = ({ children }) => {
+    const [venues, setVenues] = useState([]);
+    const [displayedVenues, setDisplayedVenues] = useState(9);
+
+    useEffect(() => {
+        async function fetchVenues() {
+            const data = await fetchData('https://nf-api.onrender.com/api/v1/holidaze/venues');
+            setVenues(data);
+        }
+        fetchVenues();
+    }, []);
+
+    const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`);
+    const getSpecificVenueBookings = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true`);
+    const getSpecificVenueOwner = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_owner=true`);
+
+
+    const handleScroll = () => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+        if (scrolledToBottom) {
+            setDisplayedVenues(displayedVenues + 9);
+        }
+        if (window.scrollY > 100) {
+            return <button className="primary-button to-top" onClick={() => scrollTop()}>^</button>;
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [displayedVenues]);
+
+    const value = {
+        allVenues: venues.slice(0, displayedVenues),
+        getSpecificVenue,
+        getSpecificVenueBookings,
+        getSpecificVenueOwner,
+    };
+
+    return <VenuesContext.Provider value={value}>{children}</VenuesContext.Provider>;
+};
+
+
+/*
+ // allVenues.then((data) => console.log(data));
+
+    // const allVenuesList = allVenues?.value?.map((venue : { name: string }) => venue.name);
+
+ */

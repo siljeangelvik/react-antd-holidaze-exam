@@ -32,7 +32,6 @@ export function BookingsList() {
                     <div>
                         <Button variant={'contained'} color={'error'}>Cancel bookings</Button>
                         {bookings}
-
                     </div>
                 )}
             </Row>

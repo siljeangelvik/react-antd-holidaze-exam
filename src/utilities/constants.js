@@ -1,6 +1,8 @@
 /*      API URLS    */
 export const API_BASE_URL = "https://nf-api.onrender.com/api/v1/holidaze";
 
+// https://nf-api.onrender.com/api/v1/holidaze/venues/73a67858-9f1b-4f46-a0a9-6827655bafc3?_bookings=true
+
 export const API_LOGIN = `${API_BASE_URL}/auth/login`;
 export const API_REGISTER = `${API_BASE_URL}/auth/register`;
 

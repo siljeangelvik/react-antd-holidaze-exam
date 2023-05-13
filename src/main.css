@@ -81,3 +81,46 @@ input[type="checkbox"]:focus {
     border-radius: 50%;
     font-weight: bold;
 }
+
+.last-section { padding-bottom: 120px; }
+
+.venues-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.to-top {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ff9900;
+}
+/* Define styles for large displays */
+@media screen and (min-width: 720px) {
+
+    .venues-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .desktop-row {
+        display: flex;
+        justify-content: space-between;
+        gap:20px;
+        align-items: baseline;
+    }
+}
+
+
+

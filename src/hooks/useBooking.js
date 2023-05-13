@@ -1,5 +1,4 @@
 import { useState } from "react";
-import {useParams} from 'react-router-dom';
 import {API_BOOKINGS} from '../utilities/constants';
 
 const useBooking = (venueId, selectedDates, guests) => {
@@ -7,16 +6,14 @@ const useBooking = (venueId, selectedDates, guests) => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
-    const {id} = useParams();
 
     const createBooking = async () => {
         setLoading(true);
         setError(null);
         setSuccess(false);
 
-        // `${API_VENUES}/${venueId}?_bookings=true`
         try {
-            const response = await fetch(`${API_BOOKINGS}/${id}?_bookings=true`, {
+            const response = await fetch(`${API_BOOKINGS}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

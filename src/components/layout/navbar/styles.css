@@ -47,7 +47,6 @@ span.navbar-button-emoji {
     font-size: 16px;
     color: #000;
     cursor: pointer;
-
     transition: 0.3s ease-out;
 }
 
@@ -132,7 +131,6 @@ li:hover, li > *:hover {
 
     nav.navbar-container-mobile {
         display: flex;
-
     }
 
     nav.navbar-container-mobile,
@@ -141,18 +139,12 @@ li:hover, li > *:hover {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-
         position: absolute;
         top: 0;
         right: 0;
-
         height: 100%;
         width: min-content;
-
-
         box-shadow: none;
-
-
         background-color: transparent;
         border: 1px solid transparent;
     }

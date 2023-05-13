@@ -2,7 +2,6 @@ import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import {Route, Routes} from 'react-router-dom';
-import Navbar from './components/layout/navbar/Navbar';
 import {ProtectedRoute} from './utilities/ProtectedRoute';
 import Venues from './pages/Venues';
 import Login from './pages/Login';
@@ -17,6 +16,7 @@ import {VenuesProvider} from './context/VenuesContext';
 import "./main.css";
 
 function App() {
+
 
     return (
         <>
@@ -51,7 +51,6 @@ function App() {
                 <CssBaseline/>
 
                 <Content className={"App"}>
-                    <Navbar/>
                     <Routes>
                         <Route path="/" element={<Layout/>}>
                             <Route index path="/" element={
@@ -70,9 +69,11 @@ function App() {
 
                             <Route path="/profile/:name"
                                    element={
-                                       <ProtectedRoute>
-                                           <Profile/>
-                                       </ProtectedRoute>
+                                       <VenuesProvider>
+                                           <ProtectedRoute>
+                                               <Profile/>
+                                           </ProtectedRoute>
+                                       </VenuesProvider>
                                    }
                             />
 
