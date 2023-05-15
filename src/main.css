@@ -2,30 +2,12 @@
     font-family: sans-serif;
 }
 
-input {
-    max-width: 320px;
-    padding: 10px;
-    border-radius: 7px;
-    border: 1px solid #ccc;
-}
 
 body, html, .App {
     height: 100vh;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-    outline: #ff9900 solid 1px;
-}
 
-input[type="text"]:focus {
-    box-shadow: 0 0 0 rgb(0, 0, 0);
-}
-
-input[type="checkbox"]:focus {
-    box-shadow: 0 0 0 rgb(0, 0, 0);
-}
 
 .primary-button {
     cursor: pointer;
@@ -105,7 +87,6 @@ input[type="checkbox"]:focus {
 }
 /* Define styles for large displays */
 @media screen and (min-width: 720px) {
-
     .venues-list {
         display: flex;
         flex-direction: row;

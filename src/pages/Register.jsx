@@ -1,12 +1,21 @@
+import Title from 'antd/es/typography/Title';
+import React from 'react';
 import {Content} from 'antd/es/layout/layout';
-import {RegisterForm} from '../components/forms/RegisterForm';
+import Registration from '../components/form/register/Registration';
 
 function Register(onSubmit) {
+
     return (
         <>
             <div style={{padding: "80px 40px", height: "95vh"}}>
+
+            <Content style={{paddingBottom: "20px"}}>
+                <Title level={1}>Register</Title>
+                <Title level={4}>Sign up for a new account!</Title>
+            </Content>
+
                 <Content style={{paddingBottom: "20px"}}>
-                    <RegisterForm onSubmit={onSubmit}/>
+                    <Registration onSubmit={onSubmit}/>
                 </Content>
             </div>
         </>
@@ -14,3 +23,9 @@ function Register(onSubmit) {
 }
 
 export default Register;
+
+
+/*
+import {RegisterForm} from '../components/forms/RegisterForm';
+<RegisterForm onSubmit={onSubmit}/>
+ */

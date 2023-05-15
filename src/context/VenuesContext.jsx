@@ -70,7 +70,6 @@ export const VenuesProvider = ({ children }) => {
     const getSpecificVenueBookings = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true`);
     const getSpecificVenueOwner = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_owner=true`);
 
-
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = document.documentElement.scrollTop;
@@ -87,7 +86,7 @@ export const VenuesProvider = ({ children }) => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [displayedVenues]);
+    }, [handleScroll, displayedVenues]);
 
     const value = {
         allVenues: venues.slice(0, displayedVenues),

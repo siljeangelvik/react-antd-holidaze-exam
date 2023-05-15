@@ -3,26 +3,27 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 
 function useManagerStatus() {
     const [isManager, setIsManager] = useState(false);
-    const {data} = useContext(AuthenticationContext);
+    const {userData} = useContext(AuthenticationContext);
 
     const manager = localStorage.getItem('manager');
-    console.log(manager);
 
     useEffect(() => {
         function checkManagerStatus () {
-            if (manager !== "true") {
-                localStorage.setItem('manager', false);
-                setIsManager(false);
-                console.log('not a manager');
-            } else {
+            if (manager === true) {
                 localStorage.getItem('manager');
                 setIsManager(true);
-                console.log('is a manager');
+                console.log(userData?.name + 'is a manager');
+                return true;
+            } else if (manager === undefined || manager === null) {
+                localStorage.setItem("manager", false);
+                setIsManager(false);
+                console.log(userData?.name + 'is not a manager');
+                return false;
             }
         }
 
         checkManagerStatus();
-    }, [data, manager]);
+    }, [userData, manager]);
 
     return isManager;
 }

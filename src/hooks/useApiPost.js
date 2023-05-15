@@ -20,23 +20,11 @@ function useApiPost(url) {
             const response = await fetch(url, options);
             const json = await response.json();
             setData(json);
-            console.log(json, "useApiPost json");
-
-            localStorage.setItem('accessToken', json.accessToken);
-           localStorage.setItem('name', json.name);
-            localStorage.setItem('email', json.email);
-            localStorage.setItem('avatar', json.avatar);
-            localStorage.setItem('manager', json.manager);
-
-            if (json.manager === undefined || json.manager === null) {
-                localStorage.setItem('manager', false);
-            } else {
-                localStorage.setItem('manager', true);
-            }
-
+            console.log(data, "useApiPost json");
         } catch (error) {
-            console.log(error);
             setIsError(true);
+            console.log(error);
+
         } finally {
             setIsLoading(false);
         }
@@ -48,9 +36,16 @@ function useApiPost(url) {
 export default useApiPost;
 
 /*
-           localStorage.setItem('accessToken', json.accessToken);
+  if (json.manager === undefined || json.manager === null) {
+                localStorage.setItem('manager', false);
+            } else {
+                localStorage.setItem('manager', true);
+            }
+
+         localStorage.setItem('accessToken', json.accessToken);
            localStorage.setItem('name', json.name);
-           localStorage.setItem('email', json.email);
-           localStorage.setItem('avatar', json.avatar);
-           localStorage.setItem('manager', json.manager);
-           */
+            localStorage.setItem('email', json.email);
+            localStorage.setItem('avatar', json.avatar);
+            localStorage.setItem('manager', json.manager);
+
+ */

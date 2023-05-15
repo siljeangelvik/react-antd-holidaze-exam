@@ -2,7 +2,7 @@ import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext, useState} from 'react';
-import {UpdateAvatar} from '../components/profile/avatar/UpdateAvatar';
+import {UpdateAvatar} from '../components/form/avatar/UpdateAvatar';
 import {CreateVenue} from '../components/forms/venue/CreateVenue';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 
@@ -11,11 +11,11 @@ function Profile() {
     const {isAuthenticated, isManager, userData} = useContext(AuthenticationContext);
 
     if (isManager) {
-        console.log("isManager\nNeed to show venues to manage");
+        console.log(userData?.venueManager + "\nisManager\nNeed to show venues to manage");
         return (<CreateVenue/>);
     } else {
-        console.log(!isManager, "isManager value");
-        console.log("If user is not a venueManager and has a invalid email:\nDisplay nothing\n\nIf user is not a venueManager and has a valid email:\nDisplay option to register as a venueManager\n\nIf user is already a venueManager:\nDisplay a list of venues to manage");
+        console.log(!isManager, "\nisManager value");
+        console.log(userData?.venueManager +  "\nIf user is not a venueManager and has a invalid email:\nDisplay nothing\n\nIf user is not a venueManager and has a valid email:\nDisplay option to register as a venueManager\n\nIf user is already a venueManager:\nDisplay a list of venues to manage");
     }
 
     const handleToggle = () => {

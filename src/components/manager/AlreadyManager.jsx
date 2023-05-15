@@ -7,7 +7,7 @@ import useToggle from '../../hooks/useToggle';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import './styles.css';
 
-const RegisterVenueManager = () => {
+const AlreadyManager = () => {
 
     const {isManager, userProfileData} = useContext(AuthenticationContext);
 
@@ -31,7 +31,7 @@ const RegisterVenueManager = () => {
                     </div>
                 )}
 
-                {!isManager && (
+                {isManager && (
                     <div>
                         <Title level={2}>Welcome {userProfileData?.name}</Title>
                         <Title level={4}>You are not a Venue Manager</Title>
@@ -43,4 +43,4 @@ const RegisterVenueManager = () => {
     );
 };
 
-export default RegisterVenueManager;
+export default AlreadyManager;

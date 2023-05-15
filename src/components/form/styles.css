@@ -1,0 +1,95 @@
+form.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 400px;
+}
+
+form > div,
+form > button {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+form > div > label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.manager-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    justify-items: center;
+    gap: 10px;
+}
+
+.form-error {
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: lighter;
+    color: #d10000;
+}
+
+/* Input Styling */
+input {
+    max-width: 320px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: transparent solid 1px;
+}
+
+input[type="text"]:focus {
+    box-shadow: 6px 20px 30px -6px rgba(0,0,0,0.1);
+}
+
+/* Input: Checkbox Styling */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    appearance: none; /* Remove default styles */
+    -moz-appearance: none; /* Remove default styles in Firefox */
+    border: 1px solid #ff9900; /* Add a border to the checkbox */
+    border-radius: 4px; /* Add border radius for a rounded appearance */
+    position: relative; /* Create a positioning context for pseudo-elements */
+    background: transparent;
+}
+
+input[type="checkbox"]::before {
+    content: "\2714";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    color: #fff;
+    font-weight: bold;
+}
+
+input[type="checkbox"]:checked::before {
+    visibility: visible; /* Show the checkmark when the checkbox is checked */
+}
+
+input[type="checkbox"]:checked {
+    background-color: #ff9900; /* Change the background color to orange when the checkbox is checked */
+}
+
+input[type="checkbox"]:focus {
+    box-shadow: 6px 20px 30px -6px rgba(0,0,0,0.1);
+}
