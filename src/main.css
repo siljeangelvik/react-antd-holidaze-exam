@@ -2,12 +2,9 @@
     font-family: sans-serif;
 }
 
-
 body, html, .App {
     height: 100vh;
 }
-
-
 
 .primary-button {
     cursor: pointer;
@@ -32,7 +29,6 @@ body, html, .App {
     border: 1px solid #ff9900;
     background-color: transparent;
 }
-
 
 .modal-close {
     position: absolute;
@@ -64,7 +60,9 @@ body, html, .App {
     font-weight: bold;
 }
 
-.last-section { padding-bottom: 120px; }
+.last-section {
+    padding-bottom: 120px;
+}
 
 .venues-list {
     display: flex;
@@ -85,6 +83,7 @@ body, html, .App {
     border-radius: 50%;
     background-color: #ff9900;
 }
+
 /* Define styles for large displays */
 @media screen and (min-width: 720px) {
     .venues-list {
@@ -98,10 +97,7 @@ body, html, .App {
     .desktop-row {
         display: flex;
         justify-content: space-between;
-        gap:20px;
+        gap: 20px;
         align-items: baseline;
     }
 }
-
-
-

@@ -21,14 +21,13 @@ function Bookings() {
 
     return (
         <>
-            <div style={{padding: "80px 40px", height: "95vh"}}>
+            <div style={{padding: "80px 40px", height: "95vh", paddingBottom: "120px"}}>
                 <Content style={{paddingBottom: "20px"}}>
-
                     <Title level={1}>Your Bookings</Title>
-                    <Title level={4}>Hi {userData?.name}, you currently
-                        have <em>{userData?.bookings?.length}</em> upcoming bookings.</Title>
-                    <BookingsList bookings={bookings}/>
+                    <Title level={4}>Hi {userData?.name}, you currently have <em>{userData?.bookings?.length}</em> upcoming bookings.</Title>
                 </Content>
+
+                <BookingsList bookings={bookings}/>
             </div>
         </>
     );

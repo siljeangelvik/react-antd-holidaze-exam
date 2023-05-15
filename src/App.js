@@ -1,3 +1,4 @@
+import React from 'react';
 import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
@@ -16,7 +17,6 @@ import {VenuesProvider} from './context/VenuesContext';
 import "./main.css";
 
 function App() {
-
 
     return (
         <>
@@ -56,15 +56,14 @@ function App() {
                             <Route index path="/" element={
                                 <VenuesProvider>
                                     <Home/>
-                                </VenuesProvider>
-                            }
+                                </VenuesProvider>}
                             />
+
                             <Route path="/details/:id"
                                    element={
                                        <VenuesProvider>
                                            <Details/>
-                                       </VenuesProvider>
-                                   }
+                                       </VenuesProvider>}
                             />
 
                             <Route path="/profile/:name"
@@ -73,8 +72,7 @@ function App() {
                                            <ProtectedRoute>
                                                <Profile/>
                                            </ProtectedRoute>
-                                       </VenuesProvider>
-                                   }
+                                       </VenuesProvider>}
                             />
 
                             <Route path="/bookings"
@@ -83,8 +81,7 @@ function App() {
                                            <ProtectedRoute>
                                                <Bookings/>
                                            </ProtectedRoute>
-                                       </VenuesProvider>
-                                   }
+                                       </VenuesProvider>}
                             />
 
                             <Route path="/venues"
@@ -93,11 +90,8 @@ function App() {
                                            <ProtectedRoute>
                                                <Venues/>
                                            </ProtectedRoute>
-                                       </VenuesProvider>
-
-                                   }
+                                       </VenuesProvider>}
                             />
-
 
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/register" element={<Register/>}/>

@@ -18,7 +18,6 @@ const Logout = () => {
             handleUserLogout();
             navigate('/login');
         };
-
         // unique key for notification to avoid duplication of notifications
         const key = `open${Date.now()}`;
         const btn = (
@@ -47,4 +46,5 @@ const Logout = () => {
         </>
     );
 };
+
 export default Logout;

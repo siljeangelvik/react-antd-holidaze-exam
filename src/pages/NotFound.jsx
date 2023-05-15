@@ -1,10 +1,11 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
-import { Button, Result } from 'antd';
+import {Button, Result} from 'antd';
 import {Link} from 'react-router-dom';
 
 function NotFound() {
+
     return (
         <>
             <div style={{padding: "80px 40px", height: "95vh"}}>

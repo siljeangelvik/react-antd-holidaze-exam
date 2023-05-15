@@ -7,9 +7,7 @@ import {loginSchema} from './schema';
 import '../styles.css';
 
 const LoginForm = () => {
-
     const {handleUserLogin, userData} = useContext(AuthenticationContext);
-
     const {data, isLoading, isError, postData} = useApiPost(API_LOGIN); // Make sure this custom hook is implemented correctly
 
     const formik = useFormik({
@@ -59,7 +57,6 @@ const LoginForm = () => {
                     <div className="form-error">* {formik.errors.email}</div>
                 ) : null}
             </div>
-
             <div>
                 <label htmlFor="password">Password</label>
                 <input
@@ -75,7 +72,6 @@ const LoginForm = () => {
                     <div className="form-error">* {formik.errors.password}</div>
                 ) : null}
             </div>
-
             <button className="primary-button" type="submit">Submit</button>
         </form>
     );

@@ -12,15 +12,13 @@ import useApiGet from '../hooks/useApiGet';
 import {API_VENUES} from '../utilities/constants';
 
 const BookingCalendar = (venueId) => {
-
     const [selectedDates, setSelectedDates] = useState([]);
     const [guests, setGuests] = useState(0);
-
     const {isAuthenticated} = useContext(AuthenticationContext);
-
     const {id} = useParams();
     const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
     const bookingsList = data?.bookings;
+
     const newBookingsList = bookingsList?.map((booking) => {
         return {
             ...booking,
@@ -74,8 +72,8 @@ const BookingCalendar = (venueId) => {
         if (isAuthenticated && selectedDates && setGuests(guests)) {
             const postDataBooking = await postData({
                 venueId: id,
-                dateFrom: selectedDates[0],
-                dateTo: selectedDates[1],
+                startDate: selectedDates[0],
+                endDate: selectedDates[1],
                 guests: guests,
             })
 
@@ -139,7 +137,6 @@ const BookingCalendar = (venueId) => {
                             {selectedDates[1].toDateString()}
                         </Typography.Text>
                     )}
-
                 </Content>
 
 

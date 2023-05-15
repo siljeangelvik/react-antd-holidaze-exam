@@ -1,6 +1,6 @@
+import React from 'react';
 import Container from '@mui/material/Container';
 import {Typography} from 'antd';
-import React from 'react';
 import "../navbar/styles.css";
 
 const Footer = () => {

@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {useFormik} from 'formik';
 import {useNavigate} from 'react-router-dom';
-import {RegisterSuccess} from '../../alerts/RegisterSuccess';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import useApiPost from '../../../hooks/useApiPost';
 import {API_REGISTER} from '../../../utilities/constants';
@@ -10,9 +9,7 @@ import '../styles.css';
 
 const RegistrationForm = () => {
     const {handleUserRegister} = useContext(AuthenticationContext);
-
     const {data, isLoading, isError, postData} = useApiPost(API_REGISTER); // Make sure this custom hook is implemented correctly
-
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -30,7 +27,6 @@ const RegistrationForm = () => {
                 console.log(response);
                 if (data.success) {
                     navigate('/login');
-                    RegisterSuccess();
                     handleUserRegister(data);
                 }
                 return response;
@@ -51,7 +47,6 @@ const RegistrationForm = () => {
                 <p className="form-error">* {data.errors[0].message}</p>)}
             {isLoading && (<p className="form-error">Loading...</p>)}
             {isError && (<p className="form-error">Error</p>)}
-
             <div>
                 <label htmlFor="name">Name</label>
                 <input
@@ -67,7 +62,6 @@ const RegistrationForm = () => {
                     <div className="form-error">* {formik.errors.name}</div>
                 ) : null}
             </div>
-
             <div>
                 <label htmlFor="email">Email</label>
                 <input
@@ -83,7 +77,6 @@ const RegistrationForm = () => {
                     <div className="form-error">* {formik.errors.email}</div>
                 ) : null}
             </div>
-
             <div>
                 <label htmlFor="password">Password</label>
                 <input
@@ -99,7 +92,6 @@ const RegistrationForm = () => {
                     <div className="form-error">* {formik.errors.password}</div>
                 ) : null}
             </div>
-
             {showVenueManagerOption && (
                 <div>
                     <label htmlFor="venueManager">Venue Manager</label>
@@ -113,7 +105,6 @@ const RegistrationForm = () => {
                             onBlur={formik.handleBlur}
                             checked={formik.values.venueManager}
                         />
-
                         <p>
                             {formik.values.venueManager
                                 ? 'Yes, I want to register as manager'
@@ -125,7 +116,6 @@ const RegistrationForm = () => {
                     ) : null}
                 </div>
             )}
-
             <button className="primary-button" type="submit">Submit</button>
         </form>
     );

@@ -5,25 +5,22 @@ function useManagerStatus() {
     const [isManager, setIsManager] = useState(false);
     const {userData} = useContext(AuthenticationContext);
 
-    const manager = localStorage.getItem('manager');
-
     useEffect(() => {
-        function checkManagerStatus () {
-            if (manager === true) {
-                localStorage.getItem('manager');
-                setIsManager(true);
-                console.log(userData?.name + 'is a manager');
-                return true;
-            } else if (manager === undefined || manager === null) {
-                localStorage.setItem("manager", false);
-                setIsManager(false);
-                console.log(userData?.name + 'is not a manager');
-                return false;
-            }
+        const manager = userData?.venueManager;
+
+        if (manager === true) {
+            setIsManager(true);
+            localStorage.setItem('manager', true);
+        } else {
+            setIsManager(false);
+            localStorage.setItem('manager', false);
         }
 
-        checkManagerStatus();
-    }, [userData, manager]);
+        // Cleanup function to remove the storedManagerStatus from localStorage
+        return () => {
+            localStorage.removeItem('manager');
+        };
+    }, [userData]);
 
     return isManager;
 }

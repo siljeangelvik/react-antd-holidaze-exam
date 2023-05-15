@@ -8,13 +8,12 @@ import "./styles.css";
 export function UpdateAvatar() {
     const [toggle, setToggle] = useState(false);
     const [avatar, setAvatar] = useState('');
+    const {userData} = useContext(AuthenticationContext);
+    const {putData, isLoading, isError, data} = useApiPut(`${API_PROFILES}/${localStorage.getItem("name")}/media`);
 
     const handleToggle = () => {
         setToggle(!toggle);
     };
-
-    const {userData} = useContext(AuthenticationContext);
-    const {putData, isLoading, isError, data} = useApiPut(`${API_PROFILES}/${localStorage.getItem("name")}/media`);
 
     const isValidAvatarUrl = (url) => {
         const regex = /\.(jpg|jpeg|png|gif|bmp)$/i;
@@ -29,23 +28,24 @@ export function UpdateAvatar() {
 
         await putData({avatar});
         if (isError) {
-            console.log('Error updating avatar');
+            return alert('Error trying to update avatar');
         }
         setAvatar(avatar);
         localStorage.setItem('avatar', avatar);
-        console.log('avatar', avatar);
-        console.log('You have successfully updated your avatar!');
         userData.avatar = avatar;
     };
 
-
     return (
         <>
-            <div style={{width:"100%", display:"flex", flexDirection:"column", justifyContent:"center", gap:"10px"}}>
+            <div style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "10px"
+            }}>
                 <Avatar src={userData?.avatar} className={"avatar-image"}/>
-
                 <button className={"button-tertiary"} onClick={handleToggle}>Edit avatar</button>
-
             </div>
             {toggle &&
                 <form style={{

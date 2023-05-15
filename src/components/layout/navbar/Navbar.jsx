@@ -1,14 +1,17 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
+import useManagerStatus from '../../../hooks/useManagerStatus';
 import Logout from '../../../components/notifications/Logout';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import useToggle from "../../../hooks/useToggle";
 import "./styles.css";
 
 const Navbar = () => {
-
     const [value, toggleValue] = useToggle(false);
-   const {isAuthenticated, userData} = useContext(AuthenticationContext);
+    const {isAuthenticated, userData} = useContext(AuthenticationContext);
+
+    const isManager = useManagerStatus();
+
     const handleNavbar = () => {
         toggleValue(!value);
     };
@@ -39,6 +42,7 @@ const Navbar = () => {
 
                             {/* <li><Link to={`/profile/${localStorage.getItem("name")}/bookings`}>Bookings</Link></li> */}
                             <li><Link to={`/bookings`}>Bookings</Link></li>
+                            {isManager && <li><Link to={`/venues`}>Venues</Link></li>}
                             <li><Logout/></li>
                         </>
                     ) : (

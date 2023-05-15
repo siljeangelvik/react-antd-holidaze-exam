@@ -1,47 +1,7 @@
-/*import React, {createContext, useState} from 'react';
-import useApiGet from '../hooks/useApiGet';
-import {API_VENUES} from '../utilities/constants';
+// https://nf-api.onrender.com/api/v1/holidaze/venues/73a67858-9f1b-4f46-a0a9-6827655bafc3?_bookings=true&_owner=true
 
-const VenuesContext = createContext();
-// 73a67858-9f1b-4f46-a0a9-6827655bafc3?_bookings=true
-export const VenuesProvider = ({children}) => {
-    const [limit, setLimit] = useState(9);
-    const [offset, setOffset] = useState(0);
-
-    const {data, isLoading, isError} = useApiGet(`${API_VENUES}`);
-    const venues = [...data];
-
-    // Get Venues
-    const getVenues = async () => {
-        setOffset((prevOffset) => prevOffset + limit);
-        const response = await fetch(`${data}?limit=${limit}&offset=${offset}`);
-        return await response.json();
-    };
-
-
-    // Get Venues List
-    const dataList = venues?.map((item: { name: string }) => item.name);
-
-
-    // Sorting
-    const sortDataByRecent = (data) => {
-        return data?.sort((a, b) => {
-            return new Date(b?.createdAt) - new Date(a?.createdAt);
-        });
-    };
-
-    return (
-        <VenuesContext.Provider
-            value={{data, venues, dataList, isLoading, isError, getVenues, sortDataByRecent}}>
-            {children}
-        </VenuesContext.Provider>
-    );
-};
-
-export {VenuesContext};
-*/
-
-import React, { createContext, useState, useEffect } from 'react';
+import React, {createContext, useState, useEffect, useContext} from 'react';
+import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
 
@@ -54,21 +14,28 @@ async function fetchData(url) {
     return data;
 }
 
-export const VenuesProvider = ({ children }) => {
+export const VenuesProvider = ({children}) => {
     const [venues, setVenues] = useState([]);
     const [displayedVenues, setDisplayedVenues] = useState(9);
 
-    useEffect(() => {
-        async function fetchVenues() {
-            const data = await fetchData('https://nf-api.onrender.com/api/v1/holidaze/venues');
-            setVenues(data);
-        }
-        fetchVenues();
-    }, []);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredVenues, setFilteredVenues] = useState([]);
+
+
+    const{userData} = useContext(AuthenticationContext);
 
     const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`);
     const getSpecificVenueBookings = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true`);
     const getSpecificVenueOwner = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_owner=true`);
+
+    useEffect(() => {
+        async function fetchVenues() {
+            const data = await fetchData('https://nf-api.onrender.com/api/v1/holidaze/venues?_bookings=true&_owner=true');
+            setVenues(data);
+        }
+
+        fetchVenues();
+    }, []);
 
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight;
@@ -78,22 +45,38 @@ export const VenuesProvider = ({ children }) => {
         if (scrolledToBottom) {
             setDisplayedVenues(displayedVenues + 9);
         }
-        if (window.scrollY > 100) {
-            return <button className="primary-button to-top" onClick={() => scrollTop()}>^</button>;
-        }
     };
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [handleScroll, displayedVenues]);
+    }, [displayedVenues, handleScroll]);
+
+
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    useEffect(() => {
+        const filtered = venues.filter((venue) =>
+            venue.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredVenues(filtered);
+    }, [searchTerm, venues]);
+
+    const hasVenues = userData?.venues?.length > 0;
+
 
     const value = {
         allVenues: venues.slice(0, displayedVenues),
+        handleSearch,
+        filteredVenues,
+        hasVenues,
         getSpecificVenue,
         getSpecificVenueBookings,
         getSpecificVenueOwner,
     };
+
 
     return <VenuesContext.Provider value={value}>{children}</VenuesContext.Provider>;
 };

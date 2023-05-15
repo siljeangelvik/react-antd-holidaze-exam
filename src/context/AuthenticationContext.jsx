@@ -11,12 +11,9 @@ const AuthenticationProvider = ({children}) => {
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-
     const navigate = useNavigate();
-
     const isLoggedIn = useAuthentication();
     const {isManager} = useManagerStatus;
-
 
     /**
      *  Used to update the isAuthenticated state
@@ -31,16 +28,12 @@ const AuthenticationProvider = ({children}) => {
         setIsAuthenticated(isLoggedIn);
     }, [isLoggedIn]);
 
-
     const handleUserLogin = () => {
         setIsAuthenticated(true);
-
         console.log(`Welcome back ${localStorage.getItem("name")}!`);
         document.title = `Holidaze | ${localStorage.getItem("name")}`;
         navigate(`/profile/${localStorage.getItem('name')}`);
-
     };
-
 
     /**
      * Retrieves the user profile data from the API.
@@ -84,7 +77,6 @@ const AuthenticationProvider = ({children}) => {
         ['accessToken', 'name', 'email', 'avatar', 'manager'].forEach(key => localStorage.removeItem(key));
         setIsAuthenticated(prevState => !prevState);
     };
-
 
     return (
         <AuthenticationContext.Provider

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 function useApiPut(url) {
     const [data, setData] = useState(null);
@@ -21,15 +21,6 @@ function useApiPut(url) {
             const json = await response.json();
             setData(json);
             localStorage.setItem('avatar', json.avatar);
-
-            /*const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });*/
         } catch (error) {
             console.log(error);
             setIsError(true);
@@ -38,7 +29,7 @@ function useApiPut(url) {
         }
     }
 
-    return { data, isLoading, isError, putData };
+    return {data, isLoading, isError, putData};
 }
 
 export default useApiPut;

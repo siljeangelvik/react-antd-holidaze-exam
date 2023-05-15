@@ -1,43 +1,41 @@
+import React, {useState} from 'react';
 import {Button, Form, Input, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import React, {useState} from 'react';
 import {Checkbox} from 'antd';
 import "./styles.css";
+import {boolean, number, string} from 'yup';
 import useApiPost from '../../../hooks/useApiPost';
 import {API_VENUES} from '../../../utilities/constants';
 
-export const CreateVenue = ({onCreate}) => {
+export const PostVenue = ({onCreate}) => {
     const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        media: [],
-        price: 0,
-        maxGuests: 0,
-        wifi: false,
-        parking: false,
-        breakfast: false,
-        pets: false,
+        name: string,
+        description: string,
+        media: [string],
+        price: number,
+        maxGuests: number,
+        wifi: boolean,
+        parking: boolean,
+        breakfast: boolean,
+        pets: boolean,
     });
 
-    const {postData} = useApiPost(API_VENUES);
+    const {isLoading, isError, postData} = useApiPost(API_VENUES);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = await postData(formData);
             onCreate(data);
-            setFormData({
-                name: '',
-                description: '',
-                media: [],
-                price: 0,
-                maxGuests: 0,
-                wifi: false,
-                parking: false,
-                breakfast: false,
-                pets: false,
-            });
-            console.log('Venue created successfully');
+            setFormData(data);
+
+            if (isLoading) return <div>Loading...</div>
+            if (isError) return <div>Error</div>
+            if (data) {
+                console.log('Venue created successfully');
+                return <div>Success</div>
+            }
+
         } catch (error) {
             console.log('Venue creation failed', error);
         }
@@ -60,9 +58,10 @@ export const CreateVenue = ({onCreate}) => {
                 <Typography.Title level={2}>Create Venue</Typography.Title>
 
                 <Form.Item label="Name of Venue">
-                    <Input
+
+                    <input
                         value={formData.name}
-                        type="string"
+                        type="text"
                         name="name"
                         id="name"
                         placeholder="Name of Venue"
@@ -70,26 +69,18 @@ export const CreateVenue = ({onCreate}) => {
                         required
                         pattern="[A-Za-z]+"
                         onChange={handleInputChange}
-                        style={{
-                            padding: '9px',
-                            borderRadius: '7px',
-                            border: '1px solid lightgray',
-                            display: 'block',
-                            width: '100%',
-                        }}
                     />
+
                 </Form.Item>
 
                 <Form.Item label="Description of Venue">
                     <TextArea
                         value={formData.description}
-                        type="string"
+                        type="text"
                         name="description"
                         id="description"
                         aria-label="description"
                         placeholder="Write a description of the venue"
-                        required
-                        min={0}
                         onChange={handleInputChange}
                         autoSize={{
                             width: '100%',
@@ -123,7 +114,6 @@ export const CreateVenue = ({onCreate}) => {
                         required
                         min={1}
                         pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-
                         onChange={handleInputChange}
                         style={{
                             padding: '9px',
@@ -198,6 +188,7 @@ export const CreateVenue = ({onCreate}) => {
                         aria-label="pets"
                         onChange={handleCheckboxChange}
                     />
+                    <p>{formData.pets ? "Pets allowed" : "No pets allowed"}</p>
                 </Form.Item>
 
                 <Form.Item>
@@ -209,25 +200,6 @@ export const CreateVenue = ({onCreate}) => {
         </div>
     );
 };
-
-
-/*
-
-Party Venue
-
-Introducing a stunning wedding venue available for rent! This enchanting space is perfect for couples who are looking for a romantic and memorable location to tie the knot. With its elegant and sophisticated decor, the venue boasts a spacious main hall that can accommodate up to 200 guests. The hall is adorned with beautiful chandeliers, draped ceilings, and large windows that let in plenty of natural light. The venue also features a charming outdoor area with lush gardens and a serene pond, providing the perfect backdrop for unforgettable wedding photos. With an experienced team of event planners and catering staff, this wedding venue offers everything you need to make your big day a success.
-
-https://cdn.pixabay.com/photo/2017/08/08/00/17/events-2609526_1280.jpg, https://cdn.pixabay.com/photo/2016/03/27/18/53/drinks-1283608_1280.jpg, https://cdn.pixabay.com/photo/2013/09/05/10/38/catering-179046_1280.jpg
-
-500
-
-200
-
-
-
- */
-
-
 /*
 {
   "name": "string",

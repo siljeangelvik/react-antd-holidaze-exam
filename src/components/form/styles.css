@@ -52,7 +52,7 @@ textarea:focus {
 }
 
 input[type="text"]:focus {
-    box-shadow: 6px 20px 30px -6px rgba(0,0,0,0.1);
+    box-shadow: 6px 20px 30px -6px rgba(0, 0, 0, 0.1);
 }
 
 /* Input: Checkbox Styling */
@@ -91,5 +91,5 @@ input[type="checkbox"]:checked {
 }
 
 input[type="checkbox"]:focus {
-    box-shadow: 6px 20px 30px -6px rgba(0,0,0,0.1);
+    box-shadow: 6px 20px 30px -6px rgba(0, 0, 0, 0.1);
 }

@@ -1,11 +1,10 @@
-import { useState } from "react";
+import {useState} from "react";
 import {API_BOOKINGS} from '../utilities/constants';
 
-const useBooking = (venueId, selectedDates, guests) => {
+const useBooking = (selectedDates, guests) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-
 
     const createBooking = async () => {
         setLoading(true);
@@ -37,7 +36,7 @@ const useBooking = (venueId, selectedDates, guests) => {
         }
     };
 
-    return { loading, error, success, createBooking };
+    return {loading, error, success, createBooking};
 };
 
 export default useBooking;

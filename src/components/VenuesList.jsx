@@ -1,19 +1,35 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { VenuesContext } from '../context/VenuesContext';
 import VenueItem from './VenueItem';
 
 export const VenuesList = () => {
-    const { allVenues } = useContext(VenuesContext);
-
+    const { allVenues, filteredVenues, handleSearch } = useContext(VenuesContext);
 
     return (
         <>
-            <h2>Should be a searchbar</h2>
-            <div className="venues-list">
-                {allVenues?.map((venue) => (
-                    <VenueItem key={venue.id} venue={venue} />
-                ))}
+            <div style={{width: "320px", paddingBottom: "20px"}}>
+                <input type="text"
+                       placeholder="Search Venues..."
+                       onChange={handleSearch}
+                       style={{width: "100%"}}
+                />
             </div>
+
+            {filteredVenues && filteredVenues.length > 0 && (
+                <div className="venues-list">
+                    {filteredVenues.map((venue) => (
+                        <VenueItem key={venue.id} venue={venue}/>
+                    ))}
+                </div>
+            )}
+
+            {!filteredVenues || filteredVenues.length === 0 ? (
+                <div className="venues-list">
+                    {allVenues.map((venue) => (
+                        <VenueItem key={venue.id} venue={venue}/>
+                    ))}
+                </div>
+            ) : null}
         </>
     );
 };

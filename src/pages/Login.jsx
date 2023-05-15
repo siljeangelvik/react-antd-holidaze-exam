@@ -12,7 +12,6 @@ function Login(onSubmit) {
                     <Title level={1}>Login</Title>
                     <Title level={4}>Log in to you account</Title>
                 </Content>
-
                 <Content style={{paddingBottom: "20px"}}>
                     <LoginForm onSubmit={onSubmit}/>
                 </Content>
@@ -22,10 +21,3 @@ function Login(onSubmit) {
 }
 
 export default Login;
-
-/*
-
- import {LoginForm} from '../components/forms/LoginForm';
- <LoginForm onSubmit={onSubmit}/>
-
- */

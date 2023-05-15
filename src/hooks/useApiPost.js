@@ -36,16 +36,9 @@ function useApiPost(url) {
 export default useApiPost;
 
 /*
-  if (json.manager === undefined || json.manager === null) {
-                localStorage.setItem('manager', false);
-            } else {
-                localStorage.setItem('manager', true);
-            }
-
-         localStorage.setItem('accessToken', json.accessToken);
-           localStorage.setItem('name', json.name);
-            localStorage.setItem('email', json.email);
-            localStorage.setItem('avatar', json.avatar);
-            localStorage.setItem('manager', json.manager);
-
- */
+localStorage.setItem('accessToken', json.accessToken);
+localStorage.setItem('name', json.name);
+localStorage.setItem('email', json.email);
+localStorage.setItem('avatar', json.avatar);
+localStorage.setItem('manager', json.manager);
+*/

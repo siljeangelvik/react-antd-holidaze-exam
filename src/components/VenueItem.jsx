@@ -21,7 +21,7 @@ const VenueItem = ({venue}) => {
         <>
             <Link to={`/details/${id}`}>
                 <Card style={{
-                    maxWidth: '320px',
+                    width: '320px',
                     boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
                     transition: '0.3s',
                     borderRadius: '5px',
@@ -31,9 +31,9 @@ const VenueItem = ({venue}) => {
                           <Image
                               src={checkMediaProperty(media)}
                               alt={name}
-                              height={"213px"}
-                              width={"320px"}
-                              loading={"lazy"}
+                              width="100%"
+                              height="213px"
+                              loading="lazy"
                           />
                       }
                 >

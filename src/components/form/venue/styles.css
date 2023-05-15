@@ -4,9 +4,17 @@
     left: 50%;
     width:90vw;
     margin: 40px auto;
-    transform: translate(-50%, 8%);
+    transform: translate(-50%, 8%); /**/
 
     background-color: #fff;
     box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
     rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+    padding-bottom: 60px;
+    border-radius: 10px;
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }

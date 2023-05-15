@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 /**
  * A custom React hook to check the user's authentication status.
@@ -8,8 +8,7 @@ function useAuthentication() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        // Checks the login status by checking the
-        // presence of the access token in localStorage.
+        // Checks the login status by checking the, presence of the access token in localStorage.
         function checkLoginStatus() {
             if (localStorage.getItem('accessToken')) {
                 setIsLoggedIn(true);
@@ -25,18 +24,3 @@ function useAuthentication() {
 }
 
 export default useAuthentication;
-
-
-// HOW TO USE
-/*
-function myComponent() {
-    const isLoggedIn = useAuthentication();
-
-    return (
-        <div>
-            {isLoggedIn ? <p>Welcome Back!</p> : <p>Please login</p>}
-        </div>
-    );
-
-}
-*/
