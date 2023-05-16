@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-
+import React from 'react';
 import {Content} from 'antd/es/layout/layout';
 import {Link} from 'react-router-dom';
 import Availability from '../components/details/Availability';
@@ -8,37 +7,31 @@ import Location from '../components/details/Location';
 import Amenities from '../components/details/Amenities';
 import Info from '../components/details/Info';
 import Header from '../components/details/Header';
-import {VenuesContext} from '../context/VenuesContext';
 
 function Details() {
-    const {specificVenue} = useContext(VenuesContext);
-    console.log(specificVenue);
 
     return (
         <>
             <div style={{padding: "80px 40px", paddingBottom: "120px", height: "95vh"}}>
-                <Link to="/"><button className="primary-button">Back</button></Link>
-                {/* ROW */}
+                <Link to="/">
+                    <button className="primary-button">Back</button>
+                </Link>
                 <div className={"desktop-row"}>
                     <Content>
-                      <Header />
-                       <Info/>
+                        <Header/>
+                        <Info/>
                     </Content>
-
                     <Content>
-                       <Amenities/>
-                       <Location/>
+                        <Amenities/>
+                        <Location/>
                     </Content>
                 </div>
-
-                {/* ROW */}
                 <div className={"desktop-row last-section"}>
                     <Content>
                         <Availability/>
                     </Content>
-
                     <Content>
-                       <Owner/>
+                        <Owner/>
                     </Content>
                 </div>
             </div>

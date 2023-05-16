@@ -2,6 +2,8 @@
 
 import React, {createContext, useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
+import {API_BOOKINGS} from '../utilities/constants';
+import useApiPost from '../hooks/useApiPost';
 import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
@@ -21,6 +23,10 @@ export const VenuesProvider = ({children}) => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
+
+    const [bookings, setBookings] = useState([]);
+
+    const {postData} = useApiPost();
 
     const {id} = useParams();
     const{userData} = useContext(AuthenticationContext);
@@ -53,7 +59,6 @@ export const VenuesProvider = ({children}) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [displayedVenues, handleScroll]);
 
-
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -65,14 +70,14 @@ export const VenuesProvider = ({children}) => {
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
 
-
-
+    const handleCreateBooking = async (booking) => {
+        const response = await postData(API_BOOKINGS, booking);
+        setBookings([...bookings, response]);
+    };
 
     const hasVenues = userData?.venues?.length > 0;
 
-    const specificVenue = venues.find(venue => venue.id === id);
-
-
+    const specificVenue = venues?.find(venue => venue.id === id);
 
     const value = {
         allVenues: venues.slice(0, displayedVenues),
@@ -81,6 +86,7 @@ export const VenuesProvider = ({children}) => {
         hasVenues,
         specificVenue,
         getSpecificVenue,
+        handleCreateBooking,
         getSpecificVenueBookings,
         getSpecificVenueOwner,
     };

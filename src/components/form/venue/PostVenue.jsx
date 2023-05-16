@@ -82,6 +82,7 @@ export const PostVenue = ({onCreate}) => {
                         aria-label="description"
                         placeholder="Write a description of the venue"
                         onChange={handleInputChange}
+                        required
                         autoSize={{
                             width: '100%',
                             minRows: 3,

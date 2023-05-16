@@ -4,12 +4,8 @@ import {Content} from 'antd/lib/layout/layout';
 import React, {useContext, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {useParams} from 'react-router-dom';
-import useApiPost from '../hooks/useApiPost';
+import {VenuesContext} from '../context/VenuesContext';
 import {AuthenticationContext} from '../context/AuthenticationContext';
-import useBooking from '../hooks/useBooking';
-import useApiGet from '../hooks/useApiGet';
-import {API_VENUES} from '../utilities/constants';
 
 const BookingCalendar = (venueId) => {
     const [selectedDates, setSelectedDates] = useState([]);
@@ -17,10 +13,14 @@ const BookingCalendar = (venueId) => {
 
     const {isAuthenticated} = useContext(AuthenticationContext);
 
-    const {id} = useParams();
+    const {allVenues, specificVenue, handleCreateBooking} = useContext(VenuesContext);
 
-    const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
-    const bookingsList = data?.bookings;
+    // const {id} = useParams();
+
+   // const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
+
+
+    const bookingsList = allVenues?.bookings;
 
     const newBookingsList = bookingsList?.map((booking) => {
         return {
@@ -58,43 +58,29 @@ const BookingCalendar = (venueId) => {
         return dates;
     });
 
-    const {loading, error, success, createBooking} = useBooking(id, selectedDates[0], selectedDates[1], guests);
-
     const handleCheckIdMatch = () => {
-        console.log(data?.id, "data?.id from calendar");
+        console.log(specificVenue?.id, "data?.id from calendar");
         console.log(venueId, "venueId from calendar");
-        return data?.id === data?.venueId;
+        return specificVenue?.id === specificVenue?.venueId;
     }
 
-    const {postData} = useApiPost(`${API_VENUES}/${id}/bookings`);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         handleCheckIdMatch();
 
         if (isAuthenticated && selectedDates && setGuests(guests)) {
-            const postDataBooking = await postData({
-                venueId: id,
-                startDate: selectedDates[0],
-                endDate: selectedDates[1],
-                guests: guests,
-            })
-
-            console.log(postDataBooking, "data from handleSubmit in calendar");
-            return createBooking(postDataBooking);
+            handleCreateBooking(specificVenue, selectedDates[0], selectedDates[1], guests);
+       console.log(specificVenue, selectedDates[0], selectedDates[1], guests);
         }
         if (!isAuthenticated) {
             alert("Please log in to book a venue.");
         }
-        console.log(isAuthenticated, "isAuthenticated from handleSubmit in calendar")
-        console.log(selectedDates, "selectedDates from handleSubmit in calendar");
-        console.log(guests, "guests from handleSubmit in calendar");
     };
 
     return (
         <div>
-            {data?.dateFrom}
-
+            {specificVenue?.dateFrom}
             <form onSubmit={handleSubmit}>
                 <Calendar
                     className={"calendar"}
@@ -152,7 +138,7 @@ const BookingCalendar = (venueId) => {
                         setGuests(guests - 1)
                     }}>-
                     </button>
-                    <input onChange={(e) => setGuests(e.target.value)} type="text" value={guests} max={data?.maxGuests}
+                    <input onChange={(e) => setGuests(e.target.value)} type="text" value={guests} max={specificVenue?.maxGuests}
                            min={0} style={{maxWidth: "60px", textAlign: "center"}}/>
                     <button className={"primary-button increase-decrease-buttons"} onClick={() => {
                         setGuests(guests + 1)
@@ -163,28 +149,16 @@ const BookingCalendar = (venueId) => {
                 {guests < 0 &&
                     <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
 
-                {guests > data?.maxGuests &&
+                {guests > specificVenue?.maxGuests &&
                     <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests
                         allowed</Typography.Text>}
                 <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
-                    {guests > 0 && guests <= data?.maxGuests
+                    {guests > 0 && guests <= specificVenue?.maxGuests
                         && (
                             <button type={"submit"} className={"primary-button"}>
-                                {loading ? "Loading..." : "Book Now"}
+                                {"Book Now"}
                             </button>)
                     }
-
-                    {error && (
-                        <Typography.Text type="danger">
-                            {error?.message}
-                        </Typography.Text>
-                    )}
-                    {success && (
-                        <Typography.Text type="success">
-                            Booking successful!
-                        </Typography.Text>
-                    )}
-
                 </Content>
             </form>
         </div>

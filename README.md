@@ -49,6 +49,7 @@ a profile page and a detail page for each venue.
 [Current User](https://www.back4app.com/docs/react/working-with-users/get-current-user-react)  
 [Fastify](https://github.com/fastify/fastify-jwt)  
 [Unicode Checkmark](https://www.compart.com/en/unicode/U+2713)  
+[Logo Idea](https://www.youtube.com/watch?v=NCaP15N3g4s)  
 
 ### Had some issues with netlify
 #### 1. Redirects not working

@@ -30,7 +30,7 @@ function Venues() {
                 <div style={{display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "space-between"}}>
                     <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>
                     {hasVenues && <button className={"secondary-button"}>Edit a Venue</button>}
-                    {!hasVenues && <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}
+                    {hasVenues && <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}
                 </div>
 
                 {toggle && <PostVenue handleToggle={handleToggle}/>}
