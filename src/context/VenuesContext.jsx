@@ -1,8 +1,6 @@
-// https://nf-api.onrender.com/api/v1/holidaze/venues/73a67858-9f1b-4f46-a0a9-6827655bafc3?_bookings=true&_owner=true
-
-import React, {createContext, useState, useEffect, useContext} from 'react';
-import {useParams} from 'react-router-dom';
-import {AuthenticationContext} from './AuthenticationContext';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { AuthenticationContext } from './AuthenticationContext';
 
 export const VenuesContext = createContext();
 
@@ -15,48 +13,38 @@ async function fetchData(url) {
     return data;
 }
 
-export const VenuesProvider = ({children}) => {
+export const VenuesProvider = ({ children }) => {
+    const [userBookings, setUserBookings] = useState([]);
+    const { id } = useParams();
+    const { userData, isAuthenticated } = useContext(AuthenticationContext);
     const [venues, setVenues] = useState([]);
-    const [displayedVenues, setDisplayedVenues] = useState(9);
-
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
+    const [displayedVenues, setDisplayedVenues] = useState(9);
 
-
-    const {id} = useParams();
-    const {userData} = useContext(AuthenticationContext);
-
-    const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`);
-    const getSpecificVenueBookings = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true`);
-    const getSpecificVenueOwner = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_owner=true`);
+    const specificVenue = venues?.find(venue => venue.id === id);
+    const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`);
 
     useEffect(() => {
-        async function fetchVenues() {
-            const data = await fetchData('https://nf-api.onrender.com/api/v1/holidaze/venues?_bookings=true&_owner=true');
+        const fetchVenues = async () => {
+            const data = await fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues?_bookings=true&_owner=true`);
             setVenues(data);
-        }
+        };
 
         fetchVenues();
     }, []);
 
-    const handleScroll = () => {
-        const scrollHeight = document.documentElement.scrollHeight;
-        const scrollTop = document.documentElement.scrollTop;
-        const clientHeight = document.documentElement.clientHeight;
-        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
-        if (scrolledToBottom) {
-            setDisplayedVenues(displayedVenues + 9);
-        }
-    };
-
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [displayedVenues, handleScroll]);
+        const fetchUserBookings = async () => {
+            if (!isAuthenticated) {
+                return;
+            }
+            const data = await fetchData(`https://nf-api.onrender.com/api/v1/holidaze/profiles/${userData?.name}/bookings?_sort=desc&_limit=${displayedVenues}`);
+            setUserBookings(data);
+        };
 
-    const handleSearch = (e) => {
-        setSearchTerm(e.target.value);
-    };
+        fetchUserBookings();
+    }, [userData, isAuthenticated, displayedVenues]);
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
@@ -65,60 +53,52 @@ export const VenuesProvider = ({children}) => {
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
 
-
-
-
-
-    const hasVenues = userData?.venues?.length > 0;
-
-    const specificVenue = venues?.find(venue => venue.id === id);
-
-    const disabledDates = (current) => {
-        // Check if specificVenue or bookings is undefined or empty
-        if (!specificVenue || !specificVenue.bookings || specificVenue.bookings.length === 0) {
-            return false; // Enable all dates if there are no bookings
-        }
-        // Convert current date to ISO string format
-        const currentDate = current.toISOString().slice(0, 10);
-        // Iterate through each booking in specificVenue
-        for (const booking of specificVenue.bookings) {
-            // Check if booking object is defined and has dateFrom and dateTo properties
-            if (booking && booking.dateFrom && booking.dateTo) {
-                // Extract dateFrom and dateTo from the booking object
-                const {dateFrom, dateTo} = booking;
-                // Check if current date is within the booking range
-                if (currentDate >= dateFrom && currentDate <= dateTo) {
-                    // Disable the date if it falls within a booking range
-                    return true;
-                }
-            }
-        }
-        // Enable all other dates
-        return false;
+    const updateBookings = (newBookings) => {
+        setUserBookings(newBookings);
     };
-
-
 
     const value = {
         allVenues: venues.slice(0, displayedVenues),
-        handleSearch,
+        handleSearch: (e) => setSearchTerm(e.target.value),
         filteredVenues,
-        hasVenues,
-        specificVenue,
-        getSpecificVenue,
-        getSpecificVenueBookings,
-        getSpecificVenueOwner,
-        disabledDates,
+        hasVenues: userData?.venues?.length > 0,
+        specificVenue: venues?.find((venue) => venue.id === id),
+        getSpecificVenue: async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`),
+        disabledDates: (current) => {
+            if (!specificVenue || !specificVenue.bookings || specificVenue.bookings.length === 0) {
+                return false;
+            }
+            const currentDate = current.toISOString().slice(0, 10);
+            for (const booking of specificVenue.bookings) {
+                if (booking && booking.dateFrom && booking.dateTo) {
+                    const { dateFrom, dateTo } = booking;
+                    if (currentDate >= dateFrom && currentDate <= dateTo) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
+        userBookings,
+        updateBookings
     };
 
+    const handleScroll = () => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+        if (scrolledToBottom) {
+            setDisplayedVenues((prevDisplayedVenues) => prevDisplayedVenues + 9);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return <VenuesContext.Provider value={value}>{children}</VenuesContext.Provider>;
 };
 
-
-/*
- // allVenues.then((data) => console.log(data));
-
-    // const allVenuesList = allVenues?.value?.map((venue : { name: string }) => venue.name);
-
- */
+export default VenuesProvider;

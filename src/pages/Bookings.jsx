@@ -1,23 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Content } from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import { API_PROFILES } from '../utilities/constants';
+import {VenuesContext} from '../context/VenuesContext';
 import { AuthenticationContext } from '../context/AuthenticationContext';
 import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const [bookings, setBookings] = useState([]);
+    const {userBookings} = useContext(VenuesContext);
     const { userData } = useContext(AuthenticationContext);
-
-    useEffect(() => {
-        // Fetch booking data from an API endpoint
-        fetch(`${API_PROFILES}/${userData?.name}/bookings`)
-            .then((response) => response.json())
-            .then((data) => {
-                // Update the value of bookings with the new data
-                setBookings(data);
-            });
-    }, [userData?.name]);
 
     return (
         <>
@@ -29,7 +19,7 @@ function Bookings() {
                     </Title>
                 </Content>
 
-                <BookingsList bookings={bookings} />
+                <BookingsList userBookings={userBookings} /> {/* Pass the bookings state */}
             </div>
         </>
     );
