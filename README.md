@@ -30,20 +30,14 @@ API Endpoints - [Noroff SwaggerUI](https://nf-api.onrender.com/docs/static/index
 ![Material Design](https://img.shields.io/badge/MUI-007FFF.svg?style=for-the-badge&logo=MUI&logoColor=white)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7.svg?style=for-the-badge&logo=Netlify&logoColor=white)
 
----
-
 ## Description
-
 This is a React exam project for the course "Frontend Development 2" at Noroff.   
 The project is a website for a fictional venue booking application called "Holidaze".   
 The website is built with React, AntDesign, Sanity.io and Netlify.   
 This project contains a single page application with a home(list of venues) page,   
 a profile page and a detail page for each venue.
 
----
-
 ## Resources
-
 [Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  
 [React Router v6](https://www.youtube.com/watch?v=Ul3y1LXxzdU)  
 [Google Fonts Combination 2023](https://puzzlepiecesmarketing.com/blog/8-best-google-font-combinations-2022/)    
@@ -56,34 +50,9 @@ a profile page and a detail page for each venue.
 [Fastify](https://github.com/fastify/fastify-jwt)  
 [Unicode Checkmark](https://www.compart.com/en/unicode/U+2713)  
 
-
----
-
-### Dependencies Issues
-
-List all dependencies and their sub-dependencies in the project:  
-_(remember to open package.json in terminal)_
-`npm ls`  
-
-To check which dependencies depend on a specific package:  
-`npm ls <package-name>`  
-
-Shows all the direct dependencies of a specific package and their versions:  
-`npm view <package-name> dependencies`  
-
-To check which version of `<package-name>` is being used:  
-`npm ls <package-name> --depth=0`  
-
-
-Returns a list of packages that depend on `<package-name>` dependency:    
-`npm ls --reverse <package-name>`    
-
-
 ### Had some issues with netlify
-
 #### 1. Redirects not working
 `"build": "react-scripts build && echo '/* /index.html  200' | cat >build/_redirects ",`
-
 
 ---
 
