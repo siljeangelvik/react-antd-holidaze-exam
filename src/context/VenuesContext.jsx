@@ -1,6 +1,7 @@
 // https://nf-api.onrender.com/api/v1/holidaze/venues/73a67858-9f1b-4f46-a0a9-6827655bafc3?_bookings=true&_owner=true
 
 import React, {createContext, useState, useEffect, useContext} from 'react';
+import {useParams} from 'react-router-dom';
 import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
@@ -21,7 +22,7 @@ export const VenuesProvider = ({children}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
 
-
+    const {id} = useParams();
     const{userData} = useContext(AuthenticationContext);
 
     const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`);
@@ -64,7 +65,13 @@ export const VenuesProvider = ({children}) => {
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
 
+
+
+
     const hasVenues = userData?.venues?.length > 0;
+
+    const specificVenue = venues.find(venue => venue.id === id);
+
 
 
     const value = {
@@ -72,6 +79,7 @@ export const VenuesProvider = ({children}) => {
         handleSearch,
         filteredVenues,
         hasVenues,
+        specificVenue,
         getSpecificVenue,
         getSpecificVenueBookings,
         getSpecificVenueOwner,

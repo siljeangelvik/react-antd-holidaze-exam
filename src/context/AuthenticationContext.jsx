@@ -13,7 +13,8 @@ const AuthenticationProvider = ({children}) => {
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
     const isLoggedIn = useAuthentication();
-    const {isManager} = useManagerStatus;
+    const isManager = useManagerStatus;
+    console.log(isManager);
 
     /**
      *  Used to update the isAuthenticated state
@@ -78,18 +79,29 @@ const AuthenticationProvider = ({children}) => {
         setIsAuthenticated(prevState => !prevState);
     };
 
+    const userDataAvatar = <img src={userData?.avatar} alt={userData?.name} style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%"
+    }}/>;
+
+    const value = {
+        isAuthenticated,
+        userData,
+        userDataAvatar,
+        isLoading,
+        isError,
+        handleUserRegister,
+        handleUserLogin,
+        handleUserLogout,
+    };
+
     return (
         <AuthenticationContext.Provider
-            value={{
-                isManager,
-                isAuthenticated,
-                userData,
-                isLoading,
-                isError,
-                handleUserRegister,
-                handleUserLogin,
-                handleUserLogout,
-            }}
+            value={value}
         >
             {children}
         </AuthenticationContext.Provider>

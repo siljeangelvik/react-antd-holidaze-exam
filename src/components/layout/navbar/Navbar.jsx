@@ -26,7 +26,17 @@ const Navbar = () => {
 
             <button className="navbar-button" onClick={handleNavbar}>
         <span className="navbar-button-emoji" aria-label="navbar-button-emoji" role="img">
-          &#129409;
+
+            &#129409;
+
+            {/* {userData?.avatar && "👤"} */}
+
+            {/*
+             {userData?.avatar === "👤"
+                ? ("&#129409;")
+          : (userData?.avatar)}
+            */}
+
         </span>
             </button>
 

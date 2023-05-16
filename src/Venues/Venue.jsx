@@ -53,22 +53,22 @@ function Venue(props) {
 
 function AllVenues() {
 
-    const {data} = useContext(VenuesContext);
+    const {allVenues} = useContext(VenuesContext);
 
     const venueInfo = {
-        id: data.id,
-        name: data.name,
-        media: data.media,
-        description: data.description,
-        price: formatCurrency(data.price),
-        maxGuests: data.maxGuests,
+        id: allVenues.id,
+        name: allVenues.name,
+        media: allVenues.media,
+        description: allVenues.description,
+        price: formatCurrency(allVenues.price),
+        maxGuests: allVenues.maxGuests,
 
     }
 
     return (
         <>
-            {data.map(() => (
-                <Venue key={data.id} venue={venueInfo}/>
+            {allVenues.map(() => (
+                <Venue key={allVenues.id} venue={venueInfo}/>
             ))}
         </>
     );

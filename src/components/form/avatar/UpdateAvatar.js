@@ -35,6 +35,14 @@ export function UpdateAvatar() {
         userData.avatar = avatar;
     };
 
+    const handleRemoveAvatar = (event) => {
+        event.preventDefault();
+        putData({avatar: ""});
+        setAvatar("");
+        localStorage.setItem('avatar', "");
+        userData.avatar = "";
+    }
+
     return (
         <>
             <div style={{
@@ -54,6 +62,8 @@ export function UpdateAvatar() {
                     flexDirection: "column",
                     gap: "20px",
                 }}>
+
+                    <button onClick={handleRemoveAvatar}>Delete</button>
 
                     <input value={avatar} onChange={(e) => setAvatar(e.target.value)} type="text" name="avatar"
                            id="avatar" placeholder="Please enter a valid image url" className={"avatar-input"}

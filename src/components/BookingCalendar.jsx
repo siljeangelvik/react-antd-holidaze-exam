@@ -14,8 +14,11 @@ import {API_VENUES} from '../utilities/constants';
 const BookingCalendar = (venueId) => {
     const [selectedDates, setSelectedDates] = useState([]);
     const [guests, setGuests] = useState(0);
+
     const {isAuthenticated} = useContext(AuthenticationContext);
+
     const {id} = useParams();
+
     const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
     const bookingsList = data?.bookings;
 
@@ -86,11 +89,12 @@ const BookingCalendar = (venueId) => {
         console.log(isAuthenticated, "isAuthenticated from handleSubmit in calendar")
         console.log(selectedDates, "selectedDates from handleSubmit in calendar");
         console.log(guests, "guests from handleSubmit in calendar");
-
     };
 
     return (
         <div>
+            {data?.dateFrom}
+
             <form onSubmit={handleSubmit}>
                 <Calendar
                     className={"calendar"}
@@ -139,7 +143,6 @@ const BookingCalendar = (venueId) => {
                     )}
                 </Content>
 
-
                 <Content style={{paddingBottom: "20px"}}>
                     <Title level={5}>Your selected {guests} number of guests</Title>
                 </Content>
@@ -163,10 +166,7 @@ const BookingCalendar = (venueId) => {
                 {guests > data?.maxGuests &&
                     <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests
                         allowed</Typography.Text>}
-
-
                 <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
-
                     {guests > 0 && guests <= data?.maxGuests
                         && (
                             <button type={"submit"} className={"primary-button"}>
