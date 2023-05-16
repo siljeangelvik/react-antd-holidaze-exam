@@ -12,6 +12,7 @@ import {VenuesContext} from '../context/VenuesContext';
 
 function Details() {
     const {specificVenue} = useContext(VenuesContext);
+    console.log(specificVenue);
 
     return (
         <>

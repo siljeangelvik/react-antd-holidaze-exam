@@ -7,7 +7,7 @@ export const VenuesList = () => {
 
     return (
         <>
-            <div style={{width: "320px", paddingBottom: "20px"}}>
+            <div style={{width: "320px", paddingBottom: "40px"}}>
                 <input type="text"
                        placeholder="Search Venues..."
                        onChange={handleSearch}
