@@ -2,8 +2,6 @@
 
 import React, {createContext, useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
-import {API_BOOKINGS} from '../utilities/constants';
-import useApiPost from '../hooks/useApiPost';
 import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
@@ -24,12 +22,9 @@ export const VenuesProvider = ({children}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
 
-    const [bookings, setBookings] = useState([]);
-
-    const {postData} = useApiPost();
 
     const {id} = useParams();
-    const{userData} = useContext(AuthenticationContext);
+    const {userData} = useContext(AuthenticationContext);
 
     const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`);
     const getSpecificVenueBookings = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true`);
@@ -70,14 +65,39 @@ export const VenuesProvider = ({children}) => {
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
 
-    const handleCreateBooking = async (booking) => {
-        const response = await postData(API_BOOKINGS, booking);
-        setBookings([...bookings, response]);
-    };
+
+
+
 
     const hasVenues = userData?.venues?.length > 0;
 
     const specificVenue = venues?.find(venue => venue.id === id);
+
+    const disabledDates = (current) => {
+        // Check if specificVenue or bookings is undefined or empty
+        if (!specificVenue || !specificVenue.bookings || specificVenue.bookings.length === 0) {
+            return false; // Enable all dates if there are no bookings
+        }
+        // Convert current date to ISO string format
+        const currentDate = current.toISOString().slice(0, 10);
+        // Iterate through each booking in specificVenue
+        for (const booking of specificVenue.bookings) {
+            // Check if booking object is defined and has dateFrom and dateTo properties
+            if (booking && booking.dateFrom && booking.dateTo) {
+                // Extract dateFrom and dateTo from the booking object
+                const {dateFrom, dateTo} = booking;
+                // Check if current date is within the booking range
+                if (currentDate >= dateFrom && currentDate <= dateTo) {
+                    // Disable the date if it falls within a booking range
+                    return true;
+                }
+            }
+        }
+        // Enable all other dates
+        return false;
+    };
+
+
 
     const value = {
         allVenues: venues.slice(0, displayedVenues),
@@ -86,9 +106,9 @@ export const VenuesProvider = ({children}) => {
         hasVenues,
         specificVenue,
         getSpecificVenue,
-        handleCreateBooking,
         getSpecificVenueBookings,
         getSpecificVenueOwner,
+        disabledDates,
     };
 
 

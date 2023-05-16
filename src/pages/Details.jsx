@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Content} from 'antd/es/layout/layout';
 import {Link} from 'react-router-dom';
+import {AuthenticationContext} from '../context/AuthenticationContext';
 import Availability from '../components/details/Availability';
 import Owner from '../components/details/Owner';
 import Location from '../components/details/Location';
@@ -9,6 +10,8 @@ import Info from '../components/details/Info';
 import Header from '../components/details/Header';
 
 function Details() {
+
+    const {isAuthenticated} = useContext(AuthenticationContext);
 
     return (
         <>
@@ -31,7 +34,7 @@ function Details() {
                         <Availability/>
                     </Content>
                     <Content>
-                        <Owner/>
+                        {isAuthenticated && <Owner/>}
                     </Content>
                 </div>
             </div>

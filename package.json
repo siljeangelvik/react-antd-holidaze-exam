@@ -8,10 +8,13 @@
     "@emotion/styled": "11.10.8",
     "axios": "1.3.5",
     "formik": "^2.2.9",
+    "grommet": "^2.32.0",
+    "grommet-icons": "^4.10.0",
     "react": "experimental",
     "react-dom": "experimental",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.0.0-rc.1",
     "web-vitals": "^2.1.0",
     "yup": "^1.1.1"
   },
