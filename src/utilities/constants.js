@@ -8,8 +8,8 @@ export const API_REGISTER = `${API_BASE_URL}/auth/register`;
 
 export const API_VENUES = `${API_BASE_URL}/venues`;
 export const API_PROFILES = `${API_BASE_URL}/profiles`;
-export const API_PROFILES_NAME = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}`;
-export const API_PROFILES_AVATAR = `${API_PROFILES}/${localStorage.getItem("name")}/media`;
-export const API_PROFILES_BOOKINGS = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}/bookings`;
-export const API_PROFILES_VENUES = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}/venues`;
+export const API_PROFILE = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}`;
+export const API_PROFILE_AVATAR = `${API_PROFILES}/${localStorage.getItem("name")}/media`;
+export const API_PROFILE_BOOKINGS = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}/bookings`;
+export const API_PROFILE_VENUES = `${API_BASE_URL}/profiles/${localStorage.getItem("name")}/venues`;
 export const API_BOOKINGS = `${API_BASE_URL}/bookings`;

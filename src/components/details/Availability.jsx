@@ -1,15 +1,11 @@
-import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
-import {CalendarDisplay} from '../../components/CalendarDisplay';
+import Title from 'antd/es/typography/Title';
 import {VenuesContext} from '../../context/VenuesContext';
 import BookingCalendar from '../BookingCalendar';
 
 const Availability = () => {
-//    const {isAuthenticated} = useContext(AuthenticationContext);
     const {specificVenue} = useContext(VenuesContext);
-
     console.log(specificVenue?.bookings?.length, 'specificVenue?.bookings?.length - Availability');
-
 
     return (
         <>
@@ -24,18 +20,8 @@ const Availability = () => {
                 </h4>)
             }
 
-            <CalendarDisplay/>
-
-
+            {/*<PerfectCalendar/>*/}
             <BookingCalendar/>
-
-
-            {/*
-              <CalendarComponent  />
-
-
-
-            */}
         </>
     );
 };

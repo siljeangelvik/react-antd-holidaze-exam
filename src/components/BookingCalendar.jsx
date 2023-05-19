@@ -14,13 +14,13 @@ const BookingCalendar = () => {
 
         const {isAuthenticated} = useContext(AuthenticationContext);
 
-        const {allVenues, specificVenue, disabledDates} = useContext(VenuesContext);
+        const {allVenues, specificVenue} = useContext(VenuesContext);
 
         console.log(specificVenue?.bookings.length, "The amount of bookings on this Venue -  from calendar");
 
         const bookingsList = allVenues?.bookings;
 
-        const newBookingsList = bookingsList?.map((booking) => {
+        const newBookingsList = bookingsList?.map((booking) => { // map through the bookings list and convert the date strings to date objects
             return {
                 ...booking,
                 dateFrom: new Date(booking.dateFrom),
@@ -46,17 +46,17 @@ const BookingCalendar = () => {
             }
         };
 
-       /*
-        const disabledDates = newBookingsList?.flatMap((booking) => {
-            const dates = [];
-            let currentDate = new Date(booking.dateFrom);
-            while (currentDate <= new Date(booking.dateTo)) {
-                dates.push(new Date(currentDate));
-                currentDate.setDate(currentDate.getDate() + 1);
-            }
-            return dates;
-        });
-*/
+        /*
+         const disabledDates = newBookingsList?.flatMap((booking) => {
+             const dates = [];
+             let currentDate = new Date(booking.dateFrom);
+             while (currentDate <= new Date(booking.dateTo)) {
+                 dates.push(new Date(currentDate));
+                 currentDate.setDate(currentDate.getDate() + 1);
+             }
+             return dates;
+         });
+ */
 
         const booking = {
             dateFrom: selectedDates[0],
@@ -65,7 +65,12 @@ const BookingCalendar = () => {
             venueId: specificVenue?.id,
         };
 
-        const {data, isLoading, isError, postData } = useApiPost("https://nf-api.onrender.com/api/v1/holidaze/bookings?_customer=true&_venue=true");
+        const {
+            data,
+            isLoading,
+            isError,
+            postData
+        } = useApiPost("https://nf-api.onrender.com/api/v1/holidaze/bookings?_customer=true&_venue=true");
 
         const handleSubmit = async (event) => {
             event.preventDefault();
@@ -90,9 +95,9 @@ const BookingCalendar = () => {
             }
         };
 
-
         return (
             <div>
+                {newBookingsList}
                 {isError && <div>{data.errors[0].message}</div>}
                 <form onSubmit={handleSubmit}>
                     <Calendar
@@ -101,7 +106,6 @@ const BookingCalendar = () => {
                         onChange={setSelectedDates}
                         onClickDay={handleDateClick}
                         minDate={new Date()}
-                        tileDisabled={specificVenue?.bookings?.dateFrom && specificVenue?.bookings?.dateTo && disabledDates}
                         selectRange={true}
                         tileClassName={({date}) =>
                             selectedDates.length === 2 &&
@@ -169,7 +173,7 @@ const BookingCalendar = () => {
                     <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
                         {selectedGuests > 0 && selectedGuests <= specificVenue?.maxGuests && selectedDates.length >= 1 && isAuthenticated
                             && (
-                                <button type="submit" className="primary-button" >
+                                <button type="submit" className="primary-button">
                                     Book Now
                                 </button>)
                         }

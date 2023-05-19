@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import {VenuesList} from '../components/VenuesList';

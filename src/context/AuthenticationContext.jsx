@@ -7,14 +7,15 @@ import useAuthentication from '../hooks/useAuthentication';
 const AuthenticationContext = createContext();
 
 const AuthenticationProvider = ({children}) => {
+    const navigate = useNavigate();
+    const isLoggedIn = useAuthentication();
+    const isManager = useManagerStatus;
+
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const navigate = useNavigate();
-    const isLoggedIn = useAuthentication();
-    const isManager = useManagerStatus;
-    console.log(isManager);
+
 
     /**
      *  Used to update the isAuthenticated state
@@ -24,13 +25,14 @@ const AuthenticationProvider = ({children}) => {
      */
     useEffect(() => {
         if (!isLoggedIn) {
-            setIsAuthenticated(!isLoggedIn);
+            setIsAuthenticated(false);
         }
-        setIsAuthenticated(isLoggedIn);
+        setIsAuthenticated(true);
     }, [isLoggedIn]);
 
     const handleUserLogin = () => {
         setIsAuthenticated(true);
+        isManager();
         console.log(`Welcome back ${localStorage.getItem("name")}!`);
         document.title = `Holidaze | ${localStorage.getItem("name")}`;
         navigate(`/profile/${localStorage.getItem('name')}`);
@@ -65,7 +67,7 @@ const AuthenticationProvider = ({children}) => {
                     setIsLoading(false);
                 }
             }
-        getUserProfile();
+        getUserProfile().catch(error => console.error(error));
     }, [isLoggedIn, isAuthenticated]);
 
     const handleUserRegister = () => {

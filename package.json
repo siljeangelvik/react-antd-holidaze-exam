@@ -10,6 +10,7 @@
     "formik": "^2.2.9",
     "grommet": "^2.32.0",
     "grommet-icons": "^4.10.0",
+    "moment": "^2.29.4",
     "react": "experimental",
     "react-dom": "experimental",
     "react-router-dom": "^6.10.0",

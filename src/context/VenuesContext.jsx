@@ -1,6 +1,7 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { AuthenticationContext } from './AuthenticationContext';
+import React, {createContext, useState, useEffect, useContext} from 'react';
+import {useParams} from 'react-router-dom';
+import {API_PROFILE, API_VENUES} from '../utilities/constants';
+import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
 
@@ -13,38 +14,37 @@ async function fetchData(url) {
     return data;
 }
 
-export const VenuesProvider = ({ children }) => {
-    const [userBookings, setUserBookings] = useState([]);
-    const { id } = useParams();
-    const { userData, isAuthenticated } = useContext(AuthenticationContext);
+export const VenuesProvider = ({children}) => {
+    const {id} = useParams();
+
+    const {userData, isAuthenticated} = useContext(AuthenticationContext);
+
+
     const [venues, setVenues] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
-    const [displayedVenues, setDisplayedVenues] = useState(9);
+    const [limit, setLimit] = useState(9);
 
     const specificVenue = venues?.find(venue => venue.id === id);
-    const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`);
+
+
+   // const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`);
+
+
+    const [userBookings, setUserBookings] = useState([]);
+    const [userVenues, setUserVenues] = useState([]);
 
     useEffect(() => {
         const fetchVenues = async () => {
-            const data = await fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues?_bookings=true&_owner=true`);
+            const data = await fetchData(`${API_VENUES}?_sort=name&_sortOrder=desc&_limit=${limit}&_bookings=true&_owner=true`);
             setVenues(data);
         };
 
-        fetchVenues();
-    }, []);
+        fetchVenues().catch((error) => {
+            console.log(error);
+        });
+    }, [limit]);
 
-    useEffect(() => {
-        const fetchUserBookings = async () => {
-            if (!isAuthenticated) {
-                return;
-            }
-            const data = await fetchData(`https://nf-api.onrender.com/api/v1/holidaze/profiles/${userData?.name}/bookings?_sort=desc&_limit=${displayedVenues}`);
-            setUserBookings(data);
-        };
-
-        fetchUserBookings();
-    }, [userData, isAuthenticated, displayedVenues]);
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
@@ -53,15 +53,39 @@ export const VenuesProvider = ({ children }) => {
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
 
+
+    useEffect(() => {
+        const fetchUserVenues = async () => {
+            const profileVenues = await fetchData(`${API_PROFILE}/venues`);
+            setUserVenues(profileVenues);
+        };
+
+        const fetchUserBookings = async () => {
+            const profileBookings = await fetchData(`${API_PROFILE}/bookings`);
+            setUserBookings(profileBookings);
+        };
+
+        if (isAuthenticated) {
+            fetchUserVenues().catch((error) => {
+                console.log(error);
+            });
+            fetchUserBookings().catch((error) => {
+                console.log(error);
+            });
+        }
+    }, [isAuthenticated]);
+
+
     const updateBookings = (newBookings) => {
         setUserBookings(newBookings);
     };
 
     const value = {
-        allVenues: venues.slice(0, displayedVenues),
+        allVenues: venues?.slice(0, limit),
         handleSearch: (e) => setSearchTerm(e.target.value),
         filteredVenues,
-        hasVenues: userData?.venues?.length > 0,
+        userHasVenues: userData?.venues?.length > 0,
+        userHasBookings: userData?.bookings?.length > 0,
         specificVenue: venues?.find((venue) => venue.id === id),
         getSpecificVenue: async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`),
         disabledDates: (current) => {
@@ -71,7 +95,7 @@ export const VenuesProvider = ({ children }) => {
             const currentDate = current.toISOString().slice(0, 10);
             for (const booking of specificVenue.bookings) {
                 if (booking && booking.dateFrom && booking.dateTo) {
-                    const { dateFrom, dateTo } = booking;
+                    const {dateFrom, dateTo} = booking;
                     if (currentDate >= dateFrom && currentDate <= dateTo) {
                         return true;
                     }
@@ -80,7 +104,8 @@ export const VenuesProvider = ({ children }) => {
             return false;
         },
         userBookings,
-        updateBookings
+        userVenues,
+        updateBookings,
     };
 
     const handleScroll = () => {
@@ -89,7 +114,7 @@ export const VenuesProvider = ({ children }) => {
         const clientHeight = document.documentElement.clientHeight;
         const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
         if (scrolledToBottom) {
-            setDisplayedVenues((prevDisplayedVenues) => prevDisplayedVenues + 9);
+            setLimit((prevLimit) => prevLimit + 9);
         }
     };
 

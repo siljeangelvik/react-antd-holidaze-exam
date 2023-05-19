@@ -32,7 +32,14 @@ const VenueItem = ({ venue }) => {
                         />
                     }
                 >
-                    <Title level={4}>{name}</Title>
+                    <Title level={4}
+                           style={{
+                               overflow: 'hidden',
+                               whiteSpace: 'nowrap',
+                               textOverflow: 'ellipsis',
+                               maxWidth: '85ch',
+                           }}
+                    >{name.toUpperCase()}</Title>
                     <Content>
                         <Typography>{number}</Typography>
                         <Typography.Paragraph
@@ -48,14 +55,16 @@ const VenueItem = ({ venue }) => {
                         <Typography>
                             <strong>Max Guests:</strong> {maxGuests}
                         </Typography>
-                        <Typography>
-                            <strong>{formatCurrency(price)}</strong> /night
-                        </Typography>
+
                         {bookings && (
                             <Typography>
                                 <strong>Bookings:</strong> {bookings.length}
                             </Typography>
                         )}
+
+                        <Typography>
+                            <strong>{formatCurrency(price)}</strong> /night
+                        </Typography>
                     </Content>
                 </Card>
             </Link>

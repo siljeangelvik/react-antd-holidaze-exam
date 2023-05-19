@@ -6,7 +6,7 @@ import { AuthenticationContext } from '../context/AuthenticationContext';
 import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const {userBookings} = useContext(VenuesContext);
+    const {specificProfileBookings} = useContext(VenuesContext);
     const { userData } = useContext(AuthenticationContext);
 
     return (
@@ -15,11 +15,11 @@ function Bookings() {
                 <Content style={{ paddingBottom: '20px' }}>
                     <Title level={1}>Your Bookings</Title>
                     <Title level={4}>
-                        Hi {userData?.name}, you currently have <em>{userData?.bookings?.length}</em> upcoming bookings.
+                        Hi {userData?.name}, you currently have <em>{specificProfileBookings?.length}</em> upcoming bookings.
                     </Title>
                 </Content>
 
-                <BookingsList userBookings={userBookings} /> {/* Pass the bookings state */}
+                <BookingsList specificProfileBookings={specificProfileBookings} /> {/* Pass the bookings state */}
             </div>
         </>
     );

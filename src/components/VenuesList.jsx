@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { VenuesContext } from '../context/VenuesContext';
+import React, {useContext} from 'react';
+import {VenuesContext} from '../context/VenuesContext';
 import VenueItem from './VenueItem';
 
 export const VenuesList = () => {
