@@ -54,6 +54,10 @@ export const VenuesProvider = ({children}) => {
     }, [searchTerm, venues]);
 
 
+    const updateBookings = (newBookings) => {
+        setUserBookings(newBookings);
+    };
+
     useEffect(() => {
         const fetchUserVenues = async () => {
             const profileVenues = await fetchData(`${API_PROFILE}/venues`);
@@ -76,9 +80,7 @@ export const VenuesProvider = ({children}) => {
     }, [isAuthenticated]);
 
 
-    const updateBookings = (newBookings) => {
-        setUserBookings(newBookings);
-    };
+
 
     const value = {
         allVenues: venues?.slice(0, limit),
