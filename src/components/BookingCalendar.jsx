@@ -78,7 +78,6 @@ const BookingCalendar = () => {
                     console.log('Booking successful, Response:', response);
                     console.log('Booking successful, Booking:', booking);
                     alert(JSON.stringify(booking, null, 2));
-                   // prompt('Booking successful' + JSON.stringify(booking));
                     return response;
                 } else {
                     console.log('Booking failed');

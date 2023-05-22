@@ -23,10 +23,10 @@ const LoginForm = () => {
                 const response = postData(values);
                 if (isLoading) return <p>Loading...</p>
                 if (isError) return <p>Error</p>
-                if (response) {
-                    handleUserLogin(response && response.data);
+                if (response && data) {
+                    handleUserLogin(response && response.data && data);
                 }
-                //return data;
+                // return data;
             } catch (error) {
                 console.log(error);
             }
