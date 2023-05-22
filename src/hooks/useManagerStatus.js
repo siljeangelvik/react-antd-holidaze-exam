@@ -1,26 +1,22 @@
-import {useState, useEffect, useContext} from 'react';
-import {AuthenticationContext} from '../context/AuthenticationContext';
+import { useState, useEffect } from 'react';
 
 function useManagerStatus() {
     const [isManager, setIsManager] = useState(false);
-    const {userData} = useContext(AuthenticationContext);
+    const manager = localStorage.getItem('venueManager');
 
     useEffect(() => {
-        const manager = userData?.venueManager;
 
-        if (manager === true) {
-            setIsManager(true);
-            localStorage.setItem('manager', true);
+        if (manager === true || manager === 'true') {
+            setIsManager(true)
         } else {
-            setIsManager(false);
-            localStorage.setItem('manager', false);
+            setIsManager(false)
         }
 
         // Cleanup function to remove the storedManagerStatus from localStorage
         return () => {
-            localStorage.removeItem('manager');
+            localStorage.removeItem('venueManager');
         };
-    }, [userData]);
+    }, [manager]);
 
     return isManager;
 }

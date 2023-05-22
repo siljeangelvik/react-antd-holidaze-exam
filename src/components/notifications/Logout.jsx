@@ -9,7 +9,7 @@ const close = () => {
 
 const Logout = () => {
     const [api, contextHolder] = notification.useNotification();
-    const {handleUserLogout} = useContext(AuthenticationContext);
+    const {handleUserLogout, isAuthenticated} = useContext(AuthenticationContext);
     const navigate = useNavigate();
 
     const openNotification = () => {
@@ -23,7 +23,7 @@ const Logout = () => {
         const btn = (
             <Space>
                 <Button type="link" size="medium" onClick={() => api.destroy()}>
-                    No, forget it
+                    No, stay logged in
                 </Button>
                 <button className="primary-button" onClick={() => logout(key)}>Yes, logout</button>
             </Space>
@@ -31,7 +31,7 @@ const Logout = () => {
         api.open({
             message: 'Are you sure you want to logout?',
             description:
-                'Logging out will clear all your data and you will be logged out of all devices.',
+                'Logging out will clear all your data, from this device only.',
             btn,
             key,
             onClose: close,
@@ -40,9 +40,11 @@ const Logout = () => {
     return (
         <>
             {contextHolder}
-            <Button type="primary" onClick={openNotification} style={{fontWeight:"bold"}}>
-                Logout
-            </Button>
+            {isAuthenticated &&
+                <Button type="primary" onClick={openNotification} style={{fontWeight:"bold"}}>
+                    Logout
+                </Button>
+            }
         </>
     );
 };

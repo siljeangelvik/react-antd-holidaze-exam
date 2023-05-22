@@ -2,11 +2,15 @@ import {Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
+import useManagerStatus from '../hooks/useManagerStatus';
 import {UpdateAvatar} from '../components/form/avatar/UpdateAvatar';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 
 function Profile() {
     const {isAuthenticated, userData} = useContext(AuthenticationContext);
+
+    const {isManager} = useManagerStatus();
+
 
     return (
         <>
@@ -31,7 +35,7 @@ function Profile() {
                             <>
                                 <Typography><strong>Name:</strong> {userData?.name}</Typography>
                                 <Typography><strong>Email:</strong> {userData?.email}</Typography>
-                                <Typography><strong>Manager:</strong> {userData?.venueManager ? "Yes" : "No"}</Typography>
+                                <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
                             </>
                         )}
                     </Content>

@@ -1,95 +1,95 @@
-import React, {createContext, useState, useEffect, useContext} from 'react';
-import {useParams} from 'react-router-dom';
-import {API_PROFILE, API_VENUES} from '../utilities/constants';
-import {AuthenticationContext} from './AuthenticationContext';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { API_PROFILE, API_VENUES } from '../utilities/constants';
+import { AuthenticationContext } from './AuthenticationContext';
 
 export const VenuesContext = createContext();
 
-async function fetchData(url) {
+const fetchData = async (url) => {
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`Failed to fetch data from ${url}`);
     }
     const data = await response.json();
     return data;
-}
+};
 
-export const VenuesProvider = ({children}) => {
-    const {id} = useParams();
-
-    const {userData, isAuthenticated} = useContext(AuthenticationContext);
+export const VenuesProvider = ({ children }) => {
+    const { id } = useParams();
+    const { userData, isAuthenticated } = useContext(AuthenticationContext);
 
 
     const [venues, setVenues] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
     const [limit, setLimit] = useState(9);
-
-    const specificVenue = venues?.find(venue => venue.id === id);
-
-
-   // const getSpecificVenue = async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`);
-
-
+    const [offset, setOffset] = useState(0);
+    const [count, setCount] = useState(9);
     const [userBookings, setUserBookings] = useState([]);
     const [userVenues, setUserVenues] = useState([]);
 
+    const specificVenue = venues.find((venue) => venue.id === id);
+
     useEffect(() => {
         const fetchVenues = async () => {
-            const data = await fetchData(`${API_VENUES}?_sort=name&_sortOrder=desc&_limit=${limit}&_bookings=true&_owner=true`);
-            setVenues(data);
+            try {
+                const data = await fetchData(
+                    `${API_VENUES}?_sort=${searchTerm}&_sortOrder=desc&_offset=${offset}&_limit=${limit}&_venues=true&_bookings=true&_owner=true`
+                );
+                setVenues(data);
+               // setFilteredVenues(data);
+            } catch (error) {
+                console.log(error);
+            }
         };
 
-        fetchVenues().catch((error) => {
-            console.log(error);
-        });
+        fetchVenues().catch((error) => console.log(error));
     }, [limit]);
-
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
             venue.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredVenues(filtered);
-    }, [searchTerm, venues]);
+    }, [searchTerm, venues, limit]);
 
 
     const updateBookings = (newBookings) => {
         setUserBookings(newBookings);
     };
 
-    useEffect(() => {
-        const fetchUserVenues = async () => {
-            const profileVenues = await fetchData(`${API_PROFILE}/venues`);
-            setUserVenues(profileVenues);
-        };
+    function addToBookings(venue) {
+        setUserBookings((prevBookings) => [...prevBookings, venue]);
+    }
 
-        const fetchUserBookings = async () => {
-            const profileBookings = await fetchData(`${API_PROFILE}/bookings`);
-            setUserBookings(profileBookings);
-        };
+    function removeFromBookings(venue) {
+        setUserBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== venue.id));
+    }
 
-        if (isAuthenticated) {
-            fetchUserVenues().catch((error) => {
-                console.log(error);
-            });
-            fetchUserBookings().catch((error) => {
-                console.log(error);
-            });
+    function toggleEditBookings(venue) {
+        if (userBookings.some((booking) => booking.id === venue.id)) { // If the venue is already in the bookings array, remove it
+            removeFromBookings(venue);
+        } else {
+            addToBookings(venue);
         }
-    }, [isAuthenticated]);
-
-
+    }
 
 
     const value = {
-        allVenues: venues?.slice(0, limit),
+        allVenues: venues.slice(0, limit), // Used for the list
+        carouselVenues: venues.slice(0, count), // Used for the carousel
+        setCount, // Used for the carousel
+        // handle onclick loop through venue media if media.length > 0, else return default image
+
         handleSearch: (e) => setSearchTerm(e.target.value),
-        filteredVenues,
+        filteredVenues , // Used for the list
         userHasVenues: userData?.venues?.length > 0,
         userHasBookings: userData?.bookings?.length > 0,
-        specificVenue: venues?.find((venue) => venue.id === id),
-        getSpecificVenue: async (id) => fetchData(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`),
+        specificVenue,
+        getSpecificVenue: async (id) =>
+            fetchData(
+                `https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`
+            ),
         disabledDates: (current) => {
             if (!specificVenue || !specificVenue.bookings || specificVenue.bookings.length === 0) {
                 return false;
@@ -97,7 +97,7 @@ export const VenuesProvider = ({children}) => {
             const currentDate = current.toISOString().slice(0, 10);
             for (const booking of specificVenue.bookings) {
                 if (booking && booking.dateFrom && booking.dateTo) {
-                    const {dateFrom, dateTo} = booking;
+                    const { dateFrom, dateTo } = booking;
                     if (currentDate >= dateFrom && currentDate <= dateTo) {
                         return true;
                     }
@@ -107,7 +107,7 @@ export const VenuesProvider = ({children}) => {
         },
         userBookings,
         userVenues,
-        updateBookings,
+        updateBookings: setUserBookings,
     };
 
     const handleScroll = () => {

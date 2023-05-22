@@ -15,20 +15,26 @@ function useApiPost(url) {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload)
-            }
+                body: JSON.stringify(payload),
+            };
             const response = await fetch(url, options);
             const json = await response.json();
             setData(json);
-            console.log(data, "useApiPost json");
+            localStorage.setItem('accessToken', json.accessToken);
+            localStorage.setItem('name', json.name);
+            localStorage.setItem('email', json.email);
+            localStorage.setItem('avatar', json.avatar);
+            localStorage.setItem('venueManager', json.venueManager);
+            return json; // Return the JSON data
         } catch (error) {
             setIsError(true);
             console.log(error);
-
+            throw error; // Throw the error to be caught in the calling code
         } finally {
             setIsLoading(false);
         }
     }
+
 
     return {data, isLoading, isError, postData};
 }
@@ -36,9 +42,9 @@ function useApiPost(url) {
 export default useApiPost;
 
 /*
-localStorage.setItem('accessToken', json.accessToken);
-localStorage.setItem('name', json.name);
-localStorage.setItem('email', json.email);
-localStorage.setItem('avatar', json.avatar);
-localStorage.setItem('manager', json.manager);
+ localStorage.setItem('accessToken', json.accessToken);
+            localStorage.setItem('name', json.name);
+            localStorage.setItem('email', json.email);
+            localStorage.setItem('avatar', json.avatar);
+            localStorage.setItem('venueManager', json.venueManager);
 */

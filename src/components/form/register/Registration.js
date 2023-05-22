@@ -1,52 +1,49 @@
 import React, {useContext} from 'react';
 import {useFormik} from 'formik';
-import {useNavigate} from 'react-router-dom';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import useApiPost from '../../../hooks/useApiPost';
 import {API_REGISTER} from '../../../utilities/constants';
-import {registrationSchema} from './schema'; // Import the registrationSchema from schema.js
+import {registrationSchema} from './schema';
 import '../styles.css';
 
 const RegistrationForm = () => {
     const {handleUserRegister} = useContext(AuthenticationContext);
-    const {data, isLoading, isError, postData} = useApiPost(API_REGISTER); // Make sure this custom hook is implemented correctly
-    const navigate = useNavigate();
+    const {data, isLoading, isError} = useApiPost(API_REGISTER);
+
+    const handleCheckboxChange = (event) => {
+        const newValue = event.target.checked;
+        formik.setFieldValue('venueManager', newValue);
+        console.log(newValue);
+    };
 
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
             password: '',
-            venueManager: true,
+            venueManager: false,
         },
         validationSchema: registrationSchema, // Use the imported registrationSchema
-
-        onSubmit: async (values) => {
+        onSubmit: (data) => {
             try {
-                const response = await postData(values);
-                console.log(response);
-                if (data.success) {
-                    navigate('/login');
-                    handleUserRegister(data);
-                }
-                return response;
+                if (isLoading) return <p>Loading...</p>
+                if (isError) return <p>Error</p>
+                console.log('Registration successful', data, formik.values);
+                handleUserRegister(data);
             } catch (error) {
-                console.error(error);
-                return error;
+                console.log(error);
             }
+            return data;
         },
     });
-
-    const showVenueManagerOption = formik.values.email.endsWith('stud.noroff.no');
 
     return (
         <form onSubmit={formik.handleSubmit} className="form">
             {formik.status && <p>{formik.status}</p>}
-            {/* Display the API response error message */}
-            {data && data.errors && data.errors[0].message && (
-                <p className="form-error">* {data.errors[0].message}</p>)}
-            {isLoading && (<p className="form-error">Loading...</p>)}
-            {isError && (<p className="form-error">Error</p>)}
+            {data?.errors?.[0]?.message && (<p className="form-error">* {data.errors[0].message}</p>)}
+            {isLoading && <p className="form-error">Loading...</p>}
+            {isError && <p className="form-error">Error</p>}
+
             <div>
                 <label htmlFor="name">Name</label>
                 <input
@@ -92,31 +89,29 @@ const RegistrationForm = () => {
                     <div className="form-error">* {formik.errors.password}</div>
                 ) : null}
             </div>
-            {showVenueManagerOption && (
-                <div>
-                    <label htmlFor="venueManager">Venue Manager</label>
-                    <div className="manager-container">
-                        <input
-                            className="checkmark"
-                            id="venueManager"
-                            name="venueManager"
-                            type="checkbox"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            checked={formik.values.venueManager}
-                        />
-                        <p>
-                            {formik.values.venueManager
-                                ? 'Yes, I want to register as manager'
-                                : 'No, I don\'t want to register as manager'}
-                        </p>
-                    </div>
-                    {formik.touched.venueManager && formik.errors.venueManager ? (
-                        <div className="form-error">* {formik.errors.venueManager}</div>
-                    ) : null}
+            <div>
+                <label htmlFor="venueManager">Venue Manager</label>
+                <div className="manager-container">
+                    <input
+                        className="checkmark"
+                        id="venueManager"
+                        name="venueManager"
+                        type="checkbox"
+                        onChange={handleCheckboxChange}
+                        onBlur={formik.handleBlur}
+                        checked={formik.values.venueManager}
+                    />
+                    <p>
+                        {formik.values.venueManager
+                            ? 'Yes, I want to register as manager'
+                            : 'No, I don\'t want to register as manager'}
+                    </p>
                 </div>
-            )}
-            <button className="primary-button" type="submit">Submit</button>
+                {formik.touched.venueManager && formik.errors.venueManager ? (
+                    <div className="form-error">* {formik.errors.venueManager}</div>
+                ) : null}
+            </div>
+            <button className="primary-button" type="submit">Sign up</button>
         </form>
     );
 };

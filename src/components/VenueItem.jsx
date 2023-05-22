@@ -1,3 +1,4 @@
+import {capitalize} from '@mui/material';
 import { Card, Image, Typography } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
@@ -10,6 +11,43 @@ const VenueItem = ({ venue }) => {
     const { id, name, media, description, price, maxGuests, number, bookings } = venue;
 
     const mediaType = useCheckMediaProperty(media);
+
+    /*
+    const mediaCarousel = () => {
+        if (venue?.media?.length > 0) {
+            return venue?.media?.map((media, index) => {
+                return (
+                    <Image
+                        key={index}
+                        src={media}
+                        alt={name}
+                        width="100%"
+                        height="213px"
+                        loading="lazy"
+                    />
+                );
+            });
+        }
+        else {
+            return (
+                <Image
+                    src={mediaType}
+                    alt={name}
+                    width="100%"
+                    height="213px"
+                    loading="lazy"
+                />
+            );
+        }
+    };
+    const handleClickMediaCarousel = () => {
+        setCount(count + 1);
+        console.log(count);
+
+                            <button onClick={handleMediaCarousel}>Click me</button>
+                        {mediaCarousel()}
+    };
+   */
 
     return (
         <>
@@ -29,6 +67,7 @@ const VenueItem = ({ venue }) => {
                             width="100%"
                             height="213px"
                             loading="lazy"
+                            aria-label={name}
                         />
                     }
                 >
@@ -39,7 +78,7 @@ const VenueItem = ({ venue }) => {
                                textOverflow: 'ellipsis',
                                maxWidth: '85ch',
                            }}
-                    >{name.toUpperCase()}</Title>
+                    >{capitalize(name)}</Title>
                     <Content>
                         <Typography>{number}</Typography>
                         <Typography.Paragraph
@@ -61,7 +100,6 @@ const VenueItem = ({ venue }) => {
                                 <strong>Bookings:</strong> {bookings.length}
                             </Typography>
                         )}
-
                         <Typography>
                             <strong>{formatCurrency(price)}</strong> /night
                         </Typography>

@@ -24,3 +24,13 @@ function useAuthentication() {
 }
 
 export default useAuthentication;
+
+// HOW TO USE
+/*
+ const isAuthenticated = useAuthentication();
+ if (isAuthenticated) {
+     // Do something
+ } else {
+     // Do something else
+ }
+*/

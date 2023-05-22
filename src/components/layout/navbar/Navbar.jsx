@@ -22,7 +22,9 @@ const Navbar = () => {
 
     return (
         <div className="navbar-container">
-            <Link to="/"><span className="logo">HOLIDAZE</span></Link>
+            <Link to="/">
+                <img className="navbar-logo" src={"./logo_white_100.svg"} alt="logo" width="40"/>
+            </Link>
 
             <button className="navbar-button" onClick={handleNavbar}>
         <span className="navbar-button-emoji" aria-label="navbar-button-emoji" role="img">
@@ -36,7 +38,6 @@ const Navbar = () => {
                 ? ("&#129409;")
           : (userData?.avatar)}
             */}
-
         </span>
             </button>
 

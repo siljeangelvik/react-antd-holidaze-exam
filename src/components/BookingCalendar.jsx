@@ -46,17 +46,15 @@ const BookingCalendar = () => {
             }
         };
 
-        /*
-         const disabledDates = newBookingsList?.flatMap((booking) => {
-             const dates = [];
-             let currentDate = new Date(booking.dateFrom);
-             while (currentDate <= new Date(booking.dateTo)) {
-                 dates.push(new Date(currentDate));
-                 currentDate.setDate(currentDate.getDate() + 1);
-             }
-             return dates;
-         });
- */
+    const disabledDates = newBookingsList?.flatMap((booking) => {
+        const dates = [];
+        let currentDate = new Date(booking.dateFrom);
+        while (currentDate <= new Date(booking.dateTo)) {
+            dates.push(new Date(currentDate));
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        return dates;
+    });
 
         const booking = {
             dateFrom: selectedDates[0],
@@ -74,12 +72,13 @@ const BookingCalendar = () => {
 
         const handleSubmit = async (event) => {
             event.preventDefault();
-
             try {
                 const response = await postData(booking);
                 if (response) {
                     console.log('Booking successful, Response:', response);
                     console.log('Booking successful, Booking:', booking);
+                    alert(JSON.stringify(booking, null, 2));
+                   // prompt('Booking successful' + JSON.stringify(booking));
                     return response;
                 } else {
                     console.log('Booking failed');
@@ -97,7 +96,12 @@ const BookingCalendar = () => {
 
         return (
             <div>
+                {disabledDates?.map((date) => (
+                    <div key={date.toDateString()}>{date.toDateString()}</div>
+                ))}
                 {newBookingsList}
+
+                {isLoading && <div>Loading...</div>}
                 {isError && <div>{data.errors[0].message}</div>}
                 <form onSubmit={handleSubmit}>
                     <Calendar
@@ -107,6 +111,11 @@ const BookingCalendar = () => {
                         onClickDay={handleDateClick}
                         minDate={new Date()}
                         selectRange={true}
+                        tileDisabled={({date}) =>
+                            disabledDates?.some((disabledDate) =>
+                                date >= disabledDate.dateFrom && date <= disabledDate.dateTo
+                            )
+                        }
                         tileClassName={({date}) =>
                             selectedDates.length === 2 &&
                             date >= selectedDates[0] &&
@@ -119,7 +128,7 @@ const BookingCalendar = () => {
                         <Title level={5}>Your selected dates</Title>
 
                         {selectedDates.length === 0 && (
-                            <Typography.Text type="danger">
+                            <Typography.Text type="secondary">
                                 Please select a date range
                             </Typography.Text>
                         )}

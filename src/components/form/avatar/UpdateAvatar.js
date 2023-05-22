@@ -37,7 +37,9 @@ export function UpdateAvatar() {
 
     const handleRemoveAvatar = (event) => {
         event.preventDefault();
-        putData({avatar: ""});
+        putData({avatar: ""}).catch((error) => {
+            console.log(error);
+        });
         setAvatar("");
         localStorage.setItem('avatar', "");
         userData.avatar = "";
@@ -63,7 +65,7 @@ export function UpdateAvatar() {
                     gap: "20px",
                 }}>
 
-                    <button onClick={handleRemoveAvatar}>Delete</button>
+                    <button onClick={handleRemoveAvatar}>X</button>
 
                     <input value={avatar} onChange={(e) => setAvatar(e.target.value)} type="text" name="avatar"
                            id="avatar" placeholder="Please enter a valid image url" className={"avatar-input"}
@@ -78,6 +80,7 @@ export function UpdateAvatar() {
                                 backgroundColor: "#ff9900",
                                 color: "white",
                                 fontWeight: "bold",
+                                textAlign: "center",
                             }}>
                         Update Avatar
                     </button>
