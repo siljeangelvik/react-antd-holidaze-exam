@@ -4,6 +4,7 @@ import {Content} from 'antd/lib/layout/layout';
 import React, {useContext, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import {API_BOOKINGS} from '../utilities/constants';
 import useApiPost from '../hooks/useApiPost';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 import {VenuesContext} from '../context/VenuesContext';
@@ -13,14 +14,9 @@ const BookingCalendar = () => {
         const [selectedGuests, setSelectedGuests] = useState(1);
 
         const {isAuthenticated} = useContext(AuthenticationContext);
-
         const {allVenues, specificVenue} = useContext(VenuesContext);
 
-        console.log(specificVenue?.bookings.length, "The amount of bookings on this Venue -  from calendar");
-
-        const bookingsList = allVenues?.bookings;
-
-        const newBookingsList = bookingsList?.map((booking) => { // map through the bookings list and convert the date strings to date objects
+        const newBookingsList = allVenues?.bookings?.map((booking) => { // map through the bookings list and convert the date strings to date objects
             return {
                 ...booking,
                 dateFrom: new Date(booking.dateFrom),
@@ -68,7 +64,8 @@ const BookingCalendar = () => {
             isLoading,
             isError,
             postData
-        } = useApiPost("https://nf-api.onrender.com/api/v1/holidaze/bookings?_customer=true&_venue=true");
+        } = useApiPost(API_BOOKINGS, isAuthenticated, booking);
+
 
         const handleSubmit = async (event) => {
             event.preventDefault();

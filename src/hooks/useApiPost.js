@@ -1,6 +1,8 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import {AuthenticationContext} from '../context/AuthenticationContext';
 
 function useApiPost(url) {
+    const {isAuthenticated} = useContext(AuthenticationContext);
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -22,11 +24,13 @@ function useApiPost(url) {
             setData(json)
             // console.log(data);
             if (!response.ok) throw new Error(json.message);
-            localStorage.setItem('accessToken', json.accessToken);
-            localStorage.setItem('name', json.name);
-            localStorage.setItem('email', json.email);
-            localStorage.setItem('avatar', json.avatar);
-            localStorage.setItem('venueManager', json.venueManager);
+            if (!isAuthenticated) {
+                localStorage.setItem('accessToken', json.accessToken);
+                localStorage.setItem('name', json.name);
+                localStorage.setItem('email', json.email);
+                localStorage.setItem('avatar', json.avatar);
+                localStorage.setItem('venueManager', json.venueManager);
+            }
             return json;
         } catch (error) {
             setIsError(true);

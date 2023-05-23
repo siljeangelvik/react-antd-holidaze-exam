@@ -5,12 +5,11 @@ import Logout from '../../../components/notifications/Logout';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import useToggle from "../../../hooks/useToggle";
 import "./styles.css";
+import Logo from '../../../utilities/Logo';
 
 const Navbar = () => {
     const [value, toggleValue] = useToggle(false);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
-    console.log("auth", isAuthenticated);
-
 
     const isManager = useManagerStatus();
 
@@ -25,8 +24,12 @@ const Navbar = () => {
     return (
         <div className="navbar-container">
             <Link to="/">
-                <img className="navbar-logo" src={"./logo_white_100.svg"} alt="logo" width="40"/>
+                <Logo />
             </Link>
+
+            {/*
+             <img className="navbar-logo" src={"./logo_white_100.svg"} alt="logo" width="40"/>
+            */}
 
             <button className="navbar-button" onClick={handleNavbar}>
         <span className="navbar-button-emoji" aria-label="navbar-button-emoji" role="img">

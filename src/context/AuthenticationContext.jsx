@@ -30,6 +30,7 @@ const AuthenticationProvider = ({children}) => {
         setIsAuthenticated(true);
         if (data && userFormData) {
             setUserData(data);
+          //  localStorage.setItem('accessToken', userFormData.accessToken);
             console.log(typeof data, data);
             console.log('You successfully logged in!');
             document.title = `Holidaze | ${localStorage.getItem('name')}`;

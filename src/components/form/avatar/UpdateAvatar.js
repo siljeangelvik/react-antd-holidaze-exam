@@ -64,26 +64,18 @@ export function UpdateAvatar() {
                     flexDirection: "column",
                     gap: "20px",
                 }}>
-
-                    <button onClick={handleRemoveAvatar}>X</button>
-
                     <input value={avatar} onChange={(e) => setAvatar(e.target.value)} type="text" name="avatar"
-                           id="avatar" placeholder="Please enter a valid image url" className={"avatar-input"}
+                           id="avatar" placeholder="Please enter a valid image url" className="avatar-input"
                     />
 
-                    <button type="submit" disabled={isLoading} onClick={handleSubmit}
-                            style={{
-                                padding: "9px",
-                                background: "transparent",
-                                border: "2px solid transparent",
-                                borderRadius: "7px",
-                                backgroundColor: "#ff9900",
-                                color: "white",
-                                fontWeight: "bold",
-                                textAlign: "center",
-                            }}>
-                        Update Avatar
-                    </button>
+                    <div style={{display: "flex", flexDirection:"row", flexWrap: "wrap", justifyItems:"space-between", gap: "10px"}}>
+                        <button className="primary-button" type="submit" disabled={isLoading} onClick={handleSubmit} style={{maxWidth:"55%"}}>
+                            Update Avatar
+                        </button>
+
+                        <button className="secondary-button" onClick={handleRemoveAvatar}>Remove Avatar</button>
+                    </div>
+
                     {isError && <div>Error submitting form</div>}
                     {data && <div>{data.message}</div>}
                 </form>

@@ -7,7 +7,7 @@ import {UpdateAvatar} from '../components/form/avatar/UpdateAvatar';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 
 function Profile() {
-    const { isAuthenticated, userProfile } = useContext(AuthenticationContext);
+    const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
     const isManager = useManagerStatus();
 
     return (
@@ -15,8 +15,8 @@ function Profile() {
             <div style={{minHeight: '95vh', padding: '80px 40px'}}>
                 <Content style={{paddingBottom: "40px"}}>
                     <Title level={1}>Your Profile</Title>
-                    {isAuthenticated ? (<Title level={4}>Welcome back to your profile, {userProfile?.name}</Title>)
-                     : (<Title level={4}>Here you can view and edit your profile information.</Title>)}
+                    {isAuthenticated ? (<Title level={4}>Welcome back, {userProfile?.name}! </Title>)
+                        : (<Title level={4}>Here you can view and edit your profile information.</Title>)}
                 </Content>
                 <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                     <UpdateAvatar/>
@@ -29,13 +29,9 @@ function Profile() {
                         width: "100%",
                         gap: "20px",
                     }}>
-                        {isAuthenticated && (
-                            <>
-                                <Typography><strong>Name:</strong> {userProfile?.name}</Typography>
-                                <Typography><strong>Email:</strong> {userProfile?.email}</Typography>
-                                <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
-                            </>
-                        )}
+                        <Typography><strong>Name:</strong> {userProfile?.name}</Typography>
+                        <Typography><strong>Email:</strong> {userProfile?.email}</Typography>
+                        <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
                     </Content>
                 </Content>
             </div>

@@ -16,9 +16,7 @@ const fetchData = async (url) => {
 
 export const VenuesProvider = ({children}) => {
     const {id} = useParams();
-    const {userData, isAuthenticated} = useContext(AuthenticationContext);
-    // const {data: userBookings} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}/bookings`);
-    // const {data: userVenues} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}/venues`);
+    const {userData, userProfile} = useContext(AuthenticationContext);
 
     const [venues, setVenues] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -28,6 +26,12 @@ export const VenuesProvider = ({children}) => {
     const [count, setCount] = useState(9);
     const [userBookings, setUserBookings] = useState([]);
     const [userVenues, setUserVenues] = useState([]);
+
+
+
+    console.log(userBookings);
+    console.log(userVenues);
+
 
     const specificVenue = venues.find((venue) => venue.id === id);
 
@@ -59,21 +63,26 @@ export const VenuesProvider = ({children}) => {
         setUserBookings(newBookings);
     };
 
-    function addToBookings(venue) {
+    const updateVenues = (newVenues) => {
+        setUserVenues(newVenues);
+    };
+
+    function addToBookings(venue) { // Add venue to bookings array
         setUserBookings((prevBookings) => [...prevBookings, venue]);
     }
 
-    function removeFromBookings(venue) {
+    function removeFromBookings(venue) { // Remove venue from bookings array
         setUserBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== venue.id));
     }
 
-    function toggleEditBookings(venue) {
-        if (userBookings.some((booking) => booking.id === venue.id)) { // If the venue is already in the bookings array, remove it
+    function toggleEditBookings(venue) { // Toggle venue in bookings array (add or remove)
+        if (userBookings.some((booking) => booking.id === venue.id)) {
             removeFromBookings(venue);
         } else {
             addToBookings(venue);
         }
     }
+
 
     const value = {
         allVenues: venues.slice(0, limit), // Used for the list
@@ -83,8 +92,8 @@ export const VenuesProvider = ({children}) => {
 
         handleSearch: (e) => setSearchTerm(e.target.value),
         filteredVenues, // Used for the list
-        userHasVenues: userData?.venues?.length > 0,
-        userHasBookings: userData?.bookings?.length > 0,
+        userHasVenues: userProfile?.venues?.length > 0,
+        userHasBookings: userProfile?.bookings?.length > 0,
         specificVenue,
         getSpecificVenue: async (id) =>
             fetchData(
@@ -108,6 +117,7 @@ export const VenuesProvider = ({children}) => {
         userBookings,
         userVenues,
         updateBookings: setUserBookings,
+        updateVenues: setUserVenues,
     };
 
     const handleScroll = () => {
