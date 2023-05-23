@@ -41,7 +41,7 @@ export const VenuesProvider = ({children}) => {
         };
 
         fetchVenues();
-    }), [];
+        }, []);
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
