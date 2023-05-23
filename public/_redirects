@@ -1,0 +1,9 @@
+# if user login, redirect to /profile
+/login  /profile  200  /
+
+# if user is not logged in, redirect to /login
+/profile  /login  200  /
+
+
+# if page doesnt exist, redirect to page not found
+/  /NotFound 404  /NotFound

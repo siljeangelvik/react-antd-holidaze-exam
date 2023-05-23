@@ -1,27 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
+import {VenuesContext} from '../context/VenuesContext';
+import { AuthenticationContext } from '../context/AuthenticationContext';
 import { Col, Row } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-import {VenuesContext} from '../context/VenuesContext';
-import EmptyTab from '../components/profile/EmptyTab';
-import { AuthenticationContext } from '../context/AuthenticationContext';
-import VenueItem from '../components/VenueItem';
+import VenueItem from './VenueItem';
+import EmptyTab from './profile/EmptyTab';
 
 function BookingsList() {
     const [bookings, setBookings] = useState([]);
     const {userBookings} = useContext(VenuesContext);
-    const { userData } = useContext(AuthenticationContext);
+    const { userProfile } = useContext(AuthenticationContext);
 
     useEffect(() => {
-        if (userData?.bookings?.length > 0) {
-            setBookings(userData?.bookings);
+        if (userProfile?.bookings?.length > 0) {
+            setBookings(userProfile?.bookings);
         }
-    }, [userData, bookings, userBookings]);
+    }, [userProfile, bookings, userBookings]);
 
     return (
         <Content style={{ paddingBottom: '40px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '40px 0' }}>
-                <button className="primary-button">button</button>
-            </div>
 
             <Row gutter={[16, 16]} style={{ display: 'flex', flexWrap: 'wrap', rowGap: '50px' }}>
                 {bookings.length > 0 ? (

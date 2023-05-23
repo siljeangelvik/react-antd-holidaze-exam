@@ -1,13 +1,12 @@
 import React, {useContext} from 'react';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import EditBookings from '../components/buttons/EditBookings';
 import {VenuesContext} from '../context/VenuesContext';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const {userBookings} = useContext(VenuesContext);
+    const {userBookings, updateBookings} = useContext(VenuesContext);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
 
     return (
@@ -17,15 +16,12 @@ function Bookings() {
                     <Title level={1}>Your Bookings</Title>
                     {isAuthenticated && userProfile
                         && <Title level={4}>
-                            Hi {userProfile?.name}, you currently have <em>{userBookings?.length}</em> upcoming
+                            Hi {userProfile?.name}, you currently have <em>{userProfile?.bookings?.length}</em> upcoming
                             bookings.
                         </Title>}
                 </Content>
 
-
-                <EditBookings/> {/* Button to edit bookings */}
-
-                <BookingsList userBookings={userBookings}/> {/* Pass the bookings state */}
+                <BookingsList userBookings={userBookings && updateBookings} /> {/* Pass the bookings state */}
             </div>
         </>
     );

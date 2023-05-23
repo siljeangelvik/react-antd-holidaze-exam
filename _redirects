@@ -1,8 +1,0 @@
-# Rewrite a path
-/*        /index.html   200! Role=user
-
-# Redirect with a 301
-/home         /         301
-
-# Show a custom 404 for this path
-/*          /index.html    404

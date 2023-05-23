@@ -16,22 +16,15 @@ const fetchData = async (url) => {
 
 export const VenuesProvider = ({children}) => {
     const {id} = useParams();
-    const {userData, userProfile} = useContext(AuthenticationContext);
+    const {userProfile} = useContext(AuthenticationContext);
 
     const [venues, setVenues] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
     const [limit, setLimit] = useState(9);
-    const [offset, setOffset] = useState(0);
     const [count, setCount] = useState(9);
     const [userBookings, setUserBookings] = useState([]);
     const [userVenues, setUserVenues] = useState([]);
-
-
-
-    console.log(userBookings);
-    console.log(userVenues);
-
 
     const specificVenue = venues.find((venue) => venue.id === id);
 
@@ -39,31 +32,29 @@ export const VenuesProvider = ({children}) => {
         const fetchVenues = async () => {
             try {
                 const data = await fetchData(
-                    `${API_VENUES}?_sort=${searchTerm}&_sortOrder=desc&_offset=${offset}&_limit=${limit}&_venues=true&_bookings=true&_owner=true`
+                    `${API_VENUES}?_sort=${searchTerm}&_sortOrder=desc&_limit=${limit}&_venues=true&_bookings=true&_owner=true`
                 );
                 setVenues(data);
-                // setFilteredVenues(data);
             } catch (error) {
                 console.log(error);
             }
         };
 
         fetchVenues().catch((error) => console.log(error));
-    }, [limit]);
+    });
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
             venue.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredVenues(filtered);
-    }, [searchTerm, venues, limit]);
+    }, [searchTerm, venues]);
 
-
-    const updateBookings = (newBookings) => {
+    const updateBookings = (newBookings) => { // Update bookings array
         setUserBookings(newBookings);
     };
 
-    const updateVenues = (newVenues) => {
+    const updateVenues = (newVenues) => { // Update venues array
         setUserVenues(newVenues);
     };
 
@@ -83,15 +74,28 @@ export const VenuesProvider = ({children}) => {
         }
     }
 
+    const handleScroll = () => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+
+        if (scrolledToBottom) {
+            setLimit((prevLimit) => prevLimit + 9);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const value = {
         allVenues: venues.slice(0, limit), // Used for the list
         carouselVenues: venues.slice(0, count), // Used for the carousel
-        setCount, // Used for the carousel
-        // handle onclick loop through venue media if media.length > 0, else return default image
-
+        setCount,
         handleSearch: (e) => setSearchTerm(e.target.value),
-        filteredVenues, // Used for the list
+        filteredVenues,
         userHasVenues: userProfile?.venues?.length > 0,
         userHasBookings: userProfile?.bookings?.length > 0,
         specificVenue,
@@ -116,24 +120,10 @@ export const VenuesProvider = ({children}) => {
         },
         userBookings,
         userVenues,
-        updateBookings: setUserBookings,
-        updateVenues: setUserVenues,
+        updateBookings,
+        updateVenues,
+        toggleEditBookings,
     };
-
-    const handleScroll = () => {
-        const scrollHeight = document.documentElement.scrollHeight;
-        const scrollTop = document.documentElement.scrollTop;
-        const clientHeight = document.documentElement.clientHeight;
-        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
-        if (scrolledToBottom) {
-            setLimit((prevLimit) => prevLimit + 9);
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return <VenuesContext.Provider value={value}>{children}</VenuesContext.Provider>;
 };

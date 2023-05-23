@@ -31,7 +31,7 @@ function useAuthentication() {
         checkLoginStatus();
 
         // The empty array is passed as the second argument to prevent the function from being called on every render.
-    }, []);
+    }, [isToken]);
 
     return isLoggedIn;
 }

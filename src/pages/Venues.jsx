@@ -1,6 +1,7 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
+import EditVenues from '../components/buttons/EditVenues';
 import {VenuesContext} from '../context/VenuesContext';
 import {YourVenuesList} from '../components/YourVenuesList';
 import {PostVenue} from '../components/form/venue/PostVenue';
@@ -29,6 +30,7 @@ function Venues() {
 
                 <div style={{display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "space-between"}}>
                     <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>
+                    <EditVenues /> {/* Button to edit bookings */}
                     {hasVenues && <button className={"secondary-button"}>Edit a Venue</button>}
                     {hasVenues && <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}
                 </div>

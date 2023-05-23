@@ -2,6 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)
 
+**Student:** [Silje Angelvik](https://github.com/siljeangelvik)    
 **Host:** [Netlify](https://exam-holidaze.netlify.app/)  
 **Repository:** [GitHub](https://github.com/siljeangelvik/react-antd-holidaze-exam)
 
@@ -11,16 +12,28 @@ Roadmap - [Gantt Chart](https://github.com/users/siljeangelvik/projects/1/views/
 Table - [Overview](https://github.com/users/siljeangelvik/projects/1/views/4)
 
 **Figma:**   
-Design - [Style Tile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=K92xt7vpIrkLTIzI-0)    
-WireFrame / Prototype - [Mobile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0)        
-WireFrame / Prototype - [Desktop](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=36-1086&t=i0IMM4amVObPEwpw-0)  
+Design: [Style Tile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=K92xt7vpIrkLTIzI-0)    
+WireFrame / Prototype: [Mobile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0)        
+WireFrame / Prototype: [Desktop](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=36-1086&t=i0IMM4amVObPEwpw-0)  
 
 **Resources:**  
-Exam - [Noroff Brief](https://content.noroff.dev/project-exam-2/brief.html)  
-API Documentation -  [Noroff Holidaze](https://docs.noroff.dev/holidaze/venues)    
-API Endpoints - [Noroff SwaggerUI](https://nf-api.onrender.com/docs/static/index.html#/)
+Exam: [Noroff Brief](https://content.noroff.dev/project-exam-2/brief.html)  
+API Documentation:  [Noroff Holidaze](https://docs.noroff.dev/holidaze/venues)    
+API Endpoints: [Noroff SwaggerUI](https://nf-api.onrender.com/docs/static/index.html#/)
 
-### Resources used in this project
+## Setup
+To run this project, install it locally using yarn:
+    
+    $ yarn install
+    $ yarn start
+
+## Description
+This is a React exam project for the course "Frontend Development 2" at Noroff.   
+The project is a website for a fictional venue booking application called "Holidaze".   
+The website is built with React, AntDesign, Sanity.io and Netlify.   
+This project contains a single page application with a home(list of venues) page,   
+a profile page and a detail page for each venue.  
+
 ![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
 ![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)  
@@ -29,13 +42,6 @@ API Endpoints - [Noroff SwaggerUI](https://nf-api.onrender.com/docs/static/index
 ![AntDesign](https://img.shields.io/badge/Ant%20Design-0170FE.svg?style=for-the-badge&logo=Ant-Design&logoColor=white)
 ![Material Design](https://img.shields.io/badge/MUI-007FFF.svg?style=for-the-badge&logo=MUI&logoColor=white)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7.svg?style=for-the-badge&logo=Netlify&logoColor=white)
-
-## Description
-This is a React exam project for the course "Frontend Development 2" at Noroff.   
-The project is a website for a fictional venue booking application called "Holidaze".   
-The website is built with React, AntDesign, Sanity.io and Netlify.   
-This project contains a single page application with a home(list of venues) page,   
-a profile page and a detail page for each venue.
 
 ## Resources
 [Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  
@@ -50,16 +56,28 @@ a profile page and a detail page for each venue.
 [Fastify](https://github.com/fastify/fastify-jwt)  
 [Unicode Checkmark](https://www.compart.com/en/unicode/U+2713)  
 [Logo Idea](https://www.youtube.com/watch?v=NCaP15N3g4s)  
-
-### Had some issues with netlify
-#### 1. Redirects not working
-`"build": "react-scripts build && echo '/* /index.html  200' | cat >build/_redirects ",`
-
----
+[React Admin](https://marmelab.com/react-admin/Edit.html)  
+[React Form](https://www.youtube.com/watch?v=JX36ga1O6xo)  
+[Sandbox Delete from List](https://codesandbox.io/embed/n43z9w3o0?codemirror=1)  
+[Sandbox Add ToDo](https://codesandbox.io/embed/build-a-todo-app-with-react-cc4l8?codemirror=1)  
+[AntDesign Modal](https://3x.ant.design/components/modal/)  
+[AntDesign AutoComplete](https://3x.ant.design/components/auto-complete/)  
+[AntDesign Card](https://3x.ant.design/components/card/)  
+[AntDesign Table](https://3x.ant.design/components/table/)  
+[React UseEffect](https://legacy.reactjs.org/docs/hooks-effect.html)  
+[React Form Validation with Formik and Yup](https://www.smashingmagazine.com/2020/10/react-validation-formik-yup/)    
+[React Form Validation with React Hook Form and Yup](https://dev.to/franciscomendes10866/react-form-validation-with-react-hook-form-and-yup-4a98)  
+[React Search Filter](https://contactmentor.com/build-reactjs-search-filter/)  
+[React Calendar with Events](https://contactmentor.com/create-reactjs-calendar-events/)  
+[Netlify Redirect Options](https://docs.netlify.com/routing/redirects/redirect-options/#custom-404-page-handling)  
+[Netlify Redirects for 404 Forum](https://answers.netlify.com/t/redirects-for-404s-with-role-based-access-control/31353)  
+[Netlify Custom 404-Page Forum](https://answers.netlify.com/t/i-have-a-custom-404-page-in-react-app-but-its-not-rendering-insteand-its-showing-netlify-404-page/88848)   
+[Netlify Redirects Forum](https://answers.netlify.com/t/support-guide-i-ve-deployed-my-site-but-i-still-see-page-not-found/125?utm_source=404page&utm_campaign=community_tracking)  
+[Guide to Authentication with React Router v6](https://blog.logrocket.com/complete-guide-authentication-with-react-router-v6/)  
 
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+_This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
 
 ## Available Scripts
 

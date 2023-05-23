@@ -42,15 +42,15 @@ const BookingCalendar = () => {
             }
         };
 
-    const disabledDates = newBookingsList?.flatMap((booking) => {
-        const dates = [];
-        let currentDate = new Date(booking.dateFrom);
-        while (currentDate <= new Date(booking.dateTo)) {
-            dates.push(new Date(currentDate));
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-        return dates;
-    });
+        const disabledDates = newBookingsList?.flatMap((booking) => {
+            const dates = [];
+            let currentDate = new Date(booking.dateFrom);
+            while (currentDate <= new Date(booking.dateTo)) {
+                dates.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            return dates;
+        });
 
         const booking = {
             dateFrom: selectedDates[0],
@@ -74,6 +74,7 @@ const BookingCalendar = () => {
                 if (response) {
                     console.log('Booking successful, Response:', response);
                     console.log('Booking successful, Booking:', booking);
+
                     alert(JSON.stringify(booking, null, 2));
                     return response;
                 } else {

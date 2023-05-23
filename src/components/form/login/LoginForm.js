@@ -34,16 +34,13 @@ const LoginForm = () => {
         if (userData && data && data.token) {
             handleUserLogin(data, formik.values);
         }
-    }, [data, handleUserLogin, formik.values]);
+    }, [userData, data, handleUserLogin, formik.values]);
 
     return (
         <form onSubmit={formik.handleSubmit} className="form">
-            {data && data.message && <p>{data.message}</p>}
             {formik.status && <p>{formik.status}</p>}
-            {data && data.errors && data.errors[0].message && (
-                <p className="form-error">* {data.errors[0].message}</p>)}
-            {isLoading && (<p className="form-error">Loading...</p>)}
-            {isError && (<p className="form-error">Error</p>)}
+            {isLoading && <p className="form-error">Loading...</p>}
+            {isError && (<p className="form-error">* Error: <span className="form-error">{data?.errors?.[0]?.message}</span></p>)}
             <div>
                 <label htmlFor="email">Email</label>
                 <input
