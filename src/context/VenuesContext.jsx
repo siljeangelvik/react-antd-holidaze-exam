@@ -1,5 +1,6 @@
 import React, {createContext, useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
+import useApiGet from '../hooks/useApiGet';
 import {API_VENUES} from '../utilities/constants';
 import {AuthenticationContext} from './AuthenticationContext';
 
@@ -22,30 +23,25 @@ export const VenuesProvider = ({children}) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredVenues, setFilteredVenues] = useState([]);
     const [limit, setLimit] = useState(9);
-    const [count, setCount] = useState(9);
     const [userBookings, setUserBookings] = useState([]);
     const [userVenues, setUserVenues] = useState([]);
 
     const specificVenue = venues.find((venue) => venue.id === id);
 
-    useEffect(() => {
-        const fetchVenues = async () => {
-            try {
-                const data = await fetchData(
-                    `${API_VENUES}?_sort=${searchTerm}&_sortOrder=desc&_limit=${limit}&_venues=true&_bookings=true&_owner=true`
-                );
-                setVenues(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+    const {data: getAllVenues} = useApiGet(`${API_VENUES}?_bookings=true&_venues=true&_owner=true&_limit=${limit}`);
 
-        fetchVenues();
-        }, []);
+    useEffect(() => {
+        if (getAllVenues) {
+            setVenues(getAllVenues);
+        }
+    }, [getAllVenues]);
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
-            venue.name.toLowerCase().includes(searchTerm.toLowerCase())
+            venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            venue.owner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            venue.location.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            venue.location.city.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
@@ -92,8 +88,6 @@ export const VenuesProvider = ({children}) => {
 
     const value = {
         allVenues: venues.slice(0, limit), // Used for the list
-        carouselVenues: venues.slice(0, count), // Used for the carousel
-        setCount,
         handleSearch: (e) => setSearchTerm(e.target.value),
         filteredVenues,
         userHasVenues: userProfile?.venues?.length > 0,

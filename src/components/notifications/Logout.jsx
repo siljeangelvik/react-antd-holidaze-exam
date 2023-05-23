@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { Button, notification, Space } from 'antd';
+import {notification, Space } from 'antd';
 import {useNavigate} from 'react-router-dom';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 
@@ -9,7 +9,7 @@ const close = () => {
 
 const Logout = () => {
     const [api, contextHolder] = notification.useNotification();
-    const {handleUserLogout, isAuthenticated} = useContext(AuthenticationContext);
+    const {handleUserLogout, isAuthenticated, userProfile} = useContext(AuthenticationContext);
     const navigate = useNavigate();
 
     const openNotification = () => {
@@ -22,16 +22,16 @@ const Logout = () => {
         const key = `open${Date.now()}`;
         const btn = (
             <Space>
-                <Button type="link" size="medium" onClick={() => api.destroy()}>
-                    No, stay logged in
-                </Button>
-                <button className="primary-button" onClick={() => logout(key)}>Yes, logout</button>
+                <button className="primary-button" type="link" onClick={() => api.destroy()}>
+                    No, stay logged in 😊
+                </button>
+                <button className="secondary-button" onClick={() => logout(key)}>Yes, logout 😞</button>
             </Space>
         );
         api.open({
-            message: 'Are you sure you want to logout?',
+            message: `Oh no, ${userProfile?.name}!` ,
             description:
-                'Logging out will clear all your data, from this device only.',
+            `Are you sure you want to logout?`,
             btn,
             key,
             onClose: close,
@@ -41,9 +41,9 @@ const Logout = () => {
         <>
             {contextHolder}
             {isAuthenticated &&
-                <Button type="primary" onClick={openNotification} style={{fontWeight:"bold"}}>
+                <button className="secondary-button logout-button" onClick={openNotification} style={{fontWeight:"bold"}}>
                     Logout
-                </Button>
+                </button>
             }
         </>
     );

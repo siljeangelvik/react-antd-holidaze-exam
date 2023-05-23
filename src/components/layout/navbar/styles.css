@@ -187,6 +187,10 @@ li:hover, li > *:hover {
     li:hover, li > *:hover {
         color: #000;
     }
+
+    li > em {
+        display: none;
+    }
 }
 
 /* Define styles for x-small displays */

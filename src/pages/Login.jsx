@@ -1,6 +1,8 @@
+import {Typography} from '@mui/material';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
+import {Link} from 'react-router-dom';
 import LoginForm from '../components/form/login/LoginForm';
 
 function Login(onSubmit) {
@@ -15,6 +17,8 @@ function Login(onSubmit) {
                 <Content style={{paddingBottom: "20px"}}>
                     <LoginForm onSubmit={onSubmit}/>
                 </Content>
+
+                <Typography>Don't have an account? <Link to="/register" style={{fontWeight:"bold"}}>Register</Link></Typography>
             </div>
         </>
     );
