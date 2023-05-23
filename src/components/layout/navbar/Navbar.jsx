@@ -9,6 +9,8 @@ import "./styles.css";
 const Navbar = () => {
     const [value, toggleValue] = useToggle(false);
     const {isAuthenticated, userData} = useContext(AuthenticationContext);
+    console.log("auth", isAuthenticated);
+
 
     const isManager = useManagerStatus();
 

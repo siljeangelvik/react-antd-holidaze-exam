@@ -19,12 +19,13 @@ function useApiPost(url) {
             };
             const response = await fetch(url, options);
             const json = await response.json();
-            setData(json);
-            localStorage.setItem('accessToken', json.accessToken);
-            localStorage.setItem('name', json.name);
-            localStorage.setItem('email', json.email);
-            localStorage.setItem('avatar', json.avatar);
-            localStorage.setItem('venueManager', json.venueManager);
+            if (!response.ok) throw new Error(json.message);
+            setData(json)
+             localStorage.setItem('accessToken', json.accessToken);
+              localStorage.setItem('name', json.name);
+              localStorage.setItem('email', json.email);
+              localStorage.setItem('avatar', json.avatar);
+              localStorage.setItem('venueManager', json.venueManager);
             return json; // Return the JSON data
         } catch (error) {
             setIsError(true);
@@ -34,7 +35,6 @@ function useApiPost(url) {
             setIsLoading(false);
         }
     }
-
 
     return {data, isLoading, isError, postData};
 }

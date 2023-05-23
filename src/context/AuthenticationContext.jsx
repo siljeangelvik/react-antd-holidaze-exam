@@ -1,12 +1,17 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import useManagerStatus from '../hooks/useManagerStatus';
+import useApiGet from '../hooks/useApiGet';
 import {API_PROFILES} from '../utilities/constants';
 import useAuthentication from '../hooks/useAuthentication';
 
 const AuthenticationContext = createContext();
 
+
 const AuthenticationProvider = ({children}) => {
+   // const {data: userProfile} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}?_bookings=true&_venues=true`);
+
+    const userProfile = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}?_bookings=true&_venues=true`);
+
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userData, setUserData] = useState({} || null);
@@ -16,72 +21,29 @@ const AuthenticationProvider = ({children}) => {
     const navigate = useNavigate();
     const isLoggedIn = useAuthentication();
 
-
     useEffect(() => {
         if (!isLoggedIn) {
             setIsAuthenticated(false);
         }
         setIsAuthenticated(true);
-        document.title = `Holidaze | ${localStorage.getItem("name")}`;
-        console.log(document.title);
+        setUserData(userProfile);
     }, [isLoggedIn]);
 
 
-    const handleUserLogin = () => {
-        setIsAuthenticated(true); // set isAuthenticated to true and set userData to userData
-        console.log('You successfully logged in!');
+    const handleUserLogin = (data, userFormData) => {
+        setIsAuthenticated(true);
+        if (isAuthenticated && localStorage.getItem('name')) {
+            setUserData(data);
+            console.log(data);
+            document.title = `Holidaze | ${localStorage.getItem('name')}`;
+            console.log('You successfully logged in!');
+            console.log(document.title);
 
-        isAuthenticated && userData && navigate(`/profile/${localStorage.getItem('name')}`);
-
-
-     //   return userData;
-
-        /*
-        alert('You successfully logged in!');
-        console.log('You successfully logged in!');
-
-        console.log(userData, "from handleUserLogin")
-
-        console.log(`Welcome back ${localStorage.getItem("name")}!`);
-        document.title = `Holidaze | ${localStorage.getItem("name")}`;
-*/
-
-
-        //  navigate(`/profile/${localStorage.getItem('name')}`);
-       // navigate(`/profile/${userData?.name}`);
-//        navigate(`/profile/${localStorage.getItem('name')}`);
-
+            console.log(`Welcome back ${localStorage.getItem('name')}!`);
+            navigate(`/profile/${localStorage.getItem('name')}`);
+        }
     };
 
-
-    useEffect(() => {
-        async function getUserProfile() {
-            try {
-                setIsLoading(true);
-                setIsError(false);
-                const response = await fetch(
-                    `${API_PROFILES}/${localStorage.getItem('name')}?_bookings=true&_venues=true`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                            'Content-Type': 'application/json',
-                        },
-                    }
-                );
-                const json = await response.json();
-                setUserData(json);
-               // console.log(JSON.stringify(json, null, 2));
-            } catch (error) {
-                console.error(error);
-                setIsError(true);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        getUserProfile().catch(error => console.error(error));
-    }, [isLoggedIn, isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     const handleUserRegister = () => {
