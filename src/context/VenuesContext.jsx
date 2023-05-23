@@ -40,8 +40,8 @@ export const VenuesProvider = ({children}) => {
             }
         };
 
-        fetchVenues().catch((error) => console.log(error));
-    });
+        fetchVenues();
+    }), [];
 
     useEffect(() => {
         const filtered = venues.filter((venue) =>
