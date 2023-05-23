@@ -3,7 +3,7 @@ import React from 'react';
 import {Content} from 'antd/es/layout/layout';
 import Registration from '../components/form/register/Registration';
 
-function Register() {
+function Register(onSubmit) {
 
     return (
         <>
@@ -14,7 +14,7 @@ function Register() {
                 </Content>
 
                 <Content style={{paddingBottom: "20px"}}>
-                    <Registration onSubmit />
+                    <Registration onSubmit={onSubmit} />
                 </Content>
             </div>
         </>

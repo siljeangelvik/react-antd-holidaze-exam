@@ -1,13 +1,22 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Form, Input, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import {Checkbox} from 'antd';
 import "./styles.css";
+import {AuthenticationContext} from '../../../context/AuthenticationContext';
+import useApiGet from '../../../hooks/useApiGet';
+import useToggle from '../../../hooks/useToggle';
 import {boolean, number, string} from 'yup';
 import useApiPost from '../../../hooks/useApiPost';
-import {API_VENUES} from '../../../utilities/constants';
+import {API_PROFILES, API_VENUES} from '../../../utilities/constants';
 
 export const PostVenue = ({onCreate}) => {
+    const {userData} = useContext(AuthenticationContext);
+    const [toggle, setToggle] = useToggle(false);
+
+    const userProfileBookings = useApiGet(`${API_PROFILES}/${userData?.name}/bookings`);
+
+
     const [formData, setFormData] = useState({
         name: string,
         description: string,
@@ -53,6 +62,7 @@ export const PostVenue = ({onCreate}) => {
 
     return (
         <div className={'create-venue-modal'}>
+            <button className="secondary-button" onClick={setToggle}>Close</button>
             <form onSubmit={onSubmit}
                   style={{minWidth: '340px', maxWidth: '340px', margin: '0 auto', paddingTop: '40px'}}>
                 <Typography.Title level={2}>Create Venue</Typography.Title>

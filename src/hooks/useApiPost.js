@@ -19,18 +19,19 @@ function useApiPost(url) {
             };
             const response = await fetch(url, options);
             const json = await response.json();
-            if (!response.ok) throw new Error(json.message);
             setData(json)
-             localStorage.setItem('accessToken', json.accessToken);
-              localStorage.setItem('name', json.name);
-              localStorage.setItem('email', json.email);
-              localStorage.setItem('avatar', json.avatar);
-              localStorage.setItem('venueManager', json.venueManager);
-            return json; // Return the JSON data
+            // console.log(data);
+            if (!response.ok) throw new Error(json.message);
+            localStorage.setItem('accessToken', json.accessToken);
+            localStorage.setItem('name', json.name);
+            localStorage.setItem('email', json.email);
+            localStorage.setItem('avatar', json.avatar);
+            localStorage.setItem('venueManager', json.venueManager);
+            return json;
         } catch (error) {
             setIsError(true);
             console.log(error);
-            throw error; // Throw the error to be caught in the calling code
+            throw error;
         } finally {
             setIsLoading(false);
         }

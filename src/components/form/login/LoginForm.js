@@ -7,8 +7,8 @@ import {loginSchema} from './schema';
 import '../styles.css';
 
 const LoginForm = () => {
-    const { handleUserLogin } = useContext(AuthenticationContext);
-    const {data, isLoading, isError, postData} = useApiPost(API_LOGIN); // this will post the form data to the api and return the user data
+    const { handleUserLogin, userData } = useContext(AuthenticationContext);
+    const { data, isLoading, isError, postData } = useApiPost(API_LOGIN);
 
     const formik = useFormik({
         initialValues: {
@@ -20,8 +20,7 @@ const LoginForm = () => {
             try {
                 const data = await postData(userFormData);
                 if (data) {
-                    handleUserLogin(data, formik.values);
-                    return data;
+                   return handleUserLogin(data, userFormData);
                 }
                 return userFormData;
             } catch (error) {
@@ -30,8 +29,9 @@ const LoginForm = () => {
         },
     });
 
+
     useEffect(() => {
-        if (data && data.token) {
+        if (userData && data && data.token) {
             handleUserLogin(data, formik.values);
         }
     }, [data, handleUserLogin, formik.values]);

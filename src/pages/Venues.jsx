@@ -9,7 +9,7 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 
 function Venues() {
     const [toggle, setToggle] = useToggle(false);
-    const {userData} = useContext(AuthenticationContext);
+    const {userProfile} = useContext(AuthenticationContext);
 
     const {hasVenues} = useContext(VenuesContext);
 
@@ -23,8 +23,8 @@ function Venues() {
 
                 <Content style={{paddingBottom: "40px"}}>
                     <Title level={1}>Your Venues</Title>
-                    <Title level={4}>Hi {userData?.name}, you are currently
-                        managing <em>{userData?.venues?.length}</em> venues.</Title>
+                    <Title level={4}>Hi {userProfile?.name}, you are currently
+                        managing <em>{userProfile?.venues?.length}</em> venues.</Title>
                 </Content>
 
                 <div style={{display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "space-between"}}>

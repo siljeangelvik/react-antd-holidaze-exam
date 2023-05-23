@@ -8,7 +8,7 @@ import "./styles.css";
 
 const Navbar = () => {
     const [value, toggleValue] = useToggle(false);
-    const {isAuthenticated, userData} = useContext(AuthenticationContext);
+    const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
     console.log("auth", isAuthenticated);
 
 
@@ -51,7 +51,7 @@ const Navbar = () => {
                     {isAuthenticated ? (
                         <>
                             {/* <li><Link to={`/profile/${localStorage.getItem("name")}`}>Profile</Link></li> */}
-                            <li><Link to={`/profile/${userData?.name}`}>Profile</Link></li>
+                            <li><Link to={`/profile/${userProfile?.name}`}>Profile</Link></li>
 
                             {/* <li><Link to={`/profile/${localStorage.getItem("name")}/bookings`}>Bookings</Link></li> */}
                             <li><Link to={`/bookings`}>Bookings</Link></li>

@@ -5,30 +5,34 @@ import {useEffect, useState} from 'react';
  * @returns {boolean} Whether the user is authenticated or not.
  */
 function useAuthentication() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const isToken = localStorage.getItem('accessToken'); // Checks if the access token is present in localStorage.
     useEffect(() => {
         // Checks the login status by checking the, presence of the access token in localStorage.
         function checkLoginStatus() {
-            if (localStorage.getItem('accessToken')) {
-                setIsAuthenticated(true);
+            if (isToken !== null || undefined) { // If the access token is present, the user is logged in.
+                setIsLoggedIn(true);
             } else {
-                setIsAuthenticated(false);
+                setIsLoggedIn(false);
             }
         }
 
+        // Calls the function to check the login status.
         checkLoginStatus();
+
+        // The empty array is passed as the second argument to prevent the function from being called on every render.
     }, []);
 
-    return isAuthenticated;
+    return isLoggedIn;
 }
 
 export default useAuthentication;
 
 // HOW TO USE
 /*
- const isAuthenticated = useAuthentication();
- if (isAuthenticated) {
+ const isLoggedIn = useAuthentication();
+ if (isLoggedIn) {
      // Do something
  } else {
      // Do something else

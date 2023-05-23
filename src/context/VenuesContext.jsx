@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { API_PROFILE, API_VENUES } from '../utilities/constants';
-import { AuthenticationContext } from './AuthenticationContext';
+import React, {createContext, useState, useEffect, useContext} from 'react';
+import {useParams} from 'react-router-dom';
+import {API_VENUES} from '../utilities/constants';
+import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
 
@@ -14,10 +14,11 @@ const fetchData = async (url) => {
     return data;
 };
 
-export const VenuesProvider = ({ children }) => {
-    const { id } = useParams();
-    const { userData, isAuthenticated } = useContext(AuthenticationContext);
-
+export const VenuesProvider = ({children}) => {
+    const {id} = useParams();
+    const {userData, isAuthenticated} = useContext(AuthenticationContext);
+    // const {data: userBookings} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}/bookings`);
+    // const {data: userVenues} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}/venues`);
 
     const [venues, setVenues] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -37,7 +38,7 @@ export const VenuesProvider = ({ children }) => {
                     `${API_VENUES}?_sort=${searchTerm}&_sortOrder=desc&_offset=${offset}&_limit=${limit}&_venues=true&_bookings=true&_owner=true`
                 );
                 setVenues(data);
-               // setFilteredVenues(data);
+                // setFilteredVenues(data);
             } catch (error) {
                 console.log(error);
             }
@@ -74,7 +75,6 @@ export const VenuesProvider = ({ children }) => {
         }
     }
 
-
     const value = {
         allVenues: venues.slice(0, limit), // Used for the list
         carouselVenues: venues.slice(0, count), // Used for the carousel
@@ -82,7 +82,7 @@ export const VenuesProvider = ({ children }) => {
         // handle onclick loop through venue media if media.length > 0, else return default image
 
         handleSearch: (e) => setSearchTerm(e.target.value),
-        filteredVenues , // Used for the list
+        filteredVenues, // Used for the list
         userHasVenues: userData?.venues?.length > 0,
         userHasBookings: userData?.bookings?.length > 0,
         specificVenue,
@@ -97,7 +97,7 @@ export const VenuesProvider = ({ children }) => {
             const currentDate = current.toISOString().slice(0, 10);
             for (const booking of specificVenue.bookings) {
                 if (booking && booking.dateFrom && booking.dateTo) {
-                    const { dateFrom, dateTo } = booking;
+                    const {dateFrom, dateTo} = booking;
                     if (currentDate >= dateFrom && currentDate <= dateTo) {
                         return true;
                     }

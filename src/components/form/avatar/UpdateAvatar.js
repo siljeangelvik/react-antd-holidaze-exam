@@ -8,7 +8,7 @@ import "./styles.css";
 export function UpdateAvatar() {
     const [toggle, setToggle] = useState(false);
     const [avatar, setAvatar] = useState('');
-    const {userData} = useContext(AuthenticationContext);
+    const {userProfile} = useContext(AuthenticationContext);
     const {putData, isLoading, isError, data} = useApiPut(`${API_PROFILES}/${localStorage.getItem("name")}/media`);
 
     const handleToggle = () => {
@@ -32,7 +32,7 @@ export function UpdateAvatar() {
         }
         setAvatar(avatar);
         localStorage.setItem('avatar', avatar);
-        userData.avatar = avatar;
+        userProfile.avatar = avatar;
     };
 
     const handleRemoveAvatar = (event) => {
@@ -42,7 +42,7 @@ export function UpdateAvatar() {
         });
         setAvatar("");
         localStorage.setItem('avatar', "");
-        userData.avatar = "";
+        userProfile.avatar = "";
     }
 
     return (
@@ -54,7 +54,7 @@ export function UpdateAvatar() {
                 justifyContent: "center",
                 gap: "10px"
             }}>
-                <Avatar src={userData?.avatar} className={"avatar-image"}/>
+                <Avatar src={userProfile?.avatar} className={"avatar-image"}/>
                 <button className={"button-tertiary"} onClick={handleToggle}>Edit avatar</button>
             </div>
             {toggle &&

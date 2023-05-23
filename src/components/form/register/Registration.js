@@ -7,8 +7,8 @@ import {registrationSchema} from './schema';
 import '../styles.css';
 
 const RegistrationForm = () => {
-    const {handleUserRegister} = useContext(AuthenticationContext);
-    const {data, isLoading, isError} = useApiPost(API_REGISTER);
+    const { handleUserRegister } = useContext(AuthenticationContext);
+    const { data, isLoading, isError, postData } = useApiPost(API_REGISTER);
 
     const handleCheckboxChange = (event) => {
         const newValue = event.target.checked;
@@ -24,26 +24,25 @@ const RegistrationForm = () => {
             venueManager: false,
         },
         validationSchema: registrationSchema, // Use the imported registrationSchema
-        onSubmit: (data) => {
+        onSubmit: async (userFormData) => {
             try {
-                if (isLoading) return <p>Loading...</p>
-                if (isError) return <p>Error</p>
-                console.log('Registration successful', data, formik.values);
-                handleUserRegister(data);
+                const response = await postData(userFormData);
+                if (response) {
+                    console.log('Registration successful', response);
+                    return handleUserRegister(response, userFormData);
+                }
+                return userFormData;
             } catch (error) {
                 console.log(error);
             }
-            return data;
         },
     });
 
     return (
         <form onSubmit={formik.handleSubmit} className="form">
             {formik.status && <p>{formik.status}</p>}
-            {data?.errors?.[0]?.message && (<p className="form-error">* {data.errors[0].message}</p>)}
             {isLoading && <p className="form-error">Loading...</p>}
-            {isError && <p className="form-error">Error</p>}
-
+            {isError && (<p className="form-error">Error: {data?.errors?.[0]?.message}</p>)}
             <div>
                 <label htmlFor="name">Name</label>
                 <input

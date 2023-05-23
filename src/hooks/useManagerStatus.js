@@ -12,10 +12,6 @@ function useManagerStatus() {
             setIsManager(false)
         }
 
-        // Cleanup function to remove the storedManagerStatus from localStorage
-        return () => {
-            localStorage.removeItem('venueManager');
-        };
     }, [manager]);
 
     return isManager;
