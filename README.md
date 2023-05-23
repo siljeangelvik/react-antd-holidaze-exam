@@ -74,6 +74,15 @@ a profile page and a detail page for each venue.
 [Netlify Custom 404-Page Forum](https://answers.netlify.com/t/i-have-a-custom-404-page-in-react-app-but-its-not-rendering-insteand-its-showing-netlify-404-page/88848)   
 [Netlify Redirects Forum](https://answers.netlify.com/t/support-guide-i-ve-deployed-my-site-but-i-still-see-page-not-found/125?utm_source=404page&utm_campaign=community_tracking)  
 [Guide to Authentication with React Router v6](https://blog.logrocket.com/complete-guide-authentication-with-react-router-v6/)  
+[React Clean Code](https://dev.to/thawkin3/react-clean-code-simple-ways-to-write-better-and-cleaner-code-2loa)  
+[Clean Up Your React Code](https://javascript.plainenglish.io/clean-up-your-react-code-63992a82d8e7)  
+[Tips to Write Clean React Code](https://javascript.plainenglish.io/6-important-tips-to-write-clean-react-code-5ef29d6a73a6)  
+[Use React Context for Auth](https://dev.to/dayvster/use-react-context-for-auth-288g)  
+[React Router v6 in 45 minutes](https://www.youtube.com/watch?v=Ul3y1LXxzdU)  
+[Dev Server](https://webpack.js.org/configuration/dev-server/)  
+[RTK-Example GitHub](https://github.com/jonfossheim/RTK-Example/tree/main/src/pages)  
+[Starter React GitHub](https://github.com/jonfossheim/starter-react/blob/main/package.json)  
+[5 Custom React Hooks](https://www.youtube.com/watch?v=0c6znExIqRw)  
 
 # Getting Started with Create React App
 
