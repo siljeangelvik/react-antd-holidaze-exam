@@ -9,14 +9,11 @@ const AuthenticationContext = createContext();
 const AuthenticationProvider = ({children}) => {
     const {data: userProfile} = useApiGet(`${API_PROFILES}/${localStorage.getItem('name')}?_bookings=true&_venues=true`);
 
-
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     let [userData, setUserData] = useState(null);
 
-
     const navigate = useNavigate();
     const isLoggedIn = useAuthentication();
-
 
     useEffect(() => {
         if (!isLoggedIn) {

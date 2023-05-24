@@ -1,4 +1,4 @@
-import {Typography} from 'antd';
+/*import {Typography} from 'antd';
 import React, {useContext, useState} from 'react';
 import useApiPost from '../../../hooks/useApiPost';
 import {API_BOOKINGS} from '../../../utilities/constants';
@@ -37,34 +37,27 @@ const LoginForm = ({bookingData}) => {
         }
     }
 
-
     return (
         <form onSubmit={handleSubmit} className="form">
-            {/* Display the API response error message */}
             {data && data.errors && data.errors[0].message && (<p className="form-error">* {data.errors[0].message}</p>)}
             {isLoading && (<p className="form-error">Loading...</p>)}
             {isError && (<p className="form-error">Error</p>)}
-
-
             {selectedDates.length === 0 && (
                 <Typography.Text type="danger">
                     Please select a date range
                 </Typography.Text>
             )}
-
             {selectedDates.length === 1 && (
                 <Typography.Text type="secondary">
                     Please select an end date
                 </Typography.Text>
             )}
-
             {selectedDates.length === 2 && (
                 <Typography.Text type="secondary">
                     {selectedDates[0].toDateString()} - {" "}
                     {selectedDates[1].toDateString()}
                 </Typography.Text>
             )}
-
             <div>
                 <label htmlFor="startDate">{startDate}</label>
             </div>
@@ -89,4 +82,4 @@ const LoginForm = ({bookingData}) => {
     );
 };
 
-export default LoginForm;
+export default LoginForm;/*

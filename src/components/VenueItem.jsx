@@ -1,16 +1,19 @@
 import {capitalize} from '@mui/material';
-import { Card, Image, Typography } from 'antd';
-import { Content } from 'antd/es/layout/layout';
+import {Card, Carousel, Image, Typography} from 'antd';
+import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import useCheckMediaProperty from '../hooks/useCheckMediaProperty';
-import { formatCurrency } from '../utilities/formatCurrency';
+import {formatCurrency} from '../utilities/formatCurrency';
 
-const VenueItem = ({ venue }) => {
-    const { id, name, media, description, price, maxGuests, number, bookings } = venue;
+const VenueItem = ({venue}) => {
+    const {id, name, media, description, price, maxGuests, number, bookings} = venue;
 
     const mediaType = useCheckMediaProperty(media);
+
+    console.log(mediaType);
+    console.log(media);
 
     /*
     const mediaCarousel = () => {
@@ -60,7 +63,32 @@ const VenueItem = ({ venue }) => {
                         borderRadius: '5px',
                         height: '435px',
                     }}
-                    cover={
+                    cover={media ? (
+                       <Carousel
+                            autoplay
+                            autoplaySpeed={3000}
+                            pauseOnHover={true}
+                            style={{
+                                 height: '213px',
+                                 overflow: 'hidden',
+                                 borderRadius: '5px',
+                                }}
+                        >
+                            {media.map((media, index) => {
+                                return (
+                                    <Image
+                                        key={index}
+                                        src={media}
+                                        alt={name}
+                                        width="100%"
+                                        height="213px"
+                                        loading="lazy"
+                                        aria-label={name}
+                                    />
+                                );
+                            })}
+                        </Carousel>
+                    ) : (
                         <Image
                             src={mediaType}
                             alt={name}
@@ -69,7 +97,7 @@ const VenueItem = ({ venue }) => {
                             loading="lazy"
                             aria-label={name}
                         />
-                    }
+                    )}
                 >
                     <Title level={4}
                            style={{

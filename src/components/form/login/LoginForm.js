@@ -4,11 +4,12 @@ import useApiPost from '../../../hooks/useApiPost';
 import {API_LOGIN} from '../../../utilities/constants';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import {loginSchema} from './schema';
+import {Input} from 'antd';
 import '../styles.css';
 
 const LoginForm = () => {
-    const { handleUserLogin, userData } = useContext(AuthenticationContext);
-    const { data, isLoading, isError, postData } = useApiPost(API_LOGIN);
+    const {handleUserLogin, userData} = useContext(AuthenticationContext);
+    const {data, isLoading, isError, postData} = useApiPost(API_LOGIN);
 
     const formik = useFormik({
         initialValues: {
@@ -20,15 +21,16 @@ const LoginForm = () => {
             try {
                 const data = await postData(userFormData);
                 if (data) {
-                   return handleUserLogin(data, userFormData);
+                    return handleUserLogin(data, userFormData);
                 }
+
                 return userFormData;
             } catch (error) {
                 console.log(error);
             }
+
         },
     });
-
 
     useEffect(() => {
         if (userData && data && data.token) {
@@ -37,7 +39,7 @@ const LoginForm = () => {
     }, [userData, data, handleUserLogin, formik.values]);
 
     return (
-        <form onSubmit={formik.handleSubmit} className="form">
+        <form className="form" onSubmit={formik.handleSubmit}>
             {formik.status && <p>{formik.status}</p>}
             {isLoading && <p className="form-error">Loading...</p>}
             {isError && (<p className="form-error">* Error: <span className="form-error">{data?.errors?.[0]?.message}</span></p>)}
@@ -58,7 +60,7 @@ const LoginForm = () => {
             </div>
             <div>
                 <label htmlFor="password">Password</label>
-                <input
+                <Input.Password
                     id="password"
                     name="password"
                     type="password"
@@ -66,12 +68,14 @@ const LoginForm = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
+                    visibilityToggle
+                    rootClassName="input-password-login"
                 />
                 {formik.touched.password && formik.errors.password ? (
                     <div className="form-error">* {formik.errors.password}</div>
                 ) : null}
             </div>
-            <button className="primary-button" type="submit">Sign In</button>
+            <button className="primary-button" type="submit">Login</button>
         </form>
     );
 };

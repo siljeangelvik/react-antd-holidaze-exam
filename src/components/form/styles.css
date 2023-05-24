@@ -38,20 +38,31 @@ form > div > label {
 }
 
 /* Input Styling */
-input {
-    max-width: 320px;
+input,
+.input-password-login {
+    max-width: 480px;
+    min-width: 320px;
+    max-height: 37px;
     padding: 10px;
     border-radius: 7px;
     border: 1px solid #ccc;
 }
 
+textarea { max-width: 480px; min-width: 320px; }
+
 input:focus,
 select:focus,
-textarea:focus {
+textarea:focus,
+.input-password-login:focus {
     outline: transparent solid 1px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+.input-password-login:focus {
     box-shadow: 6px 20px 30px -6px rgba(0, 0, 0, 0.1);
 }
 
@@ -93,3 +104,4 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:focus {
     box-shadow: 6px 20px 30px -6px rgba(0, 0, 0, 0.1);
 }
+

@@ -14,13 +14,12 @@ const Info = () => {
         if (rating) {
             setRatingValue(rating);
         }
-
-    }, );
+    }, [rating]);
 
     return (
         <>
             {/* Description, Max Guests, Rating */}
-            <div>
+            <div style={{minWidth:'340px', maxWidth:'480px'}}>
                 <Title level={5}>Description:</Title>
                 <Typography.Paragraph>{specificVenue?.description ? specificVenue?.description : "N/A"}</Typography.Paragraph>
                 <Title level={5}>Max Guests:</Title>

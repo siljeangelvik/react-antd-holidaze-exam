@@ -15,7 +15,8 @@ export const VenuesList = () => {
                     </Typography.Text>
                 ) : (
                     <Typography.Text level={5} style={{fontWeight: "bold"}}>
-                        Venues found: {filteredVenues?.length}
+                        Venues found: {filteredVenues?.length} <br/>
+                        Currently listing <em>({allVenues?.length})</em> venues
                     </Typography.Text>
                 )}
             </Typography.Text>
@@ -27,10 +28,6 @@ export const VenuesList = () => {
                        style={{width: "100%"}}
                 />
             </div>
-
-            <Typography.Text level={5} style={{fontWeight: "bold"}}>
-                Currently listing <em>({allVenues?.length})</em> venues
-            </Typography.Text>
 
             {handleSearch && (
                 <div className="venues-list">

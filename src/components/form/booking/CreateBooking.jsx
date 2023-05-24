@@ -1,16 +1,15 @@
-/*
 import {Typography} from 'antd';
 import Title from 'antd/es/typography/Title';
 import {Content} from 'antd/lib/layout/layout';
 import React, {useContext, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {API_BOOKINGS} from '../utilities/constants';
-import useApiPost from '../hooks/useApiPost';
-import {AuthenticationContext} from '../context/AuthenticationContext';
-import {VenuesContext} from '../context/VenuesContext';
+import {API_BOOKINGS} from '../../../utilities/constants';
+import useApiPost from '../../../hooks/useApiPost';
+import {AuthenticationContext} from '../../../context/AuthenticationContext';
+import {VenuesContext} from '../../../context/VenuesContext';
 
-const BookingCalendar = () => {
+const CreateBooking = () => {
         const [selectedDates, setSelectedDates] = useState([]);
         const [selectedGuests, setSelectedGuests] = useState(1);
 
@@ -192,8 +191,8 @@ const BookingCalendar = () => {
     }
 ;
 
-export default BookingCalendar;
-*/
+export default CreateBooking;
+
 
 // const {id} = useParams();
 // const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);

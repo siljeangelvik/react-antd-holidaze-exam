@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
-import Trigger from '../components/buttons/Trigger';
 import {VenuesList} from '../components/VenuesList';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 
@@ -19,10 +18,6 @@ export default function Home() {
                         <Title level={4}>Find your perfect holiday destination.</Title>
                     )}
                 </Content>
-
-                <div>
-                    <Trigger/>
-                </div>
 
 
                 <VenuesList/>

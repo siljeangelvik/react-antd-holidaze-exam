@@ -90,6 +90,21 @@ body, html, .App {
     background-color: #fff;
 }
 
+.form-content > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder,
+.input-password-login::placeholder {
+    color: #c2c2c2;
+}
+
 /* Define styles for large displays */
 @media screen and (min-width: 720px) {
     .venues-list {

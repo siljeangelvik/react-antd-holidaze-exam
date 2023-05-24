@@ -58,12 +58,15 @@ export const PostVenue = ({onCreate}) => {
 
     // Need to fix the close button to close the modal !!
     return (
-        <div className={'create-venue-modal'}>
+        <div className='create-venue-modal'>
             <button className="secondary-button" onClick={handleToggle}>Close</button>
 
             <div ontoggle={setToggle}>
 
-                <form onSubmit={onSubmit} style={{minWidth: '340px', maxWidth: '340px', margin: '0 auto', paddingTop: '40px'}}>
+                <form
+                    className="form"
+                    onSubmit={onSubmit}
+                      style={{minWidth: '340px', maxWidth: '340px', margin: '0 auto', paddingTop: '40px'}}>
                     <Typography.Title level={2}>Create Venue</Typography.Title>
 
                     <Form.Item label="Name of Venue">

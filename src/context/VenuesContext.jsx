@@ -1,7 +1,7 @@
 import React, {createContext, useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import useApiGet from '../hooks/useApiGet';
-import {API_VENUES} from '../utilities/constants';
+import {API_PROFILE, API_VENUES} from '../utilities/constants';
 import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
@@ -97,6 +97,7 @@ export const VenuesProvider = ({children}) => {
             fetchData(
                 `https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`
             ),
+        getUserVenues: useApiGet(`${API_PROFILE}?_venues=true`),
         disabledDates: (current) => {
             if (!specificVenue || !specificVenue.bookings || specificVenue.bookings.length === 0) {
                 return false;
