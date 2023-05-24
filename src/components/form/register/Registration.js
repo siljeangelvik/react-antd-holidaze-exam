@@ -93,6 +93,7 @@ const RegistrationForm = () => {
                         onChange={handleCheckboxChange}
                         onBlur={formik.handleBlur}
                         checked={formik.values.venueManager}
+
                     />
                     <p>
                         {formik.values.venueManager

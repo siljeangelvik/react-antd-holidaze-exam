@@ -9,7 +9,7 @@ export default function Home() {
 
     return (
         <>
-            <div style={{padding: "80px 40px", height: "95vh", paddingBottom: "140px"}}>
+            <div style={{padding:"80px 0 80px 20px", height: "95vh", paddingBottom: "140px"}}>
                 <Content style={{paddingBottom: "20px"}}>
                     <Title level={1}>Holidaze</Title>
                     {isAuthenticated ? (

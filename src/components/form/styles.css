@@ -38,7 +38,12 @@ form > div > label {
 }
 
 /* Input Styling */
-input,
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
 .input-password-login {
     max-width: 480px;
     min-width: 320px;

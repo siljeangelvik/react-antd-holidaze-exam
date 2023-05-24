@@ -1,20 +1,20 @@
-import {Typography} from 'antd';
+import { Typography } from 'antd';
 import Title from 'antd/es/typography/Title';
-import {Content} from 'antd/lib/layout/layout';
+import { Content } from 'antd/lib/layout/layout';
 import React, {useContext, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {API_BOOKINGS} from '../../../utilities/constants';
+import { API_BOOKINGS } from '../../../utilities/constants';
 import useApiPost from '../../../hooks/useApiPost';
-import {AuthenticationContext} from '../../../context/AuthenticationContext';
-import {VenuesContext} from '../../../context/VenuesContext';
+import { AuthenticationContext } from '../../../context/AuthenticationContext';
+import { VenuesContext } from '../../../context/VenuesContext';
 
 const CreateBooking = () => {
         const [selectedDates, setSelectedDates] = useState([]);
         const [selectedGuests, setSelectedGuests] = useState(1);
 
-        const {isAuthenticated} = useContext(AuthenticationContext);
-        const {allVenues, specificVenue} = useContext(VenuesContext);
+        const { isAuthenticated } = useContext(AuthenticationContext);
+        const { allVenues, specificVenue, userBookings, updateBookings } = useContext(VenuesContext);
 
         const newBookingsList = allVenues?.bookings?.map((booking) => { // map through the bookings list and convert the date strings to date objects
             return {
@@ -72,8 +72,12 @@ const CreateBooking = () => {
             try {
                 const response = await postData(booking);
                 if (response) {
+                    // Handle successful booking
                     console.log('Booking successful, Response:', response);
                     console.log('Booking successful, Booking:', booking);
+
+                    // Update the bookings in the context
+                    updateBookings([...userBookings, booking]);
 
                     alert(JSON.stringify(booking, null, 2));
                     return response;
@@ -82,12 +86,6 @@ const CreateBooking = () => {
                 }
             } catch (error) {
                 console.error('Error posting booking:', error);
-            }
-            if (isLoading) {
-                return console.log('Booking is loading');
-            }
-            if (isError) {
-                return console.log('Booking failed', data.errors[0].message);
             }
         };
 

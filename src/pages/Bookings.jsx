@@ -6,7 +6,7 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const {userBookings, updateBookings} = useContext(VenuesContext);
+    const {updateBookings} = useContext(VenuesContext);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
 
     return (
@@ -20,7 +20,7 @@ function Bookings() {
                             bookings.
                         </Title>}
                 </Content>
-                <BookingsList userBookings={userBookings && updateBookings} /> {/* Pass the bookings state */}
+                <BookingsList userBookings={updateBookings} /> {/* Pass the bookings state */}
             </div>
         </>
     );
