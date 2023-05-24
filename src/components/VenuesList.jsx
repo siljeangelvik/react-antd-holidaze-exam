@@ -20,7 +20,6 @@ export const VenuesList = () => {
                     </Typography.Text>
                 )}
             </Typography.Text>
-
             <div style={{width: "320px", paddingBottom: "40px", paddingTop: "10px"}}>
                 <input type="text"
                        placeholder="Search Venues..."
@@ -28,7 +27,6 @@ export const VenuesList = () => {
                        style={{width: "100%"}}
                 />
             </div>
-
             {handleSearch && (
                 <div className="venues-list">
                     {filteredVenues.map((venue) => (

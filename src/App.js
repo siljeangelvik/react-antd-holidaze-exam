@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
@@ -41,7 +41,6 @@ function App() {
                         fontWeightMedium: 500,
                         fontWeightBold: 700,
                     },
-
                     token: {
                         colorPrimary: '#ff9900',
                         colorFillSecondary: '#00bbf9',
@@ -49,7 +48,6 @@ function App() {
                 }}
             >
                 <CssBaseline/>
-
                 <Content className={"App"}>
                     <Routes>
                         <Route path="/" element={<Layout/>}>
@@ -58,14 +56,12 @@ function App() {
                                     <Home/>
                                 </VenuesProvider>}
                             />
-
                             <Route path="/details/:id"
                                    element={
                                        <VenuesProvider>
                                            <Details/>
                                        </VenuesProvider>}
                             />
-
                             <Route path="/profile/:name"
                                    element={
                                        <VenuesProvider>
@@ -74,7 +70,6 @@ function App() {
                                            </ProtectedRoute>
                                        </VenuesProvider>}
                             />
-
                             <Route path="/bookings"
                                    element={
                                        <VenuesProvider>
@@ -83,7 +78,6 @@ function App() {
                                            </ProtectedRoute>
                                        </VenuesProvider>}
                             />
-
                             <Route path="/venues"
                                    element={
                                        <VenuesProvider>
@@ -92,7 +86,6 @@ function App() {
                                            </ProtectedRoute>
                                        </VenuesProvider>}
                             />
-
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="*" element={<NotFound/>}/>

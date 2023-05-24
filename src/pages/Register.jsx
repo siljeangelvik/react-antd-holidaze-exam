@@ -14,11 +14,9 @@ function Register(onSubmit) {
                     <Title level={1}>Register</Title>
                     <Title level={4}>Sign up for a new account!</Title>
                 </Content>
-
                 <Content style={{paddingBottom: "20px"}}>
                     <Registration onSubmit={onSubmit} />
                 </Content>
-
                 <Typography>Already have an account? <Link to="/login" style={{fontWeight:"bold"}}>Login</Link></Typography>
             </div>
         </>

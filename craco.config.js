@@ -1,10 +1,3 @@
-/*
-const myMiddleware = (req, res, next) => {
-    // ... do something
-    next();
-};
-*/
-
 module.exports = {
     webpack: {
         // ... your webpack config

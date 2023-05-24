@@ -8,12 +8,11 @@ import useCheckMediaProperty from '../hooks/useCheckMediaProperty';
 import {formatCurrency} from '../utilities/formatCurrency';
 
 const VenueItem = ({venue}) => {
+    // Destructure the necessary properties from the venue object
     const {id, name, media, description, price, maxGuests, number, bookings} = venue;
 
+    // Use the useCheckMediaProperty hook to get the correct media value
     const mediaType = useCheckMediaProperty(media);
-
-    console.log(mediaType);
-    console.log(media);
 
     /*
     const mediaCarousel = () => {
@@ -63,34 +62,31 @@ const VenueItem = ({venue}) => {
                         borderRadius: '5px',
                         height: '435px',
                     }}
-                    cover={media ? (
-                       <Carousel
+                    cover={mediaType.length > 0 ? (
+                        <Carousel
                             autoplay
                             autoplaySpeed={3000}
                             pauseOnHover={true}
                             style={{
-                                 height: '213px',
-                                 overflow: 'hidden',
-                                 borderRadius: '5px',
-                                }}
-                        >
-                            {media.map((media, index) => {
-                                return (
-                                    <Image
-                                        key={index}
-                                        src={media}
-                                        alt={name}
-                                        width="100%"
-                                        height="213px"
-                                        loading="lazy"
-                                        aria-label={name}
-                                    />
-                                );
-                            })}
+                                height: '213px',
+                                overflow: 'hidden',
+                                borderRadius: '5px',
+                            }}
+                        > {mediaType.map((media, index) => {
+                            return (
+                                <Image
+                                    key={index}
+                                    src={media}
+                                    alt={name}
+                                    width="100%"
+                                    height="213px"
+                                    loading="lazy"
+                                    aria-label={name}/>);
+                        })}
                         </Carousel>
                     ) : (
                         <Image
-                            src={mediaType}
+                            src={mediaType[0]}
                             alt={name}
                             width="100%"
                             height="213px"
@@ -99,14 +95,17 @@ const VenueItem = ({venue}) => {
                         />
                     )}
                 >
-                    <Title level={4}
-                           style={{
-                               overflow: 'hidden',
-                               whiteSpace: 'nowrap',
-                               textOverflow: 'ellipsis',
-                               maxWidth: '85ch',
-                           }}
-                    >{capitalize(name)}</Title>
+                    <Title
+                        level={4}
+                        style={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: '85ch',
+                        }}
+                    >
+                        {capitalize(name)}
+                    </Title>
                     <Content>
                         <Typography>{number}</Typography>
                         <Typography.Paragraph

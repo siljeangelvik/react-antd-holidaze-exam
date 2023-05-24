@@ -1,6 +1,13 @@
-# React AntDesign "Holidaze" Exam
+# React "Holidaze" Exam
+
+#### 😂 Here is a random joke that'll make you laugh!
+![Jokes Card](https://readme-jokes.vercel.app/api?hideBorder&theme=cobalt&bgColor=%transparent)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)
+![Hello](https://img.shields.io/static/v1?label=exam&message=holidaze&color=orange)
+![GitHub last commit](https://img.shields.io/github/last-commit/siljeangelvik/react-antd-holidaze-exam?&color=ff69b4)  
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/siljeangelvik/react-antd-holidaze-exam?&color=blue)
+![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/r/rating/R4Intellij?&color=blueviolet)  
 
 **Student:** [Silje Angelvik](https://github.com/siljeangelvik)    
 **Host:** [Netlify](https://exam-holidaze.netlify.app/)  
@@ -41,7 +48,9 @@ a profile page and a detail page for each venue.
 ![React Router](https://img.shields.io/badge/React%20Router-CA4245.svg?style=for-the-badge&logo=React-Router&logoColor=white)  
 ![AntDesign](https://img.shields.io/badge/Ant%20Design-0170FE.svg?style=for-the-badge&logo=Ant-Design&logoColor=white)
 ![Material Design](https://img.shields.io/badge/MUI-007FFF.svg?style=for-the-badge&logo=MUI&logoColor=white)
-![Netlify](https://img.shields.io/badge/Netlify-00C7B7.svg?style=for-the-badge&logo=Netlify&logoColor=white)
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7.svg?style=for-the-badge&logo=Netlify&logoColor=white)  
+![shields.io](https://img.shields.io/badge/shields.io-000000.svg?style=for-the-badge&logo=shields.io&logoColor=white) 
+![Yarn](https://img.shields.io/badge/Yarn-2C8EBB.svg?style=for-the-badge&logo=Yarn&logoColor=white)
 
 ## Resources
 [Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  
@@ -83,8 +92,12 @@ a profile page and a detail page for each venue.
 [RTK-Example GitHub](https://github.com/jonfossheim/RTK-Example/tree/main/src/pages)  
 [Starter React GitHub](https://github.com/jonfossheim/starter-react/blob/main/package.json)  
 [5 Custom React Hooks](https://www.youtube.com/watch?v=0c6znExIqRw)  
-[Infinite Scroll AntDTS Mobile](https://www.typescriptlang.org/play?skipLibCheck=true&jsx=1&ssl=24&ssc=2&pln=1&pc=1&filetype=js#code/JYWwDg9gTgLgBAJQKYEMDGMA0cDecCuAzkgMowoxJwC+cAZlBCHAORSoYsBQoksucAJIA7OsGHBKJNIwA2s7ABlgheLQZNWKYTAAmAWhAQARsFlJuvaPDxG0Aa2QBHfElU16jZiwB0Aejt7fXYXNxhuLiQADz54XSQ6FHxZeAAKAEo4AF4APlwuODg0CGF3AG1dChRsYhgAESqAXWyCYjIKJAAeVShxAHMyxpzUwfSCopLygAsUQgBZaCQapBgACVmF9mas1tJySlSYKFcxwtmAT2E0enwrmGASuFkIFF1NpAz8wsLi0vgUMBgJDCXQtFAAdxQkjggWcrlUGXGhVqDXIqQAbihZNk8mUfPjMQo4PifACgSDGqdvrV1vNFqkycDdD5zMI+jApnA8gAGKnULjjdgwfBQYRwVJIuCdHKSwqdZSqGXfZW4SrkHwgAGpVKSJAgbDieJRTK5cWylXylQwHyCSjMexIc5ZHCG6LUHIuu3UTp+BXW216pUqwrpdL84M+v1B5WdERiCRSGQQeRPF5vRbO56vd60GZ09jOvM5uB+aNS0vjMbUIA)  
-
+[Infinite Scroll AntDTS Mobile](https://www.typescriptlang.org/play?skipLibCheck=true&jsx=1&ssl=24&ssc=2&pln=1&pc=1&filetype=js#code/JYWwDg9gTgLgBAJQKYEMDGMA0cDecCuAzkgMowoxJwC+cAZlBCHAORSoYsBQoksucAJIA7OsGHBKJNIwA2s7ABlgheLQZNWKYTAAmAWhAQARsFlJuvaPDxG0Aa2QBHfElU16jZiwB0Aejt7fXYXNxhuLiQADz54XSQ6FHxZeAAKAEo4AF4APlwuODg0CGF3AG1dChRsYhgAESqAXWyCYjIKJAAeVShxAHMyxpzUwfSCopLygAsUQgBZaCQapBgACVmF9mas1tJySlSYKFcxwtmAT2E0enwrmGASuFkIFF1NpAz8wsLi0vgUMBgJDCXQtFAAdxQkjggWcrlUGXGhVqDXIqQAbihZNk8mUfPjMQo4PifACgSDGqdvrV1vNFqkycDdD5zMI+jApnA8gAGKnULjjdgwfBQYRwVJIuCdHKSwqdZSqGXfZW4SrkHwgAGpVKSJAgbDieJRTK5cWylXylQwHyCSjMexIc5ZHCG6LUHIuu3UTp+BXW216pUqwrpdL84M+v1B5WdERiCRSGQQeRPF5vRbO56vd60GZ09jOvM5uB+aNS0vjMbUIA)    
+[GitHub README Badges](https://github.com/anuraghazra/github-readme-stats)  
+[Top 5 Badges for you Repository](https://www.makeuseof.com/badges-that-will-supercharge-your-github-repository/)    
+[Random Joke Generator](https://github.com/ABSphreak/readme-jokes)  
+[GitHub Badges Theme](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)  
+[Shields.io](https://shields.io/)  
 
 # Getting Started with Create React App
 

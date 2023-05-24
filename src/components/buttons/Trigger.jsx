@@ -2,7 +2,6 @@ import React from 'react';
 import successLogin from '../alerts/SuccessLogin';
 
 const Trigger = () => {
-
     const handleTrigger = () => {
         successLogin();
         console.log('triggered');

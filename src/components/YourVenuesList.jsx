@@ -8,7 +8,6 @@ import EmptyTab from './profile/EmptyTab';
 
 function YourVenuesList() {
     const [venues, setVenues] = useState([]); // [
-
     const {userVenues, getUserVenues} = useContext(VenuesContext);
     const { userProfile } = useContext(AuthenticationContext);
 
@@ -16,18 +15,16 @@ function YourVenuesList() {
         if (userProfile?.venues?.length > 0) {
             setVenues(getUserVenues);
         }
-    }, [userProfile, venues, userVenues]);
+    }, [userProfile, venues, userVenues, getUserVenues]);
 
     return (
         <Content style={{ paddingBottom: '40px' }}>
-
             <Row gutter={[16, 16]} style={{ display: 'flex', flexWrap: 'wrap', rowGap: '50px' }}>
                 {venues.length > 0 ? (
                     venues.map((venue) => (
                         <Col key={venue.id} xs={24} sm={12} md={10} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
                             {venue.venue && <VenueItem venue={venue.venue} />}
-                        </Col>
-                    ))
+                        </Col>))
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <EmptyTab />

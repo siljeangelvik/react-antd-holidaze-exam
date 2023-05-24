@@ -105,6 +105,12 @@ textarea::placeholder,
     color: #c2c2c2;
 }
 
+.carousel-image {
+    min-width: 320px;
+    max-width: 480px;
+    height: auto;
+}
+
 /* Define styles for large displays */
 @media screen and (min-width: 720px) {
     .venues-list {

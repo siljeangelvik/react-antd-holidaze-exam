@@ -13,9 +13,7 @@ import {VenuesContext} from '../context/VenuesContext';
 const PerfectCalendar = () => {
     const [selectedDates, setSelectedDates] = useState([]);
     const [selectedGuests, setSelectedGuests] = useState(1);
-
     const {isAuthenticated} = useContext(AuthenticationContext);
-
     const {specificVenue, disabledDates} = useContext(VenuesContext);
 
     const handleDateClick = (date) => {
@@ -55,7 +53,6 @@ const PerfectCalendar = () => {
         venueId: specificVenue?.id,
     };
 
-
     const {
         data,
         isLoading,
@@ -64,7 +61,6 @@ const PerfectCalendar = () => {
     } = useApiPost("https://nf-api.onrender.com/api/v1/holidaze/bookings?_customer=true&_venue=true");
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         try {
             const response = await postData(booking);
             if (response) {
@@ -84,7 +80,6 @@ const PerfectCalendar = () => {
             return console.log('Booking failed', data.errors[0].message);
         }
     };
-
 
     return (
         <>
@@ -180,13 +175,10 @@ const PerfectCalendar = () => {
                             );
                         }}
                     />
-
-
                     <div>
                         {selectedDates && selectedDates.length >= 1 ? (
                             <div style={{display: "flex", flexDirection: "column"}}>
                                 <Title level={5}>Your selected dates</Title>
-
                                 <Typography.Text type="secondary">
                                     <CalendarOutlined/>{" "}
                                     <Typography.Text type="secondary">
@@ -204,8 +196,6 @@ const PerfectCalendar = () => {
                                         ( {selectedDates.length} {selectedDates.length > 1 ? "nights" : "night"} )
                                     </Typography.Text>
                                 </Typography.Text>
-
-
                                 <Typography.Text type="secondary">
                                     <CalendarOutlined/>{" "}
                                     <Typography.Text type="secondary">
@@ -216,12 +206,7 @@ const PerfectCalendar = () => {
                                     </Typography.Text>
                                 </Typography.Text>
                             </div>
-                        ) : (
-                            <div>
-                                <Title level={5}>Please select your dates</Title>
-                            </div>
-                        )}
-
+                        ) : (<div><Title level={5}>Please select your dates</Title></div>)}
                         {selectedGuests && selectedGuests > 0 ? (
                             <div>
                                 <Title level={5}>Your selected guests</Title>
@@ -234,29 +219,12 @@ const PerfectCalendar = () => {
                                         {selectedGuests > 1 ? "guests" : "guest"}
                                     </Typography.Text>
                                 </Typography.Text>
-                            </div>
-                        ) : (
-                            <div>
-                                <Title level={5}>Please select your guests</Title>
-                            </div>
-                        )}
+                            </div>) : (<div><Title level={5}>Please select your guests</Title></div>)}
                     </div>
-
-
                     {/* GUESTS - SELECT & DISPLAY */}
                     <div>
-                        {selectedGuests <= 0 &&
-                            <Typography.Text level={5} type="danger">
-                                Please select a valid number of guests
-                            </Typography.Text>
-                        }
-
-                        {selectedGuests > specificVenue?.maxGuests &&
-                            <Typography.Text level={5} type="danger">
-                                You have exceeded the maximum amount of guests allowed
-                            </Typography.Text>
-                        }
-
+                        {selectedGuests <= 0 && <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
+                        {selectedGuests > specificVenue?.maxGuests && <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests allowed</Typography.Text>}
                         <div style={{display: "flex", flexDirection: "column"}}>
                             <Title level={5}>Select your guests</Title>
                             <Select
@@ -273,24 +241,12 @@ const PerfectCalendar = () => {
                                     ))}
                             </Select>
                         </div>
-
                     </div>
-
-
                     {/* BUTTON - BOOK NOW */}
                     <div style={{paddingTop: "10px", paddingBottom: "10px"}}>
                         {isAuthenticated && selectedGuests && selectedDates.length >= 1 && selectedGuests <= specificVenue?.maxGuests
-                            ? (
-                                <button type="submit" className="primary-button">
-                                    Book Now
-                                </button>)
-
-                            : (
-                                <button type="submit" className="primary-button" disabled>
-                                    Please select your dates and guests
-                                </button>
-                            )}
-
+                            ? (<button type="submit" className="primary-button">Book Now</button>)
+                            : (<button type="submit" className="primary-button" disabled>Please select your dates and guests</button>)}
                         {!isAuthenticated &&
                             <Link to="/login">
                                 <Title level={5} type="danger">* You need to be logged in to book</Title>

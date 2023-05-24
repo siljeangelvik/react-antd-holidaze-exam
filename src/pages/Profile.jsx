@@ -21,7 +21,6 @@ function Profile() {
                 <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                     <UpdateAvatar/>
                 </Content>
-
                 <Content style={{minHeight: "250px", width: "320px", margin: "0 auto"}}>
                     <Content style={{
                         display: "flex",

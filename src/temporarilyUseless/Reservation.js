@@ -82,4 +82,5 @@ const LoginForm = ({bookingData}) => {
     );
 };
 
-export default LoginForm;/*
+export default LoginForm;
+*/

@@ -93,11 +93,8 @@ const CreateBooking = () => {
 
         return (
             <div>
-                {disabledDates?.map((date) => (
-                    <div key={date.toDateString()}>{date.toDateString()}</div>
-                ))}
+                {disabledDates?.map((date) => (<div key={date.toDateString()}>{date.toDateString()}</div>))}
                 {newBookingsList}
-
                 {isLoading && <div>Loading...</div>}
                 {isError && <div>{data.errors[0].message}</div>}
                 <form onSubmit={handleSubmit}>
@@ -109,9 +106,7 @@ const CreateBooking = () => {
                         minDate={new Date()}
                         selectRange={true}
                         tileDisabled={({date}) =>
-                            disabledDates?.some((disabledDate) =>
-                                date >= disabledDate.dateFrom && date <= disabledDate.dateTo
-                            )
+                            disabledDates?.some((disabledDate) => date >= disabledDate.dateFrom && date <= disabledDate.dateTo)
                         }
                         tileClassName={({date}) =>
                             selectedDates.length === 2 &&
@@ -120,22 +115,18 @@ const CreateBooking = () => {
                             "selected-range"
                         }
                     />
-
                     <Content style={{paddingTop: "20px"}}>
                         <Title level={5}>Your selected dates</Title>
-
                         {selectedDates.length === 0 && (
                             <Typography.Text type="secondary">
                                 Please select a date range
                             </Typography.Text>
                         )}
-
                         {selectedDates.length === 1 && (
                             <Typography.Text type="secondary">
                                 Please select an end date
                             </Typography.Text>
                         )}
-
                         {selectedDates.length === 2 && (
                             <Typography.Text type="secondary">
                                 {selectedDates[0].toDateString()} - {" "}
@@ -147,10 +138,8 @@ const CreateBooking = () => {
                     <Content style={{paddingBottom: "20px"}}>
                         <Title level={5}>Your selected {selectedGuests} number of guests</Title>
                     </Content>
-
                     <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                        <button type="button" className={"primary-button increase-decrease-buttons"} onClick={() => {
-                            setSelectedGuests(selectedGuests - 1)
+                        <button type="button" className={"primary-button increase-decrease-buttons"} onClick={() => {setSelectedGuests(selectedGuests - 1)
                         }}>-
                         </button>
                         <input onChange={(e) => setSelectedGuests(e.target.value)} type="text" value={selectedGuests}
@@ -161,40 +150,15 @@ const CreateBooking = () => {
                         }}>+
                         </button>
                     </div>
-
-                    {selectedGuests <= 0 &&
-                        <Typography.Text level={5} type="danger">
-                            Please select a valid number of guests
-                        </Typography.Text>
-                    }
-
+                    {selectedGuests <= 0 && <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
                     {selectedGuests > specificVenue?.maxGuests && selectedGuests <= 0 && "Please select a valid number of guests"}
-
-                    {selectedGuests > specificVenue?.maxGuests &&
-                        <Typography.Text level={5} type="danger">
-                            You have exceeded the maximum amount of guests allowed
-                        </Typography.Text>
-                    }
-
-
+                    {selectedGuests > specificVenue?.maxGuests && <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests allowed</Typography.Text>}
                     <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
-                        {selectedGuests > 0 && selectedGuests <= specificVenue?.maxGuests && selectedDates.length >= 1 && isAuthenticated
-                            && (
-                                <button type="submit" className="primary-button">
-                                    Book Now
-                                </button>)
-                        }
+                        {selectedGuests > 0 && selectedGuests <= specificVenue?.maxGuests && selectedDates.length >= 1 && isAuthenticated && (<button type="submit" className="primary-button">Book Now</button>)}
                     </Content>
                 </form>
             </div>
         );
     }
-;
 
 export default CreateBooking;
-
-
-// const {id} = useParams();
-// const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
-// https://nf-api.onrender.com/api/v1/holidaze/venues/0b421a07-f14d-4faa-825a-3b274c73355f?_bookings=true
-// 0b421a07-f14d-4faa-825a-3b274c73355f

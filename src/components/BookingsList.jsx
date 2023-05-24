@@ -19,7 +19,6 @@ function BookingsList() {
 
     return (
         <Content style={{ paddingBottom: '40px' }}>
-
             <Row gutter={[16, 16]} style={{ display: 'flex', flexWrap: 'wrap', rowGap: '50px' }}>
                 {bookings.length > 0 ? (
                     bookings.map((booking) => (
@@ -30,12 +29,10 @@ function BookingsList() {
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <EmptyTab />
-                    </div>
-                )}
+                    </div>)}
             </Row>
         </Content>
     );
 }
-
 
 export default BookingsList;

@@ -23,12 +23,10 @@ const LoginForm = () => {
                 if (data) {
                     return handleUserLogin(data, userFormData);
                 }
-
                 return userFormData;
             } catch (error) {
                 console.log(error);
             }
-
         },
     });
 

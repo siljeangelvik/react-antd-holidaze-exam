@@ -7,13 +7,10 @@ export const Guests = () => {
     const [count, setCount] = useState(1);
 
     const handleDecrement = () => {
-
         if (count < 1) {
             setCount(1);
         }
-
         setCount(- 1);
-
     };
 
     const handleIncrement = () => {

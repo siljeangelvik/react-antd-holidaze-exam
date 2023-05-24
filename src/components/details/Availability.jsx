@@ -5,7 +5,7 @@ import {VenuesContext} from '../../context/VenuesContext';
 
 const Availability = () => {
     const {specificVenue} = useContext(VenuesContext);
-    console.log(specificVenue?.bookings?.length, 'specificVenue?.bookings?.length - Availability');
+   // console.log(specificVenue?.bookings?.length, 'specificVenue?.bookings?.length - Availability');
 
     return (
         <>
@@ -16,7 +16,6 @@ const Availability = () => {
                 : (<h4><span style={{color: "#7d7d7d"}}>{specificVenue?.name}</span> currently got <em>{specificVenue?.bookings.length}</em> {specificVenue?.bookings.length === 1 ? " booking" : " bookings"}
                 </h4>)
             }
-
             <CreateBooking />
         </>
     );

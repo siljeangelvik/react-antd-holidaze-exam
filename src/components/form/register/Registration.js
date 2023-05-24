@@ -54,9 +54,7 @@ const RegistrationForm = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
                 />
-                {formik.touched.name && formik.errors.name ? (
-                    <div className="form-error">* {formik.errors.name}</div>
-                ) : null}
+                {formik.touched.name && formik.errors.name ? (<div className="form-error">* {formik.errors.name}</div>) : null}
             </div>
             <div>
                 <label htmlFor="email">Email</label>
@@ -69,9 +67,7 @@ const RegistrationForm = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
                 />
-                {formik.touched.email && formik.errors.email ? (
-                    <div className="form-error">* {formik.errors.email}</div>
-                ) : null}
+                {formik.touched.email && formik.errors.email ? (<div className="form-error">* {formik.errors.email}</div>) : null}
             </div>
             <div>
                 <label htmlFor="password">Password</label>
@@ -84,9 +80,7 @@ const RegistrationForm = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
                 />
-                {formik.touched.password && formik.errors.password ? (
-                    <div className="form-error">* {formik.errors.password}</div>
-                ) : null}
+                {formik.touched.password && formik.errors.password ? (<div className="form-error">* {formik.errors.password}</div>) : null}
             </div>
             <div>
                 <label htmlFor="venueManager">Venue Manager</label>
@@ -106,9 +100,7 @@ const RegistrationForm = () => {
                             : 'No, I don\'t want to register as manager'}
                     </p>
                 </div>
-                {formik.touched.venueManager && formik.errors.venueManager ? (
-                    <div className="form-error">* {formik.errors.venueManager}</div>
-                ) : null}
+                {formik.touched.venueManager && formik.errors.venueManager ? (<div className="form-error">* {formik.errors.venueManager}</div>) : null}
             </div>
             <button className="primary-button" type="submit">Sign up</button>
         </form>

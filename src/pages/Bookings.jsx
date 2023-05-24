@@ -20,7 +20,6 @@ function Bookings() {
                             bookings.
                         </Title>}
                 </Content>
-
                 <BookingsList userBookings={userBookings && updateBookings} /> {/* Pass the bookings state */}
             </div>
         </>

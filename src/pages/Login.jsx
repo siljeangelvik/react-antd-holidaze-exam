@@ -17,7 +17,6 @@ function Login(onSubmit) {
                 <Content style={{paddingBottom: "20px"}}>
                     <LoginForm onSubmit={onSubmit}/>
                 </Content>
-
                 <Typography>Don't have an account? <Link to="/register" style={{fontWeight:"bold"}}>Register</Link></Typography>
             </div>
         </>

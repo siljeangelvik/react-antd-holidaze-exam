@@ -18,8 +18,6 @@ function Venues() {
         setToggle(!toggle);
     };
 
-    console.log(userHasVenues);
-
     return (
         <>
             <div style={{padding: "80px 40px", minHeight: "95vh"}}>
@@ -28,21 +26,15 @@ function Venues() {
                     <Title level={4}>Hi {userProfile?.name}, you are currently
                         managing <em>{userProfile?.venues?.length}</em> venues.</Title>
                 </Content>
-
                 <div style={{display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "space-between"}}>
                     <button className={"primary-button"} onClick={setToggle}>Create a Venue</button>
                     <EditVenues /> {/* Button to edit bookings */}
                     {userHasVenues && <button className={"secondary-button"}>Edit a Venue</button>}
                     {userHasVenues && <button className={"secondary-button"} onClick={setToggle}>Delete a Venue</button>}
                 </div>
-
                 {toggle &&  <CreateVenue handleToggle={handleToggle}/>}
                 <VenuesTable/>
-
-                {/*
-                 {toggle && <PostVenue handleToggle={handleToggle}/>}
-                */}
-
+                {/*  {toggle && <PostVenue handleToggle={handleToggle}/>}  */}
                 <YourVenuesList/>
             </div>
         </>

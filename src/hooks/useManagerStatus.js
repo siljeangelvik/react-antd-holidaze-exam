@@ -5,15 +5,12 @@ function useManagerStatus() {
     const manager = localStorage.getItem('venueManager');
 
     useEffect(() => {
-
         if (manager === true || manager === 'true') {
             setIsManager(true)
         } else {
             setIsManager(false)
         }
-
     }, [manager]);
-
     return isManager;
 }
 

@@ -18,8 +18,6 @@ export default function Home() {
                         <Title level={4}>Find your perfect holiday destination.</Title>
                     )}
                 </Content>
-
-
                 <VenuesList/>
             </div>
         </>

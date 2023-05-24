@@ -17,8 +17,6 @@ function CreateVenue() {
         }
     };
 
-    console.log("Create Venue");
-
     return (
         <>
             <Form layout="vertical" style={{minWidth: "320px", maxWidth: "600px", margin: "0 auto"}}>
@@ -36,7 +34,6 @@ function CreateVenue() {
                         }}
                     />
                 </Form.Item>
-
                 <Form.Item label="Description of Venue">
                     <TextArea
                         type="string"
@@ -48,7 +45,6 @@ function CreateVenue() {
                         }}
                     />
                 </Form.Item>
-
                 <Form.Item label="Images of Venue">
                     <input
                         type="[string]"
@@ -63,7 +59,6 @@ function CreateVenue() {
                         }}
                     />
                 </Form.Item>
-
                 <Form.Item label="Price of Venue /night">
                     <input
                         type="number"
@@ -78,7 +73,6 @@ function CreateVenue() {
                         }}
                     />
                 </Form.Item>
-
                 <Form.Item label="Max Guests">
                     <input
                         type="number"
@@ -93,14 +87,12 @@ function CreateVenue() {
                         }}
                     />
                 </Form.Item>
-
                 <Form.Item label="Amenities">
                     <Checkbox onChange={onChange}>WiFi Included</Checkbox>
                     <Checkbox onChange={onChange}>Parking Included</Checkbox>
                     <Checkbox onChange={onChange}>Breakfast Included</Checkbox>
                     <Checkbox onChange={onChange}>Pets Allowed</Checkbox>
                 </Form.Item>
-
                 <Button onChange={(e) => setValue(e.target.value)}
                         type="primary" htmlType="submit" style={{width: "100%"}}>
                     Create Venue

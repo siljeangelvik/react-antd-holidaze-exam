@@ -7,9 +7,7 @@ function Details() {
 
     return (
         <div style={{padding: "80px 40px", paddingBottom: "120px", height: "95vh"}}>
-
             <Button type="primary"><Link to={`/`}>Back Home</Link></Button>
-
             <VenueDetails/>
         </div>
     );

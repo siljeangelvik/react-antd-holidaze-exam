@@ -5,16 +5,13 @@ import {Content} from 'antd/lib/layout/layout';
 import {useFormik} from 'formik';
 import React, {useContext, useState} from 'react';
 import 'react-calendar/dist/Calendar.css';
-import {VenuesContext} from '../../../context/VenuesContext';
 import {venueSchema} from './schema';
 import {API_VENUES} from '../../../utilities/constants';
 import useApiPost from '../../../hooks/useApiPost';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 
 const CreateVenue = () => {
-
-        const {isAuthenticated} = useContext(AuthenticationContext);
-        const {allVenues} = useContext(VenuesContext);
+     const {isAuthenticated} = useContext(AuthenticationContext);
         /*
                 const newVenue = {
                     name: "string", // Required
@@ -78,18 +75,6 @@ const CreateVenue = () => {
                     console.log(error);
                 }
             },
-            /*  onSubmit: async (userFormData) => {
-                  try {
-                      const response = await postData(userFormData);
-                      if (response) {
-                          console.log('New Venue Successfully Created', response);
-                          return postVenueData(response, userFormData);
-                      }
-                      return userFormData;
-                  } catch (error) {
-                      console.log(error);
-                  }
-              }, */
         });
 
         return (
@@ -257,12 +242,5 @@ const CreateVenue = () => {
             </div>
         );
     }
-;
 
 export default CreateVenue;
-
-
-// const {id} = useParams();
-// const {data} = useApiGet(`${API_VENUES}/${id}?_bookings=true`);
-// https://nf-api.onrender.com/api/v1/holidaze/venues/0b421a07-f14d-4faa-825a-3b274c73355f?_bookings=true
-// 0b421a07-f14d-4faa-825a-3b274c73355f

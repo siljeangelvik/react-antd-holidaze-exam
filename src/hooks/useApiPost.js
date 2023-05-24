@@ -45,11 +45,3 @@ function useApiPost(url) {
 }
 
 export default useApiPost;
-
-/*
- localStorage.setItem('accessToken', json.accessToken);
-            localStorage.setItem('name', json.name);
-            localStorage.setItem('email', json.email);
-            localStorage.setItem('avatar', json.avatar);
-            localStorage.setItem('venueManager', json.venueManager);
-*/

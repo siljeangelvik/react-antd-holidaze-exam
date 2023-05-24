@@ -13,7 +13,6 @@ function NotFound() {
                     <Title level={1}>404</Title>
                     <Title level={4}>Oops, sorry...Page not found!</Title>
                 </Content>
-
                 <Result
                     status="404"
                     title="404"

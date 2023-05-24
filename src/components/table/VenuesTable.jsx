@@ -3,7 +3,6 @@ import {useContext, useEffect, useState} from 'react';
 import {VenuesContext} from '../../context/VenuesContext';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 
-
 const columns = [
     {
         title: 'Name',
@@ -79,17 +78,14 @@ const columns = [
 
 const VenuesTable = () => {
     const [venues, setVenues] = useState([]);
-
     const {userVenues} = useContext(VenuesContext);
     const { userProfile } = useContext(AuthenticationContext);
-
 
     useEffect(() => {
         if (userProfile?.venues?.length > 0) {
             setVenues(userProfile?.venues);
         }
     }, [userProfile, venues, userVenues]);
-
 
     const data = [
         {
@@ -100,9 +96,9 @@ const VenuesTable = () => {
             tags: ['cool', 'teacher'],
         },
     ]
-
     return (
         <Table columns={columns} dataSource={data} />
     );
 };
+
 export default VenuesTable;

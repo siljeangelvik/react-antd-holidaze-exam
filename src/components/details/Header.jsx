@@ -7,9 +7,7 @@ import {formatCurrency} from '../../utilities/formatCurrency';
 
 const Header = () => {
     const {specificVenue} = useContext(VenuesContext);
-
     const media = specificVenue?.media;
-
     const mediaType = useCheckMediaProperty(media);
 
     return (
@@ -18,7 +16,7 @@ const Header = () => {
             <div>
                 <Title level={1}>{specificVenue?.name}</Title>
                 <Title level={4}>{formatCurrency(specificVenue?.price)} / night</Title>
-                {media ? (
+                {mediaType.length > 0 ? (
                     <Carousel
                         autoplay
                         autoplaySpeed={3000}
@@ -28,24 +26,28 @@ const Header = () => {
                             overflow: 'hidden',
                             borderRadius: '5px',
                         }}
-                    >
-                        {media.map((media, index) => {
-                            return (
-                                <Image
-                                    key={index}
-                                    src={media}
-                                    alt={specificVenue?.name}
-                                    width="100%"
-                                    height="213px"
-                                    loading="lazy"
-                                    aria-label={specificVenue?.name}
-                                />
-                            );
-                        })}
+                    > {mediaType.map((media, index) => {
+                        return (
+                            <Image
+                                key={index}
+                                src={media}
+                                alt={specificVenue?.name}
+                                width="100%"
+                                height="auto"
+                                loading="lazy"
+                                aria-label={specificVenue?.name}
+                                style={{
+                                    objectFit: 'cover',
+                                    height: '213px',
+                                    overflow: 'hidden',
+                                    borderRadius: '5px',
+                                }}
+                            />);
+                    })}
                     </Carousel>
                 ) : (
                     <Image
-                        src={mediaType}
+                        src={mediaType[0]}
                         alt={specificVenue?.name}
                         width="100%"
                         height="213px"
@@ -53,15 +55,9 @@ const Header = () => {
                         aria-label={specificVenue?.name}
                     />
                 )}
-
-                {/*
-                                <Image src={specificVenue?.media ? specificVenue?.media : "https://via.placeholder.com/150"} alt={specificVenue?.name} style={{maxWidth:"640px"}}/>
-                */}
                 <div style={{display: "flex", gap: "40px", fontSize: "12px"}}>
-                    <p><strong>Created:</strong><em
-                        style={{display: "block"}}>{new Date(specificVenue?.created).toDateString()}</em></p>
-                    <p><strong>Last Updated:</strong><em
-                        style={{display: "block"}}>{new Date(specificVenue?.updated).toDateString()}</em></p>
+                    <p><strong>Created:</strong><em style={{display: "block"}}>{new Date(specificVenue?.created).toDateString()}</em></p>
+                    <p><strong>Last Updated:</strong><em style={{display: "block"}}>{new Date(specificVenue?.updated).toDateString()}</em></p>
                 </div>
             </div>
         </>
