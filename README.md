@@ -97,7 +97,14 @@ a profile page and a detail page for each venue.
 [Top 5 Badges for you Repository](https://www.makeuseof.com/badges-that-will-supercharge-your-github-repository/)    
 [Random Joke Generator](https://github.com/ABSphreak/readme-jokes)  
 [GitHub Badges Theme](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)  
-[Shields.io](https://shields.io/)  
+[Shields.io](https://shields.io/)   
+[CRA Deployment](https://create-react-app.dev/docs/deployment/)  
+
+
+### Might add later
+
+To support `pushState`, make sure to create a `public/_redirects` file with the following rewrite rules:  
+/*  /index.html  200
 
 # Getting Started with Create React App
 
