@@ -11,7 +11,7 @@ function BookingsList() {
 
     useEffect(() => {
         if (userProfile?.bookings?.length > 0) {
-            setBookings(userProfile?.bookings);
+            setBookings(userProfile?.bookings); // bookings / userBookings
         }
     }, [userProfile, bookings, userBookings]);
 

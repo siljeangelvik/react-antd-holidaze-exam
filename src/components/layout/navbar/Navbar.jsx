@@ -52,9 +52,9 @@ const Navbar = () => {
                         <Link to="/">Home</Link>
                     </li>
                     {isAuthenticated ? (<>
-                            <li><Link to={`/profile/${userProfile?.name}`}>{userProfile?.name}'s Profile</Link></li>
-                            <li><Link to={`/bookings`}>View your bookings</Link></li>
-                            {isManager && <li><Link to={`/venues`}>Manage your venues</Link></li>}
+                            <li><Link to={`/profile/${userProfile?.name}`}>Profile</Link></li>
+                            <li><Link to={`/bookings`}>Bookings</Link></li>
+                            {isManager && <li><Link to={`/venues`}>Venues</Link></li>}
                             <li><Logout/></li>
                         </>
                     ) : (<>

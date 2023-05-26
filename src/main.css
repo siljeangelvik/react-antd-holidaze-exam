@@ -135,4 +135,8 @@ input.guests-input {
         gap: 20px;
         align-items: baseline;
     }
+
+    .logout-button {
+        width:auto;
+    }
 }
