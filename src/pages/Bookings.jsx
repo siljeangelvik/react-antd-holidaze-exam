@@ -6,7 +6,7 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const {updateBookings, userHasBookings, userBookings} = useContext(VenuesContext);
+    const {updateBookings, userHasBookings} = useContext(VenuesContext);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
 
     return (

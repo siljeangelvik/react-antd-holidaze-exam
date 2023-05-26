@@ -86,7 +86,7 @@ input[type="checkbox"] {
 
 input[type="checkbox"]::before {
     content: "\2714";
-    display: flex;
+    border:1px solid transparent;
     justify-content: center;
     align-items: center;
     font-size: 18px;

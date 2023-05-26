@@ -90,6 +90,7 @@ body, html, .App {
 
 .logout-button {
     background-color: #fff;
+    width:120px;
 }
 
 .form-content > div {

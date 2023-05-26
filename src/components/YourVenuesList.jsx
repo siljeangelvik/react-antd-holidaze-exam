@@ -1,37 +1,57 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Col, Row} from 'antd';
-import { Content } from 'antd/es/layout/layout';
-import VenueItem from './VenueItem';
+import React, {useContext, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {API_VENUES} from '../utilities/constants';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 import {VenuesContext} from '../context/VenuesContext';
+import useApiDelete from '../hooks/useApiDelete';
+import VenueItem from './VenueItem';
 import EmptyTab from './profile/EmptyTab';
 
 function YourVenuesList() {
-    const [venues, setVenues] = useState([]); // [
-    const {userVenues, getUserVenues} = useContext(VenuesContext);
-    const { userProfile } = useContext(AuthenticationContext);
+    const {id} = useParams();
+    const [successMessage, setSuccessMessage] = useState('');
 
-    useEffect(() => {
-        if (userProfile?.venues?.length > 0) {
-            setVenues(getUserVenues);
-        }
-    }, [userProfile, venues, userVenues, getUserVenues]);
+    const {userVenues} = useContext(VenuesContext);
+    const {isAuthenticated} = useContext(AuthenticationContext);
+
+    const {isLoading, isError, deleteData} = useApiDelete(`${API_VENUES}/${id}`);
+
+    const handleDelete = (venue) => {
+        isAuthenticated && userVenues && deleteData(venue, userVenues);
+        setSuccessMessage('Venue deleted successfully.');
+    };
+
+    const handleEdit = () => {
+        console.log('edit');
+    };
 
     return (
-        <Content style={{ paddingBottom: '40px' }}>
-            <Row gutter={[16, 16]} style={{ display: 'flex', flexWrap: 'wrap', rowGap: '50px' }}>
-                {venues.length > 0 ? (
-                    venues.map((venue) => (
-                        <Col key={venue.id} xs={24} sm={12} md={10} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
-                            {venue.venue && <VenueItem venue={venue.venue} />}
-                        </Col>))
+        <>
+            {isError && <div>Something went wrong...</div>}
+            {isLoading && <div>Loading...</div>}
+            {successMessage && <div>{successMessage}</div>}
+            <div className="venues-list">
+                {userVenues.length > 0 ? (
+                    userVenues.map((venue) => (
+                            <VenueItem key={venue.id}
+                                       venue={venue}
+                                       showDeleteButton={true}
+                                       showEditButton={true}
+                                       onDelete={handleDelete}
+                                       onEdit={handleEdit}
+                            />
+                        )
+                    )
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <EmptyTab />
-                    </div>
+                    <EmptyTab
+                        title="Your Venues"
+                        text="You haven't added any venues yet."
+                        link="/add-venue"
+                        linkText="Add a venue"
+                    />
                 )}
-            </Row>
-        </Content>
+            </div>
+        </>
     );
 }
 

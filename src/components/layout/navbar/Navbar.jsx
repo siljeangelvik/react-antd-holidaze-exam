@@ -31,7 +31,7 @@ const Navbar = () => {
             </Link>
             <button className="navbar-button" onClick={handleNavbar}>
                 {isAuthenticated ? (
-                    <span className="navbar-button-emoji" aria-label="navbar-button-emoji" role="img" style={{backgroundColor: "transparent", border: "none", transition: "none"}}>
+                    <span className="navbar-button-emoji" aria-label="menu-button" role="img" style={{backgroundColor: "transparent", border: "none", transition: "none"}}>
                     <Space direction="vertical" size={16}>
                         <Space wrap size={16}>
                             {userProfile?.avatar
@@ -42,7 +42,7 @@ const Navbar = () => {
                     </Space>
                     </span>
                 ) : (
-                    <span className="navbar-button-emoji" aria-label="navbar-button-emoji" role="img">&#129409;</span>)}
+                    <span className="navbar-button-emoji" aria-label="menu-button" role="img">&#129409;</span>)}
             </button>
 
             <nav className="navbar-container-mobile" style={{display: toggle && "flex"}} onClick={handleNavbarClose}>
@@ -52,9 +52,9 @@ const Navbar = () => {
                         <Link to="/">Home</Link>
                     </li>
                     {isAuthenticated ? (<>
-                            <li><Link to={`/profile/${userProfile?.name}`}>Profile</Link></li>
-                            <li><Link to={`/bookings`}>Bookings</Link></li>
-                            {isManager && <li><Link to={`/venues`}>Venues</Link></li>}
+                            <li><Link to={`/profile/${userProfile?.name}`}>{userProfile?.name}'s Profile</Link></li>
+                            <li><Link to={`/bookings`}>View your bookings</Link></li>
+                            {isManager && <li><Link to={`/venues`}>Manage your venues</Link></li>}
                             <li><Logout/></li>
                         </>
                     ) : (<>

@@ -11,6 +11,8 @@ export const VenuesList = () => {
         ? `Found ${filteredVenues?.length} matching results`
         : "Found 0 matching your results";
 
+
+
     return (
         <>
             <p><em> Currently displaying <strong>({allVenues?.length})</strong> venues</em></p>

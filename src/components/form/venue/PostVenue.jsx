@@ -1,232 +1,198 @@
-import React, {useState} from 'react';
-import {Button, Form, Input, Typography} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import {Checkbox} from 'antd';
+import React, {useContext} from 'react';
+import {Form, Typography} from 'antd';
 import "./styles.css";
+import {VenuesContext} from '../../../context/VenuesContext';
 import useToggle from '../../../hooks/useToggle';
-import {boolean, number, string} from 'yup';
 import useApiPost from '../../../hooks/useApiPost';
 import {API_VENUES} from '../../../utilities/constants';
+import {venueSchema} from './schema';
+import {useFormik} from 'formik';
 
-export const PostVenue = ({onCreate}) => {
-    // const {userProfile} = useContext(AuthenticationContext);
+export const PostVenue = () => {
     const [toggle, setToggle] = useToggle(false);
-    // const userProfileBookings = useApiGet(`${API_PROFILES}/${userProfile?.name}/bookings`);
+    const {userVenues, addVenue} = useContext(VenuesContext);
 
-    const handleToggle = () => {
-        setToggle(toggle);
+    const {data, isLoading, isError, postData} = useApiPost(API_VENUES, addVenue);
+
+    const handleClose = () => {
+        setToggle(!toggle);
     };
 
-    const [formData, setFormData] = useState({
-        name: string,
-        description: string,
-        media: [string],
-        price: number,
-        maxGuests: number,
-        wifi: boolean,
-        parking: boolean,
-        breakfast: boolean,
-        pets: boolean,
-    });
-    const {isLoading, isError, postData} = useApiPost(API_VENUES);
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const data = await postData(formData);
-            onCreate(data);
-            setFormData(data);
-
-            if (isLoading) return <div>Loading...</div>
-            if (isError) return <div>Error</div>
-            if (data) {
-                console.log('Venue created successfully');
-                return <div>Success</div>
-            }
-
-        } catch (error) {
-            console.log('Venue creation failed', error);
-        }
-    };
-    const handleInputChange = (event) => {
-        const {name, value} = event.target;
-        setFormData({...formData, [name]: value});
-    };
     const handleCheckboxChange = (event) => {
-        const {name, checked} = event.target;
-        setFormData({...formData, [name]: checked});
+        const newValue = event.target.checked;
+        formik.setFieldValue('venueManager', newValue);
+        console.log(newValue);
     };
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            description: '',
+            media: '',
+            price: '',
+            maxGuests: '',
+            wifi: '',
+            parking: '',
+            breakfast: '',
+            pets: '',
+        },
+        validationSchema: venueSchema,
+        onSubmit: async (postVenueData) => {
+            try {
+                const response = await postData(postVenueData, data);
+                if (response) {
+                    console.log('Venue created successfully', response);
+                    addVenue(response,userVenues);
+                }
+            } catch (error) {
+                console.log('Venue creation failed', error);
+            }
+            handleClose();
+        },
+    });
 
-    // Need to fix the close button to close the modal !!
     return (
-        <div className='create-venue-modal'>
-            <button className="secondary-button" onClick={handleToggle}>Close</button>
+        <div className='create-venue-modal form' handletoggle={toggle} style={{display: toggle && "none"}}>
+            <button className="secondary-button" onClick={setToggle}
+                    style={{margin: "40px 0 0 40px", width: "120px"}}>Close
+            </button>
+            <form className="form" onSubmit={formik.handleSubmit}
+                  style={{minWidth: '340px', maxWidth: '340px', margin: '0 auto'}}>
+                <Typography.Title level={2}>Create Venue</Typography.Title>
+                {isLoading && <p className="form-error">Loading...</p>}
+                {isError && (<p className="form-error">Error: {data?.errors?.[0]?.message}</p>)}
 
-            <div ontoggle={setToggle}>
+                {/* NAME */}
+                <div>
+                    <label htmlFor="name">Name of Venue</label>
+                    <input
+                        value={formik.values.name}
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Name of Venue"
+                        aria-label="name"
+                        onChange={formik.handleChange}
+                        required
+                    />
+                    {formik.touched.name && formik.errors.name ? (
+                        <div className="form-error">* {formik.errors.name}</div>) : null}
+                </div>
+                {/* DESCRIPTION */}
+                <div>
+                    <label htmlFor="description">Description of Venue</label>
 
-                <form
-                    className="form"
-                    onSubmit={onSubmit}
-                      style={{minWidth: '340px', maxWidth: '340px', margin: '0 auto', paddingTop: '40px'}}>
-                    <Typography.Title level={2}>Create Venue</Typography.Title>
+                    <TextArea
+                        defaultValue='Write a description of the venue'
+                        id="description"
+                        name="description"
+                        placeholder="Write a description of the venue"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.description}
+                        showCount
+                        maxLength={500}
+                        height={100}
+                    />
+                    {formik.touched.description && formik.errors.description ? (
+                        <div className="form-error">* {formik.errors.description}</div>) : null}
+                </div>
+                {/* MEDIA */}
+                <div>
+                    <label htmlFor="media">Add images of venue</label>
+                    <input
+                        value={formik.values.media}
+                        type="text"
+                        name="media"
+                        id="media"
+                        placeholder="Add images of the venue"
+                        aria-label="media"
+                        onChange={formik.handleChange}
+                    />
+                    {formik.touched.media && formik.errors.media ? (
+                        <div className="form-error">* {formik.errors.media}</div>) : null}
+                </div>
+                {/* PRICE */}
+                <div>
+                    <label htmlFor="price">Price of Venue /night</label>
+                    <input
+                        value={formik.values.price}
+                        type="number"
+                        name="price"
+                        id="price"
+                        placeholder="$1,000"
+                        aria-label="price"
+                        required
+                        min={1}
+                        pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                        onChange={formik.handleChange}
+                    />
+                    {formik.touched.price && formik.errors.price ? (
+                        <div className="form-error">* {formik.errors.price}</div>) : null}
+                </div>
+                {/* MAX GUESTS */}
+                <div>
+                    <label htmlFor="maxGuests">Max Guests</label>
+                    <input
+                        value={formik.values.maxGuests}
+                        type="number"
+                        name="maxGuests"
+                        id="maxGuests"
+                        placeholder="Max Guests"
+                        aria-label="maxGuests"
+                        required
+                        min={1}
+                        onChange={formik.handleChange}
+                    />
+                    {formik.touched.maxGuests && formik.errors.maxGuests ? (
+                        <div className="form-error">* {formik.errors.maxGuests}</div>) : null}
+                </div>
+                {/* LOCATION: Address, City */}
+                <div>
+                    <label htmlFor="address">Address of Venue</label>
+                    <input
+                        value={formik.values.address}
+                        type="text"
+                        name="address"
+                        id="address"
+                        placeholder="Address of Venue"
+                        aria-label="address"
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="city">City of Venue</label>
+                    <input
+                        value={formik.values.city}
+                        type="text"
+                        name="city"
+                        id="city"
+                        placeholder="City of Venue"
+                        aria-label="city"
+                        onChange={formik.handleChange}
+                    />
+                </div>
 
-                    <Form.Item label="Name of Venue">
-                        <input
-                            value={formData.name}
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Name of Venue"
-                            aria-label="name"
-                            required
-                            pattern="[A-Za-z]+"
-                            onChange={handleInputChange}
-                        />
-                    </Form.Item>
+                <div>
+                    <label htmlFor="wifi">Wifi</label>
+                    <input
+                        value={formik.values.wifi}
+                        type="checkbox"
+                        name="wifi"
+                        id="wifi"
+                        placeholder="Wifi"
+                        aria-label="wifi"
+                        onChange={handleCheckboxChange}
+                    />
+                </div>
 
-                    <Form.Item label="Description of Venue">
-                        <TextArea
-                            value={formData.description}
-                            type="text"
-                            name="description"
-                            id="description"
-                            aria-label="description"
-                            placeholder="Write a description of the venue"
-                            onChange={handleInputChange}
-                            required
-                            autoSize={{
-                                width: '100%',
-                                minRows: 3,
-                                maxRows: 5,
-                            }}
-                        />
-                    </Form.Item>
 
-                    <Form.Item label="Images of Venue">
-                        <Input
-                            value={formData.media}
-                            type="[string]"
-                            name="media"
-                            id="media"
-                            placeholder="Add images of the venue"
-                            aria-label="media"
-                            optional
-                            onChange={handleInputChange}
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="Price of Venue /night">
-                        <Input
-                            value={formData.price}
-                            type="number"
-                            name="price"
-                            id="price"
-                            placeholder="$1,000"
-                            aria-label="price"
-                            required
-                            min={1}
-                            pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                            onChange={handleInputChange}
-                            style={{
-                                padding: '9px',
-                                borderRadius: '7px',
-                                border: '1px solid lightgray',
-                                display: 'block',
-                                width: '100%',
-                            }}
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="Max Guests">
-                        <Input
-                            value={formData.maxGuests}
-                            type="number"
-                            name="maxGuests"
-                            id="maxGuests"
-                            placeholder="100"
-                            aria-label="maxGuests"
-                            required
-                            min={1}
-                            onChange={handleInputChange}
-                            style={{
-                                padding: '9px',
-                                borderRadius: '7px',
-                                border: '1px solid lightgray',
-                                display: 'block',
-                                width: '100%',
-                            }}
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="Wifi">
-                        <Checkbox
-                            value={formData.wifi}
-                            type="boolean"
-                            name="wifi"
-                            id="wifi"
-                            aria-label="wifi"
-                            onChange={handleCheckboxChange}
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="Parking">
-                        <Checkbox
-                            value={formData.parking}
-                            type="boolean"
-                            name="parking"
-                            id="parking"
-                            aria-label="parking"
-                            onChange={handleCheckboxChange}
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="Breakfast">
-                        <Checkbox
-                            value={formData.breakfast}
-                            type="boolean"
-                            name="breakfast"
-                            id="breakfast"
-                            aria-label="breakfast"
-                            onChange={handleCheckboxChange}
-                        />
-                    </Form.Item>
-
-                    <Form.Item label="Pets">
-                        <Checkbox
-                            value={formData.pets}
-                            type="boolean"
-                            name="pets"
-                            id="pets"
-                            aria-label="pets"
-                            onChange={handleCheckboxChange}
-                        />
-                        <p>{formData.pets ? "Pets allowed" : "No pets allowed"}</p>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" style={{width: '100%'}}>
-                            Create Venue
-                        </Button>
-                    </Form.Item>
-                </form>
-            </div>
-
+                <Form.Item>
+                    <button type="submit" className="primary-button" style={{width: '100%'}}>
+                        Create Venue
+                    </button>
+                </Form.Item>
+            </form>
         </div>
-   );
+    );
 };
-/*
-{
-  "name": "string",
-  "description": "string",
-  "media": [
-    "string"
-  ],
-  "price": 0,
-  "maxGuests": 0,
-  "meta": {
-    "wifi": true,
-    "parking": true,
-    "breakfast": true,
-    "pets": true
-  }
-}
- */
