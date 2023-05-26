@@ -5,6 +5,7 @@ import React, {useContext, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {Link} from 'react-router-dom';
+import SuccessBookings from '../../alerts/SuccessBooking';
 import { API_BOOKINGS } from '../../../utilities/constants';
 import useApiPost from '../../../hooks/useApiPost';
 import { AuthenticationContext } from '../../../context/AuthenticationContext';
@@ -67,21 +68,15 @@ const CreateBooking = () => {
             postData
         } = useApiPost(API_BOOKINGS, isAuthenticated, booking);
 
-
         const handleSubmit = async (event) => {
             event.preventDefault();
             try {
                 const response = await postData(booking);
                 if (response) {
-                    // Handle successful booking
-                    console.log('Booking successful, Response:', response);
-                    console.log('Booking successful, Booking:', booking);
-
                     // Update the bookings in the context
                     updateBookings([...userBookings, booking]);
-
-                    alert(JSON.stringify(booking, null, 2));
-                    return response;
+                    console.log(JSON.stringify(booking, null, 2));
+                    return userBookings;
                 } else {
                     console.log('Booking failed');
                 }
@@ -92,8 +87,7 @@ const CreateBooking = () => {
 
         return (
             <div>
-                {disabledDates?.map((date) => (<div key={date.toDateString()}>{date.toDateString()}</div>))}
-                {newBookingsList}
+                {data && booking && <SuccessBookings booking={data} />}
                 {isLoading && <div>Loading...</div>}
                 {isError && <div>{data.errors[0].message}</div>}
                 <form onSubmit={handleSubmit}>

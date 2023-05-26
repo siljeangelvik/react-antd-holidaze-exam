@@ -23,10 +23,16 @@ export const VenuesProvider = ({children}) => {
     const {data: getAllUserVenues} = useApiGet(`${API_PROFILE}/venues`);
     const {data: getAllUserBookings} = useApiGet(`${API_PROFILE}/bookings`);
     const {data: getSpecificVenue} = useApiGet(`${API_VENUES}/${id}?_bookings=true&_owner=true&_venue=true`);
-    console.log(getSpecificVenue, "GET SPECIFIC VENUE");
 
     const specificVenue = venues.find((venue) => venue.id === id);
 
+
+    // UPDATE USER-BOOKINGS AFTER BOOKING
+    const updateBookings = (booking) => {
+        setUserBookings((prevBookings) => [...prevBookings, booking]);
+    };
+
+    // GET ALL VENUES
     useEffect(() => {
         if (getAllVenues) {
             setVenues(getAllVenues);
@@ -103,6 +109,7 @@ export const VenuesProvider = ({children}) => {
         userBookings, // User bookings array
         userVenues, // User venues array
         getSpecificVenue,
+        updateBookings
     };
 
     return <VenuesContext.Provider value={value}>{children}</VenuesContext.Provider>;
