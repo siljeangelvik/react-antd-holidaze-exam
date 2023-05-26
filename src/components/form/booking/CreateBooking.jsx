@@ -4,6 +4,7 @@ import { Content } from 'antd/lib/layout/layout';
 import React, {useContext, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import {Link} from 'react-router-dom';
 import { API_BOOKINGS } from '../../../utilities/constants';
 import useApiPost from '../../../hooks/useApiPost';
 import { AuthenticationContext } from '../../../context/AuthenticationContext';
@@ -137,22 +138,32 @@ const CreateBooking = () => {
                         <Title level={5}>Your selected {selectedGuests} number of guests</Title>
                     </Content>
                     <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                        <button type="button" className={"primary-button increase-decrease-buttons"} onClick={() => {setSelectedGuests(selectedGuests - 1)
+                        <button type="button" className="primary-button increase-decrease-buttons" onClick={() => {setSelectedGuests(selectedGuests - 1)
                         }}>-
                         </button>
                         <input onChange={(e) => setSelectedGuests(e.target.value)} type="text" value={selectedGuests}
                                max={specificVenue?.maxGuests}
-                               min={0} style={{maxWidth: "60px", textAlign: "center"}}/>
-                        <button type="button" className={"primary-button increase-decrease-buttons"} onClick={() => {
+                               min={0}
+                               className="guests-input"
+                               />
+                        <button type="button" className="primary-button increase-decrease-buttons" onClick={() => {
                             setSelectedGuests(selectedGuests + 1)
                         }}>+
                         </button>
                     </div>
+
+
                     {selectedGuests <= 0 && <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
                     {selectedGuests > specificVenue?.maxGuests && selectedGuests <= 0 && "Please select a valid number of guests"}
                     {selectedGuests > specificVenue?.maxGuests && <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests allowed</Typography.Text>}
+                   {selectedGuests > 0 && selectedDates.length >= 2 && !isAuthenticated && (
+                       <Title level={5}>You need to be <Link to="/login">logged in</Link> to book a venue</Title>)}
+
                     <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
-                        {selectedGuests > 0 && selectedGuests <= specificVenue?.maxGuests && selectedDates.length >= 1 && isAuthenticated && (<button type="submit" className="primary-button">Book Now</button>)}
+                        {selectedGuests > 0
+                            && selectedGuests <= specificVenue?.maxGuests
+                            && selectedDates.length >= 1 && isAuthenticated
+                            && (<button type="submit" className="primary-button">Book Now</button>)}
                     </Content>
                 </form>
             </div>

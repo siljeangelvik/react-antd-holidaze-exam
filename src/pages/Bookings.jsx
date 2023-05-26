@@ -6,13 +6,12 @@ import {AuthenticationContext} from '../context/AuthenticationContext';
 import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const {updateBookings} = useContext(VenuesContext);
+    const {updateBookings, userHasBookings, userBookings} = useContext(VenuesContext);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
 
     return (
-        <>
-            <div style={{padding: '80px 40px', height: '95vh', paddingBottom: '120px'}}>
-                <Content style={{paddingBottom: '20px'}}>
+            <div style={{padding:"80px 20px 120px 20px", minHeight: "95vh"}}>
+                <Content>
                     <Title level={1}>Your Bookings</Title>
                     {isAuthenticated && userProfile
                         && <Title level={4}>
@@ -20,9 +19,9 @@ function Bookings() {
                             bookings.
                         </Title>}
                 </Content>
-                <BookingsList userBookings={updateBookings} /> {/* Pass the bookings state */}
+
+                {userHasBookings && <BookingsList update={updateBookings} />}
             </div>
-        </>
     );
 }
 

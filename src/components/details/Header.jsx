@@ -13,7 +13,7 @@ const Header = () => {
     return (
         <>
             {/* title, price, image, created, updated */}
-            <div>
+            <div style={{maxWidth:"480px"}}>
                 <Title level={1}>{specificVenue?.name}</Title>
                 <Title level={4}>{formatCurrency(specificVenue?.price)} / night</Title>
                 {mediaType.length > 0 ? (

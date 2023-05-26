@@ -6,34 +6,35 @@ import {Typography} from 'antd';
 export const VenuesList = () => {
     const {allVenues, handleSearch, filteredVenues} = useContext(VenuesContext);
 
+    const results = filteredVenues?.length > 1 && filteredVenues?.length < 99;
+    const displayResults = results
+        ? `Found ${filteredVenues?.length} matching results`
+        : "Found 0 matching your results";
+
     return (
         <>
-            <Typography.Text level={5} style={{fontWeight: "bold"}}>
-                {filteredVenues?.length === 0 && handleSearch?.length > 0 ? (
-                    <Typography.Text level={5} style={{fontWeight: "bold"}}>
-                        No venues found: {filteredVenues?.length}
-                    </Typography.Text>
-                ) : (
-                    <Typography.Text level={5} style={{fontWeight: "bold"}}>
-                        Venues found: {filteredVenues?.length} <br/>
-                        Currently listing <em>({allVenues?.length})</em> venues
-                    </Typography.Text>
-                )}
+            <p><em> Currently displaying <strong>({allVenues?.length})</strong> venues</em></p>
+            <Typography.Text level={2} style={{fontWeight: "bold"}}>
+              Search Results: <br/> {displayResults}
             </Typography.Text>
             <div style={{width: "320px", paddingBottom: "40px", paddingTop: "10px"}}>
                 <input type="text"
                        placeholder="Search Venues..."
                        onChange={handleSearch}
-                       style={{width: "100%"}}
-                />
+                       style={{width: "100%"}}/>
             </div>
-            {handleSearch && (
-                <div className="venues-list">
-                    {filteredVenues.map((venue) => (
-                        <VenueItem key={venue.id} venue={venue}/>
-                    ))}
-                </div>
-            )}
+            {handleSearch ?
+                (<div className="venues-list">
+                        {filteredVenues.map((venue) => (
+                            <VenueItem key={venue.id} venue={venue}/>
+                        ))}
+                    </div>
+                ) : (<div className="venues-list">
+                        {allVenues.map((venue) => (
+                            <VenueItem key={venue.id} venue={venue}/>
+                        ))}
+                    </div>
+                )}
         </>
     );
 };

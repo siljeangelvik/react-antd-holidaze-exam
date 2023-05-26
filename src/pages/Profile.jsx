@@ -11,8 +11,7 @@ function Profile() {
     const isManager = useManagerStatus();
 
     return (
-        <>
-            <div style={{minHeight: '95vh', padding: '80px 40px'}}>
+        <div style={{padding:"80px 20px 120px 20px", minHeight: "95vh"}}>
                 <Content style={{paddingBottom: "40px"}}>
                     <Title level={1}>Your Profile</Title>
                     {isAuthenticated ? (<Title level={4}>Welcome back, {userProfile?.name}! </Title>)
@@ -33,8 +32,7 @@ function Profile() {
                         <Typography><strong>Manager:</strong> {isManager ? "Yes" : "No"}</Typography>
                     </Content>
                 </Content>
-            </div>
-        </>
+        </div>
     );
 }
 

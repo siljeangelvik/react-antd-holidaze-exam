@@ -4,6 +4,7 @@
 
 body, html, .App {
     height: 100vh;
+    font-size: 16px;
 }
 
 .primary-button {
@@ -71,6 +72,7 @@ body, html, .App {
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
 }
 
@@ -111,12 +113,17 @@ textarea::placeholder,
     height: auto;
 }
 
+input.guests-input {
+    width: 60px;
+    text-align: center;
+}
+
 /* Define styles for large displays */
 @media screen and (min-width: 720px) {
     .venues-list {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
         gap: 20px;
     }

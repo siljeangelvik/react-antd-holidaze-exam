@@ -27,7 +27,7 @@ export const Guests = () => {
                 type="number"
                value={count}
                max={specificVenue?.maxGuests}
-               min={0} style={{maxWidth: "60px", textAlign: "center"}}>{count}</input>
+               min={0} style={{width: "60px", textAlign: "center"}}>{count}</input>
             <button
                 className={"primary-button increase-decrease-buttons"}
                 type="button"

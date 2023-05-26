@@ -1,5 +1,6 @@
 import React, {createContext, useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
+import useApiPost from '../hooks/useApiPost';
 import useApiGet from '../hooks/useApiGet';
 import {API_PROFILE, API_VENUES} from '../utilities/constants';
 import {AuthenticationContext} from './AuthenticationContext';
@@ -30,9 +31,22 @@ export const VenuesProvider = ({children}) => {
 
     const {data: getAllVenues} = useApiGet(`${API_VENUES}?_bookings=true&_venues=true&_owner=true&_limit=${limit}`);
 
+    const {data: getAllUserVenues} = useApiGet(`${API_PROFILE}?_bookings=true&_venues=true&_owner=true&_sort=createdAt&_sortOrder=desc`);
+
+    const {data: deleteVenue} = useApiPost(`${API_VENUES}/${id}`, 'DELETE', null, {
+            onSuccess: () => {
+                const updatedVenues = venues.filter((venue) => venue.id !== id);
+                setVenues(updatedVenues);
+            },
+        }
+    );
+
+
+
     useEffect(() => {
         if (getAllVenues) {
             setVenues(getAllVenues);
+            setUserVenues(getAllUserVenues?.venues);
         }
     }, [getAllVenues]);
 
@@ -46,29 +60,20 @@ export const VenuesProvider = ({children}) => {
         setFilteredVenues(filtered);
     }, [searchTerm, venues]);
 
+    function addVenues(venue) {
+        setUserVenues((prevVenues) => [...prevVenues, venue]);
+        // Update the getAllUserVenues fetch function
+        const updatedUserVenues = [...userVenues, venue];
+        getAllUserVenues.setData({ venues: updatedUserVenues });
+    }
+
     const updateBookings = (newBookings) => { // Update bookings array
         setUserBookings(newBookings);
     };
 
-    const updateVenues = (newVenues) => { // Update venues array
-        setUserVenues(newVenues);
+    const updateVenues = (newVenues) => {
+        setUserVenues(newVenues); // Update venues array
     };
-
-    function addToBookings(venue) { // Add venue to bookings array
-        setUserBookings((prevBookings) => [...prevBookings, venue]);
-    }
-
-    function removeFromBookings(venue) { // Remove venue from bookings array
-        setUserBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== venue.id));
-    }
-
-    function toggleEditBookings(venue) { // Toggle venue in bookings array (add or remove)
-        if (userBookings.some((booking) => booking.id === venue.id)) {
-            removeFromBookings(venue);
-        } else {
-            addToBookings(venue);
-        }
-    }
 
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight;
@@ -97,7 +102,7 @@ export const VenuesProvider = ({children}) => {
             fetchData(
                 `https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true&sort=desc`
             ),
-        getUserVenues: useApiGet(`${API_PROFILE}?_venues=true`),
+        //   getUserVenues: useApiGet(`${API_PROFILE}?_venues=true`),
         disabledDates: (current) => {
             if (!specificVenue || !specificVenue.bookings || specificVenue.bookings.length === 0) {
                 return false;
@@ -117,7 +122,8 @@ export const VenuesProvider = ({children}) => {
         userVenues,
         updateBookings,
         updateVenues,
-        toggleEditBookings,
+        deleteVenue,
+        addVenues,
     };
 
     return <VenuesContext.Provider value={value}>{children}</VenuesContext.Provider>;

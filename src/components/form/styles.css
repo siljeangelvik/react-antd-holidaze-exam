@@ -5,6 +5,7 @@ form.form {
     align-items: center;
     gap: 20px;
     max-width: 400px;
+    max-height: max-content;
 }
 
 form > div,
@@ -45,15 +46,14 @@ input[type="password"],
 input[type="number"],
 textarea,
 .input-password-login {
-    max-width: 480px;
-    min-width: 320px;
+    width: 320px;
     max-height: 37px;
     padding: 10px;
     border-radius: 7px;
     border: 1px solid #ccc;
 }
 
-textarea { max-width: 480px; min-width: 320px; }
+textarea { width:320px; min-height: 150px; max-height: 200px; }
 
 input:focus,
 select:focus,

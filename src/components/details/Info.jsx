@@ -19,16 +19,16 @@ const Info = () => {
     return (
         <>
             {/* Description, Max Guests, Rating */}
-            <div style={{minWidth:'340px', maxWidth:'480px'}}>
-                <Title level={5}>Description:</Title>
-                <Typography.Paragraph>{specificVenue?.description ? specificVenue?.description : "N/A"}</Typography.Paragraph>
-                <Title level={5}>Max Guests:</Title>
-                <Typography.Paragraph>{specificVenue?.maxGuests}</Typography.Paragraph>
+            <div style={{minWidth: '340px', maxWidth: '480px'}}>
                 <Title level={5}>Rating:</Title>
                 <Typography.Paragraph>
                     <Rating name="read-only" value={ratingValue} readOnly/>
                     &nbsp; <span>{ratingValue} / 5</span>
                 </Typography.Paragraph>
+                <Title level={5}>Description:</Title>
+                <Typography.Paragraph>{specificVenue?.description ? specificVenue?.description : "N/A"}</Typography.Paragraph>
+                <Title level={5}>Max Guests:</Title>
+                <Typography.Paragraph>{specificVenue?.maxGuests}</Typography.Paragraph>
             </div>
         </>
     );

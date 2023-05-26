@@ -14,9 +14,10 @@ export const venueSchema = Yup.object({
         .typeError('Price must be a number'),
     maxGuests: Yup.number()
         .required('Please enter the maximum number of guests')
-        .integer('Max Guests must be an integer')
-        .positive('Max Guests must be a positive number')
-        .typeError('Max Guests must be a number'),
+        .integer('Max guests must be an number')
+        .max(100, 'Max Guests must be less than 100')
+        .min(1, 'Max Guests must be greater than 0')
+        .typeError('Max guests must be a number'),
     rating: Yup.number()
         .positive('Rating must be a positive number')
         .max(5, 'Rating must be less than 5')
