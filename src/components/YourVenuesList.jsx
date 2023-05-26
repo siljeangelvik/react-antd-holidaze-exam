@@ -30,6 +30,7 @@ function YourVenuesList() {
             {isError && <div>Something went wrong...</div>}
             {isLoading && <div>Loading...</div>}
             {successMessage && <div>{successMessage}</div>}
+            <p>If you dont see your most recently created venue, please refresh the browser.</p>
             <div className="venues-list">
                 {userVenues.length > 0 ? (
                     userVenues.map((venue) => (

@@ -17,6 +17,7 @@ function BookingsList() {
 
     return (
         <>
+            <p>If you dont see your most recently booked venue, please refresh the browser.</p>
             <div className="venues-list">
                 {bookings.length > 0 ? (
                     bookings.map((booking) => (
