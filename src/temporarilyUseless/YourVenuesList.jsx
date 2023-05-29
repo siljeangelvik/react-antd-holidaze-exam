@@ -6,7 +6,6 @@ import { API_VENUES } from '../utilities/constants';
 import { AuthenticationContext } from '../context/AuthenticationContext';
 import { VenuesContext } from '../context/VenuesContext';
 import useApiDelete from '../hooks/useApiDelete';
-import { Button, Popconfirm } from 'antd';
 
 function YourVenuesList() {
     const { id } = useParams();
@@ -16,34 +15,6 @@ function YourVenuesList() {
     const { isAuthenticated } = useContext(AuthenticationContext);
 
     const { isLoading, isError, deleteData } = useApiDelete(`${API_VENUES}/${id}`);
-
-    const confirmDelete = (venue) => (
-        <Popconfirm
-            title="Delete the venue"
-            description="Are you sure to delete this venue?"
-            okText="Yes"
-            cancelText="No"
-        >
-            <Button danger onClick={() => handleDelete(venue)}>Delete</Button>
-        </Popconfirm>
-    );
-
-    const handleDelete = (venue) => {
-        isAuthenticated && userVenues && deleteData(venue, userVenues);
-        setSuccessMessage('Venue deleted successfully.');
-    };
-
-    const handleEdit = (venueId) => {
-        console.log('edit', venueId);
-    };
-
-    const handleCancelEdit = () => {
-        console.log('cancel edit');
-    };
-
-    const handleSaveEdit = (updatedVenue) => {
-        console.log('save edit', updatedVenue);
-    };
 
     return (
         <>

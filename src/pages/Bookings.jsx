@@ -19,8 +19,7 @@ function Bookings() {
                         bookings.
                     </Title>}
             </Content>
-
-            {userHasBookings && <BookingsList bookings={userBookings}  />}
+            {userHasBookings && <BookingsList bookings={userBookings} updateBookings={updateBookings} />}
         </div>
     );
 }
