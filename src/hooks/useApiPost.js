@@ -34,13 +34,12 @@ function useApiPost(url) {
             return json;
         } catch (error) {
             setIsError(true);
-            console.log(error);
+          //  console.log(error);
             throw error;
         } finally {
             setIsLoading(false);
         }
     }
-
     return {data, isLoading, isError, postData};
 }
 

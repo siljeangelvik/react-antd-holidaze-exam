@@ -27,9 +27,8 @@ const AuthenticationProvider = ({children}) => {
         setIsAuthenticated(true);
         if (data && userFormData) {
             setUserData(data);
-          //  localStorage.setItem('accessToken', userFormData.accessToken);
-            console.log(typeof data, data);
-            console.log('You successfully logged in!');
+           // console.log(typeof data, data);
+           // console.log('You successfully logged in!');
             document.title = `Holidaze | ${localStorage.getItem('name')}`;
             console.log(`Welcome back ${localStorage.getItem("name")}!`);
             navigate(`/profile/${localStorage.getItem('name')}`);
@@ -39,14 +38,14 @@ const AuthenticationProvider = ({children}) => {
     const handleUserRegister = (response, userFormData) => {
         localStorage.clear();
         if (response && userFormData) {
-            console.log('You successfully registered a new account!');
+           // console.log('You successfully registered a new account!');
             alert('You successfully registered a new account!');
             navigate('/login');
         }
     };
 
     const handleUserLogout = () => {
-        console.log(`Sad to see you logout, see you soon!\n${userProfile?.name}`);
+      //  console.log(`Sad to see you logout, see you soon!\n${userProfile?.name}`);
         document.title = 'Holidaze';
         [
             'accessToken',

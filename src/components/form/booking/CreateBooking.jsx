@@ -144,14 +144,11 @@ const CreateBooking = () => {
                     }}>+
                     </button>
                 </div>
-
-
                 {selectedGuests <= 0 && <Typography.Text level={5} type="danger">Please select a valid number of guests</Typography.Text>}
                 {selectedGuests > specificVenue?.maxGuests && selectedGuests <= 0 && "Please select a valid number of guests"}
                 {selectedGuests > specificVenue?.maxGuests && <Typography.Text level={5} type="danger">You have exceeded the maximum amount of guests allowed</Typography.Text>}
                 {selectedGuests > 0 && selectedDates.length >= 2 && !isAuthenticated && (
                     <Title level={5}>You need to be <Link to="/login">logged in</Link> to book a venue</Title>)}
-
                 <Content style={{paddingTop: "10px", paddingBottom: "10px"}}>
                     {selectedGuests > 0
                         && selectedGuests <= specificVenue?.maxGuests

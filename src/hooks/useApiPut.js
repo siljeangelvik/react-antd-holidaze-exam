@@ -21,8 +21,9 @@ function useApiPut(url) {
             const json = await response.json();
             setData(json);
             localStorage.setItem('avatar', json.avatar);
+            localStorage.setItem('venueManager', json.venueManager);
         } catch (error) {
-            console.log(error);
+           // console.log(error);
             setIsError(true);
         } finally {
             setIsLoading(false);

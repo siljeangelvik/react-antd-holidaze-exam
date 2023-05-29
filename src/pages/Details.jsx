@@ -8,9 +8,7 @@ function Details() {
        <>
            <div style={{padding: "80px 40px", paddingBottom: "120px", height: "95vh"}}>
                <Link to={`/`} className="primary-button">Back Home</Link>
-
                <Typography.Title level={2}>Details</Typography.Title>
-
               <VenueDetails />
            </div>
        </>

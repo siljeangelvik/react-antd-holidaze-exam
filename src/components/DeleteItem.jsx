@@ -2,11 +2,12 @@ import React from 'react';
 import { Button, message, Popconfirm } from 'antd';
 import { API_BOOKINGS } from '../utilities/constants';
 
-export function DeleteItem ({ change }) {
-    const confirm = (e) => {
-        console.log(e);
-        if (e) {
-            fetch(`${API_BOOKINGS}/${e}`, {
+export function DeleteItem ({ change, onDelete }) {
+    const { id } = onDelete;
+    const confirm = (onDelete) => {
+        console.log(onDelete);
+        if (onDelete) {
+            fetch(`${API_BOOKINGS}/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +39,8 @@ export function DeleteItem ({ change }) {
             okText="Yes"
             cancelText="No"
         >
-            <Button onClick={() => change()} danger>Delete</Button>
+            {}
+            <Button onClick={() => change()} onDelete={onDelete} danger>Delete</Button>
         </Popconfirm>
     );
 }

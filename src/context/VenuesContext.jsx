@@ -1,15 +1,12 @@
-import React, {createContext, useState, useEffect, useContext} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import useApiGet from '../hooks/useApiGet';
 import {API_PROFILE, API_VENUES} from '../utilities/constants';
-import {AuthenticationContext} from './AuthenticationContext';
 
 export const VenuesContext = createContext();
 
 export const VenuesProvider = ({children}) => {
     const {id} = useParams();
-    const {userProfile} = useContext(AuthenticationContext);
-    console.log(userProfile);
 
     const [venues, setVenues] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');

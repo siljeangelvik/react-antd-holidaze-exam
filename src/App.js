@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
@@ -17,7 +17,6 @@ import {VenuesProvider} from './context/VenuesContext';
 import "./main.css";
 
 function App() {
-
 
     return (
         <>

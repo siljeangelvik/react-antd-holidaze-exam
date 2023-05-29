@@ -10,6 +10,7 @@ import Owner from '../../components/details/Owner';
 
 const Details = () => {
     const {isAuthenticated} = useContext(AuthenticationContext);
+
     return (
         <>
             <div className={"desktop-row"}>

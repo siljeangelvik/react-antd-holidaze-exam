@@ -1,4 +1,3 @@
-// Global state example using Context API
 import React, {useContext, useState} from 'react';
 import {VenuesContext} from '../../context/VenuesContext';
 

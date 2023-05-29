@@ -1,19 +1,23 @@
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React, {useContext} from 'react';
+import useApiDelete from '../hooks/useApiDelete';
 import VenueItem from '../components/VenueItem';
 import useApiGet from '../hooks/useApiGet';
-import {API_PROFILES} from '../utilities/constants';
+import {API_PROFILES, API_VENUES} from '../utilities/constants';
 import {PostVenue} from '../components/form/venue/PostVenue';
 import {VenuesContext} from '../context/VenuesContext';
 import useToggle from '../hooks/useToggle';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 
-function Venues() {
+function Venues({onDelete}) {
     const { userVenues } = useContext(VenuesContext);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
     const {data, isLoading, isError} = useApiGet(`${API_PROFILES}/${userProfile?.name}/venues`);
     const [toggle, setToggle] = useToggle(false);
+
+
+    const {deleteData} = useApiDelete(`${API_VENUES}/${userVenues?.id}/venues`);
 
     const handleToggle = () => {
         setToggle(!toggle);
@@ -41,9 +45,11 @@ function Venues() {
                 <button className="primary-button" onClick={setToggle}>Create a Venue</button>
           </div>
 
-            <div className="venues-list">
-                {userVenues?.map(venue => <VenueItem key={venue.id} venue={venue} />)}
-            </div>
+            {data &&
+                <div className="venues-list">
+                    {userVenues?.map(venue => <VenueItem key={venue.id} venue={venue} showDeleteButton={true} onDelete={deleteData}  />)}
+                </div>
+            }
             {toggle && <PostVenue handleToggle={handleToggle}/>}
         </div>
     );

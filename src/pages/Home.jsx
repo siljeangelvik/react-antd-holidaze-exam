@@ -8,7 +8,7 @@ export default function Home() {
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
 
     return (
-        <div style={{padding:"80px 20px 120px 20px", minHeight: "95vh"}}>
+        <div style={{padding: "80px 20px 120px 20px", minHeight: "95vh"}}>
             <Content>
                 <Title level={1}>Holidaze</Title>
                 {isAuthenticated ? (

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EmptyTab from './EmptyTab';
-import VenueItem from './VenueItem';
+import VenueItem from './';
 import { API_VENUES } from '../utilities/constants';
-import { AuthenticationContext } from '../context/AuthenticationContext';
 import { VenuesContext } from '../context/VenuesContext';
 import useApiDelete from '../hooks/useApiDelete';
 
@@ -12,9 +11,13 @@ function YourVenuesList() {
     const [successMessage, setSuccessMessage] = useState('');
 
     const { userVenues } = useContext(VenuesContext);
-    const { isAuthenticated } = useContext(AuthenticationContext);
 
     const { isLoading, isError, deleteData } = useApiDelete(`${API_VENUES}/${id}`);
+
+    const handleDelete = async () => {
+        await deleteData();
+        setSuccessMessage('Venue deleted successfully!');
+    }
 
     return (
         <>

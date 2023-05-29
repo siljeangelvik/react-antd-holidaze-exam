@@ -21,8 +21,6 @@ function BookingsList() {
         }
     }, [userProfile, bookings, userBookings]);
 
-
-
     return (
         <>
             <p>If you dont see your most recently booked venue, please refresh the browser.</p>

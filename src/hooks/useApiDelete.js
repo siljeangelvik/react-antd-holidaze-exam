@@ -22,7 +22,7 @@ function useApiDelete(url) {
                 throw new Error('Failed to delete data');
             }
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             setIsError(true);
         } finally {
             setIsLoading(false);

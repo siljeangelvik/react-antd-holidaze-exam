@@ -1,11 +1,40 @@
-import {Card, Carousel, Image, Typography} from 'antd';
+import {Button, Card, Carousel, Image, message, Popconfirm, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {DeleteItem} from './DeleteItem';
+import {API_BOOKINGS} from '../utilities/constants';
 import useCheckMediaProperty from '../hooks/useCheckMediaProperty';
 import {formatCurrency} from '../utilities/formatCurrency';
+
+const confirm = (e) => {
+    console.log(e);
+    if (e) {
+        fetch(`${API_BOOKINGS}/${e.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        message.success('Successfully deleted the venue');
+
+    } else {
+        message.error('Failed to delete the venue');
+    }
+
+};
+const cancel = (e) => {
+    console.log(e);
+    message.error('Clicked on No');
+};
 
 const VenueItem = ({venue, showDeleteButton, showEditButton, onEdit, onDelete}) => {
     // Destructure the necessary properties from the venue object
@@ -14,11 +43,6 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onEdit, onDelete}) 
     // Use the useCheckMediaProperty hook to get the correct media value
     const mediaType = useCheckMediaProperty(media);
 
-    // Handle the state change when the delete button is clicked
-    const handleState = () => {
-        onDelete(venue);
-        console.log('delete clicked');
-    };
 
     return (
         <>
@@ -110,7 +134,17 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onEdit, onDelete}) 
                     }}
                 >
                     {showDeleteButton && (
-                       <DeleteItem handleState={handleState} />
+                        <Popconfirm
+                            title="Delete the venue"
+                            description="Are you sure you want to delete this venue?"
+                            onConfirm={confirm}
+                            onCancel={cancel}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            {}
+                                <Button onClick={onDelete} onDelete={onDelete} danger>Delete</Button>
+                        </Popconfirm>
                     )}
                     {showEditButton && (
                         <button className="secondary-button" onClick={onEdit} style={{ width: '45%' }}>

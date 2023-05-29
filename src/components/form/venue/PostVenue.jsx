@@ -185,8 +185,6 @@ export const PostVenue = () => {
                         onChange={handleCheckboxChange}
                     />
                 </div>
-
-
                 <Form.Item>
                     <button type="submit" className="primary-button" style={{width: '100%'}}>
                         Create Venue
