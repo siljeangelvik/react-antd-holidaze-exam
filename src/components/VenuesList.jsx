@@ -8,14 +8,14 @@ export const VenuesList = () => {
 
     const results = filteredVenues?.length > 1 && filteredVenues?.length < 99;
     const displayResults = results
-        ? `Found ${filteredVenues?.length} matching results`
-        : "Found 0 matching your results";
+        ? `Found ${filteredVenues?.length} venues matching your results`
+        : "Found 0 venues matching your results";
 
     return (
         <>
             <p><em> Currently displaying <strong>({allVenues?.length})</strong> venues</em></p>
             <Typography.Text level={2} style={{fontWeight: "bold"}}>
-              Search Results: <br/> {displayResults}
+                Search Results: <br/> {displayResults}
             </Typography.Text>
             <div style={{width: "320px", paddingBottom: "40px", paddingTop: "10px"}}>
                 <input type="text"

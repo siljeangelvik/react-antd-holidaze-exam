@@ -119,6 +119,18 @@ input.guests-input {
     text-align: center;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 /* Define styles for large displays */
 @media screen and (min-width: 720px) {
     .venues-list {

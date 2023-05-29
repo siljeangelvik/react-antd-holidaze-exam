@@ -1,4 +1,3 @@
-import {capitalize} from '@mui/material';
 import {Card, Carousel, Image, Typography} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
@@ -7,12 +6,13 @@ import {Link} from 'react-router-dom';
 import useCheckMediaProperty from '../hooks/useCheckMediaProperty';
 import {formatCurrency} from '../utilities/formatCurrency';
 
-const VenueItem = ({venue, showDeleteButton, showEditButton, onDelete, onEdit}) => {
+const VenueItem = ({venue, showDeleteButton, showEditButton, onEdit, onDelete}) => {
     // Destructure the necessary properties from the venue object
     const {id, name, media, description, price, maxGuests, number, bookings} = venue;
 
     // Use the useCheckMediaProperty hook to get the correct media value
     const mediaType = useCheckMediaProperty(media);
+
 
     return (
         <>
@@ -22,7 +22,7 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onDelete, onEdit}) 
                     boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
                     transition: '0.3s',
                     borderRadius: '5px',
-                    height: '435px',
+                    height: '455px',
                 }}
                 cover={mediaType.length > 0 ? (
                     <Carousel
@@ -69,7 +69,7 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onDelete, onEdit}) 
                             maxWidth: '85ch',
                         }}
                     >
-                        {capitalize(name)}
+                        {name}
                     </Title>
                     <Content>
                         <Typography>{number}</Typography>
@@ -86,11 +86,9 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onDelete, onEdit}) 
                         <Typography>
                             <strong>Max Guests:</strong> {maxGuests}
                         </Typography>
-                        {bookings && (
                             <Typography>
-                                <strong>Bookings:</strong> {bookings.length}
+                                <strong>Bookings:</strong> {bookings?.length}
                             </Typography>
-                        )}
                         <Typography>
                             <strong>{formatCurrency(price)}</strong> /night
                         </Typography>
@@ -98,6 +96,7 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onDelete, onEdit}) 
                 </Link>
                 <Content
                     style={{
+                        padding:"20px 0",
                         display: 'flex',
                         justifyContent: 'space-between',
                         flexWrap: 'wrap',

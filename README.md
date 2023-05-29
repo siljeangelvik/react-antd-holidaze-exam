@@ -99,8 +99,14 @@ a profile page and a detail page for each venue.
 [GitHub Badges Theme](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)  
 [Shields.io](https://shields.io/)   
 [CRA Deployment](https://create-react-app.dev/docs/deployment/)  
+[Push Into Array JS](https://www.freecodecamp.org/news/how-to-insert-an-element-into-an-array-in-javascript/)  
 
+### Issues
 
+#### Errors / Warnings in Console
+> When SuccessBooking-Modal opens after booking a venue:  
+>> **Warning**: Invalid value for prop `handletoggle` on `<div>` tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://reactjs.org/link/attribute-behavior
+> **Warning**: Each child in a list should have a unique "key" prop.  Check the render method of `BookingsList`. See https://reactjs.org/link/warning-keys for more information.
 ### Might add later
 
 To support `pushState`, make sure to create a `public/_redirects` file with the following rewrite rules:  

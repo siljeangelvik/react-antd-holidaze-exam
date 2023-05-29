@@ -2,7 +2,7 @@ import {Content} from 'antd/es/layout/layout';
 import React, {useContext} from 'react';
 import {AuthenticationContext} from '../../context/AuthenticationContext';
 import Amenities from '../../components/details/Amenities';
-import Availability from '../../components/details/Availability';
+import {Availability} from '../../components/details/Availability';
 import Header from '../../components/details/Header';
 import Info from '../../components/details/Info';
 import Location from '../../components/details/Location';
