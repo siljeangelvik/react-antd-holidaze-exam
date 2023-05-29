@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
+import BookingsList from '../components/BookingsList';
 import {VenuesContext} from '../context/VenuesContext';
 import {AuthenticationContext} from '../context/AuthenticationContext';
-import BookingsList from '../components/BookingsList';
 
 function Bookings() {
-    const {updateBookings, userHasBookings, userBookings} = useContext(VenuesContext);
+    const {updateBookings, userBookings, userHasBookings} = useContext(VenuesContext);
     const {isAuthenticated, userProfile} = useContext(AuthenticationContext);
 
     return (
@@ -20,7 +20,7 @@ function Bookings() {
                     </Title>}
             </Content>
 
-            {userHasBookings && <BookingsList update={updateBookings} />}
+            {userHasBookings && <BookingsList bookings={userBookings}  />}
         </div>
     );
 }

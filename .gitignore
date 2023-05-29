@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# ignored files for the whole repo (except for the root folder)
+./src/temporarilyUseless/*
+
 # dependencies
 /node_modules
 /.pnp

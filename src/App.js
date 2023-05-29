@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {CssBaseline} from '@mui/material';
 import {ConfigProvider} from 'antd';
 import {Content} from 'antd/es/layout/layout';
 import {Route, Routes} from 'react-router-dom';
+import Home from './pages/Home';
 import {ProtectedRoute} from './utilities/ProtectedRoute';
 import Venues from './pages/Venues';
 import Login from './pages/Login';
@@ -12,11 +13,11 @@ import Bookings from './pages/Bookings';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import Details from './pages/Details';
-import Home from './pages/Home';
 import {VenuesProvider} from './context/VenuesContext';
 import "./main.css";
 
 function App() {
+
 
     return (
         <>
@@ -48,42 +49,51 @@ function App() {
                 }}
             >
                 <CssBaseline/>
+
                 <Content className={"App"}>
                     <Routes>
                         <Route path="/" element={<Layout/>}>
                             <Route index path="/" element={
-                                <VenuesProvider>
+                                <VenuesProvider children={
                                     <Home/>
+                                }>
                                 </VenuesProvider>}
                             />
                             <Route path="/details/:id"
                                    element={
-                                       <VenuesProvider>
+                                       <VenuesProvider children={
                                            <Details/>
+                                       }>
                                        </VenuesProvider>}
                             />
                             <Route path="/profile/:name"
                                    element={
-                                       <VenuesProvider>
+                                       <VenuesProvider
+                                           children={
                                            <ProtectedRoute>
-                                               <Profile/>
-                                           </ProtectedRoute>
+                                           <Profile/>
+                                       </ProtectedRoute>
+                                       }>
                                        </VenuesProvider>}
                             />
                             <Route path="/bookings"
                                    element={
-                                       <VenuesProvider>
-                                           <ProtectedRoute>
-                                               <Bookings/>
-                                           </ProtectedRoute>
+                                       <VenuesProvider
+                                           children={
+                                               <ProtectedRoute>
+                                                   <Bookings/>
+                                               </ProtectedRoute>
+                                           }>
                                        </VenuesProvider>}
                             />
                             <Route path="/venues"
                                    element={
-                                       <VenuesProvider>
-                                           <ProtectedRoute>
-                                               <Venues/>
-                                           </ProtectedRoute>
+                                       <VenuesProvider
+                                           children={
+                                               <ProtectedRoute>
+                                                   <Venues/>
+                                               </ProtectedRoute>
+                                           }>
                                        </VenuesProvider>}
                             />
                             <Route path="/login" element={<Login/>}/>

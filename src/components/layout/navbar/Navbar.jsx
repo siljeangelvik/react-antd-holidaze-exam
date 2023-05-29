@@ -4,7 +4,7 @@ import Avatar from 'antd/es/avatar/avatar';
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
 import useManagerStatus from '../../../hooks/useManagerStatus';
-import Logout from '../../../components/notifications/Logout';
+import Logout from '../../../components/alerts/Logout';
 import {AuthenticationContext} from '../../../context/AuthenticationContext';
 import useToggle from "../../../hooks/useToggle";
 import "./styles.css";

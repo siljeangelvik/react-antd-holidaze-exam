@@ -19,6 +19,5 @@ export default function Home() {
             </Content>
             <VenuesList/>
         </div>
-
     );
 }

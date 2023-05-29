@@ -9,7 +9,7 @@ export default function Layout({children}) {
         <>
             <Navbar/>
 
-            <Outlet context={children}/>
+            <Outlet context={children} />
 
             <Footer/>
         </>

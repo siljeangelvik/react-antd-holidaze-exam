@@ -3,6 +3,7 @@ import {Content} from 'antd/es/layout/layout';
 import Title from 'antd/es/typography/Title';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {DeleteItem} from './DeleteItem';
 import useCheckMediaProperty from '../hooks/useCheckMediaProperty';
 import {formatCurrency} from '../utilities/formatCurrency';
 
@@ -13,6 +14,11 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onEdit, onDelete}) 
     // Use the useCheckMediaProperty hook to get the correct media value
     const mediaType = useCheckMediaProperty(media);
 
+    // Handle the state change when the delete button is clicked
+    const handleState = () => {
+        onDelete(venue);
+        console.log('delete clicked');
+    };
 
     return (
         <>
@@ -104,9 +110,7 @@ const VenueItem = ({venue, showDeleteButton, showEditButton, onEdit, onDelete}) 
                     }}
                 >
                     {showDeleteButton && (
-                        <button className="secondary-button" onClick={onDelete} style={{ width: '45%' }}>
-                            Delete
-                        </button>
+                       <DeleteItem handleState={handleState} />
                     )}
                     {showEditButton && (
                         <button className="secondary-button" onClick={onEdit} style={{ width: '45%' }}>

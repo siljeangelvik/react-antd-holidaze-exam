@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {VenuesContext} from '../context/VenuesContext';
 import {AuthenticationContext} from '../context/AuthenticationContext';
 import VenueItem from './VenueItem';
-import EmptyTab from './profile/EmptyTab';
+import EmptyTab from './EmptyTab';
 
 function BookingsList() {
     const [bookings, setBookings] = useState([]);
