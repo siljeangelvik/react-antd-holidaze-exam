@@ -1,58 +1,99 @@
-# React "Holidaze" Exam
+# Project Exam 2
 
-#### 😂 Here is a random joke that'll make you laugh!
-![Jokes Card](https://readme-jokes.vercel.app/api?hideBorder&theme=cobalt&bgColor=%transparent)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)
-![Hello](https://img.shields.io/static/v1?label=exam&message=holidaze&color=orange)
-![GitHub last commit](https://img.shields.io/github/last-commit/siljeangelvik/react-antd-holidaze-exam?&color=ff69b4)  
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/siljeangelvik/react-antd-holidaze-exam?&color=blue)
-![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/r/rating/R4Intellij?&color=blueviolet)  
+[![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)   
+![Hello](https://img.shields.io/static/v1?label=project&message=holidaze&color=orange) ![GitHub last commit](https://img.shields.io/github/last-commit/siljeangelvik/react-antd-holidaze-exam?&color=ff69b4) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/siljeangelvik/react-antd-holidaze-exam?&color=blue) ![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/r/rating/R4Intellij?&color=blueviolet)
 
 **Student:** [Silje Angelvik](https://github.com/siljeangelvik)    
 **Host:** [Netlify](https://exam-holidaze.netlify.app/)  
 **Repository:** [GitHub](https://github.com/siljeangelvik/react-antd-holidaze-exam)
 
-**GitHub:**  
-Board - [KanBan](https://github.com/users/siljeangelvik/projects/1/views/2)   
-Roadmap - [Gantt Chart](https://github.com/users/siljeangelvik/projects/1/views/3)  
-Table - [Overview](https://github.com/users/siljeangelvik/projects/1/views/4)
+| Resources | URLs                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|:----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GitHub    | [Kanban](https://github.com/users/siljeangelvik/projects/1/views/2) - [Gantt Chartt](https://github.com/users/siljeangelvik/projects/1/views/3) - [Table Oveview](https://github.com/users/siljeangelvik/projects/1/views/4)                                                                                                                                                                                                                    |
+| Figma     | [Style Tile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=K92xt7vpIrkLTIzI-0) - [Prototype Mobile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0) - [Prototype Desktop](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=36-1086&t=i0IMM4amVObPEwpw-0) |
+| Resources | [Exam Brief](https://content.noroff.dev/project-exam-2/brief.html) - [Holidaze API Docs](https://docs.noroff.dev/holidaze/venues) - [API Endpoints](https://nf-api.onrender.com/docs/static/index.html#/)                                                                                                                                                                                                                                       |                                                                                                                                                                                                                     |
 
-**Figma:**   
-Design: [Style Tile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=30-1568&t=K92xt7vpIrkLTIzI-0)    
-WireFrame / Prototype: [Mobile](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=5-911&t=xkqBhFw0ewmxhreV-0)        
-WireFrame / Prototype: [Desktop](https://www.figma.com/file/0rgZXLdgoNZuJTmYoTV9MA/Holidaze-Venue-Manager-UI?type=design&node-id=36-1086&t=i0IMM4amVObPEwpw-0)  
+## Holidaze
 
-**Resources:**  
-Exam: [Noroff Brief](https://content.noroff.dev/project-exam-2/brief.html)  
-API Documentation:  [Noroff Holidaze](https://docs.noroff.dev/holidaze/venues)    
-API Endpoints: [Noroff SwaggerUI](https://nf-api.onrender.com/docs/static/index.html#/)
+<img src="./public/media/project_exam_2_home.png" alt="Holidaze Home Page" width="480" />
+<img src="./public/media/project_exam_2_details.png" alt="Holidaze Details Page" width="240" />
+<img src="./public/media/project_exam_2_profile.png" alt="Holidaze Profile Page" width="240" />
 
-## Setup
-To run this project, install it locally using yarn:
-    
-    $ yarn install
-    $ yarn start
+The images displayed above are screenshots of the Holidaze website on desktop.
 
 ## Description
+
 This is a React exam project for the course "Frontend Development 2" at Noroff.   
 The project is a website for a fictional venue booking application called "Holidaze".   
 The website is built with React, AntDesign, Sanity.io and Netlify.   
 This project contains a single page application with a home(list of venues) page,   
-a profile page and a detail page for each venue.  
+a profile page and a detail page for each venue.
 
-![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
-![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)  
-![Create React App](https://img.shields.io/badge/Create%20React%20App-09D3AC.svg?style=for-the-badge&logo=Create-React-App&logoColor=white)
-![React Router](https://img.shields.io/badge/React%20Router-CA4245.svg?style=for-the-badge&logo=React-Router&logoColor=white)  
-![AntDesign](https://img.shields.io/badge/Ant%20Design-0170FE.svg?style=for-the-badge&logo=Ant-Design&logoColor=white)
-![Material Design](https://img.shields.io/badge/MUI-007FFF.svg?style=for-the-badge&logo=MUI&logoColor=white)
-![Netlify](https://img.shields.io/badge/Netlify-00C7B7.svg?style=for-the-badge&logo=Netlify&logoColor=white)  
-![shields.io](https://img.shields.io/badge/shields.io-000000.svg?style=for-the-badge&logo=shields.io&logoColor=white) 
-![Yarn](https://img.shields.io/badge/Yarn-2C8EBB.svg?style=for-the-badge&logo=Yarn&logoColor=white)
+## Built With
 
-## Resources
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [React.js](https://reactjs.org/)
+- [Create React App](https://create-react-app.dev/)
+- [Ant Design](https://ant.design/)
+- [Material UI](https://material-ui.com/)
+- [React Router DOM](https://reactrouter.com/web/guides/quick-start)
+- [Yup](https://www.npmjs.com/package/yup)
+- [Git](https://training.github.com/downloads/github-git-cheat-sheet/)
+- [GitHub](https://github.com/about)
+- [Yarn](https://yarnpkg.com/)
+- [Netlify](https://www.netlify.com/)
+- [PhpStorm](https://www.jetbrains.com/phpstorm/)
+- [Noroff API _Holidaze_ Endpoints](https://api.noroff.dev/api/v1/holidaze/venues)
+- [Noroff API Docs](https://docs.noroff.dev/holidaze/venues)
+
+## Getting Started
+
+### Installing
+
+1. Clone the repo:
+
+```bash
+git clone git@github.com:siljeangelvik/react-antd-holidaze-exam.git
+```
+
+2. Install the dependencies:
+
+```
+yarn install
+```
+
+### Running
+
+To run and preview the app:
+
+```bash
+yarn start
+```
+
+## Contributing
+
+No contributions at this time.
+
+## Contact
+
+Click on the badges below to go to my profiles or contact me via email.
+
+<a href = "https://www.linkedin.com/in/siljeangelvik/">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white" alt="LinkedIn Badge" />
+</a>
+<a href = "https://github.com/siljeangelvik">
+    <img src="https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white" alt="GitHub Badge" />
+</a>
+<a href = "mailto: angelviksilje@gmail.com">
+    <img src="https://img.shields.io/badge/Gmail-EA4335.svg?style=for-the-badge&logo=Gmail&logoColor=white" alt="Gmail Badge" />
+</a>
+
+## Acknowledgments
+
+### Resources
+
 [Sanity Yup Form](https://www.sanity.io/guides/form-validation-with-npm-yup)  
 [React Router v6](https://www.youtube.com/watch?v=Ul3y1LXxzdU)  
 [Google Fonts Combination 2023](https://puzzlepiecesmarketing.com/blog/8-best-google-font-combinations-2022/)    
@@ -99,86 +140,4 @@ a profile page and a detail page for each venue.
 [GitHub Badges Theme](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)  
 [Shields.io](https://shields.io/)   
 [CRA Deployment](https://create-react-app.dev/docs/deployment/)  
-[Push Into Array JS](https://www.freecodecamp.org/news/how-to-insert-an-element-into-an-array-in-javascript/)  
-
-### Issues
-
-#### Errors / Warnings in Console
-> When SuccessBooking-Modal opens after booking a venue:  
->> **Warning**: Invalid value for prop `handletoggle` on `<div>` tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://reactjs.org/link/attribute-behavior
-> **Warning**: Each child in a list should have a unique "key" prop.  Check the render method of `BookingsList`. See https://reactjs.org/link/warning-keys for more information.
-### Might add later
-
-To support `pushState`, make sure to create a `public/_redirects` file with the following rewrite rules:  
-/*  /index.html  200
-
-# Getting Started with Create React App
-
-_This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Push Into Array JS](https://www.freecodecamp.org/news/how-to-insert-an-element-into-an-array-in-javascript/)
