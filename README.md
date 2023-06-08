@@ -15,9 +15,8 @@
 
 ## Holidaze
 
-<img src="./public/media/project_exam_2_home.png" alt="Holidaze Home Page" width="480" />
-<img src="./public/media/project_exam_2_details.png" alt="Holidaze Details Page" width="240" />
-<img src="./public/media/project_exam_2_profile.png" alt="Holidaze Profile Page" width="240" />
+<img src="./public/media/project_exam_2_home.png" alt="Holidaze Home Page" width="482" /> <br/>
+<img src="./public/media/project_exam_2_details.png" alt="Holidaze Details Page" width="240" /> <img src="./public/media/project_exam_2_profile.png" alt="Holidaze Profile Page" width="240" />
 
 The images displayed above are screenshots of the Holidaze website on desktop.
 
