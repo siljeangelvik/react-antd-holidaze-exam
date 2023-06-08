@@ -1,7 +1,8 @@
 # Project Exam 2
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/39caaf7a-be52-4896-87a3-0ecf29d801f8/deploy-status)](https://app.netlify.com/sites/exam-holidaze/deploys)   
-![Hello](https://img.shields.io/static/v1?label=project&message=holidaze&color=orange) ![GitHub last commit](https://img.shields.io/github/last-commit/siljeangelvik/react-antd-holidaze-exam?&color=ff69b4) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/siljeangelvik/react-antd-holidaze-exam?&color=blue) ![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/r/rating/R4Intellij?&color=blueviolet)
+![Hello](https://img.shields.io/static/v1?label=project&message=holidaze&color=orange) ![GitHub last commit](https://img.shields.io/github/last-commit/siljeangelvik/react-antd-holidaze-exam?&color=ff69b4)  
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/siljeangelvik/react-antd-holidaze-exam?&color=blue) ![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/r/rating/R4Intellij?&color=blueviolet)
 
 **Student:** [Silje Angelvik](https://github.com/siljeangelvik)    
 **Host:** [Netlify](https://exam-holidaze.netlify.app/)  
